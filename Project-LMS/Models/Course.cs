@@ -42,6 +42,14 @@ namespace Project_LMS.Models
         IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             List<ValidationResult> res = new List<ValidationResult>();
+            ApplicationDbContext db = new ApplicationDbContext();
+
+            var result = db.Courses.FirstOrDefault(v => v.CourseName == CourseName);
+            if (result != null)
+            {
+                ValidationResult mss = new ValidationResult("The course name is already excisting in the database, try another name!");
+                res.Add(mss);
+            }
             if (StartDate < DateTime.Now.Date)
             {
                 ValidationResult mss = new ValidationResult("You cannot add a course in the past!");
