@@ -49,13 +49,21 @@ namespace Project_LMS.Migrations
             var adminUser = userManager.FindByName("admin@admin.se");
             userManager.AddToRole(adminUser.Id, "Teacher");
 
-            var types = new[] {
+            var activityTypes = new[] {
                 new ActivityType { Type = "Lecture" },
                 new ActivityType { Type = "Exercise" },
                 new ActivityType { Type = "E-learning" },
                 new ActivityType { Type = "Other" }
             };
-            db.ActivityTypes.AddOrUpdate(s => new { s.Type }, types);
+            db.ActivityTypes.AddOrUpdate(s => new { s.Type }, activityTypes);
+
+            var documentTypes = new[] {
+                new DocumentType { Type = "doc" },
+                new DocumentType { Type = "docx" },
+                new DocumentType { Type = "txt" },
+                new DocumentType { Type = "pdf" }
+            };
+            db.DocumentTypes.AddOrUpdate(s => new { s.Type }, documentTypes);
         }
     }
 }
