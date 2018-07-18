@@ -6,7 +6,7 @@ using System.Web;
 
 namespace Project_LMS.Models
 {
-    public class Course
+    public class Course : IValidatableObject
     {
         [Key]
         public int CourseId { get; set; }
@@ -18,12 +18,12 @@ namespace Project_LMS.Models
 
         [Display(Name = "Start Date")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime StartDate { get; set; }
 
         [Display(Name = "End Date")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime EndDate { get; set; }
 
         [Required]
@@ -38,5 +38,26 @@ namespace Project_LMS.Models
         [Display(Name = "Course Modules")]        public virtual ICollection<Module> CourseModules { get; set; }
 
         [Display(Name = "Course Documents")]        public virtual ICollection<Document> CourseDocuments { get; set; }
+
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        {
+            List<ValidationResult> res = new List<ValidationResult>();
+            if (StartDate < DateTime.Now.Date)
+            {
+                ValidationResult mss = new ValidationResult("You cannot add a course in the past!");
+                res.Add(mss);
+            }
+            else if (StartDate >= DateTime.Now.AddYears(5))
+            {
+                ValidationResult mss = new ValidationResult("You cannot add a course more than 5 years in the future!");
+                res.Add(mss);
+            }
+            if (EndDate < StartDate)
+            {
+                ValidationResult mss = new ValidationResult("End date must be greater than start date");
+                res.Add(mss);
+            }
+            return res;
+        }
     }
 }

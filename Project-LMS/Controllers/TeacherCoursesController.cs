@@ -17,9 +17,19 @@ namespace Project_LMS.Controllers
         // GET: TeacherCourses
         public ActionResult Index()
         {
-            return View(db.Courses.ToList());
+            return View(db.Courses.ToList().Where(i => DateTime.Compare(i.EndDate, DateTime.Now) > 0).ToList());
         }
 
+        public ActionResult ShowUndergoingCourses()
+        {
+            return View(db.Courses.ToList().Where(i => DateTime.Compare(i.StartDate, DateTime.Now) < 0 && DateTime.Compare(i.EndDate, DateTime.Now) >= 0).ToList());
+        }
+
+        public ActionResult ShowExpiredCourses()
+        {
+            return View(db.Courses.ToList().Where(i => DateTime.Compare(i.EndDate, DateTime.Now) <= 0).ToList());
+        }
+        
         // GET: TeacherCourses/Details/5
         public ActionResult Details(int? id)
         {

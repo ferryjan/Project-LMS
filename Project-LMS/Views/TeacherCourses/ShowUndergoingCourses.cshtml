@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<Project_LMS.Models.Course>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Undergoing Courses";
 }
 
-<h2>Index</h2>
+<h2>Undergoing Courses</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -51,6 +51,5 @@
 </table>
 
 <p>
-    @Html.ActionLink("Show Undergoing Courses", "ShowUndergoingCourses", null, new { @class = "btn btn-danger btn-large" })
-    @Html.ActionLink("Show Expired Courses", "ShowExpiredCourses", null, new { @class = "btn btn-danger btn-large" })
+    @Html.ActionLink("Back To Courses Overview", "Index", null, new { @class = "btn btn-danger btn-large" })
 </p>
