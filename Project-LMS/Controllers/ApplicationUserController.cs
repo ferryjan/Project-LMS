@@ -81,13 +81,26 @@ namespace Project_LMS.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,GivenName,FamilyName,MobileNumber,ProfileImageRef,TimeOfRegistration,CourseId,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName")] ApplicationUser applicationUser)
+        public ActionResult Create([Bind(Include = "GivenName,FamilyName,ProfileImageRef,CourseId,Email,PhoneNumber")] ApplicationUser applicationUser)
         {
             if (ModelState.IsValid)
             {
-                db.Users.Add(applicationUser);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    applicationUser.TimeOfRegistration = DateTime.Now;
+                    applicationUser.UserName = applicationUser.Email;
+                    db.Users.Add(applicationUser);
+                    db.SaveChanges();
+
+                    var userStore = new UserStore<ApplicationUser>(db);
+                    var userManager = new UserManager<ApplicationUser>(userStore);
+                    userManager.AddToRole(applicationUser.Id, "Teacher");
+
+                    return RedirectToAction("Index");
+                }
+             
+
+                
             }
 
             ViewBag.CourseId = new SelectList(db.Courses, "CourseId", "CourseName", applicationUser.CourseId);

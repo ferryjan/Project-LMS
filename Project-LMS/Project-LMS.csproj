@@ -209,6 +209,10 @@
     <Compile Include="Migrations\201807190638508_remove-document-datatype.Designer.cs">
       <DependentUpon>201807190638508_remove-document-datatype.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201807190812097_RemovedMobilePhoneNumber.cs" />
+    <Compile Include="Migrations\201807190812097_RemovedMobilePhoneNumber.Designer.cs">
+      <DependentUpon>201807190812097_RemovedMobilePhoneNumber.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Activity.cs" />
@@ -312,6 +316,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201807190638508_remove-document-datatype.resx">
       <DependentUpon>201807190638508_remove-document-datatype.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807190812097_RemovedMobilePhoneNumber.resx">
+      <DependentUpon>201807190812097_RemovedMobilePhoneNumber.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
