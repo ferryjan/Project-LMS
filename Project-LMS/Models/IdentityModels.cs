@@ -23,13 +23,18 @@ namespace Project_LMS.Models
         public int? CourseId { get; set; }
         public virtual Course Course { get; set; }
 
-        [Display(Name = "Users' Documents")]        public virtual ICollection<Document> UserDocuments { get; set; }
+        [Display(Name = "Users' Documents")]
+        public virtual ICollection<Document> UserDocuments { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
             // Add custom user claims here
+            userIdentity.AddClaim(new Claim("GivenName", this.GivenName.ToString()));
+            userIdentity.AddClaim(new Claim("FamilyName", this.FamilyName.ToString()));
+            userIdentity.AddClaim(new Claim("ProfileImageRef", this.ProfileImageRef.ToString()));
+
             return userIdentity;
         }
     }
