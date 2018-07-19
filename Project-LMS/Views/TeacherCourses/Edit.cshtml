@@ -61,7 +61,10 @@
     @Html.ActionLink("Back to List", "Index")
 </div>
 
-@Html.Action("MemberProfile", "Member", new { id = Model.CourseId })
+<br />
+<br />
+
+@Html.Action("ShowCourseDocuments", "Documents", new { id = Model.CourseId })
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

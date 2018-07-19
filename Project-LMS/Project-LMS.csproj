@@ -196,6 +196,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ApplicationUserController.cs" />
+    <Compile Include="Controllers\DocumentsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\TeacherCoursesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -212,6 +213,14 @@
     <Compile Include="Migrations\201807190812097_RemovedMobilePhoneNumber.cs" />
     <Compile Include="Migrations\201807190812097_RemovedMobilePhoneNumber.Designer.cs">
       <DependentUpon>201807190812097_RemovedMobilePhoneNumber.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807190858363_some-changes-in-document-model.cs" />
+    <Compile Include="Migrations\201807190858363_some-changes-in-document-model.Designer.cs">
+      <DependentUpon>201807190858363_some-changes-in-document-model.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807190901489_some-changes-in-document-model-again.cs" />
+    <Compile Include="Migrations\201807190901489_some-changes-in-document-model-again.Designer.cs">
+      <DependentUpon>201807190901489_some-changes-in-document-model-again.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -293,6 +302,12 @@
     <Content Include="Views\TeacherCourses\Index.cshtml" />
     <Content Include="Views\TeacherCourses\ShowUndergoingCourses.cshtml" />
     <Content Include="Views\TeacherCourses\ShowExpiredCourses.cshtml" />
+    <Content Include="Views\Documents\Create.cshtml" />
+    <Content Include="Views\Documents\Delete.cshtml" />
+    <Content Include="Views\Documents\Details.cshtml" />
+    <Content Include="Views\Documents\Edit.cshtml" />
+    <Content Include="Views\Documents\Index.cshtml" />
+    <Content Include="Views\Documents\ShowCourseDocuments.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -319,6 +334,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201807190812097_RemovedMobilePhoneNumber.resx">
       <DependentUpon>201807190812097_RemovedMobilePhoneNumber.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807190858363_some-changes-in-document-model.resx">
+      <DependentUpon>201807190858363_some-changes-in-document-model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807190901489_some-changes-in-document-model-again.resx">
+      <DependentUpon>201807190901489_some-changes-in-document-model-again.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -14,12 +14,7 @@ namespace Project_LMS.Models
         [Required]
         [Display(Name = "Document Name")]
         [StringLength(50, MinimumLength = 2)]
-        public string CourseName { get; set; }
-
-        [Required]
-        [Display(Name = "Document Description")]
-        [StringLength(255)]
-        public string CourseDescription { get; set; }
+        public string DocumentName { get; set; }
 
         [Display(Name = "Uploading Date & Time")]
         [DataType(DataType.DateTime)]
@@ -28,6 +23,9 @@ namespace Project_LMS.Models
 
         [Display(Name = "Document URL")]
         public string DocumentRef { get; set; }
+
+        [Display(Name = "Document File Type")]
+        public string DocumentFileType { get; set; }
 
         //Navigational properties
         [Display(Name = "Course ID")]

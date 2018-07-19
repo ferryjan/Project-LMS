@@ -30,7 +30,7 @@ namespace Project_LMS.Controllers
                 }
                 else
                 {
-                    var list = db.Users.Where(x => x.Roles.Any(s => s.RoleId == teacherRole.Id)).Where(i => i.GivenName.ToLower() == search.ToLower()).ToList();
+                    var list = db.Users.Where(x => x.Roles.Any(s => s.RoleId == teacherRole.Id)).Where(i => i.GivenName.ToLower().Contains(search.ToLower())).ToList();
                     return View(list);
                 }
             }
@@ -43,7 +43,7 @@ namespace Project_LMS.Controllers
                 }
                 else
                 {
-                    var list = db.Users.Where(x => x.Roles.Any(s => s.RoleId == teacherRole.Id)).Where(i => i.FamilyName.ToLower() == search.ToLower()).ToList();
+                    var list = db.Users.Where(x => x.Roles.Any(s => s.RoleId == teacherRole.Id)).Where(i => i.FamilyName.ToLower().Contains(search.ToLower())).ToList();
                     return View(list);
                 }
             }
