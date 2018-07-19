@@ -57,8 +57,15 @@ namespace Project_LMS.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
-            ViewBag.ReturnUrl = returnUrl;
-            return View();
+            if(User.IsInRole("Teacher"))
+            {
+                return RedirectToAction("Index", "TeacherCourses");
+            }
+            else
+            {
+                ViewBag.ReturnUrl = returnUrl;
+                return View();
+            }      
         }
 
         //

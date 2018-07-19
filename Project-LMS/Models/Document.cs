@@ -42,10 +42,6 @@ namespace Project_LMS.Models
         public int? ActivityId { get; set; }
         public virtual Activity Activity { get; set; }
 
-        [Display(Name = "Document Type")]
-        public int DocumentTypeId { get; set; }
-        public virtual DocumentType DocumentType { get; set; }
-
         [Display(Name = "Application User ID")]
         public string ApplicationUserId { get; set; }
         public virtual ApplicationUser ApplicationUser { get; set; }

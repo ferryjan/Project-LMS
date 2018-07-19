@@ -56,14 +56,6 @@ namespace Project_LMS.Migrations
                 new ActivityType { Type = "Other" }
             };
             db.ActivityTypes.AddOrUpdate(s => new { s.Type }, activityTypes);
-
-            var documentTypes = new[] {
-                new DocumentType { Type = "doc" },
-                new DocumentType { Type = "docx" },
-                new DocumentType { Type = "txt" },
-                new DocumentType { Type = "pdf" }
-            };
-            db.DocumentTypes.AddOrUpdate(s => new { s.Type }, documentTypes);
         }
     }
 }
