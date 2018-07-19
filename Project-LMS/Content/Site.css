@@ -22,3 +22,9 @@ select,
 textarea {
     max-width: 280px;
 }
+
+/* Bootstrap overrides */
+body {
+    font-size: 17px;
+    background-color: rgba(182, 255, 0, 0.12);
+}
