@@ -14,7 +14,6 @@ namespace Project_LMS.Models
     {
         public string GivenName { get; set; }
         public string FamilyName { get; set; }
-        public string MobileNumber { get; set; }
         public string ProfileImageRef { get; set; }
         public DateTime TimeOfRegistration { get; set; }
 
