@@ -26,5 +26,17 @@ textarea {
 /* Bootstrap overrides */
 body {
     font-size: 17px;
-    background-color: rgba(182, 255, 0, 0.12);
+    background-color: lightgrey;
+}
+.navbar-inverse {
+    background-color: red;
+    border-color: red;
+}
+    .navbar-inverse .navbar-nav > li > a {
+        color: #fff;
+    }
+.btn-default {
+    color: #fff;
+    background-color: #ff4342;
+    border-color: #ff4342;
 }
