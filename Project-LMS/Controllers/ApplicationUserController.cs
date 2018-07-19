@@ -6,6 +6,8 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Project_LMS.Models;
 
 namespace Project_LMS.Controllers
@@ -15,10 +17,41 @@ namespace Project_LMS.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: ApplicationUser
-        public ActionResult Index()
+        public ActionResult Index(string option, string search)
         {
-            var applicationUsers = db.Users.Include(a => a.Course);
-            return View(applicationUsers.ToList());
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
+            var teacherRole = roleManager.FindByName("Teacher");
+            if (option == "GivenName")
+            {
+                if (search == "")
+                {
+                    var list = db.Users.Where(x => x.Roles.Any(s => s.RoleId == teacherRole.Id)).ToList();
+                    return View(list);
+                }
+                else
+                {
+                    var list = db.Users.Where(x => x.Roles.Any(s => s.RoleId == teacherRole.Id)).Where(i => i.GivenName.ToLower() == search.ToLower()).ToList();
+                    return View(list);
+                }
+            }
+            else if (option == "FamilyName")
+            {
+                if (search == "")
+                {
+                    var list = db.Users.Where(x => x.Roles.Any(s => s.RoleId == teacherRole.Id)).ToList();
+                    return View(list);
+                }
+                else
+                {
+                    var list = db.Users.Where(x => x.Roles.Any(s => s.RoleId == teacherRole.Id)).Where(i => i.FamilyName.ToLower() == search.ToLower()).ToList();
+                    return View(list);
+                }
+            }
+            else
+            {
+                var list = db.Users.Where(x => x.Roles.Any(s => s.RoleId == teacherRole.Id)).ToList();
+                return View(list);
+            }
         }
 
         // GET: ApplicationUser/Details/5
