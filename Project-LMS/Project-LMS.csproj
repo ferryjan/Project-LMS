@@ -227,6 +227,10 @@
     <Compile Include="Migrations\201807190950410_add-filedata-to-document-model.Designer.cs">
       <DependentUpon>201807190950410_add-filedata-to-document-model.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201807191252431_make-uploadtime-nullable.cs" />
+    <Compile Include="Migrations\201807191252431_make-uploadtime-nullable.Designer.cs">
+      <DependentUpon>201807191252431_make-uploadtime-nullable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Activity.cs" />
@@ -314,6 +318,7 @@
     <Content Include="Views\Documents\Index.cshtml" />
     <Content Include="Views\Documents\ShowCourseDocuments.cshtml" />
     <Content Include="Views\Documents\CreateCourseDocument.cshtml" />
+    <Content Include="Views\Documents\FileDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -350,6 +355,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201807190950410_add-filedata-to-document-model.resx">
       <DependentUpon>201807190950410_add-filedata-to-document-model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807191252431_make-uploadtime-nullable.resx">
+      <DependentUpon>201807191252431_make-uploadtime-nullable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

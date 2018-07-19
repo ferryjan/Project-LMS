@@ -1,0 +1,27 @@
+﻿@model IEnumerable<Project_LMS.Models.Document>  
+
+<table class="table table-bordered">  
+    <tr>  
+        <th class="col-md-4">  
+            @Html.DisplayNameFor(model => model.DocumentName)  
+        </th>  
+          
+        <th class="col-md-2"></th>  
+    </tr>  
+  
+@foreach (var item in Model) {  
+    <tr>  
+        <td>  
+            @Html.DisplayFor(modelItem => item.DocumentName)  
+        </td>  
+          
+        <td>  
+            @Html.ActionLink("Download", "DownLoadFile", new { id= item.DocumentId })   
+             
+        </td>  
+    </tr>  
+}  
+  
+</table> 
+
+

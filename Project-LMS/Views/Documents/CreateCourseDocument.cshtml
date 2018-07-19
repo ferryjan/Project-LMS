@@ -1,57 +1,23 @@
 ﻿@model Project_LMS.Models.Document
 
 @{
+    /**/
+
     ViewBag.Title = "Create Course Document";
 }
 
 <h2>CreateCourseDocument</h2>
 
-@using (Html.BeginForm("CreateCourseDocument", "Documents", FormMethod.Post,
-    new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("CreateCourseDocument", "Documents", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-
-    @Html.EditorForModel()
-
-    <div class="editor-label">Document</div>
     <div class="editor-field">
-        <div>Upload new document: <input type="file" accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf" name="Document"/></div>
+
+        <div>Upload new document: <input type="file" accept=".xlsx,.xls, .doc, .docx,.ppt, .pptx,.txt,.pdf" name="Document" /></div>
     </div>
 
     <input type="submit" value="Save" />
     @Html.ActionLink("Cancel and return to List", "Index")
 }
-
-
-@*@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        <h4>Document</h4>
-        <hr />
-        <div class="form-group">
-            @Html.LabelFor(model => model.DocumentName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.HiddenFor(model => model.DocumentName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.DocumentName, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ApplicationUserId, "ApplicationUserId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("ApplicationUserId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ApplicationUserId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
-}*@
 
 <div>
     @Html.ActionLink("Back to List", "Index")

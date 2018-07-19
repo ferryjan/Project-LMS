@@ -22,7 +22,8 @@ namespace Project_LMS.Controllers
         }
 
         [ChildActionOnly]
-        public ActionResult ShowCourseDocuments(int? courseId) {
+        public ActionResult ShowCourseDocuments(int? courseId)
+        {
             var documents = db.Documents.Where(i => i.CourseId == courseId && !i.ModuleId.HasValue && !i.ActivityId.HasValue);
             return PartialView(documents.ToList());
         }
@@ -53,18 +54,46 @@ namespace Project_LMS.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult CreateCourseDocument([Bind(Include = "DocumentId,CourseName,CourseDescription,UploadingTime,DocumentRef,CourseId,ModuleId,ActivityId,ApplicationUserId")] Document document)
+        public ActionResult CreateCourseDocument(Document doc)
         {
             if (ModelState.IsValid)
             {
-                db.Documents.Add(document);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (Request.Files.Count > 0)
+                {
+                    HttpPostedFileBase file = Request.Files[0];
+                    if (file.ContentLength > 0)
+                    {
+                        doc.ApplicationUserId = db.Users.FirstOrDefault(u => u.UserName == User.Identity.Name).Id;
+                        doc.DocumentFileType = file.ContentType;
+                        doc.UploadingTime = DateTime.Now;
+                        doc.FileData = new byte[file.ContentLength];
+                        doc.DocumentName = file.FileName;
+                        file.InputStream.Read(doc.FileData, 0, file.ContentLength);
+                    }
+                    db.Documents.Add(doc);
+                    db.SaveChanges();
+                    return RedirectToAction("FileDetails");
+                }
             }
-            return View(document);
+
+            return View(doc);
         }
-        
+
+        [HttpGet]
+        public FileResult DownLoadFile(int? id)
+        {
+            var FileById = db.Documents.Where(i => i.DocumentId == id).ToList().FirstOrDefault();
+            return File(FileById.FileData, FileById.DocumentFileType, FileById.DocumentName);
+
+        }
+
+        [HttpGet]
+        public PartialViewResult FileDetails()
+        {
+            var documents = db.Documents.Include(d => d.Activity).Include(d => d.ApplicationUser).Include(d => d.Course).Include(d => d.Module);
+            return PartialView("FileDetails", documents.ToList());
+        }
+
 
         // GET: Documents/Create
         public ActionResult Create()
