@@ -29,6 +29,7 @@ namespace Project_LMS.Models
         [Required]
         [Display(Name = "Module Description")]
         [StringLength(255)]
+        [DataType(DataType.MultilineText)]
         public string ModuleDescription { get; set; }
 
         //Navigational properties

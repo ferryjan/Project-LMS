@@ -29,6 +29,7 @@ namespace Project_LMS.Models
         [Required]
         [Display(Name = "Activity Description")]
         [StringLength(255)]
+        [DataType(DataType.MultilineText)]
         public string ActivityDescription { get; set; }
 
         [Display(Name = "Deadline")]

@@ -29,6 +29,7 @@ namespace Project_LMS.Models
         [Required]
         [Display(Name = "Course Description")]
         [StringLength(255)]
+        [DataType(DataType.MultilineText)]
         public string CourseDescription { get; set; }
 
 

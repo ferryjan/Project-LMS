@@ -11,7 +11,6 @@ namespace Project_LMS.Models
         [Key]
         public int DocumentId { get; set; }
 
-        [Required]
         [Display(Name = "Document Name")]
         [StringLength(50, MinimumLength = 2)]
         public string DocumentName { get; set; }
@@ -26,6 +25,8 @@ namespace Project_LMS.Models
 
         [Display(Name = "Document File Type")]
         public string DocumentFileType { get; set; }
+
+        public byte[] FileData { get; set; }
 
         //Navigational properties
         [Display(Name = "Course ID")]

@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Project_LMS.Models.Document>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "CreateCourseDocument", new { CourseId = Model.Select(i=>i.CourseId).FirstOrDefault().ToString() })
 </p>
 <table class="table">
     <tr>
