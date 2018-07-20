@@ -57,10 +57,6 @@
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-
 <br />
 <br />
 
@@ -71,7 +67,11 @@
 
 @Html.Action("FileDetails", "Documents", new { id = Model.CourseId })
 
+<br />
 
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

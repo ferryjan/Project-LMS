@@ -220,8 +220,7 @@ namespace Project_LMS.Controllers
         public ActionResult DeleteStudentFromCourseConfirmed(string studnetId, int id)
         {
             ApplicationUser applicationUser = db.Users.Find(studnetId);
-            applicationUser.CourseId = null;
-            db.Entry(applicationUser).State = EntityState.Modified;
+            db.Users.Remove(applicationUser);
             db.SaveChanges();
             return RedirectToAction("Edit", "TeacherCourses", new { id = id });
         }
