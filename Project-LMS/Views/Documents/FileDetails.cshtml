@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Project_LMS.Models.Document>  
 
 <p>
-    @Html.ActionLink("Create New", "CreateCourseDocument", new { id = ViewBag.Id })
+    @Html.ActionLink("Upload Course Document", "CreateCourseDocument", new { id = ViewBag.Id }, new { @class = "btn btn-danger btn-large" })
 </p>
 
 <table class="table table-bordered">  
@@ -19,9 +19,10 @@
             @Html.DisplayFor(modelItem => item.DocumentName)  
         </td>  
           
-        <td>  
-            @Html.ActionLink("Download", "DownLoadFile", new { id= item.DocumentId })   
-             
+        <td>
+            @Html.ActionLink("Download", "DownLoadFile", new { id = item.DocumentId })  |   
+            @Html.ActionLink("Details", "Details", new { id = item.DocumentId }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.DocumentId })
         </td>  
     </tr>  
 }  
