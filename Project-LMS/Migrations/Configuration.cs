@@ -38,7 +38,7 @@ namespace Project_LMS.Migrations
             foreach (var email in emails)
             {
                 if (db.Users.Any(u => u.UserName == email)) continue;
-                var user = new ApplicationUser { UserName = email, Email = email, TimeOfRegistration = DateTime.Now };
+                var user = new ApplicationUser { UserName = email, Email = email, GivenName = "Admin", FamilyName = "Admin", ProfileImageRef = "", TimeOfRegistration = DateTime.Now };
                 var result = userManager.Create(user, "password");
                 if (!result.Succeeded)
                 {
