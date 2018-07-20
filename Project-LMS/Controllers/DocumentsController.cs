@@ -44,9 +44,9 @@ namespace Project_LMS.Controllers
         }
 
         // GET: Documents/Create
-        public ActionResult CreateCourseDocument(int? courseId)
+        public ActionResult CreateCourseDocument(int? id)
         {
-            ViewBag.CourseId = courseId;
+            ViewBag.CourseId = id;
             return View();
         }
 
@@ -54,7 +54,7 @@ namespace Project_LMS.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult CreateCourseDocument(Document doc)
+        public ActionResult CreateCourseDocument(Document doc, int id)
         {
             if (ModelState.IsValid)
             {
@@ -64,6 +64,7 @@ namespace Project_LMS.Controllers
                     if (file.ContentLength > 0)
                     {
                         doc.ApplicationUserId = db.Users.FirstOrDefault(u => u.UserName == User.Identity.Name).Id;
+                        doc.CourseId = id;
                         doc.DocumentFileType = file.ContentType;
                         doc.UploadingTime = DateTime.Now;
                         doc.FileData = new byte[file.ContentLength];
@@ -72,7 +73,7 @@ namespace Project_LMS.Controllers
                     }
                     db.Documents.Add(doc);
                     db.SaveChanges();
-                    return RedirectToAction("FileDetails");
+                    return RedirectToAction("Edit", "TeacherCourses", new { id = id });
                 }
             }
 
@@ -82,15 +83,17 @@ namespace Project_LMS.Controllers
         [HttpGet]
         public FileResult DownLoadFile(int? id)
         {
+            ViewBag.CourseId = id;
             var FileById = db.Documents.Where(i => i.DocumentId == id).ToList().FirstOrDefault();
             return File(FileById.FileData, FileById.DocumentFileType, FileById.DocumentName);
 
         }
 
         [HttpGet]
-        public PartialViewResult FileDetails()
+        public PartialViewResult FileDetails(int? id)
         {
-            var documents = db.Documents.Include(d => d.Activity).Include(d => d.ApplicationUser).Include(d => d.Course).Include(d => d.Module);
+            ViewBag.Id = id;
+            var documents = db.Documents.Where(i => i.CourseId == id && !i.ModuleId.HasValue && !i.ActivityId.HasValue);
             return PartialView("FileDetails", documents.ToList());
         }
 

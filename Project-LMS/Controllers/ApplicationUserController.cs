@@ -49,7 +49,7 @@ namespace Project_LMS.Controllers
             }
             else
             {
-                var list = db.Users.Where(x => x.Roles.Any(s => s.RoleId == teacherRole.Id)).ToList();
+                var list = db.Users.Where(x => x.Roles.Any(s => s.RoleId == teacherRole.Id)).OrderBy(g => g.GivenName).ThenBy(f => f.FamilyName).ToList();
                 return View(list);
             }
         }
@@ -72,7 +72,6 @@ namespace Project_LMS.Controllers
         // GET: ApplicationUser/Create
         public ActionResult Create()
         {
-            ViewBag.CourseId = new SelectList(db.Courses, "CourseId", "CourseName");
             return View();
         }
 
@@ -81,26 +80,28 @@ namespace Project_LMS.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "GivenName,FamilyName,ProfileImageRef,CourseId,Email,PhoneNumber")] ApplicationUser applicationUser)
+        public ActionResult Create([Bind(Include = "GivenName,FamilyName,Email,PhoneNumber")] ApplicationUser applicationUser)
         {
             if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
+
+                applicationUser.TimeOfRegistration = DateTime.Now;
+                applicationUser.UserName = applicationUser.Email;
+
+                if (db.Users.Any(u => u.UserName == applicationUser.Email))
                 {
-                    applicationUser.TimeOfRegistration = DateTime.Now;
-                    applicationUser.UserName = applicationUser.Email;
-                    db.Users.Add(applicationUser);
-                    db.SaveChanges();
-
-                    var userStore = new UserStore<ApplicationUser>(db);
-                    var userManager = new UserManager<ApplicationUser>(userStore);
-                    userManager.AddToRole(applicationUser.Id, "Teacher");
-
-                    return RedirectToAction("Index");
+                    return View(applicationUser);
                 }
-             
 
-                
+                var userStore = new UserStore<ApplicationUser>(db);
+                var userManager = new UserManager<ApplicationUser>(userStore);
+
+                var result = userManager.Create(applicationUser, "Ante_007");
+                if (!result.Succeeded) {throw new Exception(string.Join("\n", result.Errors)); }
+
+                userManager.AddToRole(applicationUser.Id, "Teacher");
+                return RedirectToAction("Index");
+
             }
 
             ViewBag.CourseId = new SelectList(db.Courses, "CourseId", "CourseName", applicationUser.CourseId);
@@ -128,11 +129,17 @@ namespace Project_LMS.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,GivenName,FamilyName,MobileNumber,ProfileImageRef,TimeOfRegistration,CourseId,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName")] ApplicationUser applicationUser)
+        public ActionResult Edit([Bind(Include = "Id,GivenName,FamilyName,ProfileImageRef,Email,PhoneNumber")] ApplicationUser applicationUser)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(applicationUser).State = EntityState.Modified;
+                ApplicationUser dbAU = db.Users.Find(applicationUser.Id);
+                dbAU.GivenName = applicationUser.GivenName;
+                dbAU.FamilyName = applicationUser.FamilyName;
+                dbAU.ProfileImageRef = applicationUser.ProfileImageRef;
+                dbAU.Email = applicationUser.Email;
+                dbAU.PhoneNumber = applicationUser.PhoneNumber;
+                db.Entry(dbAU).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

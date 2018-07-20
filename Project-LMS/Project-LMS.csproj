@@ -207,6 +207,10 @@
     <Compile Include="Migrations\201807191418476_Init.Designer.cs">
       <DependentUpon>201807191418476_Init.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201807200703231_add-firstTimeLogin-properties-for-applicationUser.cs" />
+    <Compile Include="Migrations\201807200703231_add-firstTimeLogin-properties-for-applicationUser.Designer.cs">
+      <DependentUpon>201807200703231_add-firstTimeLogin-properties-for-applicationUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Activity.cs" />
@@ -316,6 +320,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201807191418476_Init.resx">
       <DependentUpon>201807191418476_Init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807200703231_add-firstTimeLogin-properties-for-applicationUser.resx">
+      <DependentUpon>201807200703231_add-firstTimeLogin-properties-for-applicationUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

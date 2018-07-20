@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
@@ -17,6 +18,7 @@ namespace Project_LMS.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         public AccountController()
         {
@@ -86,6 +88,13 @@ namespace Project_LMS.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    var user = await UserManager.FindByNameAsync(model.Email);
+                    if (user.FirstTimeLogin == null)
+                    {   
+                        string token = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+                        TempData["Message"] = "This is your first time login onto this site, please change your password!";
+                        return RedirectToAction("ResetPassword", new {code = token });
+                    }
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -241,6 +250,15 @@ namespace Project_LMS.Controllers
         [AllowAnonymous]
         public ActionResult ResetPassword(string code)
         {
+            if (TempData["Message"] != null)
+            {
+                ViewBag.FirstLoginMessage = TempData["Message"];
+            }
+            else
+            {
+                ViewBag.FirstLoginMessage = "";
+            }
+            
             return code == null ? View("Error") : View();
         }
 
@@ -264,6 +282,8 @@ namespace Project_LMS.Controllers
             var result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
             if (result.Succeeded)
             {
+                user.FirstTimeLogin = "No";
+                UserManager.Update(user);
                 return RedirectToAction("ResetPasswordConfirmation", "Account");
             }
             AddErrors(result);
