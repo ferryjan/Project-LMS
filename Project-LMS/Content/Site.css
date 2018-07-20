@@ -27,7 +27,6 @@ textarea {
 body {
     font-size: 17px;
     background-color: lightgrey;
-
 }
 .navbar-inverse {
     background-color: #222;
@@ -35,6 +34,8 @@ body {
     padding:10px 0px 2px 0px;
 
 }
+
+
 
 .btn-default {
     color: #fff;
