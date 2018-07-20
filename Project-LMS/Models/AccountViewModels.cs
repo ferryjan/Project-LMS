@@ -97,6 +97,8 @@ namespace Project_LMS.Models
 
         [Display(Name = "Time of Registration")]
         DateTime TimeOfRegistration { get; set; }
+
+        public string FirstTimeLogin { get; set; }
     }
 
     public class ResetPasswordViewModel
