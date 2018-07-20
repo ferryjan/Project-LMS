@@ -93,7 +93,8 @@ namespace Project_LMS.Controllers
                     {   
                         string token = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
                         TempData["Message"] = "This is your first time login onto this site, please change your password!";
-                        return RedirectToAction("ResetPassword", new {code = token });
+                        AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+                        return RedirectToAction("ResetPassword", new {code = token, email = user.Email});
                     }
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
@@ -248,7 +249,7 @@ namespace Project_LMS.Controllers
         //
         // GET: /Account/ResetPassword
         [AllowAnonymous]
-        public ActionResult ResetPassword(string code)
+        public ActionResult ResetPassword(string code, string email)
         {
             if (TempData["Message"] != null)
             {
@@ -258,7 +259,7 @@ namespace Project_LMS.Controllers
             {
                 ViewBag.FirstLoginMessage = "";
             }
-            
+            ViewBag.CurrentEmail = email;
             return code == null ? View("Error") : View();
         }
 
@@ -267,13 +268,13 @@ namespace Project_LMS.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ResetPassword(ResetPasswordViewModel model)
+        public async Task<ActionResult> ResetPassword(String email, ResetPasswordViewModel model)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
-            var user = await UserManager.FindByNameAsync(model.Email);
+            var user = await UserManager.FindByNameAsync(email);
             if (user == null)
             {
                 // Don't reveal that the user does not exist
