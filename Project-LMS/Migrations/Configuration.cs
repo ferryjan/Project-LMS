@@ -137,7 +137,7 @@ namespace Project_LMS.Migrations
                     CourseId = courses[0].CourseId,
                     StartDate = courses[0].StartDate.AddDays(2),
                     EndDate = courses[0].StartDate.AddDays(4),
-                    Name = "Cookies, not just for web-pages",
+                    Name = "Coffie, the black gold",
                     Description = "An introduction to Coffie: Brew or boil?"
                 }
             };
