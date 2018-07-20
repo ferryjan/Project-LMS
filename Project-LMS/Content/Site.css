@@ -1,5 +1,5 @@
 ﻿body {
-    padding-top: 50px;
+    padding-top: 100px;
     padding-bottom: 20px;
 }
 
@@ -21,4 +21,24 @@ input,
 select,
 textarea {
     max-width: 280px;
+}
+
+/* Bootstrap overrides */
+body {
+    font-size: 17px;
+    background-color: lightgrey;
+}
+.navbar-inverse {
+    background-color: #222;
+    border-color: #080808;
+    padding:10px 0px 2px 0px;
+
+}
+
+
+
+.btn-default {
+    color: #fff;
+    background-color: #ff4342;
+    border-color: #ff4342;
 }

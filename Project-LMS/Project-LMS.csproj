@@ -196,18 +196,20 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ApplicationUserController.cs" />
+    <Compile Include="Controllers\DocumentsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\TeacherCoursesController.cs" />
+    <Compile Include="Excensions\IdentityExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201807181115402_init.cs" />
-    <Compile Include="Migrations\201807181115402_init.Designer.cs">
-      <DependentUpon>201807181115402_init.cs</DependentUpon>
+    <Compile Include="Migrations\201807191418476_Init.cs" />
+    <Compile Include="Migrations\201807191418476_Init.Designer.cs">
+      <DependentUpon>201807191418476_Init.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201807190638508_remove-document-datatype.cs" />
-    <Compile Include="Migrations\201807190638508_remove-document-datatype.Designer.cs">
-      <DependentUpon>201807190638508_remove-document-datatype.cs</DependentUpon>
+    <Compile Include="Migrations\201807200703231_add-firstTimeLogin-properties-for-applicationUser.cs" />
+    <Compile Include="Migrations\201807200703231_add-firstTimeLogin-properties-for-applicationUser.Designer.cs">
+      <DependentUpon>201807200703231_add-firstTimeLogin-properties-for-applicationUser.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -289,9 +291,18 @@
     <Content Include="Views\TeacherCourses\Index.cshtml" />
     <Content Include="Views\TeacherCourses\ShowUndergoingCourses.cshtml" />
     <Content Include="Views\TeacherCourses\ShowExpiredCourses.cshtml" />
+    <Content Include="Views\Documents\Create.cshtml" />
+    <Content Include="Views\Documents\Delete.cshtml" />
+    <Content Include="Views\Documents\Details.cshtml" />
+    <Content Include="Views\Documents\Edit.cshtml" />
+    <Content Include="Views\Documents\Index.cshtml" />
+    <Content Include="Views\Documents\ShowCourseDocuments.cshtml" />
+    <Content Include="Views\Documents\CreateCourseDocument.cshtml" />
+    <Content Include="Views\Documents\FileDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Pictures\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -307,11 +318,11 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201807181115402_init.resx">
-      <DependentUpon>201807181115402_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201807191418476_Init.resx">
+      <DependentUpon>201807191418476_Init.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201807190638508_remove-document-datatype.resx">
-      <DependentUpon>201807190638508_remove-document-datatype.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201807200703231_add-firstTimeLogin-properties-for-applicationUser.resx">
+      <DependentUpon>201807200703231_add-firstTimeLogin-properties-for-applicationUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

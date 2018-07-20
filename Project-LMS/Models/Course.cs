@@ -29,15 +29,19 @@ namespace Project_LMS.Models
         [Required]
         [Display(Name = "Course Description")]
         [StringLength(255)]
+        [DataType(DataType.MultilineText)]
         public string CourseDescription { get; set; }
 
 
         //Navigational properties
-        [Display(Name = "Attending Students")]        public virtual ICollection<ApplicationUser> AttendingStudents { get; set; }
+        [Display(Name = "Attending Students")]
+        public virtual ICollection<ApplicationUser> AttendingStudents { get; set; }
 
-        [Display(Name = "Course Modules")]        public virtual ICollection<Module> CourseModules { get; set; }
+        [Display(Name = "Course Modules")]
+        public virtual ICollection<Module> CourseModules { get; set; }
 
-        [Display(Name = "Course Documents")]        public virtual ICollection<Document> CourseDocuments { get; set; }
+        [Display(Name = "Course Documents")]
+        public virtual ICollection<Document> CourseDocuments { get; set; }
 
         IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {

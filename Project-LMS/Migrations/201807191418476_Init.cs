@@ -3,7 +3,7 @@ namespace Project_LMS.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class init : DbMigration
+    public partial class Init : DbMigration
     {
         public override void Up()
         {
@@ -31,14 +31,14 @@ namespace Project_LMS.Migrations
                 c => new
                     {
                         DocumentId = c.Int(nullable: false, identity: true),
-                        CourseName = c.String(nullable: false, maxLength: 50),
-                        CourseDescription = c.String(nullable: false, maxLength: 255),
-                        UploadingTime = c.DateTime(nullable: false),
+                        DocumentName = c.String(maxLength: 50),
+                        UploadingTime = c.DateTime(),
                         DocumentRef = c.String(),
+                        DocumentFileType = c.String(),
+                        FileData = c.Binary(),
                         CourseId = c.Int(),
                         ModuleId = c.Int(),
                         ActivityId = c.Int(),
-                        DocumentTypeId = c.Int(nullable: false),
                         ApplicationUserId = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => t.DocumentId)
@@ -46,11 +46,9 @@ namespace Project_LMS.Migrations
                 .ForeignKey("dbo.Courses", t => t.CourseId)
                 .ForeignKey("dbo.Modules", t => t.ModuleId)
                 .ForeignKey("dbo.AspNetUsers", t => t.ApplicationUserId)
-                .ForeignKey("dbo.DocumentTypes", t => t.DocumentTypeId, cascadeDelete: true)
                 .Index(t => t.CourseId)
                 .Index(t => t.ModuleId)
                 .Index(t => t.ActivityId)
-                .Index(t => t.DocumentTypeId)
                 .Index(t => t.ApplicationUserId);
             
             CreateTable(
@@ -60,7 +58,6 @@ namespace Project_LMS.Migrations
                         Id = c.String(nullable: false, maxLength: 128),
                         GivenName = c.String(),
                         FamilyName = c.String(),
-                        MobileNumber = c.String(),
                         ProfileImageRef = c.String(),
                         TimeOfRegistration = c.DateTime(nullable: false),
                         CourseId = c.Int(),
@@ -147,15 +144,6 @@ namespace Project_LMS.Migrations
                 .Index(t => t.RoleId);
             
             CreateTable(
-                "dbo.DocumentTypes",
-                c => new
-                    {
-                        DocumentTypeId = c.Int(nullable: false, identity: true),
-                        Type = c.String(),
-                    })
-                .PrimaryKey(t => t.DocumentTypeId);
-            
-            CreateTable(
                 "dbo.ActivityTypes",
                 c => new
                     {
@@ -180,7 +168,6 @@ namespace Project_LMS.Migrations
         {
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
             DropForeignKey("dbo.Activities", "ActivityTypeId", "dbo.ActivityTypes");
-            DropForeignKey("dbo.Documents", "DocumentTypeId", "dbo.DocumentTypes");
             DropForeignKey("dbo.Documents", "ApplicationUserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
@@ -200,7 +187,6 @@ namespace Project_LMS.Migrations
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
             DropIndex("dbo.AspNetUsers", new[] { "CourseId" });
             DropIndex("dbo.Documents", new[] { "ApplicationUserId" });
-            DropIndex("dbo.Documents", new[] { "DocumentTypeId" });
             DropIndex("dbo.Documents", new[] { "ActivityId" });
             DropIndex("dbo.Documents", new[] { "ModuleId" });
             DropIndex("dbo.Documents", new[] { "CourseId" });
@@ -208,7 +194,6 @@ namespace Project_LMS.Migrations
             DropIndex("dbo.Activities", new[] { "ModuleId" });
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.ActivityTypes");
-            DropTable("dbo.DocumentTypes");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.Modules");

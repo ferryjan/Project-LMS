@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Project_LMS.Models.Document>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Activity.CourseName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ApplicationUser.GivenName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Course.CourseName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Module.CourseName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UploadingTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DocumentRef)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Activity.CourseName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ApplicationUser.GivenName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Course.CourseName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Module.CourseName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UploadingTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DocumentRef)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.DocumentId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.DocumentId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.DocumentId })
+        </td>
+    </tr>
+}
+
+</table>

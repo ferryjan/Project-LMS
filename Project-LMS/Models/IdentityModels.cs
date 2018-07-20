@@ -12,11 +12,13 @@ namespace Project_LMS.Models
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit https://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
+        [Display(Name = "Given Name")]
         public string GivenName { get; set; }
+        [Display(Name = "Family Name")]
         public string FamilyName { get; set; }
-        public string MobileNumber { get; set; }
         public string ProfileImageRef { get; set; }
         public DateTime TimeOfRegistration { get; set; }
+        public string FirstTimeLogin { get; set; }
 
         //Navigational properties
         [Display(Name = "Course ID")]
@@ -30,7 +32,12 @@ namespace Project_LMS.Models
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
+            
             // Add custom user claims here
+            if (GivenName != null) userIdentity.AddClaim(new Claim("GivenName", this.GivenName.ToString()));
+            if (FamilyName != null) userIdentity.AddClaim(new Claim("FamilyName", this.FamilyName.ToString()));
+            if (ProfileImageRef != null) userIdentity.AddClaim(new Claim("ProfileImageRef", this.ProfileImageRef.ToString()));
+
             return userIdentity;
         }
     }

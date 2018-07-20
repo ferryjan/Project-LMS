@@ -32,25 +32,52 @@ namespace Project_LMS.Migrations
                 }
             }
 
+
             var userStore = new UserStore<ApplicationUser>(db);
             var userManager = new UserManager<ApplicationUser>(userStore);
-            var emails = new[] { "admin@admin.se", "student@student.se" };
-            foreach (var email in emails)
-            {
-                if (db.Users.Any(u => u.UserName == email)) continue;
-                var user = new ApplicationUser { UserName = email, Email = email, TimeOfRegistration = DateTime.Now };
-                var result = userManager.Create(user, "password");
-                if (!result.Succeeded)
-                {
-                    throw new Exception(string.Join("\n", result.Errors));
-                }
+
+            string email, rolestring;
+            ApplicationUser adminUser;
+
+            email = "admin@admin.se";
+            rolestring = "Teacher";
+            if (!db.Users.Any(u => u.UserName == email)) { 
+                var result = userManager.Create(
+                    new ApplicationUser
+                    {
+                        GivenName = "Boris",
+                        FamilyName = "Jeltsin",
+                        ProfileImageRef = "",
+                        UserName = email,
+                        Email = email,
+                        TimeOfRegistration = DateTime.Now
+                    }, 
+                    "password");
+                if (!result.Succeeded) {throw new Exception(string.Join("\n", result.Errors)); }
             }
+            adminUser = userManager.FindByName(email);
+            userManager.AddToRole(adminUser.Id, rolestring);
 
-            var adminUser = userManager.FindByName("admin@admin.se");
-            userManager.AddToRole(adminUser.Id, "Teacher");
 
-            var studentUser = userManager.FindByName("student@student.se");
-            userManager.AddToRole(studentUser.Id, "Student");
+            email = "student@student.se";
+            rolestring = "Student";
+            if (!db.Users.Any(u => u.UserName == email))
+            {
+                var result = userManager.Create(
+                    new ApplicationUser
+                    {
+                        GivenName = "Kattis",
+                        FamilyName = "Hoppsan",
+                        ProfileImageRef = "",
+                        UserName = email,
+                        Email = email,
+                        TimeOfRegistration = DateTime.Now
+                    },
+                    "password");
+                if (!result.Succeeded) { throw new Exception(string.Join("\n", result.Errors)); }
+            }
+            adminUser = userManager.FindByName(email);
+            userManager.AddToRole(adminUser.Id, rolestring);
 
             var activityTypes = new[] {
                 new ActivityType { Type = "Lecture" },

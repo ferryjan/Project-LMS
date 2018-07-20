@@ -1,0 +1,28 @@
+﻿@model Project_LMS.Models.Document
+
+@{
+    /**/
+
+    ViewBag.Title = "Create Course Document";
+}
+
+<h2>CreateCourseDocument</h2>
+
+@using (Html.BeginForm("CreateCourseDocument", "Documents", new { id = ViewBag.CourseId } ,FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="editor-field">
+
+        <div>Upload new document: <input type="file" accept=".xlsx,.xls, .doc, .docx,.ppt, .pptx,.txt,.pdf" name="Document" /></div>
+    </div>
+
+    <input type="submit" value="Save" />
+    @Html.ActionLink("Cancel and return to List", "Index")
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

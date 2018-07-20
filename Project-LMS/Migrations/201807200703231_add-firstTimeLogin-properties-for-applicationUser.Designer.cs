@@ -7,13 +7,13 @@ namespace Project_LMS.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class removedocumentdatatype : IMigrationMetadata
+    public sealed partial class addfirstTimeLoginpropertiesforapplicationUser : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(removedocumentdatatype));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(addfirstTimeLoginpropertiesforapplicationUser));
         
         string IMigrationMetadata.Id
         {
-            get { return "201807190638508_remove-document-datatype"; }
+            get { return "201807200703231_add-firstTimeLogin-properties-for-applicationUser"; }
         }
         
         string IMigrationMetadata.Source

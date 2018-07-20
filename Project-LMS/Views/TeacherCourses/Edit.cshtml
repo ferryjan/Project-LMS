@@ -7,7 +7,7 @@
 <h2>Edit</h2>
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Index", "TeacherCourses"))
 {
     @Html.AntiForgeryToken()
 
@@ -61,7 +61,10 @@
     @Html.ActionLink("Back to List", "Index")
 </div>
 
-@Html.Action("MemberProfile", "Member", new { id = Model.CourseId })
+<br />
+<br />
+
+@Html.Action("FileDetails", "Documents", new { id = Model.CourseId })
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
