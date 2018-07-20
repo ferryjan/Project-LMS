@@ -64,7 +64,13 @@
 <br />
 <br />
 
+@Html.Action("StudentIndex", "ApplicationUser", new { id = Model.CourseId })
+
+<br />
+<br />
+
 @Html.Action("FileDetails", "Documents", new { id = Model.CourseId })
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

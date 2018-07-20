@@ -3,12 +3,14 @@
 @{
     /**/
 
+    /**/
+
     ViewBag.Title = "Create Course Document";
 }
 
 <h2>CreateCourseDocument</h2>
 
-@using (Html.BeginForm("CreateCourseDocument", "Documents", new { id = ViewBag.CourseId } ,FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("CreateCourseDocument", "Documents", new { id = ViewBag.CourseId }, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <div class="editor-field">
 
@@ -16,13 +18,14 @@
     </div>
 
     <input type="submit" value="Save" />
-    @Html.ActionLink("Cancel and return to List", "Index")
-}
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+    @Html.ActionLink("Cancel and Go Back", "Edit", "TeacherCourses", new { id = ViewBag.CourseId }, null)
+    }
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+    <div>
+        @Html.ActionLink("Back", "Edit", "TeacherCourses", new { id = ViewBag.CourseId }, null)
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }

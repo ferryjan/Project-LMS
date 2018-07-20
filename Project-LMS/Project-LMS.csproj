@@ -299,6 +299,8 @@
     <Content Include="Views\Documents\ShowCourseDocuments.cshtml" />
     <Content Include="Views\Documents\CreateCourseDocument.cshtml" />
     <Content Include="Views\Documents\FileDetails.cshtml" />
+    <Content Include="Views\ApplicationUser\StudentIndex.cshtml" />
+    <Content Include="Views\ApplicationUser\DeleteStudentFromCourse.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
