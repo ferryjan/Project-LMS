@@ -23,7 +23,8 @@ namespace Project_LMS.Models
         public int? CourseId { get; set; }
         public virtual Course Course { get; set; }
 
-        [Display(Name = "Users' Documents")]        public virtual ICollection<Document> UserDocuments { get; set; }
+        [Display(Name = "Users' Documents")]
+        public virtual ICollection<Document> UserDocuments { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
