@@ -195,6 +195,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ActivitiesController.cs" />
     <Compile Include="Controllers\ApplicationUserController.cs" />
     <Compile Include="Controllers\DocumentsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -210,6 +211,14 @@
     <Compile Include="Migrations\201807200703231_add-firstTimeLogin-properties-for-applicationUser.cs" />
     <Compile Include="Migrations\201807200703231_add-firstTimeLogin-properties-for-applicationUser.Designer.cs">
       <DependentUpon>201807200703231_add-firstTimeLogin-properties-for-applicationUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807201112404_FixedActivityModel.cs" />
+    <Compile Include="Migrations\201807201112404_FixedActivityModel.Designer.cs">
+      <DependentUpon>201807201112404_FixedActivityModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807201121377_FirstTimLoginToBoolean.cs" />
+    <Compile Include="Migrations\201807201121377_FirstTimLoginToBoolean.Designer.cs">
+      <DependentUpon>201807201121377_FirstTimLoginToBoolean.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -299,6 +308,11 @@
     <Content Include="Views\Documents\ShowCourseDocuments.cshtml" />
     <Content Include="Views\Documents\CreateCourseDocument.cshtml" />
     <Content Include="Views\Documents\FileDetails.cshtml" />
+    <Content Include="Views\Activities\Create.cshtml" />
+    <Content Include="Views\Activities\Delete.cshtml" />
+    <Content Include="Views\Activities\Details.cshtml" />
+    <Content Include="Views\Activities\Edit.cshtml" />
+    <Content Include="Views\Activities\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -323,6 +337,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201807200703231_add-firstTimeLogin-properties-for-applicationUser.resx">
       <DependentUpon>201807200703231_add-firstTimeLogin-properties-for-applicationUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807201112404_FixedActivityModel.resx">
+      <DependentUpon>201807201112404_FixedActivityModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807201121377_FirstTimLoginToBoolean.resx">
+      <DependentUpon>201807201121377_FirstTimLoginToBoolean.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
