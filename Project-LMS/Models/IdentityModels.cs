@@ -59,5 +59,6 @@ namespace Project_LMS.Models
         {
             return new ApplicationDbContext();
         }
+
     }
 }

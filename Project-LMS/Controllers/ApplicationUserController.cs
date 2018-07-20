@@ -54,6 +54,14 @@ namespace Project_LMS.Controllers
             }
         }
 
+        public ActionResult StudentIndex(int id)
+        {
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
+            var studentRole = roleManager.FindByName("Student");
+            var list = db.Users.Where(x => x.Roles.Any(s => s.RoleId == studentRole.Id)).Where(t => t.CourseId == id).OrderBy(g => g.GivenName).ThenBy(f => f.FamilyName).ToList();
+            return PartialView(list);
+        }
+
         // GET: ApplicationUser/Details/5
         public ActionResult Details(string id)
         {
@@ -146,6 +154,36 @@ namespace Project_LMS.Controllers
             ViewBag.CourseId = new SelectList(db.Courses, "CourseId", "CourseName", applicationUser.CourseId);
             return View(applicationUser);
         }
+
+
+        // GET: ApplicationUser/Delete/5
+        public ActionResult DeleteStudentFromCourse(string studnetId, int id)
+        {
+            if (studnetId == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ApplicationUser applicationUser = db.Users.Find(studnetId);
+            if (applicationUser == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.CourseID = id;
+            return View(applicationUser);
+        }
+
+        // POST: ApplicationUser/Delete/5
+        [HttpPost, ActionName("DeleteStudentFromCourse")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteStudentFromCourseConfirmed(string studnetId, int id)
+        {
+            ApplicationUser applicationUser = db.Users.Find(studnetId);
+            applicationUser.CourseId = null;
+            db.Entry(applicationUser).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Edit", "TeacherCourses", new { id = id });
+        }
+        
 
         // GET: ApplicationUser/Delete/5
         public ActionResult Delete(string id)
