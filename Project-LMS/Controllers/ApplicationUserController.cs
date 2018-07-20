@@ -129,11 +129,17 @@ namespace Project_LMS.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,GivenName,FamilyName,MobileNumber,ProfileImageRef,TimeOfRegistration,CourseId,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName")] ApplicationUser applicationUser)
+        public ActionResult Edit([Bind(Include = "Id,GivenName,FamilyName,ProfileImageRef,Email,PhoneNumber")] ApplicationUser applicationUser)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(applicationUser).State = EntityState.Modified;
+                ApplicationUser dbAU = db.Users.Find(applicationUser.Id);
+                dbAU.GivenName = applicationUser.GivenName;
+                dbAU.FamilyName = applicationUser.FamilyName;
+                dbAU.ProfileImageRef = applicationUser.ProfileImageRef;
+                dbAU.Email = applicationUser.Email;
+                dbAU.PhoneNumber = applicationUser.PhoneNumber;
+                db.Entry(dbAU).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
