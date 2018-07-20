@@ -125,6 +125,25 @@ namespace Project_LMS.Migrations
             db.Courses.AddOrUpdate(n => n.CourseName, courses);
             db.SaveChanges();
 
+            var modules = new[] {
+                new Module {
+                    CourseId = courses[0].CourseId,
+                    StartDate = courses[0].StartDate,
+                    EndDate = courses[0].StartDate.AddDays(2),
+                    Name = "Cookies, not just for web-pages",
+                    Description = "An introduction to Cookies: the common combinations."
+                },
+                new Module {
+                    CourseId = courses[0].CourseId,
+                    StartDate = courses[0].StartDate.AddDays(2),
+                    EndDate = courses[0].StartDate.AddDays(4),
+                    Name = "Cookies, not just for web-pages",
+                    Description = "An introduction to Coffie: Brew or boil?"
+                }
+            };
+            db.Modules.AddOrUpdate(m => m.Name, modules);
+            db.SaveChanges();
+
         }
     }
 }
