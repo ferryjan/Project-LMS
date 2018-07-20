@@ -8,7 +8,7 @@
 
 <h2>CreateCourseDocument</h2>
 
-@using (Html.BeginForm("CreateCourseDocument", "Documents", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("CreateCourseDocument", "Documents", new { id = ViewBag.CourseId } ,FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <div class="editor-field">
 
