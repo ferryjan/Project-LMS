@@ -59,6 +59,27 @@ namespace Project_LMS.Migrations
             userManager.AddToRole(adminUser.Id, rolestring);
 
 
+            email = "Donald@duck.se";
+            rolestring = "Teacher";
+            if (!db.Users.Any(u => u.UserName == email))
+            {
+                var result = userManager.Create(
+                    new ApplicationUser
+                    {
+                        GivenName = "Donald",
+                        FamilyName = "Duck",
+                        ProfileImageRef = "",
+                        UserName = email,
+                        Email = email,
+                        TimeOfRegistration = DateTime.Now,
+                        FirstTimeLogin = false
+                    },
+                    "Ante_007");
+                if (!result.Succeeded) { throw new Exception(string.Join("\n", result.Errors)); }
+            }
+            adminUser = userManager.FindByName(email);
+            userManager.AddToRole(adminUser.Id, rolestring);
+
             email = "student@student.se";
             rolestring = "Student";
             if (!db.Users.Any(u => u.UserName == email))
@@ -86,6 +107,8 @@ namespace Project_LMS.Migrations
                 new ActivityType { Type = "Other" }
             };
             db.ActivityTypes.AddOrUpdate(s => new { s.Type }, activityTypes);
+
+
         }
     }
 }

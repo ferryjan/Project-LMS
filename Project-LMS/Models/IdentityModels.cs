@@ -18,7 +18,7 @@ namespace Project_LMS.Models
         public string FamilyName { get; set; }
         public string ProfileImageRef { get; set; }
         public DateTime TimeOfRegistration { get; set; }
-        public string FirstTimeLogin { get; set; }
+        public bool? FirstTimeLogin { get; set; }
 
         //Navigational properties
         [Display(Name = "Course ID")]
