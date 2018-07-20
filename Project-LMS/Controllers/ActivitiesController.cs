@@ -49,7 +49,7 @@ namespace Project_LMS.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ActivityId,CourseName,StartDate,EndDate,ActivityDescription,Deadline,ModuleId,ActivityTypeId")] Activity activity)
+        public ActionResult Create([Bind(Include = "ActivityId,ActivityName,Start,End,Description,Deadline,ModuleId,ActivityTypeId")] Activity activity)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace Project_LMS.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ActivityId,CourseName,StartDate,EndDate,ActivityDescription,Deadline,ModuleId,ActivityTypeId")] Activity activity)
+        public ActionResult Edit([Bind(Include = "ActivityId,ActivityName,Start,End,Description,Deadline,ModuleId,ActivityTypeId")] Activity activity)
         {
             if (ModelState.IsValid)
             {

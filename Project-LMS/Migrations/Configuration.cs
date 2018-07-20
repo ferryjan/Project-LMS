@@ -107,6 +107,8 @@ namespace Project_LMS.Migrations
                 new ActivityType { Type = "Other" }
             };
             db.ActivityTypes.AddOrUpdate(s => new { s.Type }, activityTypes);
+
+
         }
     }
 }

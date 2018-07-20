@@ -5,16 +5,16 @@ using System.Linq;
 using System.Web;
 
 namespace Project_LMS.Models
-{
-    public class Module
+{ 
+    public class Module : IValidatableObject
     {
         [Key]
         public int ModuleId { get; set; }
 
         [Required]
-        [Display(Name = "Module Name")]
+        [Display(Name = "Name")]
         [StringLength(50, MinimumLength = 2)]
-        public string CourseName { get; set; }
+        public string Name { get; set; }
 
         [Display(Name = "Start Date")]
         [DataType(DataType.Date)]
@@ -27,10 +27,10 @@ namespace Project_LMS.Models
         public DateTime EndDate { get; set; }
 
         [Required]
-        [Display(Name = "Module Description")]
+        [Display(Name = "Description")]
         [StringLength(255)]
         [DataType(DataType.MultilineText)]
-        public string ModuleDescription { get; set; }
+        public string Description { get; set; }
 
         //Navigational properties
         [Display(Name = "Course ID")]
@@ -40,5 +40,34 @@ namespace Project_LMS.Models
         [Display(Name = "Module Activities")]        public virtual ICollection<Activity> Activities { get; set; }
 
         [Display(Name = "Module Documents")]        public virtual ICollection<Document> ModuleDocuments { get; set; }
+
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        {
+            List<ValidationResult> res = new List<ValidationResult>();
+            ApplicationDbContext db = new ApplicationDbContext();
+
+            var result = db.Modules.FirstOrDefault(v => v.Name == Name);
+            if (result != null)
+            {
+                ValidationResult mss = new ValidationResult("There is already a module by this name registered in this course");
+                res.Add(mss);
+            }
+            if (StartDate < DateTime.Now.Date)
+            {
+                ValidationResult mss = new ValidationResult("You cannot add a module in the past!");
+                res.Add(mss);
+            }
+            else if (StartDate >= DateTime.Now.AddYears(5))
+            {
+                ValidationResult mss = new ValidationResult("You cannot add a module more than 5 years in the future!");
+                res.Add(mss);
+            }
+            if (EndDate < StartDate)
+            {
+                ValidationResult mss = new ValidationResult("End date must be greater than start date");
+                res.Add(mss);
+            }
+            return res;
+        }
     }
 }

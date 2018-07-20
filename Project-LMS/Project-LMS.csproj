@@ -220,6 +220,10 @@
     <Compile Include="Migrations\201807201121377_FirstTimLoginToBoolean.Designer.cs">
       <DependentUpon>201807201121377_FirstTimLoginToBoolean.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201807201147339_IssuesWithModuleModel.cs" />
+    <Compile Include="Migrations\201807201147339_IssuesWithModuleModel.Designer.cs">
+      <DependentUpon>201807201147339_IssuesWithModuleModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Activity.cs" />
@@ -343,6 +347,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201807201121377_FirstTimLoginToBoolean.resx">
       <DependentUpon>201807201121377_FirstTimLoginToBoolean.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807201147339_IssuesWithModuleModel.resx">
+      <DependentUpon>201807201147339_IssuesWithModuleModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
