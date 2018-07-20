@@ -49,7 +49,7 @@ namespace Project_LMS.Controllers
             }
             else
             {
-                var list = db.Users.Where(x => x.Roles.Any(s => s.RoleId == teacherRole.Id)).ToList();
+                var list = db.Users.Where(x => x.Roles.Any(s => s.RoleId == teacherRole.Id)).OrderBy(g => g.GivenName).ThenBy(f => f.FamilyName).ToList();
                 return View(list);
             }
         }
