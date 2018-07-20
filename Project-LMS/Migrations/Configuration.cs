@@ -81,6 +81,9 @@ namespace Project_LMS.Migrations
 
 
 
+            var adminUser1 = userManager.FindByName("gorgen@gmail.com");
+            userManager.AddToRole(adminUser1.Id, "Teacher");
+
             var activityTypes = new[] {
                 new ActivityType { Type = "Lecture" },
                 new ActivityType { Type = "Exercise" },
