@@ -30,10 +30,11 @@ namespace Project_LMS.Models
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
+            
             // Add custom user claims here
-            userIdentity.AddClaim(new Claim("GivenName", this.GivenName.ToString()));
-            userIdentity.AddClaim(new Claim("FamilyName", this.FamilyName.ToString()));
-            userIdentity.AddClaim(new Claim("ProfileImageRef", this.ProfileImageRef.ToString()));
+            if (GivenName != null) userIdentity.AddClaim(new Claim("GivenName", this.GivenName.ToString()));
+            if (FamilyName != null) userIdentity.AddClaim(new Claim("FamilyName", this.FamilyName.ToString()));
+            if (ProfileImageRef != null) userIdentity.AddClaim(new Claim("ProfileImageRef", this.ProfileImageRef.ToString()));
 
             return userIdentity;
         }

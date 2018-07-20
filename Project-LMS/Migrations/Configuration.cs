@@ -34,7 +34,7 @@ namespace Project_LMS.Migrations
 
             var userStore = new UserStore<ApplicationUser>(db);
             var userManager = new UserManager<ApplicationUser>(userStore);
-            var emails = new[] { "admin@admin.se", "student@student.se" };
+            var emails = new[] { "admin@admin.se", "student@student.se", "gorgen@gmail.com" };
             foreach (var email in emails)
             {
                 if (db.Users.Any(u => u.UserName == email)) continue;
@@ -51,6 +51,9 @@ namespace Project_LMS.Migrations
 
             var studentUser = userManager.FindByName("student@student.se");
             userManager.AddToRole(studentUser.Id, "Student");
+
+            var adminUser1 = userManager.FindByName("gorgen@gmail.com");
+            userManager.AddToRole(adminUser1.Id, "Teacher");
 
             var activityTypes = new[] {
                 new ActivityType { Type = "Lecture" },
