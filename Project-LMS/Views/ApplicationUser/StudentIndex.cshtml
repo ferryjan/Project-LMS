@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Project_LMS.Models.ApplicationUser>
 
 <p>
-    @Html.ActionLink("Add New Student to The Course", "Create")
+    @Html.ActionLink("Add New Student to The Course", "CreateStudent", new { id = ViewBag.CourseId })
 </p>
 <table class="table">
     <tr>
@@ -35,7 +35,7 @@
             @Html.DisplayFor(modelItem => item.Email)
         </td>
         <td>
-            @Html.ActionLink("Delete Student From Course", "DeleteStudentFromCourse", new { studnetId=item.Id, id = item.CourseId})
+            @Html.ActionLink("Remove Student From Course", "DeleteStudentFromCourse", new { studnetId=item.Id, id = item.CourseId})
         </td>
     </tr>
 }

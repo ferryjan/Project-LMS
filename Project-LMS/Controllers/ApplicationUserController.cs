@@ -56,10 +56,52 @@ namespace Project_LMS.Controllers
 
         public ActionResult StudentIndex(int id)
         {
+            ViewBag.CourseId = id;
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
             var studentRole = roleManager.FindByName("Student");
             var list = db.Users.Where(x => x.Roles.Any(s => s.RoleId == studentRole.Id)).Where(t => t.CourseId == id).OrderBy(g => g.GivenName).ThenBy(f => f.FamilyName).ToList();
             return PartialView(list);
+        }
+
+        // GET: ApplicationUser/Create
+        public ActionResult CreateStudent(int id)
+        {
+            ViewBag.CourseId = id;
+            return View();
+        }
+
+        // POST: ApplicationUser/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateStudent(int id, [Bind(Include = "GivenName,FamilyName,Email")] ApplicationUser applicationUser)
+        {
+            if (ModelState.IsValid)
+            {
+
+                applicationUser.TimeOfRegistration = DateTime.Now;
+                applicationUser.UserName = applicationUser.Email;
+                applicationUser.CourseId = id;
+
+                if (db.Users.Any(u => u.UserName == applicationUser.Email))
+                {
+                    return View(applicationUser);
+                }
+
+                var userStore = new UserStore<ApplicationUser>(db);
+                var userManager = new UserManager<ApplicationUser>(userStore);
+
+                var result = userManager.Create(applicationUser, "Ante_007");
+                if (!result.Succeeded) { throw new Exception(string.Join("\n", result.Errors)); }
+
+                userManager.AddToRole(applicationUser.Id, "Student");
+                return RedirectToAction("Edit", "TeacherCourses", new { id = id });
+
+            }
+
+            ViewBag.CourseId = new SelectList(db.Courses, "CourseId", "CourseName", applicationUser.CourseId);
+            return View(applicationUser);
         }
 
         // GET: ApplicationUser/Details/5
