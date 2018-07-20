@@ -1,5 +1,5 @@
 ﻿body {
-    padding-top: 50px;
+    padding-top: 100px;
     padding-bottom: 20px;
 }
 
@@ -29,12 +29,14 @@ body {
     background-color: lightgrey;
 }
 .navbar-inverse {
-    background-color: red;
-    border-color: red;
+    background-color: #222;
+    border-color: #080808;
+    padding:10px 0px 2px 0px;
+
 }
-    .navbar-inverse .navbar-nav > li > a {
-        color: #fff;
-    }
+
+
+
 .btn-default {
     color: #fff;
     background-color: #ff4342;
