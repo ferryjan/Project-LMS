@@ -203,33 +203,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201807181115402_init.cs" />
-    <Compile Include="Migrations\201807181115402_init.Designer.cs">
-      <DependentUpon>201807181115402_init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201807190638508_remove-document-datatype.cs" />
-    <Compile Include="Migrations\201807190638508_remove-document-datatype.Designer.cs">
-      <DependentUpon>201807190638508_remove-document-datatype.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201807190812097_RemovedMobilePhoneNumber.cs" />
-    <Compile Include="Migrations\201807190812097_RemovedMobilePhoneNumber.Designer.cs">
-      <DependentUpon>201807190812097_RemovedMobilePhoneNumber.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201807190858363_some-changes-in-document-model.cs" />
-    <Compile Include="Migrations\201807190858363_some-changes-in-document-model.Designer.cs">
-      <DependentUpon>201807190858363_some-changes-in-document-model.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201807190901489_some-changes-in-document-model-again.cs" />
-    <Compile Include="Migrations\201807190901489_some-changes-in-document-model-again.Designer.cs">
-      <DependentUpon>201807190901489_some-changes-in-document-model-again.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201807190950410_add-filedata-to-document-model.cs" />
-    <Compile Include="Migrations\201807190950410_add-filedata-to-document-model.Designer.cs">
-      <DependentUpon>201807190950410_add-filedata-to-document-model.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201807191252431_make-uploadtime-nullable.cs" />
-    <Compile Include="Migrations\201807191252431_make-uploadtime-nullable.Designer.cs">
-      <DependentUpon>201807191252431_make-uploadtime-nullable.cs</DependentUpon>
+    <Compile Include="Migrations\201807191418476_Init.cs" />
+    <Compile Include="Migrations\201807191418476_Init.Designer.cs">
+      <DependentUpon>201807191418476_Init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -338,26 +314,8 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201807181115402_init.resx">
-      <DependentUpon>201807181115402_init.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201807190638508_remove-document-datatype.resx">
-      <DependentUpon>201807190638508_remove-document-datatype.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201807190812097_RemovedMobilePhoneNumber.resx">
-      <DependentUpon>201807190812097_RemovedMobilePhoneNumber.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201807190858363_some-changes-in-document-model.resx">
-      <DependentUpon>201807190858363_some-changes-in-document-model.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201807190901489_some-changes-in-document-model-again.resx">
-      <DependentUpon>201807190901489_some-changes-in-document-model-again.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201807190950410_add-filedata-to-document-model.resx">
-      <DependentUpon>201807190950410_add-filedata-to-document-model.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201807191252431_make-uploadtime-nullable.resx">
-      <DependentUpon>201807191252431_make-uploadtime-nullable.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201807191418476_Init.resx">
+      <DependentUpon>201807191418476_Init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
