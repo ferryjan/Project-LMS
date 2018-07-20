@@ -35,10 +35,22 @@ body {
 
 }
 
-
-
 .btn-default {
     color: #fff;
     background-color: #ff4342;
     border-color: #ff4342;
+}
+.navbar-inverse .navbar-nav > li > a {
+    color: wheat;
+    font-size:18px;
+}
+.form-control {
+    font-size: 17px;
+    border-radius: 9px;
+    padding: 20px 15px;
+}
+.btn {
+    font-size: 17px;
+    padding: 7px 20px;
+    border-radius: 9px;
 }
