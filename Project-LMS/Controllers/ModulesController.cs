@@ -30,42 +30,57 @@ namespace Project_LMS.Controllers
         }
 
         // GET: Modules/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int id, int? moduleId)
         {
-            if (id == null)
+            if (moduleId == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Module module = db.Modules.Find(id);
+            Module module = db.Modules.Find(moduleId);
             if (module == null)
             {
                 return HttpNotFound();
             }
+            ViewBag.CourseID = id;
             return View(module);
         }
 
         // GET: Modules/Create
-        public ActionResult Create()
+        public ActionResult Create(int id)
         {
-            ViewBag.CourseId = new SelectList(db.Courses, "CourseId", "CourseName");
+            ViewBag.CourseStartDate = db.Courses.FirstOrDefault(c => c.CourseId == id).StartDate;
+            ViewBag.CourseEndDate = db.Courses.FirstOrDefault(c => c.CourseId == id).EndDate;
+            ViewBag.CourseId = id;
+            ViewBag.DateNotValidMessage = "";
             return View();
         }
 
         // POST: Modules/Create
-        // 为了防止“过多发布”攻击，请启用要绑定到的特定属性，有关 
-        // 详细信息，请参阅 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ModuleId,Name,StartDate,EndDate,Description,CourseId")] Module module)
+        public ActionResult Create(int id, [Bind(Include = "Name,StartDate,EndDate,Description")] Module module)
         {
+            module.CourseId = id;
+            var courseStartDate = db.Courses.FirstOrDefault(c => c.CourseId == id).StartDate;
+            var courseEndDate = db.Courses.FirstOrDefault(c => c.CourseId == id).EndDate;
+            if (DateTime.Compare(courseStartDate, module.StartDate) > 0 || DateTime.Compare(courseEndDate, module.EndDate) < 0)
+            {
+                ViewBag.CourseStartDate = db.Courses.FirstOrDefault(c => c.CourseId == id).StartDate;
+                ViewBag.CourseEndDate = db.Courses.FirstOrDefault(c => c.CourseId == id).EndDate;
+                ViewBag.CourseId = id;
+                ViewBag.DateNotValidMessage = ("Please make sure that the module start/end date is within the range of course start/end date!");
+                return View(module);
+            }
             if (ModelState.IsValid)
             {
                 db.Modules.Add(module);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Edit", "TeacherCourses", new { id = id });
             }
-
-            ViewBag.CourseId = new SelectList(db.Courses, "CourseId", "CourseName", module.CourseId);
+            ViewBag.CourseStartDate = db.Courses.FirstOrDefault(c => c.CourseId == id).StartDate;
+            ViewBag.CourseEndDate = db.Courses.FirstOrDefault(c => c.CourseId == id).EndDate;
+            ViewBag.CourseId = id;
+            ViewBag.DateNotValidMessage = "";
             return View(module);
         }
 
@@ -81,51 +96,50 @@ namespace Project_LMS.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.CourseId = new SelectList(db.Courses, "CourseId", "CourseName", module.CourseId);
+            // ViewBag.CourseId = new SelectList(db.Courses, "CourseId", "CourseName", module.CourseId);
             return View(module);
         }
 
         // POST: Modules/Edit/5
-        // 为了防止“过多发布”攻击，请启用要绑定到的特定属性，有关 
-        // 详细信息，请参阅 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ModuleId,Name,StartDate,EndDate,Description,CourseId")] Module module)
+        public ActionResult Edit([Bind(Include = "ModuleId,Name,StartDate,EndDate,Description")] Module module)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(module).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Edit", "TeacherCourses", new { id = module.CourseId });
             }
-            ViewBag.CourseId = new SelectList(db.Courses, "CourseId", "CourseName", module.CourseId);
+            // ViewBag.CourseId = new SelectList(db.Courses, "CourseId", "CourseName", module.CourseId);
             return View(module);
         }
 
         // GET: Modules/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(int id, int? moduleId)
         {
-            if (id == null)
+            if (moduleId == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Module module = db.Modules.Find(id);
+            Module module = db.Modules.Find(moduleId);
             if (module == null)
             {
                 return HttpNotFound();
             }
+            ViewBag.CourseID = id;
             return View(module);
         }
 
         // POST: Modules/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int moduleId, int id)
         {
-            Module module = db.Modules.Find(id);
+            Module module = db.Modules.Find(moduleId);
             db.Modules.Remove(module);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Edit", "TeacherCourses", new { id = id });
         }
 
         protected override void Dispose(bool disposing)

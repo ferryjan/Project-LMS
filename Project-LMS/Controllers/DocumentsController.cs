@@ -98,30 +98,6 @@ namespace Project_LMS.Controllers
         }
 
 
-        // GET: Documents/Create
-        public ActionResult Create(int? id)
-        {
-            return View();
-        }
-
-        // POST: Documents/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "DocumentId,CourseName,CourseDescription,UploadingTime,DocumentRef,CourseId,ModuleId,ActivityId,ApplicationUserId")] Document document)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Documents.Add(document);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            return View(document);
-        }
-
-
         // GET: Documents/Delete/5
         public ActionResult Delete(int? id)
         {
