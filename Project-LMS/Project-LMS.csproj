@@ -328,6 +328,10 @@
     <Content Include="Views\Modules\Index.cshtml" />
     <Content Include="Views\Modules\ShowCourseModules.cshtml" />
     <Content Include="Views\Nav\_Navigation.cshtml" />
+    <Content Include="Views\Documents\ModuleFileDetails.cshtml" />
+    <Content Include="Views\Documents\CreateModuleDocument.cshtml" />
+    <Content Include="Views\Documents\ModuleDocumentDetails.cshtml" />
+    <Content Include="Views\Documents\DeleteModuleDocument.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

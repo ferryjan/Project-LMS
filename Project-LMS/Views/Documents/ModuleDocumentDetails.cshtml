@@ -4,7 +4,7 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Module Document Details</h2>
 
 <div>
     <h4>Document</h4>
@@ -12,11 +12,11 @@
     <dl class="dl-horizontal">
 
         <dt>
-            @Html.DisplayNameFor(model => model.Course.CourseName)
+            @Html.DisplayNameFor(model => model.Module.Name)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Course.CourseName)
+            @Html.DisplayFor(model => model.Module.Name)
         </dd>
 
         <dt>
@@ -38,5 +38,5 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Back", "Edit", "TeacherCourses", new { id = Model.CourseId }, null)
+    @Html.ActionLink("Back", "Edit", "Modules", new { id = Model.ModuleId }, null)
 </p>

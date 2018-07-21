@@ -1,0 +1,31 @@
+﻿@model Project_LMS.Models.Document
+
+@{
+    /**/
+
+    /**/
+
+    ViewBag.Title = "Upload Module Document";
+}
+
+<h2>Upload Module Document</h2>
+
+@using (Html.BeginForm("CreateModuleDocument", "Documents", new { moduleId = ViewBag.ModuleId }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="editor-field">
+
+        <div>Upload new document: <input type="file" accept=".xlsx,.xls, .doc, .docx,.ppt, .pptx,.txt,.pdf" name="Document" /></div>
+    </div>
+
+    <input type="submit" value="Save" />
+
+    @Html.ActionLink("Cancel and Go Back", "Edit", "Modules", new { id = ViewBag.ModuleId }, null)
+}
+
+<div>
+    @Html.ActionLink("Back", "Edit", "Modules", new { id = ViewBag.ModuleId }, null)
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

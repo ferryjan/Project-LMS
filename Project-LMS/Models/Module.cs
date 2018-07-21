@@ -12,7 +12,7 @@ namespace Project_LMS.Models
         public int ModuleId { get; set; }
 
         [Required]
-        [Display(Name = "Name")]
+        [Display(Name = "Module Name")]
         [StringLength(50, MinimumLength = 2)]
         public string Name { get; set; }
 

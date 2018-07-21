@@ -60,6 +60,11 @@
     </div>
 }
 
+<br />
+<br />
+
+@Html.Action("ModuleFileDetails", "Documents", new { moduleId = Model.ModuleId })
+
 <div>
     @Html.ActionLink("Cancel and Go Back", "Edit", "TeacherCourses", new { id = Model.CourseId }, null)
 </div>
