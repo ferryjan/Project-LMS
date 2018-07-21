@@ -1,45 +1,56 @@
-﻿<div id='cssmenu'>
-    <ul>
-        <li class='has-sub'>
-            <a href='#'><span>P</span></a>
-            <ul>
-                <li class='has-sub'>
-                    <a href='#'><span>P1</span></a>
-                    <ul>
-                        <li><a href='#'><span>P1.1</span></a></li>
-                        <li><a href='#'><span>P1.2</span></a></li>
-                    </ul>
-                </li>
-                <li class='has-sub'>
-                    <a href='#'><span>P2</span></a>
-                    <ul>
-                        <li><a href='#'><span>S2.1</span></a></li>
-                        <li class='last'><a href='#'><span>S2.2</span></a></li>
-                    </ul>
-                </li>
-            </ul>
-        </li>
-    </ul>
-    <ul>
-        <li class='has-sub'>
-            <a href='#'><span>P</span></a>
-            <ul>
-                <li class='has-sub'>
-                    <a href='#'><span>P1</span></a>
-                    <ul>
-                        <li><a href='#'><span>P1.1</span></a></li>
-                        <li class='last'><a href='#'><span>P1.1</span></a></li>
-                    </ul>
-                </li>
-                <li class='has-sub'>
-                    <a href='#'><span>P2</span></a>
-                    <ul>
-                        <li><a href='#'><span>S2.1</span></a></li>
-                        <li class='last'><a href='#'><span>S2.2</span></a></li>
-                    </ul>
-                </li>
-            </ul>
-        </li>
-    </ul>
+﻿@model List<Project_LMS.Models.NaviItem>
 
+@{
+    var courseList = Model.Select(i => i.Courses).FirstOrDefault().ToList();
+    var historyCourseList = courseList.Where(c => DateTime.Compare(c.EndDate.Date, DateTime.Now.Date) < 0);
+    var undergoingAndFutureCourseList = courseList.Where(c => DateTime.Compare(c.EndDate.Date, DateTime.Now.Date) >= 0);
+    var moduleList = Model.Select(i => i.Modules).FirstOrDefault().ToList();
+}
+<div id='cssmenu'>
+    <ul>
+        @if (undergoingAndFutureCourseList.Count() != 0)
+        {
+            <li class='has-sub'>
+                <a href='#'><span>Courses</span></a>
+                <ul>
+                    @foreach (var course in undergoingAndFutureCourseList)
+                    {
+                        <li class='has-sub'>
+                            <a href='#'><span>@Html.Raw(course.CourseName)</span></a>
+                            <ul>
+                                <li><a href="@Url.Action("Edit", "TeacherCourses", new { id = course.CourseId })"><span>@Html.Raw("Edit Course")</span></a></li>
+                                @foreach (var module in moduleList.Where(m => m.CourseId == course.CourseId))
+                                {
+                                    <li><a href="@Url.Action("Edit", "Modules", new { id = module.ModuleId })"><span>@Html.Raw("Module: " + module.Name)</span></a></li>
+                                }
+                            </ul>
+                        </li>
+                    }
+                </ul>
+            </li>
+        }
+    </ul>
+    <ul>
+        @if (historyCourseList.Count() != 0)
+        {
+            <li class='has-sub'>
+                <a href='#'><span>Earlier Courses</span></a>
+                <ul>
+                    @foreach (var course in historyCourseList)
+                    {
+                        <li class='has-sub'>
+                            <a href='#'><span>@Html.Raw(course.CourseName)</span></a>
+                            <ul>
+                                <li><a href="@Url.Action("Edit", "TeacherCourses", new { id = course.CourseId })"><span>@Html.Raw("Edit Course")</span></a></li>
+                                @foreach (var module in moduleList.Where(m => m.CourseId == course.CourseId))
+                                {
+                                    <li><a href="@Url.Action("Edit", "Module", new { id = module.ModuleId })"><span>@Html.Raw("Module: " + module.Name)</span></a></li>
+                                }
+                            </ul>
+                        </li>
+                    }
+                </ul>
+            </li>
+        }
+    </ul>
 </div>

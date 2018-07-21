@@ -89,7 +89,7 @@ namespace Project_LMS.Controllers
 
         }
 
-        [HttpGet]
+
         public PartialViewResult FileDetails(int? id)
         {
             ViewBag.Id = id;

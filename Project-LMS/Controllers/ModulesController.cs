@@ -96,6 +96,10 @@ namespace Project_LMS.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.CourseStartDate = db.Courses.FirstOrDefault(c => c.CourseId == id).StartDate;
+            ViewBag.CourseEndDate = db.Courses.FirstOrDefault(c => c.CourseId == id).EndDate;
+            ViewBag.CourseId = module.CourseId;
+            ViewBag.DateNotValidMessage = "";
             // ViewBag.CourseId = new SelectList(db.Courses, "CourseId", "CourseName", module.CourseId);
             return View(module);
         }
@@ -103,14 +107,29 @@ namespace Project_LMS.Controllers
         // POST: Modules/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ModuleId,Name,StartDate,EndDate,Description")] Module module)
+        public ActionResult Edit(int id, [Bind(Include = "ModuleId,Name,StartDate,EndDate,Description")] Module module)
         {
+            module.CourseId = id;
+            var courseStartDate = db.Courses.FirstOrDefault(c => c.CourseId == id).StartDate;
+            var courseEndDate = db.Courses.FirstOrDefault(c => c.CourseId == id).EndDate;
+            if (DateTime.Compare(courseStartDate, module.StartDate) > 0 || DateTime.Compare(courseEndDate, module.EndDate) < 0)
+            {
+                ViewBag.CourseStartDate = db.Courses.FirstOrDefault(c => c.CourseId == id).StartDate;
+                ViewBag.CourseEndDate = db.Courses.FirstOrDefault(c => c.CourseId == id).EndDate;
+                ViewBag.CourseId = id;
+                ViewBag.DateNotValidMessage = ("Please make sure that the module start/end date is within the range of course start/end date!");
+                return View(module);
+            }
             if (ModelState.IsValid)
             {
                 db.Entry(module).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Edit", "TeacherCourses", new { id = module.CourseId });
             }
+            ViewBag.CourseStartDate = db.Courses.FirstOrDefault(c => c.CourseId == id).StartDate;
+            ViewBag.CourseEndDate = db.Courses.FirstOrDefault(c => c.CourseId == id).EndDate;
+            ViewBag.CourseId = id;
+            ViewBag.DateNotValidMessage = "";
             // ViewBag.CourseId = new SelectList(db.Courses, "CourseId", "CourseName", module.CourseId);
             return View(module);
         }

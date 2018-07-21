@@ -7,5 +7,7 @@ namespace Project_LMS.Models
 {
     public class NaviItem
     {
+        public List<Course> Courses { get; set; }
+        public List<Module> Modules { get; set; }
     }
 }
