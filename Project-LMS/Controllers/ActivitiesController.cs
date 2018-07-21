@@ -25,7 +25,7 @@ namespace Project_LMS.Controllers
             ViewBag.ModuleId = id;
 
             var activities = db.Activities.Where(n => n.ModuleId == id ).Include(a => a.ActivityType);
-            return View(activities.ToList());
+            return View(activities.OrderBy(s => s.Start).ToList());
         }
 
         // GET: Activities/Details/5
