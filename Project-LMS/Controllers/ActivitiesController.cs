@@ -15,10 +15,17 @@ namespace Project_LMS.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Activities
-        public ActionResult Index()
+        public ActionResult Index(int? id)
         {
-            var activities = db.Activities.Include(a => a.ActivityType).Include(a => a.Module);
-            return View(activities.ToList());
+            //Fix do allow dev on activities before Modules are checked in.
+            if (!id.HasValue) {id = db.Modules.FirstOrDefault().ModuleId;}
+
+            ViewBag.ModuleName = db.Modules.FirstOrDefault(n => n.ModuleId == id).Name;
+            ViewBag.CourseName = db.Modules.FirstOrDefault(n => n.ModuleId == id).Course.CourseName;
+            ViewBag.ModuleId = id;
+
+            var activities = db.Activities.Where(n => n.ModuleId == id ).Include(a => a.ActivityType);
+            return View(activities.OrderBy(s => s.Start).ToList());
         }
 
         // GET: Activities/Details/5
@@ -37,10 +44,13 @@ namespace Project_LMS.Controllers
         }
 
         // GET: Activities/Create
-        public ActionResult Create()
+        public ActionResult Create(int id)
         {
             ViewBag.ActivityTypeId = new SelectList(db.ActivityTypes, "ActivityTypeId", "Type");
-            ViewBag.ModuleId = new SelectList(db.Modules, "ModuleId", "CourseName");
+            ViewBag.ModuleId = id;
+            ViewBag.ModuleName = db.Modules.FirstOrDefault(n => n.ModuleId == id).Name;
+            ViewBag.CourseName = db.Modules.FirstOrDefault(n => n.ModuleId == id).Course.CourseName;
+
             return View();
         }
 
