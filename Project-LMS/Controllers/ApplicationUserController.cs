@@ -67,6 +67,7 @@ namespace Project_LMS.Controllers
         public ActionResult CreateStudent(int id)
         {
             ViewBag.CourseId = id;
+            ViewBag.UserExist = "";
             return View();
         }
 
@@ -86,6 +87,8 @@ namespace Project_LMS.Controllers
 
                 if (db.Users.Any(u => u.UserName == applicationUser.Email))
                 {
+                    ViewBag.UserExist = "This email is existed in the database, try another one!";
+                    ViewBag.CourseId = id;
                     return View(applicationUser);
                 }
 
@@ -100,7 +103,8 @@ namespace Project_LMS.Controllers
 
             }
 
-            ViewBag.CourseId = new SelectList(db.Courses, "CourseId", "CourseName", applicationUser.CourseId);
+            ViewBag.UserExist = "";
+            ViewBag.CourseId = id;
             return View(applicationUser);
         }
 
@@ -122,6 +126,7 @@ namespace Project_LMS.Controllers
         // GET: ApplicationUser/Create
         public ActionResult Create()
         {
+            ViewBag.UserExist = "";
             return View();
         }
 
@@ -140,6 +145,7 @@ namespace Project_LMS.Controllers
 
                 if (db.Users.Any(u => u.UserName == applicationUser.Email))
                 {
+                    ViewBag.UserExist = "This email is existed in the database, try another one!";
                     return View(applicationUser);
                 }
 
@@ -153,8 +159,7 @@ namespace Project_LMS.Controllers
                 return RedirectToAction("Index");
 
             }
-
-            ViewBag.CourseId = new SelectList(db.Courses, "CourseId", "CourseName", applicationUser.CourseId);
+            ViewBag.UserExist = "";
             return View(applicationUser);
         }
 
