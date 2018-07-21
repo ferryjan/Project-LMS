@@ -37,9 +37,11 @@ namespace Project_LMS.Models
         public int? CourseId { get; set; }
         public virtual Course Course { get; set; }
 
-        [Display(Name = "Module Activities")]        public virtual ICollection<Activity> Activities { get; set; }
+        [Display(Name = "Module Activities")]
+        public virtual ICollection<Activity> Activities { get; set; }
 
-        [Display(Name = "Module Documents")]        public virtual ICollection<Document> ModuleDocuments { get; set; }
+        [Display(Name = "Module Documents")]
+        public virtual ICollection<Document> ModuleDocuments { get; set; }
 
         IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {

@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Project_LMS.Models.ApplicationUser>
 
 <p>
-    @Html.ActionLink("Add New Student to The Course", "CreateStudent", new { id = ViewBag.CourseId })
+    @Html.ActionLink("Add New Student to The Course", "CreateStudent", new { id = ViewBag.CourseId }, new { @class = "btn btn-danger btn-large" })
 </p>
 <table class="table">
     <tr>

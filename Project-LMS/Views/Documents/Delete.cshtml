@@ -11,21 +11,6 @@
     <h4>Document</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Activity.CourseName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Activity.CourseName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ApplicationUser.GivenName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ApplicationUser.GivenName)
-        </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.Course.CourseName)
@@ -36,12 +21,13 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Module.CourseName)
+            @Html.DisplayNameFor(model => model.DocumentName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Module.CourseName)
+            @Html.DisplayFor(model => model.DocumentName)
         </dd>
+
         <dt>
             @Html.DisplayNameFor(model => model.UploadingTime)
         </dt>
@@ -50,22 +36,15 @@
             @Html.DisplayFor(model => model.UploadingTime)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.DocumentRef)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DocumentRef)
-        </dd>
-
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            @Html.ActionLink("Back", "Edit", "TeacherCourses", new { id = Model.CourseId }, null)
         </div>
     }
 </div>
