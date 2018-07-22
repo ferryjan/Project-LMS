@@ -28,6 +28,14 @@ namespace Project_LMS.Controllers
             return View(activities.OrderBy(s => s.Start).ToList());
         }
 
+        [ChildActionOnly]
+        public ActionResult ShowActivities(int? id)
+        {
+            ViewBag.ModuleId = id;
+            var activities = db.Activities.Where(i => i.ModuleId == id).OrderBy(o => o.Start);
+            return PartialView("_Index", activities.ToList());
+        }
+
         // GET: Activities/Details/5
         public ActionResult Details(int? id)
         {
@@ -40,6 +48,8 @@ namespace Project_LMS.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.ModuleName = activity.Module.Name;
+            ViewBag.CourseName = activity.Module.Course.CourseName;
             return View(activity);
         }
 
