@@ -20,7 +20,7 @@
             <td>@Html.DisplayFor(modelItem => item.End)</td>
             <td>@Html.DisplayFor(modelItem => item.Description)</td>
             <td>@Html.ActionLink("Details", "Details", new { id = item.ActivityId }) | 
-                @Html.ActionLink("Remove Activity", "Delete", new { id = item.ModuleId })</td>
+                @Html.ActionLink("Remove Activity", "Delete", new { id = item.ActivityId })</td>
         </tr>
     }
 
