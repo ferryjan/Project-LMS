@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Configuration;
 using System.Data.Entity;
 using System.Globalization;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
@@ -24,7 +27,7 @@ namespace Project_LMS.Controllers
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -36,9 +39,9 @@ namespace Project_LMS.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -59,7 +62,7 @@ namespace Project_LMS.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
-            if(User.IsInRole("Teacher"))
+            if (User.IsInRole("Teacher"))
             {
                 return RedirectToAction("Index", "TeacherCourses");
             }
@@ -67,7 +70,7 @@ namespace Project_LMS.Controllers
             {
                 ViewBag.ReturnUrl = returnUrl;
                 return View();
-            }      
+            }
         }
 
         //
@@ -90,11 +93,11 @@ namespace Project_LMS.Controllers
                 case SignInStatus.Success:
                     var user = await UserManager.FindByNameAsync(model.Email);
                     if (user.FirstTimeLogin == null)
-                    {   
+                    {
                         string token = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
                         TempData["Message"] = "This is your first time login onto this site, please change your password!";
                         AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-                        return RedirectToAction("ResetPassword", new {code = token, email = user.Email});
+                        return RedirectToAction("ResetPassword", new { userId = user.Id, code = token });
                     }
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
@@ -137,7 +140,7 @@ namespace Project_LMS.Controllers
             // If a user enters incorrect codes for a specified amount of time then the user account 
             // will be locked out for a specified amount of time. 
             // You can configure the account lockout settings in IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -172,8 +175,8 @@ namespace Project_LMS.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
@@ -220,7 +223,8 @@ namespace Project_LMS.Controllers
             if (ModelState.IsValid)
             {
                 var user = await UserManager.FindByNameAsync(model.Email);
-                if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
+                //if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
+                if (user == null)
                 {
                     // Don't reveal that the user does not exist or is not confirmed
                     return View("ForgotPasswordConfirmation");
@@ -228,15 +232,21 @@ namespace Project_LMS.Controllers
 
                 // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link
-                string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
-                await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                //var provider = new Microsoft.Owin.Security.DataProtection.DpapiDataProtectionProvider("LexiconLMS");
+                //UserManager.UserTokenProvider = new Microsoft.AspNet.Identity.Owin.DataProtectorTokenProvider<ApplicationUser>(provider.Create("EmailConfirmation"));
+
+                string token = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = token }, protocol: Request.Url.Scheme);
+                UserManager.EmailService = new EmailService();
+                await UserManager.SendEmailAsync(user.Id, "Reset Password", "Reset password link: \n" + callbackUrl);
+
                 return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 
             // If we got this far, something failed, redisplay form
             return View(model);
         }
+
 
         //
         // GET: /Account/ForgotPasswordConfirmation
@@ -249,7 +259,8 @@ namespace Project_LMS.Controllers
         //
         // GET: /Account/ResetPassword
         [AllowAnonymous]
-        public ActionResult ResetPassword(string code, string email)
+        [ValidateInput(false)]
+        public ActionResult ResetPassword(string userId, string code)
         {
             if (TempData["Message"] != null)
             {
@@ -259,7 +270,8 @@ namespace Project_LMS.Controllers
             {
                 ViewBag.FirstLoginMessage = "";
             }
-            ViewBag.CurrentEmail = email;
+            var user = UserManager.FindById(userId);
+            ViewBag.CurrentEmail = user.Email;
             return code == null ? View("Error") : View();
         }
 
@@ -267,6 +279,7 @@ namespace Project_LMS.Controllers
         // POST: /Account/ResetPassword
         [HttpPost]
         [AllowAnonymous]
+        [ValidateInput(false)]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ResetPassword(String email, ResetPasswordViewModel model)
         {
@@ -294,6 +307,7 @@ namespace Project_LMS.Controllers
         //
         // GET: /Account/ResetPasswordConfirmation
         [AllowAnonymous]
+        [ValidateInput(false)]
         public ActionResult ResetPasswordConfirmation()
         {
             return View();
