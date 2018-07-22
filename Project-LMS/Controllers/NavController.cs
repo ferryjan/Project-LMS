@@ -15,8 +15,9 @@ namespace Project_LMS.Controllers
         {
             var courseList = db.Courses.ToList();
             var moduleList = db.Modules.ToList();
+            var documentList = db.Documents.ToList();
             List<NaviItem> menuViewModel = new List<NaviItem>();
-            NaviItem nav = new NaviItem() { Courses = courseList, Modules = moduleList };
+            NaviItem nav = new NaviItem() { Courses = courseList, Modules = moduleList, Documents = documentList };
             menuViewModel.Add(nav);
             return PartialView("_Navigation", menuViewModel);
         }

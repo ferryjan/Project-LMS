@@ -39,7 +39,11 @@
     </div>
 
     <div class="container body-content">
-        @Html.Action("Menu", "Nav")
+        @if (User.IsInRole("Teacher"))
+        {
+            @Html.Action("Menu", "Nav")
+        }
+
         @RenderBody()
         <hr />
         <footer>

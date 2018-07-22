@@ -71,7 +71,7 @@
 @Html.Action("ModuleFileDetails", "Documents", new { moduleId = Model.ModuleId })
 
 <div>
-    @Html.ActionLink("Cancel and Go Back", "Edit", "TeacherCourses", new { id = Model.CourseId }, null)
+    @Html.ActionLink("Go Back", "Edit", "TeacherCourses", new { id = Model.CourseId }, null)
 </div>
 
 @section Scripts {

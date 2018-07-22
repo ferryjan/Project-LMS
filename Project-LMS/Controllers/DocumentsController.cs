@@ -96,9 +96,9 @@ namespace Project_LMS.Controllers
         }
 
         // GET: Documents/Create
-        public ActionResult CreateModuleDocument(int? moduleId)
+        public ActionResult CreateModuleDocument(int? id)
         {
-            ViewBag.ModuleId = moduleId;
+            ViewBag.ModuleId = id;
             return View();
         }
 
@@ -106,7 +106,7 @@ namespace Project_LMS.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult CreateModuleDocument(Document doc, int moduleId)
+        public ActionResult CreateModuleDocument(Document doc, int id)
         {
             if (ModelState.IsValid)
             {
@@ -116,7 +116,7 @@ namespace Project_LMS.Controllers
                     if (file.ContentLength > 0)
                     {
                         doc.ApplicationUserId = db.Users.FirstOrDefault(u => u.UserName == User.Identity.Name).Id;
-                        doc.ModuleId = moduleId;
+                        doc.ModuleId = id;
                         doc.DocumentFileType = file.ContentType;
                         doc.UploadingTime = DateTime.Now;
                         doc.FileData = new byte[file.ContentLength];
@@ -125,10 +125,10 @@ namespace Project_LMS.Controllers
                     }
                     db.Documents.Add(doc);
                     db.SaveChanges();
-                    return RedirectToAction("Edit", "Modules", new { id = moduleId });
+                    return RedirectToAction("Edit", "Modules", new { id = id });
                 }
             }
-            ViewBag.ModuleId = moduleId;
+            ViewBag.ModuleId = id;
             return View(doc);
         }
 
