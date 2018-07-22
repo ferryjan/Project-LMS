@@ -226,6 +226,10 @@
     <Compile Include="Migrations\201807201147339_IssuesWithModuleModel.Designer.cs">
       <DependentUpon>201807201147339_IssuesWithModuleModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201807220516502_DroppedDeadlineForActivities.cs" />
+    <Compile Include="Migrations\201807220516502_DroppedDeadlineForActivities.Designer.cs">
+      <DependentUpon>201807220516502_DroppedDeadlineForActivities.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Activity.cs" />
@@ -332,6 +336,7 @@
     <Content Include="Views\Documents\CreateModuleDocument.cshtml" />
     <Content Include="Views\Documents\ModuleDocumentDetails.cshtml" />
     <Content Include="Views\Documents\DeleteModuleDocument.cshtml" />
+    <Content Include="Views\Activities\_Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -365,6 +370,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201807201147339_IssuesWithModuleModel.resx">
       <DependentUpon>201807201147339_IssuesWithModuleModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807220516502_DroppedDeadlineForActivities.resx">
+      <DependentUpon>201807220516502_DroppedDeadlineForActivities.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

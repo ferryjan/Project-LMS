@@ -29,6 +29,7 @@ namespace Project_LMS.Controllers
             return PartialView(modules.ToList());
         }
 
+
         // GET: Modules/Details/5
         public ActionResult Details(int id, int? moduleId)
         {
