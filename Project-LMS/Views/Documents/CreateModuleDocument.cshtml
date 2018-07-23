@@ -17,14 +17,10 @@
         <div>Upload new document: <input type="file" accept=".xlsx,.xls, .doc, .docx,.ppt, .pptx,.txt,.pdf" name="Document" /></div>
     </div>
 
-    <input type="submit" value="Save" />
+    <input type="submit" value="Save" class="btn btn-primary"/>
 
-    @Html.ActionLink("Cancel and Go Back", "Edit", "Modules", new { id = ViewBag.ModuleId }, null)
+    @Html.ActionLink("Cancel and Go Back", "Edit", "Modules", new { id = ViewBag.ModuleId }, new { @class = "btn btn-primary btn-large" })
 }
-
-<div>
-    @Html.ActionLink("Back", "Edit", "Modules", new { id = ViewBag.ModuleId }, null)
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

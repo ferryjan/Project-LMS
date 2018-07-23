@@ -54,7 +54,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </div>
     </div>
@@ -71,7 +71,7 @@
 @Html.Action("ModuleFileDetails", "Documents", new { moduleId = Model.ModuleId })
 
 <div>
-    @Html.ActionLink("Go Back", "Edit", "TeacherCourses", new { id = Model.CourseId }, null)
+    @Html.ActionLink("Go Back", "Edit", "TeacherCourses", new { id = Model.CourseId }, new { @class = "btn btn-primary btn-large" })
 </div>
 
 @section Scripts {
