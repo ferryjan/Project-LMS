@@ -58,8 +58,8 @@ body {
 
 .btn-default {
     color: #fff;
-    background-color: #ff4342;
-    border-color: #ff4342;
+    background-color: #2d4aa8;
+    border-color: #2d4aa8;
 }
 
 .navbar-inverse .navbar-nav > li > a {
@@ -239,19 +239,35 @@ body {
     }
 
         #cssmenu ul ul li a {
-            background: #f1f1f1;
+            background: #e4e4e4;
+            font-weight: 300;
             display: block;
             position: relative;
             font-size: 15px;
             padding: 14px 20px;
             border-bottom: 1px solid #dddddd;
-            color: #ff4342;
+            color: #666666;
             font-weight: 300;
             -webkit-transition: all 0.25s ease-in;
             -moz-transition: all 0.25s ease-in;
             -o-transition: all 0.25s ease-in;
             transition: all 0.25s ease-in;
         }
+
+    #cssmenu ul ul ul li a {
+        background: #f1f1f1;
+        display: block;
+        position: relative;
+        font-size: 15px;
+        padding: 14px 20px;
+        border-bottom: 1px solid #dddddd;
+        color: #480be2;
+        font-weight: 300;
+        -webkit-transition: all 0.25s ease-in;
+        -moz-transition: all 0.25s ease-in;
+        -o-transition: all 0.25s ease-in;
+        transition: all 0.25s ease-in;
+    }
 
         #cssmenu ul ul li:first-child > a {
             padding-top: 18px;
@@ -266,6 +282,7 @@ body {
     #cssmenu ul ul li.active > a {
         background: #e4e4e4;
         color: #666666;
+        font-weight: bolder;
     }
 
     #cssmenu ul ul > li.has-sub > a::after {

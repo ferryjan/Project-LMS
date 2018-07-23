@@ -6,6 +6,7 @@
 }
 
 <h3>Homework and Feedback</h3>
+<br/>
 
 <table class="table">
     <tr>
@@ -27,7 +28,7 @@
                 }
                 else
                 {
-                    @Html.Raw("No Homework has been handed in!");
+                    <div style="color: red"><i class="glyphicon glyphicon-ban-circle"></i>@Html.Raw(" No file detected")</div>
                 }
             </td>
             <td>
@@ -35,38 +36,30 @@
                 {
                     if (doc.FeedBack != null)
                     {
-                        @Html.Raw(doc.FeedBack);
+                        <div style="color: blue"><i class="glyphicon glyphicon-thumbs-up"></i>@Html.Raw(" Feedback done")</div>
                     }
                     else
                     {
-                        @Html.Raw("No feedback is given!");
+                        <div style="color: red"><i class="glyphicon glyphicon-ban-circle"></i>@Html.Raw(" No feedback given")</div>
                     }
                 }
             </td>
             <td>
                 @if (doc != null)
                 {
+                    <a href="@Url.Action("DownLoadFile", "Documents", new { id = doc.DocumentId })" class="btn btn-info">
+                        <i class="glyphicon glyphicon-bullhorn"></i>
+                        <span>
+                            <strong>Add/Edit Feedback</strong>
+                        </span>
+                    </a>
                     <a href="@Url.Action("DownLoadFile", "Documents", new { id = doc.DocumentId })" class="btn btn-success">
                         <i class="glyphicon glyphicon-download"></i>
                         <span>
                             <strong>Download</strong>
                         </span>
                     </a>
-                    <a href="@Url.Action("DownLoadFile", "Documents", new { id = doc.DocumentId })" class="btn btn-success">
-                        <i class="glyphicon glyphicon-download"></i>
-                        <span>
-                            <strong>Leave Feedback</strong>
-                        </span>
-                    </a>
-                }
-                else
-                {
-                    <a href="@Url.Action("DownLoadFile", "Documents", new { id = 12 })" class="btn btn-success">
-                        <i class="glyphicon glyphicon-download"></i>
-                        <span>
-                            <strong>Leave Feedback</strong>
-                        </span>
-                    </a>
+
                 }
             </td>
         </tr>

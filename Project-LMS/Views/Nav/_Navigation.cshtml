@@ -114,7 +114,7 @@
                                 <li class='has-sub open'>
                                     <a href='#'><span>@Html.Raw(course.CourseName)</span></a>
                                     <ul style="display:block">
-                                        <li><a href="@Url.Action("Edit", "TeacherCourses", new { id = course.CourseId })"><span>@Html.Raw("Edit Course")</span></a></li>
+                                        <li><a href="@Url.Action("Edit", "TeacherCourses", new { id = course.CourseId })"><span><i class="glyphicon glyphicon-edit"></i>@Html.Raw(" Edit Course")</span></a></li>
                                         @foreach (var module in moduleList.Where(m => m.CourseId == course.CourseId))
                                         {
                                             <li><a href="@Url.Action("Edit", "Modules", new { id = module.ModuleId })"><span>@Html.Raw("Module: " + module.Name)</span></a></li>
@@ -127,7 +127,7 @@
                                 <li class='has-sub'>
                                     <a href='#'><span>@Html.Raw(course.CourseName)</span></a>
                                     <ul>
-                                        <li><a href="@Url.Action("Edit", "TeacherCourses", new { id = course.CourseId })"><span>@Html.Raw("Edit Course")</span></a></li>
+                                        <li><a href="@Url.Action("Edit", "TeacherCourses", new { id = course.CourseId })"><span><i class="glyphicon glyphicon-edit"></i>@Html.Raw(" Edit Course")</span></a></li>
                                         @foreach (var module in moduleList.Where(m => m.CourseId == course.CourseId))
                                         {
                                             <li><a href="@Url.Action("Edit", "Modules", new { id = module.ModuleId })"><span>@Html.Raw("Module: " + module.Name)</span></a></li>
@@ -150,7 +150,7 @@
                                 <li class='has-sub'>
                                     <a href='#'><span>@Html.Raw(course.CourseName)</span></a>
                                     <ul>
-                                        <li><a href="@Url.Action("Edit", "TeacherCourses", new { id = course.CourseId })"><span>@Html.Raw("Edit Course")</span></a></li>
+                                        <li><a href="@Url.Action("Edit", "TeacherCourses", new { id = course.CourseId })"><span><i class="glyphicon glyphicon-edit"></i>@Html.Raw(" Edit Course")</span></a></li>
                                         @foreach (var module in moduleList.Where(m => m.CourseId == course.CourseId))
                                         {
                                             <li><a href="@Url.Action("Edit", "Module", new { id = module.ModuleId })"><span>@Html.Raw("Module: " + module.Name)</span></a></li>
@@ -177,7 +177,7 @@
                                 <li class='has-sub'>
                                     <a href='#'><span>@Html.Raw(course.CourseName)</span></a>
                                     <ul>
-                                        <li><a href="@Url.Action("Edit", "TeacherCourses", new { id = course.CourseId })"><span>@Html.Raw("Edit Course")</span></a></li>
+                                        <li><a href="@Url.Action("Edit", "TeacherCourses", new { id = course.CourseId })"><span><i class="glyphicon glyphicon-edit"></i>@Html.Raw(" Edit Course")</span></a></li>
                                         @foreach (var module in moduleList.Where(m => m.CourseId == course.CourseId))
                                         {
                                             <li><a href="@Url.Action("Edit", "Modules", new { id = module.ModuleId })"><span>@Html.Raw("Module: " + module.Name)</span></a></li>
@@ -200,7 +200,7 @@
                                 <li class='has-sub open'>
                                     <a href='#'><span>@Html.Raw(course.CourseName)</span></a>
                                     <ul style="display:block">
-                                        <li><a href="@Url.Action("Edit", "TeacherCourses", new { id = course.CourseId })"><span>@Html.Raw("Edit Course")</span></a></li>
+                                        <li><a href="@Url.Action("Edit", "TeacherCourses", new { id = course.CourseId })"><span><i class="glyphicon glyphicon-edit"></i>@Html.Raw(" Edit Course")</span></a></li>
                                         @foreach (var module in moduleList.Where(m => m.CourseId == course.CourseId))
                                         {
                                             <li><a href="@Url.Action("Edit", "Modules", new { id = module.ModuleId })"><span>@Html.Raw("Module: " + module.Name)</span></a></li>
@@ -213,7 +213,7 @@
                                 <li class='has-sub'>
                                     <a href='#'><span>@Html.Raw(course.CourseName)</span></a>
                                     <ul>
-                                        <li><a href="@Url.Action("Edit", "TeacherCourses", new { id = course.CourseId })"><span>@Html.Raw("Edit Course")</span></a></li>
+                                        <li><a href="@Url.Action("Edit", "TeacherCourses", new { id = course.CourseId })"><span><i class="glyphicon glyphicon-edit"></i>@Html.Raw(" Edit Course")</span></a></li>
                                         @foreach (var module in moduleList.Where(m => m.CourseId == course.CourseId))
                                         {
                                             <li><a href="@Url.Action("Edit", "Modules", new { id = module.ModuleId })"><span>@Html.Raw("Module: " + module.Name)</span></a></li>
@@ -243,7 +243,7 @@ else
                             <li class='has-sub'>
                                 <a href='#'><span>@Html.Raw(course.CourseName)</span></a>
                                 <ul>
-                                    <li><a href="@Url.Action("Edit", "TeacherCourses", new { id = course.CourseId })"><span>@Html.Raw("Edit Course")</span></a></li>
+                                    <li><a href="@Url.Action("Edit", "TeacherCourses", new { id = course.CourseId })"><span><i class="glyphicon glyphicon-edit"></i>@Html.Raw(" Edit Course")</span></a></li>
                                     @foreach (var module in moduleList.Where(m => m.CourseId == course.CourseId))
                                     {
                                         <li><a href="@Url.Action("Edit", "Modules", new { id = module.ModuleId })"><span>@Html.Raw("Module: " + module.Name)</span></a></li>
@@ -266,7 +266,7 @@ else
                             <li class='has-sub'>
                                 <a href='#'><span>@Html.Raw(course.CourseName)</span></a>
                                 <ul>
-                                    <li><a href="@Url.Action("Edit", "TeacherCourses", new { id = course.CourseId })"><span>@Html.Raw("Edit Course")</span></a></li>
+                                    <li><a href="@Url.Action("Edit", "TeacherCourses", new { id = course.CourseId })"><span><i class="glyphicon glyphicon-edit"></i>@Html.Raw(" Edit Course")</span></a></li>
                                     @foreach (var module in moduleList.Where(m => m.CourseId == course.CourseId))
                                     {
                                         <li><a href="@Url.Action("Edit", "Module", new { id = module.ModuleId })"><span>@Html.Raw("Module: " + module.Name)</span></a></li>
