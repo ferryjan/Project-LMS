@@ -436,6 +436,9 @@
     <Content Include="Views\Documents\ModuleDocumentDetails.cshtml" />
     <Content Include="Views\Documents\DeleteModuleDocument.cshtml" />
     <Content Include="Views\Activities\_Index.cshtml" />
+    <Content Include="Views\Documents\_activityFileDetails.cshtml" />
+    <Content Include="Views\Documents\CreateActivityDocument.cshtml" />
+    <Content Include="Views\Documents\ActivityDocumentDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

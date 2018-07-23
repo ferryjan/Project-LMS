@@ -1,0 +1,27 @@
+﻿@model Project_LMS.Models.Document
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Document Details</h2>
+
+<div>
+    <h4>Document</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>@Html.DisplayNameFor(model => model.Module.Name)</dt>
+        <dd>@Html.DisplayFor(model => model.Module.Name)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.DocumentName)</dt>
+        <dd>@Html.DisplayFor(model => model.DocumentName)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.UploadingTime)</dt>
+        <dd>@Html.DisplayFor(model => model.UploadingTime)</dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back", "Edit", "Activities", new { id = Model.ActivityId }, null)
+</p>
