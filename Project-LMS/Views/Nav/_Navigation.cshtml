@@ -5,12 +5,14 @@
     var historyCourseList = courseList.Where(c => DateTime.Compare(c.EndDate.Date, DateTime.Now.Date) < 0);
     var undergoingAndFutureCourseList = courseList.Where(c => DateTime.Compare(c.EndDate.Date, DateTime.Now.Date) >= 0);
     var moduleList = Model.Select(i => i.Modules).FirstOrDefault().ToList();
+    var activityList = Model.Select(i => i.Activities).FirstOrDefault().ToList();
     var documentList = Model.Select(i => i.Documents).FirstOrDefault().ToList();
     var currentController = ViewContext.ParentActionViewContext.RouteData.Values["controller"].ToString();
     var currentAction = ViewContext.ParentActionViewContext.RouteData.Values["action"].ToString();
     string currentCourseId = null;
     string currentDocumentId = null;
     string currentModuleId = null;
+    string currentActivityId = null;
     string currentApplicationUserId = null;
     switch (currentController)
     {
@@ -25,6 +27,9 @@
             break;
         case ("ApplicationUser"):
             currentApplicationUserId = ViewContext.ParentActionViewContext.RouteData.Values["id"]?.ToString();
+            break;
+        case ("Activities"):
+            currentActivityId = ViewContext.ParentActionViewContext.RouteData.Values["id"]?.ToString();
             break;
         default:
             break;
@@ -45,6 +50,20 @@
         if (currentDocumentId != null)
         {
             currentCourseId = moduleList.FirstOrDefault(d => d.ModuleId.ToString() == currentDocumentId).CourseId.ToString();
+        }
+    }
+    else if (currentController == "Documents" && currentAction == "CreateActivityDocument")
+    {
+        if (currentDocumentId != null)
+        {
+            currentCourseId = activityList.FirstOrDefault(d => d.ActivityId.ToString() == currentActivityId).Module.CourseId.ToString();
+        }
+    }
+    else if (currentController == "Documents" && currentAction == "ActivityDocumentDetails")
+    {
+        if (currentDocumentId != null)
+        {
+            currentCourseId = documentList.FirstOrDefault(d => d.DocumentId.ToString() == currentDocumentId).CourseId.ToString();
         }
     }
     else if (currentController == "Documents")
