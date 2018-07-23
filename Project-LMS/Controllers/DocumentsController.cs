@@ -58,6 +58,21 @@ namespace Project_LMS.Controllers
             return View(document);
         }
 
+        // GET: Documents/Details/5
+        public ActionResult ActivityDocumentDetails(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Document document = db.Documents.Find(id);
+            if (document == null)
+            {
+                return HttpNotFound();
+            }
+            return View(document);
+        }
+
         // GET: Documents/Create
         public ActionResult CreateCourseDocument(int? id)
         {
