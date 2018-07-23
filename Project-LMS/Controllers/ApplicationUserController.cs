@@ -17,41 +17,27 @@ namespace Project_LMS.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: ApplicationUser
-        public ActionResult Index(string option, string search)
+        public ActionResult Index(string search)
         {
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
             var teacherRole = roleManager.FindByName("Teacher");
-            if (option == "GivenName")
+
+            if (search == "")
             {
-                if (search == "")
-                {
-                    var list = db.Users.Where(x => x.Roles.Any(s => s.RoleId == teacherRole.Id)).ToList();
-                    return View(list);
-                }
-                else
-                {
-                    var list = db.Users.Where(x => x.Roles.Any(s => s.RoleId == teacherRole.Id)).Where(i => i.GivenName.ToLower().Contains(search.ToLower())).ToList();
-                    return View(list);
-                }
+                var list = db.Users.Where(x => x.Roles.Any(s => s.RoleId == teacherRole.Id)).ToList();
+                return View(list);
             }
-            else if (option == "FamilyName")
+            else if (search == null)
             {
-                if (search == "")
-                {
-                    var list = db.Users.Where(x => x.Roles.Any(s => s.RoleId == teacherRole.Id)).ToList();
-                    return View(list);
-                }
-                else
-                {
-                    var list = db.Users.Where(x => x.Roles.Any(s => s.RoleId == teacherRole.Id)).Where(i => i.FamilyName.ToLower().Contains(search.ToLower())).ToList();
-                    return View(list);
-                }
+                var list = db.Users.Where(x => x.Roles.Any(s => s.RoleId == teacherRole.Id)).ToList();
+                return View(list);
             }
             else
             {
-                var list = db.Users.Where(x => x.Roles.Any(s => s.RoleId == teacherRole.Id)).OrderBy(g => g.GivenName).ThenBy(f => f.FamilyName).ToList();
+                var list = db.Users.Where(x => x.Roles.Any(s => s.RoleId == teacherRole.Id)).Where(i => i.GivenName.ToLower().Contains(search.ToLower()) || i.FamilyName.ToLower().Contains(search.ToLower()) || i.Email.ToLower().Contains(search.ToLower())).ToList();
                 return View(list);
             }
+
         }
 
         public ActionResult StudentIndex(int id)
@@ -153,7 +139,7 @@ namespace Project_LMS.Controllers
                 var userManager = new UserManager<ApplicationUser>(userStore);
 
                 var result = userManager.Create(applicationUser, "Ante_007");
-                if (!result.Succeeded) {throw new Exception(string.Join("\n", result.Errors)); }
+                if (!result.Succeeded) { throw new Exception(string.Join("\n", result.Errors)); }
 
                 userManager.AddToRole(applicationUser.Id, "Teacher");
                 return RedirectToAction("Index");
@@ -229,7 +215,7 @@ namespace Project_LMS.Controllers
             db.SaveChanges();
             return RedirectToAction("Edit", "TeacherCourses", new { id = id });
         }
-        
+
 
         // GET: ApplicationUser/Delete/5
         public ActionResult Delete(string id)
