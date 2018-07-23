@@ -271,6 +271,34 @@ namespace Project_LMS.Controllers
             return RedirectToAction("Edit", "Module", new { id = moduleId });
         }
 
+        // GET: Documents/Delete/5
+        public ActionResult DeleteActivityDocument(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Document document = db.Documents.Find(id);
+            if (document == null)
+            {
+                return HttpNotFound();
+            }
+            return View(document);
+        }
+
+        // POST: Documents/Delete/5
+        [HttpPost, ActionName("DeleteActivityDocument")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteActivityDocumentConfirmed(int id)
+        {
+            Document document = db.Documents.Find(id);
+            var activityId = document.ActivityId;
+            db.Documents.Remove(document);
+            db.SaveChanges();
+            return RedirectToAction("Edit", "Activities", new { id = activityId });
+        }
+
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
