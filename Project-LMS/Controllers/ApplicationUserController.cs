@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Project_LMS.Models;
+using Project_LMS.ViewModels;
 
 namespace Project_LMS.Controllers
 {
@@ -153,7 +154,7 @@ namespace Project_LMS.Controllers
                 var userManager = new UserManager<ApplicationUser>(userStore);
 
                 var result = userManager.Create(applicationUser, "Ante_007");
-                if (!result.Succeeded) {throw new Exception(string.Join("\n", result.Errors)); }
+                if (!result.Succeeded) { throw new Exception(string.Join("\n", result.Errors)); }
 
                 userManager.AddToRole(applicationUser.Id, "Teacher");
                 return RedirectToAction("Index");
@@ -163,6 +164,56 @@ namespace Project_LMS.Controllers
             return View(applicationUser);
         }
 
+        public ActionResult ChangeProfile()
+        {
+            var userId = User.Identity.GetUserId();
+            ApplicationUser applicationUser = db.Users.Find(userId);
+
+            if (applicationUser == null)
+            {
+                return HttpNotFound();
+            }
+
+//          return View(applicationUser);
+
+            var model = new ChangeProfileViewModels();
+            model.GivenName = applicationUser.GivenName;
+            model.FamilyName = applicationUser.FamilyName;
+            model.ProfileImageRef = applicationUser.ProfileImageRef;
+            model.PhoneNumber = applicationUser.PhoneNumber;
+
+            return View(model);
+        }
+
+        // POST: /Manage/ChangePassword
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ChangeProfile(ChangeProfileViewModels model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var userId = User.Identity.GetUserId();
+            ApplicationUser dbAU = db.Users.Find(userId);
+            dbAU.GivenName = model.GivenName;
+            dbAU.FamilyName = model.FamilyName;
+            dbAU.ProfileImageRef = model.ProfileImageRef;
+//          dbAU.Email = model.Email;
+            dbAU.PhoneNumber = model.PhoneNumber;
+            db.Entry(dbAU).State = EntityState.Modified;
+            db.SaveChanges();
+
+            if (User.IsInRole("Teacher"))
+            {
+                return RedirectToAction("Index", "TeacherCourses");
+            }
+
+            return RedirectToAction("Index");
+        }
+
+
         // GET: ApplicationUser/Edit/5
         public ActionResult Edit(string id)
         {
@@ -170,7 +221,9 @@ namespace Project_LMS.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             ApplicationUser applicationUser = db.Users.Find(id);
+
             if (applicationUser == null)
             {
                 return HttpNotFound();
@@ -229,7 +282,7 @@ namespace Project_LMS.Controllers
             db.SaveChanges();
             return RedirectToAction("Edit", "TeacherCourses", new { id = id });
         }
-        
+
 
         // GET: ApplicationUser/Delete/5
         public ActionResult Delete(string id)
