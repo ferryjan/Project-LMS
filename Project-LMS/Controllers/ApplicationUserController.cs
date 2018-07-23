@@ -188,7 +188,7 @@ namespace Project_LMS.Controllers
 
             if (User.IsInRole("Teacher"))
             {
-                return RedirectToAction("Index", "TeacherCourses");
+                return RedirectToAction("Index", "ApplicationUser");
             }
 
             return RedirectToAction("Index");
