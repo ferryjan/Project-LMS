@@ -52,20 +52,18 @@
     }
     else if (currentController == "Documents" && currentAction == "ActivityDocumentDetails")
     {
-        if (currentDocumentId != null) {currentCourseId = documentList.FirstOrDefault(d => d.DocumentId.ToString() == currentDocumentId).CourseId.ToString(); }
-    }
-    else if (currentController == "Documents" && (currentAction == "Details" || currentAction == "Delete"))
-    {
-        if (currentDocumentId != null)
-        {
-            currentCourseId = documentList.FirstOrDefault(d => d.DocumentId.ToString() == currentDocumentId).CourseId.ToString();
+        if (currentDocumentId != null) {
+            var activityID = documentList.FirstOrDefault(d => d.DocumentId.ToString() == currentDocumentId).ActivityId;
+            currentCourseId = activityList.FirstOrDefault(d => d.ActivityId == activityID).Module.CourseId.ToString();
         }
     }
-    else if (currentController == "Documents" && (currentAction == "ModuleDocumentDetails" || currentAction == "DeleteModuleDocument"))
+    else if (currentController == "Documents" && (currentAction == "ModuleDocumentDetails" || currentAction == "DeleteModuleDocument" || currentAction == "DeleteActivityDocument" || currentAction == "Details" || currentAction == "Delete"))
+
     {
         if (currentDocumentId != null)
         {
-            currentCourseId = documentList.FirstOrDefault(d => d.DocumentId.ToString() == currentDocumentId).Module.CourseId.ToString();
+            var activityID = documentList.FirstOrDefault(d => d.DocumentId.ToString() == currentDocumentId).ActivityId;
+            currentCourseId = activityList.FirstOrDefault(d => d.ActivityId == activityID).Module.CourseId.ToString();
         }
     }
     else if (currentController == "Documents")
@@ -84,7 +82,7 @@
     {
         if (currentModuleId != null){ currentCourseId = moduleList.FirstOrDefault(d => d.ModuleId.ToString() == currentModuleId).CourseId.ToString();}
     }
-    else if (currentController == "Activities" && (currentAction == "Edit" || currentAction == "Details"))
+    else if (currentController == "Activities" && (currentAction == "Edit" || currentAction == "Details" || currentAction == "Delete"))
     {
         if (currentActivityId != null){currentCourseId = activityList.FirstOrDefault(d => d.ActivityId.ToString() == currentActivityId).Module.CourseId.ToString(); }
     }

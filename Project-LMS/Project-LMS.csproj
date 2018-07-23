@@ -439,6 +439,7 @@
     <Content Include="Views\Documents\_activityFileDetails.cshtml" />
     <Content Include="Views\Documents\CreateActivityDocument.cshtml" />
     <Content Include="Views\Documents\ActivityDocumentDetails.cshtml" />
+    <Content Include="Views\Documents\DeleteActivityDocument.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -23,7 +23,7 @@
             <td>
                 @Html.ActionLink("Download", "DownLoadFile", new { id = item.DocumentId })  |
                 @Html.ActionLink("Details", "ActivityDocumentDetails", new { id = item.DocumentId }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.DocumentId })
+                @Html.ActionLink("Delete", "DeleteActivityDocument", new { id = item.DocumentId })
             </td>
         </tr>
     }
