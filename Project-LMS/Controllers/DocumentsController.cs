@@ -132,6 +132,45 @@ namespace Project_LMS.Controllers
             return View(doc);
         }
 
+        // GET: Documents/Create
+        public ActionResult CreateActivityDocument(int? id)
+        {
+            ViewBag.ActivityId = id;
+            return View();
+        }
+
+        // POST: Documents/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        public ActionResult CreateActivityDocument(Document doc, int id)
+        {
+            if (ModelState.IsValid)
+            {
+                if (Request.Files.Count > 0)
+                {
+                    HttpPostedFileBase file = Request.Files[0];
+                    if (file.ContentLength > 0)
+                    {
+                        doc.ApplicationUserId = db.Users.FirstOrDefault(u => u.UserName == User.Identity.Name).Id;
+                        doc.ActivityId = id;
+                        doc.DocumentFileType = file.ContentType;
+                        doc.UploadingTime = DateTime.Now;
+                        doc.FileData = new byte[file.ContentLength];
+                        doc.DocumentName = file.FileName;
+                        file.InputStream.Read(doc.FileData, 0, file.ContentLength);
+                    }
+                    db.Documents.Add(doc);
+                    db.SaveChanges();
+                    return RedirectToAction("Edit", "Activities", new { id });
+                }
+            }
+            ViewBag.ModuleId = id;
+            return View(doc);
+        }
+
+
+
         [HttpGet]
         public FileResult DownLoadFile(int? id)
         {
@@ -156,6 +195,12 @@ namespace Project_LMS.Controllers
             return PartialView("ModuleFileDetails", documents.ToList());
         }
 
+        public PartialViewResult ActivityFileDetails(int? activityId)
+        {
+            ViewBag.Id = activityId;
+            var documents = db.Documents.Where(i => i.ActivityId == activityId);
+            return PartialView("_activityFileDetails", documents.ToList());
+        }
 
         // GET: Documents/Delete/5
         public ActionResult Delete(int? id)
