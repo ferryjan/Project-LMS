@@ -41,7 +41,8 @@ namespace Project_LMS.Models
         public int ActivityTypeId { get; set; }
         public virtual ActivityType ActivityType { get; set; }
 
-        [Display(Name = "Module Documents")]        public virtual ICollection<Document> ActivityDocuments { get; set; }
+        [Display(Name = "Module Documents")]
+        public virtual ICollection<Document> ActivityDocuments { get; set; }
 
         IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
@@ -49,7 +50,7 @@ namespace Project_LMS.Models
             ApplicationDbContext db = new ApplicationDbContext();
 
             var result = db.Activities.FirstOrDefault(v => v.ActivityName == ActivityName);
-            if (result != null)
+            if (result != null && ActivityId == 0)
             {
                 ValidationResult mss = new ValidationResult("There is already an activity with this name in this module");
                 res.Add(mss);

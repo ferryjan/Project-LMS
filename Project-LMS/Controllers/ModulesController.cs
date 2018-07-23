@@ -76,7 +76,7 @@ namespace Project_LMS.Controllers
             {
                 db.Modules.Add(module);
                 db.SaveChanges();
-                return RedirectToAction("Edit", "TeacherCourses", new { id = id });
+                return RedirectToAction("Edit", "TeacherCourses", new { id });
             }
             ViewBag.CourseStartDate = db.Courses.FirstOrDefault(c => c.CourseId == id).StartDate.Date;
             ViewBag.CourseEndDate = db.Courses.FirstOrDefault(c => c.CourseId == id).EndDate.Date;
@@ -159,7 +159,7 @@ namespace Project_LMS.Controllers
             Module module = db.Modules.Find(moduleId);
             db.Modules.Remove(module);
             db.SaveChanges();
-            return RedirectToAction("Edit", "TeacherCourses", new { id = id });
+            return RedirectToAction("Edit", "TeacherCourses", new { id });
         }
 
         protected override void Dispose(bool disposing)

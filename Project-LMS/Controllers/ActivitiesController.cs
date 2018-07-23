@@ -108,13 +108,14 @@ namespace Project_LMS.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ActivityId,ActivityName,Start,End,Description,ActivityTypeId")] Activity activity)
+        public ActionResult Edit(int id,[Bind(Include = "ActivityId,ActivityName,Start,End,Description,ActivityTypeId")] Activity activity)
         {
             if (ModelState.IsValid)
             {
+                activity.ModuleId = id;
                 db.Entry(activity).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Edit", "Modules", new { id = activity.ModuleId });
+                return RedirectToAction("Edit", "Modules", new { id });
             }
             ViewBag.ActivityTypeId = new SelectList(db.ActivityTypes, "ActivityTypeId", "Type", activity.ActivityTypeId);
             ViewBag.ModuleId = new SelectList(db.Modules, "ModuleId", "CourseName", activity.ModuleId);
