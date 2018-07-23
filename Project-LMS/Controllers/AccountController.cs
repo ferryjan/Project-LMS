@@ -270,8 +270,6 @@ namespace Project_LMS.Controllers
             {
                 ViewBag.FirstLoginMessage = "";
             }
-            var user = UserManager.FindById(userId);
-            ViewBag.CurrentEmail = user.Email;
             return code == null ? View("Error") : View();
         }
 
@@ -281,13 +279,13 @@ namespace Project_LMS.Controllers
         [AllowAnonymous]
         [ValidateInput(false)]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ResetPassword(String email, ResetPasswordViewModel model)
+        public async Task<ActionResult> ResetPassword(ResetPasswordViewModel model)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
-            var user = await UserManager.FindByNameAsync(email);
+            var user = await UserManager.FindByNameAsync(model.Email);
             if (user == null)
             {
                 // Don't reveal that the user does not exist

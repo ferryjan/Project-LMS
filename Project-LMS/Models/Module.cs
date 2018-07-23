@@ -26,7 +26,6 @@ namespace Project_LMS.Models
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
         public DateTime EndDate { get; set; }
 
-        [Required]
         [Display(Name = "Description")]
         [StringLength(255)]
         [DataType(DataType.MultilineText)]
