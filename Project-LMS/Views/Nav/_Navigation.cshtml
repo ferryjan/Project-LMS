@@ -33,8 +33,6 @@
     var CurrentSelectedCourseInHistoryCourse = historyCourseList.FirstOrDefault(c => c.CourseId.ToString() == currentCourseId);
 }
 
-<h3>@currentApplicationUserId</h3>
-
 @if ((currentController == "TeacherCourses" || currentController == "Documents" || currentController == "Modules" || (currentController == "ApplicationUser" && (currentAction == "CreateStudent" || currentAction == "DeleteStudentFromCourse")))
     && (currentCourseId != null || currentDocumentId != null || currentModuleId != null || currentApplicationUserId != null))
 {
