@@ -100,6 +100,7 @@ namespace Project_LMS.Controllers
             }
             ViewBag.ActivityTypeId = new SelectList(db.ActivityTypes, "ActivityTypeId", "Type", activity.ActivityTypeId);
             ViewBag.ModuleId = new SelectList(db.Modules, "ModuleId", "CourseName", activity.ModuleId);
+            ViewBag.Id = activity.ActivityId;
             return View(activity);
         }
 
