@@ -22,12 +22,7 @@ namespace Project_LMS.Controllers
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
             var teacherRole = roleManager.FindByName("Teacher");
 
-            if (search == "")
-            {
-                var list = db.Users.Where(x => x.Roles.Any(s => s.RoleId == teacherRole.Id)).ToList();
-                return View(list);
-            }
-            else if (search == null)
+            if (search == "" || search == null)
             {
                 var list = db.Users.Where(x => x.Roles.Any(s => s.RoleId == teacherRole.Id)).ToList();
                 return View(list);
