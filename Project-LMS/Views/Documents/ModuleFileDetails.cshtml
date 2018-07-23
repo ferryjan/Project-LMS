@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Project_LMS.Models.Document>
 
 <p>
-    @Html.ActionLink("Upload Module Document", "CreateModuleDocument", new { id = ViewBag.Id }, new { @class = "btn btn-danger btn-large" })
+    @Html.ActionLink("Upload Module Document", "CreateModuleDocument", new { id = ViewBag.Id }, new { @class = "btn btn-primary btn-large" })
 </p>
 
 <table class="table table-bordered">
@@ -21,9 +21,24 @@
             </td>
 
             <td>
-                @Html.ActionLink("Download", "DownLoadFile", new { id = item.DocumentId })  |
-                @Html.ActionLink("Details", "ModuleDocumentDetails", new { id = item.DocumentId }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.DocumentId })
+                <a href="@Url.Action("DownLoadFile", "Documents", new { id = item.DocumentId })" class="btn btn-success">
+                    <i class="glyphicon glyphicon-download"></i>
+                    <span>
+                        <strong>Download</strong>
+                    </span>
+                </a>
+                <a href="@Url.Action("ModuleDocumentDetails", "Documents", new { id = item.DocumentId })" class="btn btn-info">
+                    <i class="glyphicon glyphicon-list"></i>
+                    <span>
+                        <strong>Details</strong>
+                    </span>
+                </a>
+                <a href="@Url.Action("DeleteModuleDocument", "Documents", new { id = item.DocumentId })" class="btn btn-danger">
+                    <i class="glyphicon glyphicon-erase"></i>
+                    <span>
+                        <strong>Delete</strong>
+                    </span>
+                </a>
             </td>
         </tr>
     }

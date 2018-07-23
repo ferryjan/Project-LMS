@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Project_LMS.Models.Module>
 
 <p>
-    @Html.ActionLink("Add New Module to The Course", "Create", new { id = ViewBag.CourseId }, new { @class = "btn btn-danger btn-large" })
+    @Html.ActionLink("Add New Module to The Course", "Create", new { id = ViewBag.CourseId }, new { @class = "btn btn-primary btn-large" })
 </p>
 <table class="table">
     <tr>
@@ -37,9 +37,24 @@
             @Html.DisplayFor(modelItem => item.Description)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ModuleId }) |
-            @Html.ActionLink("Details", "Details", new { id = ViewBag.CourseId, moduleId = item.ModuleId }) |
-            @Html.ActionLink("Delete", "Delete", new { id = ViewBag.CourseId, moduleId = item.ModuleId })
+            <a href="@Url.Action("Edit", "Modules", new { id = item.ModuleId})" class="btn btn-primary">
+                <i class="glyphicon glyphicon-edit"></i>
+                <span>
+                    <strong>Edit</strong>
+                </span>
+            </a>
+            <a href="@Url.Action("Details", "Modules", new { id = ViewBag.CourseId, moduleId = item.ModuleId })" class="btn btn-info">
+                <i class="glyphicon glyphicon-list"></i>
+                <span>
+                    <strong>Details</strong>
+                </span>
+            </a>
+            <a href="@Url.Action("Delete", "Modules", new { id = ViewBag.CourseId, moduleId = item.ModuleId })" class="btn btn-danger">
+                <i class="glyphicon glyphicon-erase"></i>
+                <span>
+                    <strong>Delete</strong>
+                </span>
+            </a>
         </td>
     </tr>
 }

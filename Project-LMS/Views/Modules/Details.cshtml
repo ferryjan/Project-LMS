@@ -53,6 +53,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ModuleId }) |
-    @Html.ActionLink("Go Back", "Edit", "TeacherCourses", new { id = ViewBag.CourseId }, null)
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ModuleId }, new { @class = "btn btn-primary btn-large" }) 
+    @Html.ActionLink("Go Back", "Edit", "TeacherCourses", new { id = ViewBag.CourseId }, new { @class = "btn btn-primary btn-large" })
 </p>

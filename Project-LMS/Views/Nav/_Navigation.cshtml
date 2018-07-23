@@ -54,6 +54,20 @@
     {
         if (currentDocumentId != null) {currentCourseId = documentList.FirstOrDefault(d => d.DocumentId.ToString() == currentDocumentId).CourseId.ToString(); }
     }
+    else if (currentController == "Documents" && (currentAction == "Details" || currentAction == "Delete"))
+    {
+        if (currentDocumentId != null)
+        {
+            currentCourseId = documentList.FirstOrDefault(d => d.DocumentId.ToString() == currentDocumentId).CourseId.ToString();
+        }
+    }
+    else if (currentController == "Documents" && (currentAction == "ModuleDocumentDetails" || currentAction == "DeleteModuleDocument"))
+    {
+        if (currentDocumentId != null)
+        {
+            currentCourseId = documentList.FirstOrDefault(d => d.DocumentId.ToString() == currentDocumentId).Module.CourseId.ToString();
+        }
+    }
     else if (currentController == "Documents")
     {
         if (currentDocumentId != null) { currentCourseId = documentList.FirstOrDefault(d => d.DocumentId.ToString() == currentDocumentId).Module.CourseId.ToString(); }
