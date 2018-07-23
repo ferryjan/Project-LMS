@@ -35,6 +35,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ActivityId }) |
-    @Html.ActionLink("Back to Modules", "Edit", "Modules", new { id = Model.ModuleId }, null)
+    @Html.ActionLink("Edit", "Edit", "Activities", new { id = Model.ActivityId }, new { @class = "btn btn-primary btn-large" })
+    @Html.ActionLink("Back to Modules", "Edit", "Modules", new { id = Model.ModuleId }, new { @class = "btn btn-primary btn-large" })
 </p>

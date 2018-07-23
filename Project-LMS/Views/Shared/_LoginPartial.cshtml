@@ -26,7 +26,7 @@
                     }
                     else
                     {
-                        <img alt="" src="~/Pictures/defaultImage.png" data-radium="true" style="width: 32px; height: 32px; border-radius: 50%">
+                        <img alt="" src="~/Pictures/defaultAvatar.png" data-radium="true" style="width: 32px; height: 32px; border-radius: 50%">
                     }
 
                     @if (User.Identity.GetUserGivenName() != "")
@@ -41,7 +41,8 @@
                 </a>
 
                 <ul class="dropdown-menu">
-                    <li>@Html.ActionLink("Manage", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })</li>
+                    <li>@Html.ActionLink("Change Profile", "ChangeProfile", "ApplicationUser", routeValues: null, htmlAttributes: new { title = "ApplicationUser" })</li>
+                    <li>@Html.ActionLink("Change Password", "ChangePassword", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })</li>
                     <li role="separator" class="divider"></li>
                     <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
                 </ul>

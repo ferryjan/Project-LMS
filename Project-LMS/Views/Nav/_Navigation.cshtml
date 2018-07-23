@@ -48,7 +48,7 @@
     }
     else if (currentController == "Documents" && currentAction == "CreateActivityDocument")
     {
-        if (currentDocumentId != null){currentCourseId = activityList.FirstOrDefault(d => d.ActivityId.ToString() == currentDocumentId).Module.CourseId.ToString();}
+        if (currentDocumentId != null){currentCourseId = documentList.FirstOrDefault(d => d.ActivityId.ToString() == currentDocumentId).CourseId.ToString();}
     }
     else if (currentController == "Documents" && currentAction == "ActivityDocumentDetails")
     {

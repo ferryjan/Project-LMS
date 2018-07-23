@@ -56,7 +56,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ActivityTypeId, "Activity-type", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("ActivityTypeId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("ActivityTypeId", null, "-- Select A Activity Type --", htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.ActivityTypeId, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -64,14 +64,14 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
 
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to Modules", "Edit", "Modules", new { id = ViewBag.ModuleId }, null)
+    @Html.ActionLink("Back to Modules", "Edit", "Modules", new { id = ViewBag.ModuleId }, new { @class = "btn btn-primary btn-large" })
 </div>
 
 @section Scripts {
