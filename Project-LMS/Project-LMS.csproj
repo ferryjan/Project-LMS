@@ -234,6 +234,14 @@
     <Compile Include="Migrations\201807230956374_remove-required-from-module-description.Designer.cs">
       <DependentUpon>201807230956374_remove-required-from-module-description.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201807231638112_add-feedback_field-in-doc.cs" />
+    <Compile Include="Migrations\201807231638112_add-feedback_field-in-doc.Designer.cs">
+      <DependentUpon>201807231638112_add-feedback_field-in-doc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807231736526_add-isHomework_field-in-doc.cs" />
+    <Compile Include="Migrations\201807231736526_add-isHomework_field-in-doc.Designer.cs">
+      <DependentUpon>201807231736526_add-isHomework_field-in-doc.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Activity.cs" />
@@ -241,6 +249,7 @@
     <Compile Include="Models\ApplicationUserViewModels.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\Document.cs" />
+    <Compile Include="Models\HomeworkViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Module.cs" />
@@ -442,6 +451,7 @@
     <Content Include="Views\Documents\ActivityDocumentDetails.cshtml" />
     <Content Include="Views\Documents\DeleteActivityDocument.cshtml" />
     <Content Include="Views\ApplicationUser\ChangeProfile.cshtml" />
+    <Content Include="Views\Activities\_homeworkList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -481,6 +491,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201807230956374_remove-required-from-module-description.resx">
       <DependentUpon>201807230956374_remove-required-from-module-description.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807231638112_add-feedback_field-in-doc.resx">
+      <DependentUpon>201807231638112_add-feedback_field-in-doc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807231736526_add-isHomework_field-in-doc.resx">
+      <DependentUpon>201807231736526_add-isHomework_field-in-doc.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -169,6 +169,7 @@ namespace Project_LMS.Controllers
                     {
                         doc.ApplicationUserId = db.Users.FirstOrDefault(u => u.UserName == User.Identity.Name).Id;
                         doc.ActivityId = id;
+                        doc.isHomework = false;
                         doc.DocumentFileType = file.ContentType;
                         doc.UploadingTime = DateTime.Now;
                         doc.FileData = new byte[file.ContentLength];
@@ -213,7 +214,7 @@ namespace Project_LMS.Controllers
         public PartialViewResult ActivityFileDetails(int? activityId)
         {
             ViewBag.Id = activityId;
-            var documents = db.Documents.Where(i => i.ActivityId == activityId);
+            var documents = db.Documents.Where(i => i.ActivityId == activityId && i.isHomework == false);
             return PartialView("_activityFileDetails", documents.ToList());
         }
 

@@ -48,7 +48,7 @@
     }
     else if (currentController == "Documents" && currentAction == "CreateActivityDocument")
     {
-        if (currentDocumentId != null){currentCourseId = documentList.FirstOrDefault(d => d.ActivityId.ToString() == currentDocumentId).CourseId.ToString();}
+        if (currentDocumentId != null){currentCourseId = activityList.FirstOrDefault(d => d.ActivityId.ToString() == currentDocumentId).Module.CourseId.ToString();}
     }
     else if (currentController == "Documents" && currentAction == "ActivityDocumentDetails")
     {
@@ -62,8 +62,20 @@
     {
         if (currentDocumentId != null)
         {
-            var activityID = documentList.FirstOrDefault(d => d.DocumentId.ToString() == currentDocumentId).ActivityId;
-            currentCourseId = activityList.FirstOrDefault(d => d.ActivityId == activityID).Module.CourseId.ToString();
+            if (documentList.FirstOrDefault(d => d.DocumentId.ToString() == currentDocumentId).ActivityId != null )
+            {
+                var activityID = documentList.FirstOrDefault(d => d.DocumentId.ToString() == currentDocumentId).ActivityId;
+                currentCourseId = activityList.FirstOrDefault(d => d.ActivityId == activityID).Module.CourseId.ToString();
+            }
+            else if (documentList.FirstOrDefault(d => d.DocumentId.ToString() == currentDocumentId).ModuleId != null)
+            {
+                var moduleId = documentList.FirstOrDefault(d => d.DocumentId.ToString() == currentDocumentId).ModuleId;
+                currentCourseId = moduleList.FirstOrDefault(d => d.ModuleId == moduleId).CourseId.ToString();
+            }
+            else
+            {
+                currentCourseId = documentList.FirstOrDefault(d => d.DocumentId.ToString() == currentDocumentId).CourseId.ToString();
+            }
         }
     }
     else if (currentController == "Documents")

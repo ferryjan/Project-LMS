@@ -28,6 +28,10 @@ namespace Project_LMS.Models
 
         public byte[] FileData { get; set; }
 
+        public string FeedBack { get; set; }
+
+        public bool isHomework { get; set; }
+
         //Navigational properties
         [Display(Name = "Course ID")]
         public int? CourseId { get; set; }

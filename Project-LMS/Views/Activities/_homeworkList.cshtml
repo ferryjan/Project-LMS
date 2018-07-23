@@ -1,0 +1,75 @@
+﻿@model List<Project_LMS.Models.HomeworkViewModels>
+
+@{
+    var studentList = Model.Select(s => s.Students).FirstOrDefault().ToList();
+    var docList = Model.Select(s => s.Documents).FirstOrDefault().ToList();
+}
+
+<h3>Homework and Feedback</h3>
+
+<table class="table">
+    <tr>
+        <th>Student Name</th>
+        <th>Document</th>
+        <th>Feedback</th>
+        <th></th>
+    </tr>
+
+    @foreach (var student in studentList)
+    {
+        var doc = docList.FirstOrDefault(d => d.ApplicationUser.UserName == student.UserName);
+        <tr>
+            <td>@Html.Raw(student.GivenName + " " + student.FamilyName)</td>
+            <td>
+                @if (doc != null)
+                {
+                    @Html.Raw(doc.DocumentName);
+                }
+                else
+                {
+                    @Html.Raw("No Homework has been handed in!");
+                }
+            </td>
+            <td>
+                @if (doc != null)
+                {
+                    if (doc.FeedBack != null)
+                    {
+                        @Html.Raw(doc.FeedBack);
+                    }
+                    else
+                    {
+                        @Html.Raw("No feedback is given!");
+                    }
+                }
+            </td>
+            <td>
+                @if (doc != null)
+                {
+                    <a href="@Url.Action("DownLoadFile", "Documents", new { id = doc.DocumentId })" class="btn btn-success">
+                        <i class="glyphicon glyphicon-download"></i>
+                        <span>
+                            <strong>Download</strong>
+                        </span>
+                    </a>
+                    <a href="@Url.Action("DownLoadFile", "Documents", new { id = doc.DocumentId })" class="btn btn-success">
+                        <i class="glyphicon glyphicon-download"></i>
+                        <span>
+                            <strong>Leave Feedback</strong>
+                        </span>
+                    </a>
+                }
+                else
+                {
+                    <a href="@Url.Action("DownLoadFile", "Documents", new { id = 12 })" class="btn btn-success">
+                        <i class="glyphicon glyphicon-download"></i>
+                        <span>
+                            <strong>Leave Feedback</strong>
+                        </span>
+                    </a>
+                }
+            </td>
+        </tr>
+    }
+
+</table>

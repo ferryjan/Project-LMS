@@ -6,6 +6,8 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Project_LMS.Models;
 
 namespace Project_LMS.Controllers
@@ -149,6 +151,20 @@ namespace Project_LMS.Controllers
             db.Activities.Remove(activity);
             db.SaveChanges();
             return RedirectToAction("Edit", "Modules" , new { id = ModuleId });
+        }
+
+        public ActionResult ShowHomeworkList(int id)
+        {
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
+            var studentRole = roleManager.FindByName("Student");
+            var courseId = db.Activities.FirstOrDefault(a => a.ActivityId == id).Module.CourseId;
+            var studentList = db.Users.Where(x => x.Roles.Any(s => s.RoleId == studentRole.Id)).Where(s => s.CourseId == courseId).ToList();
+            var documentList = db.Documents.ToList();
+
+            List<HomeworkViewModels> homeworkVM = new List<HomeworkViewModels>();
+            HomeworkViewModels hvm = new HomeworkViewModels() { Documents = documentList, Students = studentList};
+            homeworkVM.Add(hvm);
+            return PartialView("_homeworkList", homeworkVM);
         }
 
         protected override void Dispose(bool disposing)

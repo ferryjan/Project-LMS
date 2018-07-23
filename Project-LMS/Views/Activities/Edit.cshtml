@@ -66,9 +66,19 @@
             </div>
         </div>
     </div>
-
-    @Html.Action("ActivityFileDetails", "Documents", new { activityId = Model.ActivityId })
 }
+
+<br />
+<br />
+@Html.Action("ActivityFileDetails", "Documents", new { activityId = Model.ActivityId })
+<br />
+<br />
+@if (Model.ActivityType.Type == "Exercise")
+{
+    @Html.Action("ShowHomeworkList", "Activities", new { id = Model.ActivityId })
+}
+
+<br />
 
 <div>
     @Html.ActionLink("Back to Modules", "Edit", "Modules", new { id = Model.ModuleId }, new { @class = "btn btn-primary btn-large" })
