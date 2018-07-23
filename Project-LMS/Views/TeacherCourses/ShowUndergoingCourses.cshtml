@@ -41,10 +41,24 @@
             @Html.DisplayFor(modelItem => item.CourseDescription)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.CourseId }) |
-            @Html.ActionLink("Details", "Details", new { id = item.CourseId }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.CourseId }) |
-            @Html.ActionLink("Add Modules", "Create", "Modules", new { id = item.CourseId }, null)
+            <a href="@Url.Action("Edit", "TeacherCourses", new { id = item.CourseId })" class="btn btn-primary">
+                <i class="icon-pencil icon-white"></i>
+                <span>
+                    <strong>Edit</strong>
+                </span>
+            </a>
+            <a href="@Url.Action("Details", "TeacherCourses", new { id = item.CourseId })" class="btn btn-info">
+                <i class="icon-pencil icon-white"></i>
+                <span>
+                    <strong>Details</strong>
+                </span>
+            </a>
+            <a href="@Url.Action("Delete", "TeacherCourses", new { id = item.CourseId })" class="btn btn-danger">
+                <i class="icon-pencil icon-white"></i>
+                <span>
+                    <strong>Delete</strong>
+                </span>
+            </a>
         </td>
     </tr>
 }
@@ -52,5 +66,5 @@
 </table>
 
 <p>
-    @Html.ActionLink("Back To Courses Overview", "Index", null, new { @class = "btn btn-danger btn-large" })
+    @Html.ActionLink("Back To Courses Overview", "Index", null, new { @class = "btn btn-primary btn-large" })
 </p>

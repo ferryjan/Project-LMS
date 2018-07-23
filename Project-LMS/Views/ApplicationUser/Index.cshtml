@@ -8,13 +8,11 @@
 
 @using (Html.BeginForm("Index", "ApplicationUser", FormMethod.Get))
 {
-    <b> Search Option: </b> <br /> @Html.RadioButton("option", "GivenName") <text>Given Name</text> <br />
-    @Html.RadioButton("option", "FamilyName") <text> Family Name </text> <br />
-    @Html.TextBox("search") <input type="submit" name="submit" value="Search" class="btn btn-info" />
+    @Html.TextBox("search") <input type="submit" name="submit" value="Search" class="btn btn-warning" />
 }
 
 <p>
-    @Html.ActionLink("Register a new teacher", "Create", null, new { @class = "btn btn-danger btn-large" })
+    @Html.ActionLink("Register a new teacher", "Create", null, new { @class = "btn btn-primary btn-large" })
 </p>
 <table class="table">
     <tr>
@@ -43,9 +41,24 @@
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                <a href="@Url.Action("Edit", "ApplicationUser", new { id = item.Id })" class="btn btn-primary">
+                    <i class="icon-pencil icon-white"></i>
+                    <span>
+                        <strong>Edit</strong>
+                    </span>
+                </a>
+                <a href="@Url.Action("Details", "ApplicationUser", new { id = item.Id })" class="btn btn-info">
+                    <i class="icon-pencil icon-white"></i>
+                    <span>
+                        <strong>Details</strong>
+                    </span>
+                </a>
+                <a href="@Url.Action("Delete", "ApplicationUser", new { id = item.Id })" class="btn btn-danger">
+                    <i class="icon-pencil icon-white"></i>
+                    <span>
+                        <strong>Delete</strong>
+                    </span>
+                </a>
             </td>
         </tr>
     }
