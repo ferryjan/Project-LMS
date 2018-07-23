@@ -1,27 +1,30 @@
-﻿@model Project_LMS.Models.Course
+﻿@model Project_LMS.Models.Module
 
 @{
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
+<h2>Edit Module</h2>
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Edit", "Modules", new { id = Model.CourseId }))
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Course</h4>
+        <h4>Module</h4>
+        <h4 style="color:red">Course Start Time: @ViewBag.CourseStartDate</h4>
+        <h4 style="color:red">Course End Time: @ViewBag.CourseEndDate</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.CourseId)
+        <h4 style="color:indianred"> @ViewBag.DateNotValidMessage </h4>
+        @Html.HiddenFor(model => model.ModuleId)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.CourseName, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.CourseName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CourseName, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -42,10 +45,10 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.CourseDescription, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.CourseDescription, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CourseDescription, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -60,23 +63,17 @@
 <br />
 <br />
 
-@Html.Action("StudentIndex", "ApplicationUser", new { id = Model.CourseId })
+@Html.Action("ShowActivities", "Activities", new { moduleId = Model.ModuleId })
 
 <br />
 <br />
 
-@Html.Action("ShowCourseModules", "Modules", new { id = Model.CourseId })
-
-<br />
-<br />
-
-@Html.Action("FileDetails", "Documents", new { id = Model.CourseId })
-
-<br />
+@Html.Action("ModuleFileDetails", "Documents", new { moduleId = Model.ModuleId })
 
 <div>
-    @Html.ActionLink("Back to Course List", "Index")
+    @Html.ActionLink("Go Back", "Edit", "TeacherCourses", new { id = Model.CourseId }, null)
 </div>
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

@@ -54,6 +54,60 @@ namespace Project_LMS.Controllers
             }
         }
 
+        public ActionResult StudentIndex(int id)
+        {
+            ViewBag.CourseId = id;
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
+            var studentRole = roleManager.FindByName("Student");
+            var list = db.Users.Where(x => x.Roles.Any(s => s.RoleId == studentRole.Id)).Where(t => t.CourseId == id).OrderBy(g => g.GivenName).ThenBy(f => f.FamilyName).ToList();
+            return PartialView(list);
+        }
+
+        // GET: ApplicationUser/Create
+        public ActionResult CreateStudent(int id)
+        {
+            ViewBag.CourseId = id;
+            ViewBag.UserExist = "";
+            return View();
+        }
+
+        // POST: ApplicationUser/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateStudent(int id, [Bind(Include = "GivenName,FamilyName,Email")] ApplicationUser applicationUser)
+        {
+            if (ModelState.IsValid)
+            {
+
+                applicationUser.TimeOfRegistration = DateTime.Now;
+                applicationUser.UserName = applicationUser.Email;
+                applicationUser.CourseId = id;
+
+                if (db.Users.Any(u => u.UserName == applicationUser.Email))
+                {
+                    ViewBag.UserExist = "This email is existed in the database, try another one!";
+                    ViewBag.CourseId = id;
+                    return View(applicationUser);
+                }
+
+                var userStore = new UserStore<ApplicationUser>(db);
+                var userManager = new UserManager<ApplicationUser>(userStore);
+
+                var result = userManager.Create(applicationUser, "Ante_007");
+                if (!result.Succeeded) { throw new Exception(string.Join("\n", result.Errors)); }
+
+                userManager.AddToRole(applicationUser.Id, "Student");
+                return RedirectToAction("Edit", "TeacherCourses", new { id = id });
+
+            }
+
+            ViewBag.UserExist = "";
+            ViewBag.CourseId = id;
+            return View(applicationUser);
+        }
+
         // GET: ApplicationUser/Details/5
         public ActionResult Details(string id)
         {
@@ -72,6 +126,7 @@ namespace Project_LMS.Controllers
         // GET: ApplicationUser/Create
         public ActionResult Create()
         {
+            ViewBag.UserExist = "";
             return View();
         }
 
@@ -90,6 +145,7 @@ namespace Project_LMS.Controllers
 
                 if (db.Users.Any(u => u.UserName == applicationUser.Email))
                 {
+                    ViewBag.UserExist = "This email is existed in the database, try another one!";
                     return View(applicationUser);
                 }
 
@@ -103,8 +159,7 @@ namespace Project_LMS.Controllers
                 return RedirectToAction("Index");
 
             }
-
-            ViewBag.CourseId = new SelectList(db.Courses, "CourseId", "CourseName", applicationUser.CourseId);
+            ViewBag.UserExist = "";
             return View(applicationUser);
         }
 
@@ -146,6 +201,35 @@ namespace Project_LMS.Controllers
             ViewBag.CourseId = new SelectList(db.Courses, "CourseId", "CourseName", applicationUser.CourseId);
             return View(applicationUser);
         }
+
+
+        // GET: ApplicationUser/Delete/5
+        public ActionResult DeleteStudentFromCourse(string studnetId, int id)
+        {
+            if (studnetId == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ApplicationUser applicationUser = db.Users.Find(studnetId);
+            if (applicationUser == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.CourseID = id;
+            return View(applicationUser);
+        }
+
+        // POST: ApplicationUser/Delete/5
+        [HttpPost, ActionName("DeleteStudentFromCourse")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteStudentFromCourseConfirmed(string studnetId, int id)
+        {
+            ApplicationUser applicationUser = db.Users.Find(studnetId);
+            db.Users.Remove(applicationUser);
+            db.SaveChanges();
+            return RedirectToAction("Edit", "TeacherCourses", new { id = id });
+        }
+        
 
         // GET: ApplicationUser/Delete/5
         public ActionResult Delete(string id)

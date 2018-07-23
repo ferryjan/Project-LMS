@@ -10,21 +10,6 @@
     <h4>Document</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Activity.CourseName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Activity.CourseName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ApplicationUser.GivenName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ApplicationUser.GivenName)
-        </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.Course.CourseName)
@@ -35,11 +20,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Module.CourseName)
+            @Html.DisplayNameFor(model => model.DocumentName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Module.CourseName)
+            @Html.DisplayFor(model => model.DocumentName)
         </dd>
 
         <dt>
@@ -50,17 +35,8 @@
             @Html.DisplayFor(model => model.UploadingTime)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.DocumentRef)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DocumentRef)
-        </dd>
-
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.DocumentId }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back", "Edit", "TeacherCourses", new { id = Model.CourseId }, null)
 </p>

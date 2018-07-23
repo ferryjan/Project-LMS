@@ -32,11 +32,6 @@ namespace Project_LMS.Models
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
-        [Display(Name = "Deadline")]
-        [DataType(DataType.DateTime)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd HH:mm:ss}", ApplyFormatInEditMode = true)]
-        public DateTime? Deadline { get; set; }
-
         //Navigational properties
         [Display(Name = "Module ID")]
         public int? ModuleId { get; set; }

@@ -1,13 +1,13 @@
 ﻿@model Project_LMS.Models.ApplicationUser
 
 @{
-    ViewBag.Title = "Add new Teacher";
+    ViewBag.Title = "Add new Student";
 }
 
-<h2>Add new Teacher</h2>
+<h2>Add new Student</h2>
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("CreateStudent", "ApplicationUser", new { id = ViewBag.CourseId }))
 {
     @Html.AntiForgeryToken()
 
@@ -41,14 +41,6 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>
@@ -57,9 +49,10 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Cancel and Go Back", "Edit", "TeacherCourses", new { id = ViewBag.CourseId }, null)
 </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+

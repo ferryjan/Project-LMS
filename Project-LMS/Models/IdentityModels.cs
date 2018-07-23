@@ -16,7 +16,9 @@ namespace Project_LMS.Models
         public string GivenName { get; set; }
         [Display(Name = "Family Name")]
         public string FamilyName { get; set; }
+        [Display(Name = "Picture")]
         public string ProfileImageRef { get; set; }
+        [Display(Name = "Registered")]
         public DateTime TimeOfRegistration { get; set; }
         public bool? FirstTimeLogin { get; set; }
 
@@ -59,5 +61,6 @@ namespace Project_LMS.Models
         {
             return new ApplicationDbContext();
         }
+
     }
 }

@@ -1,0 +1,27 @@
+﻿@model IEnumerable<Project_LMS.Models.Activity>
+
+<p>
+    @Html.ActionLink("Add New Activity to The Module", "Create", new { id = ViewBag.ModuleId }, new { @class = "btn btn-danger btn-large" })
+</p>
+<table class="table">
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.ActivityName)</th>
+        <th>@Html.DisplayNameFor(model => model.Start) </th>
+        <th>@Html.DisplayNameFor(model => model.End)</th>
+        <th>@Html.DisplayNameFor(model => model.Description)</th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.ActivityName)</td>
+            <td>@Html.DisplayFor(modelItem => item.Start)</td>
+            <td>@Html.DisplayFor(modelItem => item.End)</td>
+            <td>@Html.DisplayFor(modelItem => item.Description)</td>
+            <td>@Html.ActionLink("Details", "Details", new { id = item.ActivityId }) | 
+                @Html.ActionLink("Remove Activity", "Delete", new { id = item.ActivityId })</td>
+        </tr>
+    }
+
+</table>

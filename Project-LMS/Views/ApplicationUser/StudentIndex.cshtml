@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Project_LMS.Models.ApplicationUser>
+
+<p>
+    @Html.ActionLink("Add New Student to The Course", "CreateStudent", new { id = ViewBag.CourseId }, new { @class = "btn btn-danger btn-large" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Course.CourseName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GivenName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FamilyName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Course.CourseName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GivenName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FamilyName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.ActionLink("Remove Student From Course", "DeleteStudentFromCourse", new { studnetId=item.Id, id = item.CourseId})
+        </td>
+    </tr>
+}
+
+</table>

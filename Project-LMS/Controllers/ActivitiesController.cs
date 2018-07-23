@@ -15,10 +15,25 @@ namespace Project_LMS.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Activities
-        public ActionResult Index()
+        public ActionResult Index(int? id)
         {
-            var activities = db.Activities.Include(a => a.ActivityType).Include(a => a.Module);
-            return View(activities.ToList());
+            //Fix do allow dev on activities before Modules are checked in.
+            if (!id.HasValue) {id = db.Modules.FirstOrDefault().ModuleId;}
+
+            ViewBag.ModuleName = db.Modules.FirstOrDefault(n => n.ModuleId == id).Name;
+            ViewBag.CourseName = db.Modules.FirstOrDefault(n => n.ModuleId == id).Course.CourseName;
+            ViewBag.ModuleId = id;
+
+            var activities = db.Activities.Where(n => n.ModuleId == id ).Include(a => a.ActivityType);
+            return View(activities.OrderBy(s => s.Start).ToList());
+        }
+
+        [ChildActionOnly]
+        public ActionResult ShowActivities(int? id)
+        {
+            ViewBag.ModuleId = id;
+            var activities = db.Activities.Where(i => i.ModuleId == id).OrderBy(o => o.Start);
+            return PartialView("_Index", activities.ToList());
         }
 
         // GET: Activities/Details/5
@@ -33,14 +48,19 @@ namespace Project_LMS.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.ModuleName = activity.Module.Name;
+            ViewBag.CourseName = activity.Module.Course.CourseName;
             return View(activity);
         }
 
         // GET: Activities/Create
-        public ActionResult Create()
+        public ActionResult Create(int id)
         {
             ViewBag.ActivityTypeId = new SelectList(db.ActivityTypes, "ActivityTypeId", "Type");
-            ViewBag.ModuleId = new SelectList(db.Modules, "ModuleId", "CourseName");
+            ViewBag.ModuleId = id;
+            ViewBag.ModuleName = db.Modules.FirstOrDefault(n => n.ModuleId == id).Name;
+            ViewBag.CourseName = db.Modules.FirstOrDefault(n => n.ModuleId == id).Course.CourseName;
+
             return View();
         }
 
@@ -49,17 +69,20 @@ namespace Project_LMS.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ActivityId,ActivityName,Start,End,Description,Deadline,ModuleId,ActivityTypeId")] Activity activity)
+        public ActionResult Create(int id, [Bind(Include = "ActivityId,ActivityName,Start,End,Description,ModuleId,ActivityTypeId")] Activity activity)
         {
+            if(activity != null){ activity.ModuleId = id; }
             if (ModelState.IsValid)
             {
                 db.Activities.Add(activity);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Edit", "Modules", new { id = activity.ModuleId });
             }
 
             ViewBag.ActivityTypeId = new SelectList(db.ActivityTypes, "ActivityTypeId", "Type", activity.ActivityTypeId);
             ViewBag.ModuleId = new SelectList(db.Modules, "ModuleId", "CourseName", activity.ModuleId);
+            ViewBag.ModuleName = db.Modules.FirstOrDefault(n => n.ModuleId == activity.ModuleId).Name;
+            ViewBag.CourseName = db.Modules.FirstOrDefault(n => n.ModuleId == activity.ModuleId).Course.CourseName;
             return View(activity);
         }
 
@@ -85,13 +108,13 @@ namespace Project_LMS.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ActivityId,ActivityName,Start,End,Description,Deadline,ModuleId,ActivityTypeId")] Activity activity)
+        public ActionResult Edit([Bind(Include = "ActivityId,ActivityName,Start,End,Description,ActivityTypeId")] Activity activity)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(activity).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Edit", "Modules", new { id = activity.ModuleId });
             }
             ViewBag.ActivityTypeId = new SelectList(db.ActivityTypes, "ActivityTypeId", "Type", activity.ActivityTypeId);
             ViewBag.ModuleId = new SelectList(db.Modules, "ModuleId", "CourseName", activity.ModuleId);
@@ -118,10 +141,12 @@ namespace Project_LMS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            
             Activity activity = db.Activities.Find(id);
+            var ModuleId = activity.ModuleId;
             db.Activities.Remove(activity);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Edit", "Modules" , new { id = ModuleId });
         }
 
         protected override void Dispose(bool disposing)

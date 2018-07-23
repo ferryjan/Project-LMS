@@ -4,60 +4,33 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Activities</h2>
+<h3>@ViewBag.CourseName</h3>
+<h4>@ViewBag.ModuleName</h4>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+
+    <p>
+        @Html.ActionLink("Add a new activity to this module", "Create", new { id = ViewBag.ModuleId })
+    </p>
+
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ActivityType.Type)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Module.CourseName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ActivityName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Start)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.End)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Deadline)
-        </th>
+        <th>@Html.DisplayNameFor(model => model.ActivityType.Type)</th>
+        <th>@Html.DisplayNameFor(model => model.ActivityName)</th>
+        <th>@Html.DisplayNameFor(model => model.Start)</th>
+        <th>@Html.DisplayNameFor(model => model.End)</th>
+        <th>@Html.DisplayNameFor(model => model.Description)</th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ActivityType.Type)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Module.CourseName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ActivityName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Start)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.End)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Deadline)
-        </td>
+        <td>@Html.DisplayFor(modelItem => item.ActivityType.Type)</td>
+        <td>@Html.DisplayFor(modelItem => item.ActivityName)</td>
+        <td>@Html.DisplayFor(modelItem => item.Start)</td>
+        <td>@Html.DisplayFor(modelItem => item.End)</td>
+        <td>@Html.DisplayFor(modelItem => item.Description)</td>
+
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ActivityId }) |
             @Html.ActionLink("Details", "Details", new { id=item.ActivityId }) |

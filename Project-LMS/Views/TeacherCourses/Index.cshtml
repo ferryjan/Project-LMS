@@ -6,9 +6,11 @@
 
 <h2>List of Courses</h2>
 
+
 <p>
-    @Html.ActionLink("Add Course", "Create")
+    @Html.ActionLink("Add A New Course", "Create", new { id = ViewBag.Id }, new { @class = "btn btn-danger btn-large" })
 </p>
+
 <table class="table">
     <tr>
         <th>
@@ -44,7 +46,7 @@
             @Html.ActionLink("Edit", "Edit", new { id = item.CourseId }) |
             @Html.ActionLink("Details", "Details", new { id = item.CourseId }) |
             @Html.ActionLink("Delete", "Delete", new { id = item.CourseId }) |
-            @Html.ActionLink("Add Modules", "AddModule", "Modules",null, new { id = item.CourseId })
+            @Html.ActionLink("Add Modules", "Create", "Modules", new { id = item.CourseId },null)
         </td>
     </tr>
 }
