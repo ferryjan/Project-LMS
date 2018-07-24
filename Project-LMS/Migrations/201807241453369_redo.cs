@@ -58,8 +58,8 @@ namespace Project_LMS.Migrations
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128),
-                        GivenName = c.String(),
-                        FamilyName = c.String(),
+                        GivenName = c.String(nullable: false),
+                        FamilyName = c.String(nullable: false),
                         ProfileImageRef = c.String(),
                         TimeOfRegistration = c.DateTime(nullable: false),
                         FirstTimeLogin = c.Boolean(),

@@ -209,17 +209,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201807241116308_redo.cs" />
-    <Compile Include="Migrations\201807241116308_redo.Designer.cs">
-      <DependentUpon>201807241116308_redo.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201807241128134_add-some-properties-for-applicationUser.cs" />
-    <Compile Include="Migrations\201807241128134_add-some-properties-for-applicationUser.Designer.cs">
-      <DependentUpon>201807241128134_add-some-properties-for-applicationUser.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201807241135316_remove-some-properties-for-applicationUser.cs" />
-    <Compile Include="Migrations\201807241135316_remove-some-properties-for-applicationUser.Designer.cs">
-      <DependentUpon>201807241135316_remove-some-properties-for-applicationUser.cs</DependentUpon>
+    <Compile Include="Migrations\201807241453369_redo.cs" />
+    <Compile Include="Migrations\201807241453369_redo.Designer.cs">
+      <DependentUpon>201807241453369_redo.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -457,14 +449,8 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201807241116308_redo.resx">
-      <DependentUpon>201807241116308_redo.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201807241128134_add-some-properties-for-applicationUser.resx">
-      <DependentUpon>201807241128134_add-some-properties-for-applicationUser.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201807241135316_remove-some-properties-for-applicationUser.resx">
-      <DependentUpon>201807241135316_remove-some-properties-for-applicationUser.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201807241453369_redo.resx">
+      <DependentUpon>201807241453369_redo.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

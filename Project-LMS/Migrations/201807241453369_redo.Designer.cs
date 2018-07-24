@@ -7,13 +7,13 @@ namespace Project_LMS.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class addsomepropertiesforapplicationUser : IMigrationMetadata
+    public sealed partial class redo : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(addsomepropertiesforapplicationUser));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(redo));
         
         string IMigrationMetadata.Id
         {
-            get { return "201807241128134_add-some-properties-for-applicationUser"; }
+            get { return "201807241453369_redo"; }
         }
         
         string IMigrationMetadata.Source
