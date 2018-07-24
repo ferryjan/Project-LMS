@@ -32,16 +32,11 @@ namespace Project_LMS.Migrations
                 }
             }
 
-
-            var userStore = new UserStore<ApplicationUser>(db);
-            var userManager = new UserManager<ApplicationUser>(userStore);
-
-           
-
             var activityTypes = new[] {
                 new ActivityType { Type = "Lecture" },
                 new ActivityType { Type = "Exercise" },
                 new ActivityType { Type = "E-learning" },
+                new ActivityType { Type = "Homework" },
                 new ActivityType { Type = "Other" }
             };
             db.ActivityTypes.AddOrUpdate(s => new { s.Type }, activityTypes);
@@ -82,6 +77,9 @@ namespace Project_LMS.Migrations
             db.Modules.AddOrUpdate(m => m.Name, modules);
             db.SaveChanges();
 
+
+            var userStore = new UserStore<ApplicationUser>(db);
+            var userManager = new UserManager<ApplicationUser>(userStore);
             string email, rolestring;
             ApplicationUser adminUser;
 
@@ -127,52 +125,6 @@ namespace Project_LMS.Migrations
             adminUser = userManager.FindByName(email);
             userManager.AddToRole(adminUser.Id, rolestring);
 
-            
-
-            var activityTypes = new[] {
-                new ActivityType { Type = "Lecture" },
-                new ActivityType { Type = "Exercise" },
-                new ActivityType { Type = "E-learning" },
-                new ActivityType { Type = "Homework" },
-                new ActivityType { Type = "Other" }
-            };
-            db.ActivityTypes.AddOrUpdate(s => new { s.Type }, activityTypes);
-
-            var courses = new[] {
-                new Course {    CourseName = "Swedish fika done right",
-                                StartDate = DateTime.Now.Date,
-                                EndDate = DateTime.Now.AddMonths(1).Date,
-                                CourseDescription = "It takes a lot of practice to get the finer points of swedish fika right." +
-                                                    " We will start with the basic 7 types of cookies and quickly move into the " +
-                                                    "more advanced areas of the fine art of fika." },
-                new Course {    CourseName = "Cowtilting",
-                                StartDate = DateTime.Now.AddDays(2).Date,
-                                EndDate = DateTime.Now.AddMonths(1).AddDays(2).Date,
-                                CourseDescription = "While cowtilting is rather new to most of us here, the sport actually " +
-                                                    "have a very long history. " +
-                                                    "This cource is a prerequisite for the more advanced cource called \"Bulltilting\"."}
-            };
-            db.Courses.AddOrUpdate(n => n.CourseName, courses);
-            db.SaveChanges();
-
-            var modules = new[] {
-                new Module {
-                    CourseId = courses[0].CourseId,
-                    StartDate = courses[0].StartDate,
-                    EndDate = courses[0].StartDate.AddDays(2),
-                    Name = "Cookies, not just for web-pages",
-                    Description = "An introduction to Cookies: the common combinations."
-                },
-                new Module {
-                    CourseId = courses[0].CourseId,
-                    StartDate = courses[0].StartDate.AddDays(2),
-                    EndDate = courses[0].StartDate.AddDays(4),
-                    Name = "Coffie, the black gold",
-                    Description = "An introduction to Coffie: Brew or boil?"
-                }
-            };
-            db.Modules.AddOrUpdate(m => m.Name, modules);
-            db.SaveChanges();
             email = "student@student.se";
             rolestring = "Student";
             if (!db.Users.Any(u => u.UserName == email))
