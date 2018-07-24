@@ -12,14 +12,17 @@ namespace Project_LMS.Models
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit https://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
+        [Required]
         [Display(Name = "Given Name")]
         public string GivenName { get; set; }
+        [Required]
         [Display(Name = "Family Name")]
         public string FamilyName { get; set; }
         [Display(Name = "Picture")]
         public string ProfileImageRef { get; set; }
         [Display(Name = "Registered")]
         public DateTime TimeOfRegistration { get; set; }
+
         public bool? FirstTimeLogin { get; set; }
 
         //Navigational properties

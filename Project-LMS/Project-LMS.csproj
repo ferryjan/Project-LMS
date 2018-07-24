@@ -45,6 +45,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FoolproofValidation, Version=0.9.5851.39121, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Foolproof.0.9.4518\lib\net45\FoolproofValidation.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -250,6 +253,14 @@
     <Compile Include="Migrations\201807240932113_changes.Designer.cs">
       <DependentUpon>201807240932113_changes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201807241128134_add-some-properties-for-applicationUser.cs" />
+    <Compile Include="Migrations\201807241128134_add-some-properties-for-applicationUser.Designer.cs">
+      <DependentUpon>201807241128134_add-some-properties-for-applicationUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807241135316_remove-some-properties-for-applicationUser.cs" />
+    <Compile Include="Migrations\201807241135316_remove-some-properties-for-applicationUser.Designer.cs">
+      <DependentUpon>201807241135316_remove-some-properties-for-applicationUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Activity.cs" />
@@ -266,6 +277,12 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Client Scripts\mvcfoolproof.unobtrusive.js" />
+    <Content Include="Client Scripts\mvcfoolproof.unobtrusive.min.js" />
+    <Content Include="Client Scripts\MvcFoolproofJQueryValidation.js" />
+    <Content Include="Client Scripts\MvcFoolproofJQueryValidation.min.js" />
+    <Content Include="Client Scripts\MvcFoolproofValidation.js" />
+    <Content Include="Client Scripts\MvcFoolproofValidation.min.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -511,6 +528,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201807240932113_changes.resx">
       <DependentUpon>201807240932113_changes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807241128134_add-some-properties-for-applicationUser.resx">
+      <DependentUpon>201807241128134_add-some-properties-for-applicationUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807241135316_remove-some-properties-for-applicationUser.resx">
+      <DependentUpon>201807241135316_remove-some-properties-for-applicationUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
