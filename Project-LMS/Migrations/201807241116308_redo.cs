@@ -3,7 +3,7 @@ namespace Project_LMS.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Init : DbMigration
+    public partial class redo : DbMigration
     {
         public override void Up()
         {
@@ -12,11 +12,10 @@ namespace Project_LMS.Migrations
                 c => new
                     {
                         ActivityId = c.Int(nullable: false, identity: true),
-                        CourseName = c.String(nullable: false, maxLength: 50),
-                        StartDate = c.DateTime(nullable: false),
-                        EndDate = c.DateTime(nullable: false),
-                        ActivityDescription = c.String(nullable: false, maxLength: 255),
-                        Deadline = c.DateTime(),
+                        ActivityName = c.String(nullable: false, maxLength: 50),
+                        Start = c.DateTime(nullable: false),
+                        End = c.DateTime(nullable: false),
+                        Description = c.String(nullable: false, maxLength: 255),
                         ModuleId = c.Int(),
                         ActivityTypeId = c.Int(nullable: false),
                     })
@@ -32,10 +31,13 @@ namespace Project_LMS.Migrations
                     {
                         DocumentId = c.Int(nullable: false, identity: true),
                         DocumentName = c.String(maxLength: 50),
-                        UploadingTime = c.DateTime(),
+                        UploadingTime = c.DateTime(nullable: false),
                         DocumentRef = c.String(),
                         DocumentFileType = c.String(),
                         FileData = c.Binary(),
+                        FeedBack = c.String(),
+                        isHomework = c.Boolean(nullable: false),
+                        Description = c.String(),
                         CourseId = c.Int(),
                         ModuleId = c.Int(),
                         ActivityId = c.Int(),
@@ -60,6 +62,7 @@ namespace Project_LMS.Migrations
                         FamilyName = c.String(),
                         ProfileImageRef = c.String(),
                         TimeOfRegistration = c.DateTime(nullable: false),
+                        FirstTimeLogin = c.Boolean(),
                         CourseId = c.Int(),
                         Email = c.String(maxLength: 256),
                         EmailConfirmed = c.Boolean(nullable: false),
@@ -108,10 +111,10 @@ namespace Project_LMS.Migrations
                 c => new
                     {
                         ModuleId = c.Int(nullable: false, identity: true),
-                        CourseName = c.String(nullable: false, maxLength: 50),
+                        Name = c.String(nullable: false, maxLength: 50),
                         StartDate = c.DateTime(nullable: false),
                         EndDate = c.DateTime(nullable: false),
-                        ModuleDescription = c.String(nullable: false, maxLength: 255),
+                        Description = c.String(maxLength: 255),
                         CourseId = c.Int(),
                     })
                 .PrimaryKey(t => t.ModuleId)

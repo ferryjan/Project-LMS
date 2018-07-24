@@ -24,6 +24,8 @@ namespace Project_LMS.Models
         public DateTime TimeOfRegistration { get; set; }
 
         public bool? FirstTimeLogin { get; set; }
+        [Display(Name = "Name")]
+        public string FullName => GivenName + " " + FamilyName;
 
         //Navigational properties
         [Display(Name = "Course ID")]

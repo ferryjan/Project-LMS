@@ -7,13 +7,13 @@ namespace Project_LMS.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class removerequiredfrommoduledescription : IMigrationMetadata
+    public sealed partial class redo : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(removerequiredfrommoduledescription));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(redo));
         
         string IMigrationMetadata.Id
         {
-            get { return "201807230956374_remove-required-from-module-description"; }
+            get { return "201807241116308_redo"; }
         }
         
         string IMigrationMetadata.Source

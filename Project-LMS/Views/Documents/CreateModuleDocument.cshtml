@@ -12,6 +12,7 @@
 
 @using (Html.BeginForm("CreateModuleDocument", "Documents", new { id = ViewBag.ModuleId }, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
+    <br />
     <h4 style="color:indianred"> @ViewBag.NoFileSelectedMsg </h4>
     <div class="editor-field">
         <div><input type="file" accept=".xlsx,.xls, .doc, .docx,.ppt, .pptx,.txt,.pdf" name="Document" /></div>

@@ -7,33 +7,34 @@
 <h2>Module Document Details</h2>
 
 <div>
-    <h4>Document</h4>
+
     <hr />
     <dl class="dl-horizontal">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Module.Name)
-        </dt>
+        <dt>Modulename</dt>
+        <dd>@Html.DisplayFor(model => model.Module.Name)</dd>
+        <br />
+        <dt>Uploaded by</dt>
+        <dd>@Html.DisplayFor(model => model.ApplicationUser.FullName)</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Module.Name)
-        </dd>
+        <dt>@Html.DisplayNameFor(model => model.UploadingTime)</dt>
+        <dd>@Html.DisplayFor(model => model.UploadingTime)</dd>
+        <br />
+        <dt>@Html.DisplayNameFor(model => model.Description)</dt>
+        <dd>@Html.DisplayFor(model => model.Description)</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.DocumentName)
-        </dt>
+        <dt>@Html.DisplayNameFor(model => model.isHomework)</dt>
+        <dd>@Html.DisplayFor(model => model.isHomework)</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.DocumentName)
-        </dd>
+        <dt>@Html.DisplayNameFor(model => model.FeedBack)</dt>
+        <dd>@Html.DisplayFor(model => model.FeedBack)</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.UploadingTime)
-        </dt>
+        <br />
+        <dt>@Html.DisplayNameFor(model => model.DocumentName)</dt>
+        <dd>@Html.DisplayFor(model => model.DocumentName)</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.UploadingTime)
-        </dd>
+        <dt>@Html.DisplayNameFor(model => model.DocumentFileType)</dt>
+        <dd>@Html.DisplayFor(model => model.DocumentFileType)</dd>
 
     </dl>
 </div>

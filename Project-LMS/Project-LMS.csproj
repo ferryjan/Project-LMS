@@ -209,49 +209,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201807191418476_Init.cs" />
-    <Compile Include="Migrations\201807191418476_Init.Designer.cs">
-      <DependentUpon>201807191418476_Init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201807200703231_add-firstTimeLogin-properties-for-applicationUser.cs" />
-    <Compile Include="Migrations\201807200703231_add-firstTimeLogin-properties-for-applicationUser.Designer.cs">
-      <DependentUpon>201807200703231_add-firstTimeLogin-properties-for-applicationUser.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201807201112404_FixedActivityModel.cs" />
-    <Compile Include="Migrations\201807201112404_FixedActivityModel.Designer.cs">
-      <DependentUpon>201807201112404_FixedActivityModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201807201121377_FirstTimLoginToBoolean.cs" />
-    <Compile Include="Migrations\201807201121377_FirstTimLoginToBoolean.Designer.cs">
-      <DependentUpon>201807201121377_FirstTimLoginToBoolean.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201807201147339_IssuesWithModuleModel.cs" />
-    <Compile Include="Migrations\201807201147339_IssuesWithModuleModel.Designer.cs">
-      <DependentUpon>201807201147339_IssuesWithModuleModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201807220516502_DroppedDeadlineForActivities.cs" />
-    <Compile Include="Migrations\201807220516502_DroppedDeadlineForActivities.Designer.cs">
-      <DependentUpon>201807220516502_DroppedDeadlineForActivities.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201807230956374_remove-required-from-module-description.cs" />
-    <Compile Include="Migrations\201807230956374_remove-required-from-module-description.Designer.cs">
-      <DependentUpon>201807230956374_remove-required-from-module-description.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201807231638112_add-feedback_field-in-doc.cs" />
-    <Compile Include="Migrations\201807231638112_add-feedback_field-in-doc.Designer.cs">
-      <DependentUpon>201807231638112_add-feedback_field-in-doc.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201807231736526_add-isHomework_field-in-doc.cs" />
-    <Compile Include="Migrations\201807231736526_add-isHomework_field-in-doc.Designer.cs">
-      <DependentUpon>201807231736526_add-isHomework_field-in-doc.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201807240826581_uploading-time-doc-not-nullable.cs" />
-    <Compile Include="Migrations\201807240826581_uploading-time-doc-not-nullable.Designer.cs">
-      <DependentUpon>201807240826581_uploading-time-doc-not-nullable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201807240932113_changes.cs" />
-    <Compile Include="Migrations\201807240932113_changes.Designer.cs">
-      <DependentUpon>201807240932113_changes.cs</DependentUpon>
+    <Compile Include="Migrations\201807241116308_redo.cs" />
+    <Compile Include="Migrations\201807241116308_redo.Designer.cs">
+      <DependentUpon>201807241116308_redo.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\201807241128134_add-some-properties-for-applicationUser.cs" />
     <Compile Include="Migrations\201807241128134_add-some-properties-for-applicationUser.Designer.cs">
@@ -496,38 +456,8 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201807191418476_Init.resx">
-      <DependentUpon>201807191418476_Init.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201807200703231_add-firstTimeLogin-properties-for-applicationUser.resx">
-      <DependentUpon>201807200703231_add-firstTimeLogin-properties-for-applicationUser.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201807201112404_FixedActivityModel.resx">
-      <DependentUpon>201807201112404_FixedActivityModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201807201121377_FirstTimLoginToBoolean.resx">
-      <DependentUpon>201807201121377_FirstTimLoginToBoolean.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201807201147339_IssuesWithModuleModel.resx">
-      <DependentUpon>201807201147339_IssuesWithModuleModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201807220516502_DroppedDeadlineForActivities.resx">
-      <DependentUpon>201807220516502_DroppedDeadlineForActivities.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201807230956374_remove-required-from-module-description.resx">
-      <DependentUpon>201807230956374_remove-required-from-module-description.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201807231638112_add-feedback_field-in-doc.resx">
-      <DependentUpon>201807231638112_add-feedback_field-in-doc.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201807231736526_add-isHomework_field-in-doc.resx">
-      <DependentUpon>201807231736526_add-isHomework_field-in-doc.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201807240826581_uploading-time-doc-not-nullable.resx">
-      <DependentUpon>201807240826581_uploading-time-doc-not-nullable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201807240932113_changes.resx">
-      <DependentUpon>201807240932113_changes.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201807241116308_redo.resx">
+      <DependentUpon>201807241116308_redo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201807241128134_add-some-properties-for-applicationUser.resx">
       <DependentUpon>201807241128134_add-some-properties-for-applicationUser.cs</DependentUpon>
