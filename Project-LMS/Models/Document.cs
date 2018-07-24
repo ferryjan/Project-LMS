@@ -32,6 +32,8 @@ namespace Project_LMS.Models
 
         public bool isHomework { get; set; }
 
+        public string Description { get; set; }
+
         //Navigational properties
         [Display(Name = "Course ID")]
         public int? CourseId { get; set; }

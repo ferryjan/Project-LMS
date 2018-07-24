@@ -8,15 +8,29 @@
     ViewBag.Title = "Upload Module Document";
 }
 
-<h2>Upload Module Document</h2>
+<h2>Upload document to module</h2>
 
 @using (Html.BeginForm("CreateModuleDocument", "Documents", new { id = ViewBag.ModuleId }, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <h4 style="color:indianred"> @ViewBag.NoFileSelectedMsg </h4>
     <div class="editor-field">
-
-        <div>Upload new document: <input type="file" accept=".xlsx,.xls, .doc, .docx,.ppt, .pptx,.txt,.pdf" name="Document" /></div>
+        <div><input type="file" accept=".xlsx,.xls, .doc, .docx,.ppt, .pptx,.txt,.pdf" name="Document" /></div>
     </div>
+
+    <br />
+    <br />
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <br />
+    <br />
+
 
     <input type="submit" value="Save" class="btn btn-primary" />
 

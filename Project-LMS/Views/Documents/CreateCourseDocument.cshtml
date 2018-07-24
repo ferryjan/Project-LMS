@@ -5,18 +5,35 @@
 
     /**/
 
+    /**/
+
     ViewBag.Title = "Upload Course Document";
 }
 
-<h2>Upload Course Document</h2>
+<h2>Upload document</h2>
+<h3>@ViewBag.CourseName</h3>
 
 @using (Html.BeginForm("CreateCourseDocument", "Documents", new { id = ViewBag.CourseId }, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <h4 style="color:indianred"> @ViewBag.NoFileSelectedMsg </h4>
     <div class="editor-field">
-
-        <div>Upload new document: <input type="file" accept=".xlsx,.xls, .doc, .docx,.ppt, .pptx,.txt,.pdf" name="Document" /></div>
+        <div><input type="file" accept=".xlsx,.xls, .doc, .docx,.ppt, .pptx,.txt,.pdf" name="Document" /></div>
     </div>
+
+    <br />
+    <br />
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <br />
+    <br />
+
 
     <input type="submit" value="Save" class="btn btn-primary" />
 
