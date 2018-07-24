@@ -160,6 +160,7 @@ namespace Project_LMS.Controllers
             var model = new ChangeProfileViewModels();
             model.GivenName = applicationUser.GivenName;
             model.FamilyName = applicationUser.FamilyName;
+            model.Email = applicationUser.Email;
             model.ProfileImageRef = applicationUser.ProfileImageRef;
             model.PhoneNumber = applicationUser.PhoneNumber;
 
@@ -181,8 +182,14 @@ namespace Project_LMS.Controllers
             dbAU.GivenName = model.GivenName;
             dbAU.FamilyName = model.FamilyName;
             dbAU.ProfileImageRef = model.ProfileImageRef;
-//          dbAU.Email = model.Email;
+            if (db.Users.Any(u => u.UserName == model.Email) && dbAU.UserName != model.Email)
+            {
+                ViewBag.UserExist = "This email is existed in the database, try another one!";
+                return View(model);
+            }
+            dbAU.Email = model.Email;
             dbAU.PhoneNumber = model.PhoneNumber;
+            dbAU.UserName = model.Email;
             db.Entry(dbAU).State = EntityState.Modified;
             db.SaveChanges();
 
@@ -209,7 +216,7 @@ namespace Project_LMS.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.CourseId = new SelectList(db.Courses, "CourseId", "CourseName", applicationUser.CourseId);
+            //ViewBag.CourseId = new SelectList(db.Courses, "CourseId", "CourseName", applicationUser.CourseId);
             return View(applicationUser);
         }
 
@@ -226,13 +233,19 @@ namespace Project_LMS.Controllers
                 dbAU.GivenName = applicationUser.GivenName;
                 dbAU.FamilyName = applicationUser.FamilyName;
                 dbAU.ProfileImageRef = applicationUser.ProfileImageRef;
+                if (db.Users.Any(u => u.UserName == applicationUser.Email) && dbAU.UserName != applicationUser.Email)
+                {
+                    ViewBag.UserExist = "This email is existed in the database, try another one!";
+                    return View(applicationUser);
+                }
                 dbAU.Email = applicationUser.Email;
                 dbAU.PhoneNumber = applicationUser.PhoneNumber;
+                dbAU.UserName = applicationUser.Email;
                 db.Entry(dbAU).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CourseId = new SelectList(db.Courses, "CourseId", "CourseName", applicationUser.CourseId);
+            //ViewBag.CourseId = new SelectList(db.Courses, "CourseId", "CourseName", applicationUser.CourseId);
             return View(applicationUser);
         }
 

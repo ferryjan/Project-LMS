@@ -6,12 +6,13 @@
 }
 
 <h3>Homework and Feedback</h3>
-<br/>
+<br />
 
 <table class="table">
     <tr>
         <th>Student Name</th>
-        <th>Document</th>
+        <th>Homework File</th>
+        <th>Handed-in on time</th>
         <th>Feedback</th>
         <th></th>
     </tr>
@@ -34,9 +35,26 @@
             <td>
                 @if (doc != null)
                 {
+                    if (DateTime.Compare(doc.UploadingTime, doc.Activity.End) <= 0)
+                    {
+                        <div style="color: green"><i class="glyphicon glyphicon-check"></i></div>
+                    }
+                    else
+                    {
+                        <div style="color: red"><i class="glyphicon glyphicon-remove"></i></div>
+                    }
+                }
+                else
+                {
+                    <div style="color: red"><i class="glyphicon glyphicon-remove"></i></div>
+                }
+            </td>
+            <td>
+                @if (doc != null)
+                {
                     if (doc.FeedBack != null)
                     {
-                        <div style="color: blue"><i class="glyphicon glyphicon-thumbs-up"></i>@Html.Raw(" Feedback done")</div>
+                        <div style="color: green"><i class="glyphicon glyphicon-thumbs-up"></i>@Html.Raw(" Feedback done")</div>
                     }
                     else
                     {

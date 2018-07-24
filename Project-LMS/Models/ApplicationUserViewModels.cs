@@ -18,6 +18,11 @@ namespace Project_LMS.ViewModels
         [Display(Name = "Family Name")]
         public string FamilyName { get; set; }
 
+        [Required]
+        [Display(Name = "Email")]
+        [EmailAddress]
+        public string Email { get; set; }
+
         [StringLength(100)]
         [Display(Name = "Picture")]
         public string ProfileImageRef { get; set; }
