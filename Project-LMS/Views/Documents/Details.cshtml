@@ -23,18 +23,16 @@
         <dt>@Html.DisplayNameFor(model => model.Description)</dt>
         <dd>@Html.DisplayFor(model => model.Description)</dd>
 
-        <dt>@Html.DisplayNameFor(model => model.isHomework)</dt>
-        <dd>@Html.DisplayFor(model => model.isHomework)</dd>
-
-        <dt>@Html.DisplayNameFor(model => model.FeedBack)</dt>
-        <dd>@Html.DisplayFor(model => model.FeedBack)</dd>
+        @if (Model.isHomework == true)
+        {
+            <dt>@Html.DisplayNameFor(model => model.FeedBack)</dt>
+            <dd>@Html.DisplayFor(model => model.FeedBack)</dd>
+        }
 
         <br />
         <dt>@Html.DisplayNameFor(model => model.DocumentName)</dt>
         <dd>@Html.DisplayFor(model => model.DocumentName)</dd>
 
-        <dt>@Html.DisplayNameFor(model => model.DocumentFileType)</dt>
-        <dd>@Html.DisplayFor(model => model.DocumentFileType)</dd>
 
     </dl>
 </div>

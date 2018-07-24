@@ -61,7 +61,7 @@ namespace Project_LMS.Controllers
         // GET: /Account/Login
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
-        {
+        {   
             if (User.IsInRole("Teacher"))
             {
                 return RedirectToAction("Index", "TeacherCourses");

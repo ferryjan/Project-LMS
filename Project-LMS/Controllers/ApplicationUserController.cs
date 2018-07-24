@@ -4,10 +4,13 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Security.Principal;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.Owin.Security;
 using Project_LMS.Models;
 using Project_LMS.ViewModels;
 
@@ -69,7 +72,13 @@ namespace Project_LMS.Controllers
 
                 if (db.Users.Any(u => u.UserName == applicationUser.Email))
                 {
-                    ViewBag.UserExist = "This email is existed in the database, try another one!";
+                    ViewBag.ErrMsg = "This email is existed in the database, try another one!";
+                    ViewBag.CourseId = id;
+                    return View(applicationUser);
+                }
+                if (!IsValidEmail(applicationUser.Email) || applicationUser.Email == null)
+                {
+                    ViewBag.ErrMsg = "This email address is not valid!";
                     ViewBag.CourseId = id;
                     return View(applicationUser);
                 }
@@ -112,6 +121,19 @@ namespace Project_LMS.Controllers
             return View();
         }
 
+        private bool IsValidEmail(string email)
+        {
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(email);
+                return addr.Address == email;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         // POST: ApplicationUser/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -127,7 +149,12 @@ namespace Project_LMS.Controllers
 
                 if (db.Users.Any(u => u.UserName == applicationUser.Email))
                 {
-                    ViewBag.UserExist = "This email is existed in the database, try another one!";
+                    ViewBag.ErrMsg = "This email is existed in the database, try another one!";
+                    return View(applicationUser);
+                }
+                if (!IsValidEmail(applicationUser.Email) || applicationUser.Email==null)
+                {
+                    ViewBag.ErrMsg = "This email address is not valid!";
                     return View(applicationUser);
                 }
 
@@ -182,6 +209,7 @@ namespace Project_LMS.Controllers
             dbAU.GivenName = model.GivenName;
             dbAU.FamilyName = model.FamilyName;
             dbAU.ProfileImageRef = model.ProfileImageRef;
+            var oldEmail = dbAU.Email;
             if (db.Users.Any(u => u.UserName == model.Email) && dbAU.UserName != model.Email)
             {
                 ViewBag.Errmsg = "This email is existed in the database, try another one!";
@@ -197,7 +225,12 @@ namespace Project_LMS.Controllers
             dbAU.UserName = model.Email;
             db.Entry(dbAU).State = EntityState.Modified;
             db.SaveChanges();
-
+            if (oldEmail != model.Email)
+            {
+                Request.GetOwinContext().Authentication.SignOut(Microsoft.AspNet.Identity.DefaultAuthenticationTypes.ApplicationCookie);
+                Session.Abandon();
+                return RedirectToAction("Login", "Account");
+            }
             if (User.IsInRole("Teacher"))
             {
                 return RedirectToAction("Index", "ApplicationUser");
@@ -230,6 +263,8 @@ namespace Project_LMS.Controllers
             return View(model);
         }
 
+       
+
         // POST: ApplicationUser/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -246,6 +281,7 @@ namespace Project_LMS.Controllers
             dbAU.GivenName = model.GivenName;
             dbAU.FamilyName = model.FamilyName;
             dbAU.ProfileImageRef = model.ProfileImageRef;
+            var oldEmail = dbAU.Email;
             if (db.Users.Any(u => u.UserName == model.Email) && dbAU.UserName != model.Email)
             {
                 ViewBag.Errmsg = "This email is existed in the database, try another one!";
@@ -261,6 +297,12 @@ namespace Project_LMS.Controllers
             dbAU.UserName = model.Email;
             db.Entry(dbAU).State = EntityState.Modified;
             db.SaveChanges();
+            if (oldEmail != model.Email)
+            {
+                Request.GetOwinContext().Authentication.SignOut(Microsoft.AspNet.Identity.DefaultAuthenticationTypes.ApplicationCookie);
+                Session.Abandon();
+                return RedirectToAction("Login", "Account");
+            }
 
             return RedirectToAction("Index");
         }
