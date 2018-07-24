@@ -184,7 +184,12 @@ namespace Project_LMS.Controllers
             dbAU.ProfileImageRef = model.ProfileImageRef;
             if (db.Users.Any(u => u.UserName == model.Email) && dbAU.UserName != model.Email)
             {
-                ViewBag.UserExist = "This email is existed in the database, try another one!";
+                ViewBag.Errmsg = "This email is existed in the database, try another one!";
+                return View(model);
+            }
+            if (model.Email == "" || model.Email == null)
+            {
+                ViewBag.Errmsg = "You must type an valid email address here!";
                 return View(model);
             }
             dbAU.Email = model.Email;
@@ -205,19 +210,24 @@ namespace Project_LMS.Controllers
         // GET: ApplicationUser/Edit/5
         public ActionResult Edit(string id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
             ApplicationUser applicationUser = db.Users.Find(id);
 
             if (applicationUser == null)
             {
                 return HttpNotFound();
             }
-            //ViewBag.CourseId = new SelectList(db.Courses, "CourseId", "CourseName", applicationUser.CourseId);
-            return View(applicationUser);
+
+            //          return View(applicationUser);
+
+            var model = new ChangeProfileViewModels();
+            model.UserId = id;
+            model.GivenName = applicationUser.GivenName;
+            model.FamilyName = applicationUser.FamilyName;
+            model.Email = applicationUser.Email;
+            model.ProfileImageRef = applicationUser.ProfileImageRef;
+            model.PhoneNumber = applicationUser.PhoneNumber;
+
+            return View(model);
         }
 
         // POST: ApplicationUser/Edit/5
@@ -225,28 +235,34 @@ namespace Project_LMS.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,GivenName,FamilyName,ProfileImageRef,Email,PhoneNumber")] ApplicationUser applicationUser)
+        public ActionResult Edit(ChangeProfileViewModels model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                ApplicationUser dbAU = db.Users.Find(applicationUser.Id);
-                dbAU.GivenName = applicationUser.GivenName;
-                dbAU.FamilyName = applicationUser.FamilyName;
-                dbAU.ProfileImageRef = applicationUser.ProfileImageRef;
-                if (db.Users.Any(u => u.UserName == applicationUser.Email) && dbAU.UserName != applicationUser.Email)
-                {
-                    ViewBag.UserExist = "This email is existed in the database, try another one!";
-                    return View(applicationUser);
-                }
-                dbAU.Email = applicationUser.Email;
-                dbAU.PhoneNumber = applicationUser.PhoneNumber;
-                dbAU.UserName = applicationUser.Email;
-                db.Entry(dbAU).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                return View(model);
             }
-            //ViewBag.CourseId = new SelectList(db.Courses, "CourseId", "CourseName", applicationUser.CourseId);
-            return View(applicationUser);
+
+            ApplicationUser dbAU = db.Users.Find(model.UserId);
+            dbAU.GivenName = model.GivenName;
+            dbAU.FamilyName = model.FamilyName;
+            dbAU.ProfileImageRef = model.ProfileImageRef;
+            if (db.Users.Any(u => u.UserName == model.Email) && dbAU.UserName != model.Email)
+            {
+                ViewBag.Errmsg = "This email is existed in the database, try another one!";
+                return View(model);
+            }
+            if (model.Email == "" || model.Email == null)
+            {
+                ViewBag.Errmsg = "You must type an valid email address here!";
+                return View(model);
+            }
+            dbAU.Email = model.Email;
+            dbAU.PhoneNumber = model.PhoneNumber;
+            dbAU.UserName = model.Email;
+            db.Entry(dbAU).State = EntityState.Modified;
+            db.SaveChanges();
+
+            return RedirectToAction("Index");
         }
 
 
