@@ -12,6 +12,7 @@
 
 @using (Html.BeginForm("CreateCourseDocument", "Documents", new { id = ViewBag.CourseId }, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
+    <h4 style="color:indianred"> @ViewBag.NoFileSelectedMsg </h4>
     <div class="editor-field">
 
         <div>Upload new document: <input type="file" accept=".xlsx,.xls, .doc, .docx,.ppt, .pptx,.txt,.pdf" name="Document" /></div>

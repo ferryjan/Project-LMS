@@ -12,12 +12,13 @@
 
 @using (Html.BeginForm("CreateModuleDocument", "Documents", new { id = ViewBag.ModuleId }, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
+    <h4 style="color:indianred"> @ViewBag.NoFileSelectedMsg </h4>
     <div class="editor-field">
 
         <div>Upload new document: <input type="file" accept=".xlsx,.xls, .doc, .docx,.ppt, .pptx,.txt,.pdf" name="Document" /></div>
     </div>
 
-    <input type="submit" value="Save" class="btn btn-primary"/>
+    <input type="submit" value="Save" class="btn btn-primary" />
 
     @Html.ActionLink("Cancel and Go Back", "Edit", "Modules", new { id = ViewBag.ModuleId }, new { @class = "btn btn-primary btn-large" })
 }

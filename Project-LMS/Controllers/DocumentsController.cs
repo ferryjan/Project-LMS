@@ -100,10 +100,16 @@ namespace Project_LMS.Controllers
                         doc.FileData = new byte[file.ContentLength];
                         doc.DocumentName = file.FileName;
                         file.InputStream.Read(doc.FileData, 0, file.ContentLength);
+                        db.Documents.Add(doc);
+                        db.SaveChanges();
+                        return RedirectToAction("Edit", "TeacherCourses", new { id = id });
                     }
-                    db.Documents.Add(doc);
-                    db.SaveChanges();
-                    return RedirectToAction("Edit", "TeacherCourses", new { id = id });
+                    else
+                    {
+                        ViewBag.NoFileSelectedMsg = "No file has been selected!";
+                        ViewBag.CourseId = id;
+                        return View(doc);
+                    }
                 }
             }
             ViewBag.CourseId = id;
@@ -137,10 +143,17 @@ namespace Project_LMS.Controllers
                         doc.FileData = new byte[file.ContentLength];
                         doc.DocumentName = file.FileName;
                         file.InputStream.Read(doc.FileData, 0, file.ContentLength);
+                        db.Documents.Add(doc);
+                        db.SaveChanges();
+                        return RedirectToAction("Edit", "Modules", new { id = id });
                     }
-                    db.Documents.Add(doc);
-                    db.SaveChanges();
-                    return RedirectToAction("Edit", "Modules", new { id = id });
+                    else
+                    {
+                        ViewBag.NoFileSelectedMsg = "No file has been selected!";
+                        ViewBag.ModuleId = id;
+                        return View(doc);
+                    }
+                    
                 }
             }
             ViewBag.ModuleId = id;
@@ -175,10 +188,17 @@ namespace Project_LMS.Controllers
                         doc.FileData = new byte[file.ContentLength];
                         doc.DocumentName = file.FileName;
                         file.InputStream.Read(doc.FileData, 0, file.ContentLength);
+                        db.Documents.Add(doc);
+                        db.SaveChanges();
+                        return RedirectToAction("Edit", "Activities", new { id });
                     }
-                    db.Documents.Add(doc);
-                    db.SaveChanges();
-                    return RedirectToAction("Edit", "Activities", new { id });
+                    else
+                    {
+                        ViewBag.NoFileSelectedMsg = "No file has been selected!";
+                        ViewBag.ActivityId = id;
+                        return View(doc);
+                    }
+                    
                 }
             }
             ViewBag.ModuleId = id;
