@@ -52,12 +52,15 @@
                         <strong>Details</strong>
                     </span>
                 </a>
-                <a href="@Url.Action("Delete", "ApplicationUser", new { id = item.Id })" class="btn btn-danger">
-                    <i class="glyphicon glyphicon-erase"></i>
-                    <span>
-                        <strong>Delete</strong>
-                    </span>
-                </a>
+                @if (item.UserName != User.Identity.Name)
+                {
+                    <a href="@Url.Action("Delete", "ApplicationUser", new { id = item.Id })" class="btn btn-danger">
+                        <i class="glyphicon glyphicon-erase"></i>
+                        <span>
+                            <strong>Delete</strong>
+                        </span>
+                    </a>
+                }
             </td>
         </tr>
     }

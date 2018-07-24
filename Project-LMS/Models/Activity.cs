@@ -55,12 +55,12 @@ namespace Project_LMS.Models
                 ValidationResult mss = new ValidationResult("There is already an activity with this name in this module");
                 res.Add(mss);
             }
-            if (Start < DateTime.Now.Date)
+            if (Start < DateTime.Now.Date && ActivityId == 0)
             {
                 ValidationResult mss = new ValidationResult("You cannot add an activity in the past!");
                 res.Add(mss);
             }
-            else if (Start >= DateTime.Now.AddYears(5))
+            else if (Start >= DateTime.Now.AddYears(5) && ActivityId == 0)
             {
                 ValidationResult mss = new ValidationResult("You cannot add an activity more than 5 years in the future!");
                 res.Add(mss);

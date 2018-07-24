@@ -18,7 +18,7 @@ namespace Project_LMS.Models
         [Display(Name = "Uploading Date & Time")]
         [DataType(DataType.DateTime)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd HH:mm:ss}", ApplyFormatInEditMode = true)]
-        public DateTime? UploadingTime { get; set; }
+        public DateTime UploadingTime { get; set; }
 
         [Display(Name = "Document URL")]
         public string DocumentRef { get; set; }
