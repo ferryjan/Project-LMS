@@ -1,13 +1,15 @@
 ﻿@model Project_LMS.Models.Document
 
 @{
-    /**/
+                /**/
 
-    /**/
+                /**/
 
-    /**/
+                /**/
 
-    ViewBag.Title = "Upload Course Document";
+                /**/
+
+                ViewBag.Title = "Upload Course Document";
 }
 
 <h2>Upload document</h2>
@@ -15,6 +17,7 @@
 
 @using (Html.BeginForm("CreateCourseDocument", "Documents", new { id = ViewBag.CourseId }, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
+    <br />
     <h4 style="color:indianred"> @ViewBag.NoFileSelectedMsg </h4>
     <div class="editor-field">
         <div><input type="file" accept=".xlsx,.xls, .doc, .docx,.ppt, .pptx,.txt,.pdf" name="Document" /></div>

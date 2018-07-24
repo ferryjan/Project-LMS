@@ -11,11 +11,11 @@ namespace Project_LMS.Models
         [Key]
         public int DocumentId { get; set; }
 
-        [Display(Name = "Document Name")]
+        [Display(Name = "Filename")]
         [StringLength(50, MinimumLength = 2)]
         public string DocumentName { get; set; }
 
-        [Display(Name = "Uploading Date & Time")]
+        [Display(Name = "Timestamp")]
         [DataType(DataType.DateTime)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd HH:mm:ss}", ApplyFormatInEditMode = true)]
         public DateTime UploadingTime { get; set; }
@@ -23,13 +23,14 @@ namespace Project_LMS.Models
         [Display(Name = "Document URL")]
         public string DocumentRef { get; set; }
 
-        [Display(Name = "Document File Type")]
+        [Display(Name = "Filetype")]
         public string DocumentFileType { get; set; }
 
         public byte[] FileData { get; set; }
 
         public string FeedBack { get; set; }
 
+        [Display(Name = "Homework")]
         public bool isHomework { get; set; }
 
         public string Description { get; set; }
