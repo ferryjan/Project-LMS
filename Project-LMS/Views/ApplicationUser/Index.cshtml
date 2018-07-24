@@ -52,7 +52,7 @@
                         <strong>Details</strong>
                     </span>
                 </a>
-                @if (item.UserName != User.Identity.Name)
+                @if (item.UserName != User.Identity.Name && item.Email != "admin@admin.se")
                 {
                     <a href="@Url.Action("Delete", "ApplicationUser", new { id = item.Id })" class="btn btn-danger">
                         <i class="glyphicon glyphicon-erase"></i>

@@ -8,6 +8,8 @@ namespace Project_LMS.ViewModels
 {
     public class ChangeProfileViewModels
     {
+        public string UserId { get; set; }
+
         [Required]
         [StringLength(50)]
         [Display(Name = "Given Name")]
