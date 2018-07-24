@@ -73,7 +73,7 @@
 @Html.Action("ActivityFileDetails", "Documents", new { activityId = Model.ActivityId })
 <br />
 <br />
-@if (Model.ActivityTypeId == 2)
+@if (Model.ActivityType.Type == "Homework")
 {
     @Html.Action("ShowHomeworkList", "Activities", new { id = Model.ActivityId })
 }

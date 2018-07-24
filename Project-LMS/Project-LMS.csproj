@@ -420,6 +420,7 @@
     <Content Include="Views\Documents\DeleteActivityDocument.cshtml" />
     <Content Include="Views\ApplicationUser\ChangeProfile.cshtml" />
     <Content Include="Views\Activities\_homeworkList.cshtml" />
+    <Content Include="Views\Documents\GiveFeedback.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

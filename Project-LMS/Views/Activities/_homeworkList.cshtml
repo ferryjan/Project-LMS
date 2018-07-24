@@ -65,10 +65,10 @@
             <td>
                 @if (doc != null)
                 {
-                    <a href="@Url.Action("DownLoadFile", "Documents", new { id = doc.DocumentId })" class="btn btn-info">
+                    <a href="@Url.Action("GiveFeedback", "Documents", new { id = doc.DocumentId })" class="btn btn-info">
                         <i class="glyphicon glyphicon-bullhorn"></i>
                         <span>
-                            <strong>Add/Edit Feedback</strong>
+                            <strong>Feedback</strong>
                         </span>
                     </a>
                     <a href="@Url.Action("DownLoadFile", "Documents", new { id = doc.DocumentId })" class="btn btn-success">

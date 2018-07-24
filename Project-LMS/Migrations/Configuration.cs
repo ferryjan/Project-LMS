@@ -104,6 +104,7 @@ namespace Project_LMS.Migrations
                 new ActivityType { Type = "Lecture" },
                 new ActivityType { Type = "Exercise" },
                 new ActivityType { Type = "E-learning" },
+                new ActivityType { Type = "Homework" },
                 new ActivityType { Type = "Other" }
             };
             db.ActivityTypes.AddOrUpdate(s => new { s.Type }, activityTypes);
