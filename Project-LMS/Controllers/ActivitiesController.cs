@@ -167,6 +167,21 @@ namespace Project_LMS.Controllers
             return PartialView("_homeworkList", homeworkVM);
         }
 
+        //public PartialViewResult ActivityFileDetails(int? activityId)
+        //{
+        //    ViewBag.Id = activityId;
+        //    var documents = db.Documents.Where(i => i.ActivityId == activityId && i.isHomework == false);
+        //    return PartialView("_activityFileDetails", documents.ToList());
+        //}
+
+
+        public PartialViewResult ActivityFileDetails(int? activityId)
+        {
+            ViewBag.Id = activityId;
+            var documents = db.Documents.Where(i => i.ActivityId == activityId && i.isHomework == false);
+            return PartialView("_activityFileDetails", documents.ToList());
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

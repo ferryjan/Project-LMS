@@ -184,7 +184,6 @@ namespace Project_LMS.Controllers
                     {
                         doc.ApplicationUserId = db.Users.FirstOrDefault(u => u.UserName == User.Identity.Name).Id;
                         doc.ActivityId = id;
-                        doc.isHomework = false;
                         doc.DocumentFileType = file.ContentType;
                         doc.UploadingTime = DateTime.Now;
                         doc.FileData = new byte[file.ContentLength];
@@ -218,6 +217,33 @@ namespace Project_LMS.Controllers
 
         }
 
+        // GET: Documents/GiveFeedback
+        public ActionResult GiveFeedback(int id)
+        {
+            var doc = db.Documents.FirstOrDefault(i => i.DocumentId == id);
+            if (doc == null)
+            {
+                throw new Exception("Attempting to give feedback on nonexisting document");
+            }
+
+            ViewBag.Entity = "Module";
+            ViewBag.EntityName = doc.Activity.Module.Name;
+
+            return View(doc);
+        }
+
+        // POST: Documents/GiveFeedback/5
+        [HttpPost, ActionName("GiveFeedback")]
+        [ValidateAntiForgeryToken]
+        public ActionResult GiveFeedbackConfirmed([Bind(Include = "DocumentId,FeedBack")] Document doc)
+        {
+            var dbdoc = db.Documents.FirstOrDefault(i => i.DocumentId == doc.DocumentId);
+            dbdoc.FeedBack = doc.FeedBack;
+            db.Entry(dbdoc).State = EntityState.Modified;
+            db.SaveChanges();
+
+            return RedirectToAction("Edit", "Activities", new { id = dbdoc.ActivityId });
+        }
 
         public PartialViewResult FileDetails(int? id)
         {

@@ -45,6 +45,16 @@
                     <strong>Delete</strong>
                 </span>
             </a>
+            @if (item.isHomework)
+            {
+                <a href="@Url.Action("GiveFeedback", "Documents", new { id = item.DocumentId })" class="btn btn-danger">
+                    <i class="glyphicon glyphicon-bullhorn"></i>
+                    <span>
+                        <strong>Feedback</strong>
+                    </span>
+                </a>
+            }
+
         </td>
     </tr>
     }
