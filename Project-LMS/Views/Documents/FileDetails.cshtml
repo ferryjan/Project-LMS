@@ -5,20 +5,26 @@
 </p>
 
 <table class="table table-bordered">  
-    <tr>  
-        <th>  
-            @Html.DisplayNameFor(model => model.DocumentName)  
-        </th>  
-          
-        <th></th>  
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DocumentName)
+        </th>
+
+        <th></th>
     </tr>  
   
 @foreach (var item in Model) {  
-    <tr>  
-        <td>  
-            @Html.DisplayFor(modelItem => item.DocumentName)  
-        </td>  
-          
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DocumentName)
+        </td>
+
         <td>
             <a href="@Url.Action("DownLoadFile", "Documents", new { id = item.DocumentId })" class="btn btn-success">
                 <i class="glyphicon glyphicon-download"></i>
@@ -38,7 +44,7 @@
                     <strong>Delete</strong>
                 </span>
             </a>
-        </td>  
+        </td>
     </tr>  
 }  
   

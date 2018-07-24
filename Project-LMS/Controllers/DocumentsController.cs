@@ -74,9 +74,11 @@ namespace Project_LMS.Controllers
         }
 
         // GET: Documents/Create
-        public ActionResult CreateCourseDocument(int? id)
+        public ActionResult CreateCourseDocument(int id)
         {
+
             ViewBag.CourseId = id;
+            ViewBag.CourseName = db.Courses.FirstOrDefault(i => i.CourseId == id).CourseName;
             return View();
         }
 

@@ -242,6 +242,10 @@
     <Compile Include="Migrations\201807231736526_add-isHomework_field-in-doc.Designer.cs">
       <DependentUpon>201807231736526_add-isHomework_field-in-doc.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201807240856580_AddDescriptionForDocuments.cs" />
+    <Compile Include="Migrations\201807240856580_AddDescriptionForDocuments.Designer.cs">
+      <DependentUpon>201807240856580_AddDescriptionForDocuments.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Activity.cs" />
@@ -497,6 +501,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201807231736526_add-isHomework_field-in-doc.resx">
       <DependentUpon>201807231736526_add-isHomework_field-in-doc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807240856580_AddDescriptionForDocuments.resx">
+      <DependentUpon>201807240856580_AddDescriptionForDocuments.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
