@@ -48,16 +48,22 @@ namespace Project_LMS.Models
             List<ValidationResult> res = new List<ValidationResult>();
             ApplicationDbContext db = new ApplicationDbContext();
 
-            //if (StartDate < DateTime.Now.Date)
-            //{
-            //    ValidationResult mss = new ValidationResult("You cannot add a course in the past!");
-            //    res.Add(mss);
-            //}
-            //else if (StartDate >= DateTime.Now.AddYears(5))
-            //{
-            //    ValidationResult mss = new ValidationResult("You cannot add a course more than 5 years in the future!");
-            //    res.Add(mss);
-            //}
+            var result = db.Courses.FirstOrDefault(v => v.CourseName == CourseName);
+            if (result != null && CourseId == 0)
+            {
+                ValidationResult mss = new ValidationResult("There is already a module by this name registered in this course");
+                res.Add(mss);
+            }
+            if (StartDate < DateTime.Now.Date && CourseId == 0)
+            {
+                ValidationResult mss = new ValidationResult("You cannot add a course in the past!");
+                res.Add(mss);
+            }
+            else if (StartDate >= DateTime.Now.AddYears(5) && CourseId == 0)
+            {
+                ValidationResult mss = new ValidationResult("You cannot add a course more than 5 years in the future!");
+                res.Add(mss);
+            }
             if (EndDate < StartDate)
             {
                 ValidationResult mss = new ValidationResult("End date must be greater than start date");
