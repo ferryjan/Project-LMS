@@ -28,6 +28,7 @@ namespace Project_LMS.Models
 
         public byte[] FileData { get; set; }
 
+        [DataType(DataType.MultilineText)]
         public string FeedBack { get; set; }
 
         [Display(Name = "Homework")]
