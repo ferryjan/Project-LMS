@@ -213,6 +213,10 @@
     <Compile Include="Migrations\201807251201077_somethingfunny.Designer.cs">
       <DependentUpon>201807251201077_somethingfunny.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201807251612547_add-isActive-field-in-applicationUser.cs" />
+    <Compile Include="Migrations\201807251612547_add-isActive-field-in-applicationUser.Designer.cs">
+      <DependentUpon>201807251612547_add-isActive-field-in-applicationUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Activity.cs" />
@@ -452,6 +456,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201807251201077_somethingfunny.resx">
       <DependentUpon>201807251201077_somethingfunny.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807251612547_add-isActive-field-in-applicationUser.resx">
+      <DependentUpon>201807251612547_add-isActive-field-in-applicationUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

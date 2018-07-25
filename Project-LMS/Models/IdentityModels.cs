@@ -24,6 +24,7 @@ namespace Project_LMS.Models
         public DateTime TimeOfRegistration { get; set; }
 
         public bool? FirstTimeLogin { get; set; }
+        public bool? isActive { get; set; }
         [Display(Name = "Name")]
         public string FullName => GivenName + " " + FamilyName;
 

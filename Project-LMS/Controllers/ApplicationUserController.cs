@@ -28,12 +28,12 @@ namespace Project_LMS.Controllers
 
             if (search == "" || search == null)
             {
-                var list = db.Users.Where(x => x.Roles.Any(s => s.RoleId == teacherRole.Id)).ToList();
+                var list = db.Users.Where(x => x.Roles.Any(s => s.RoleId == teacherRole.Id)).Where(u => u.isActive == true).OrderBy(g => g.GivenName).ThenBy(f => f.FamilyName).ToList();
                 return View(list);
             }
             else
             {
-                var list = db.Users.Where(x => x.Roles.Any(s => s.RoleId == teacherRole.Id)).Where(i => i.GivenName.ToLower().Contains(search.ToLower()) || i.FamilyName.ToLower().Contains(search.ToLower()) || i.Email.ToLower().Contains(search.ToLower())).ToList();
+                var list = db.Users.Where(x => x.Roles.Any(s => s.RoleId == teacherRole.Id)).Where(i => i.isActive == true && i.GivenName.ToLower().Contains(search.ToLower()) || i.FamilyName.ToLower().Contains(search.ToLower()) || i.Email.ToLower().Contains(search.ToLower())).OrderBy(g => g.GivenName).ThenBy(f => f.FamilyName).ToList();
                 return View(list);
             }
 
@@ -44,7 +44,7 @@ namespace Project_LMS.Controllers
             ViewBag.CourseId = id;
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
             var studentRole = roleManager.FindByName("Student");
-            var list = db.Users.Where(x => x.Roles.Any(s => s.RoleId == studentRole.Id)).Where(t => t.CourseId == id).OrderBy(g => g.GivenName).ThenBy(f => f.FamilyName).ToList();
+            var list = db.Users.Where(x => x.Roles.Any(s => s.RoleId == studentRole.Id)).Where(t => t.CourseId == id && t.isActive == true).OrderBy(g => g.GivenName).ThenBy(f => f.FamilyName).ToList();
             return PartialView(list);
         }
 
@@ -65,12 +65,11 @@ namespace Project_LMS.Controllers
         {
             if (ModelState.IsValid)
             {
-
                 applicationUser.TimeOfRegistration = DateTime.Now;
                 applicationUser.UserName = applicationUser.Email;
                 applicationUser.CourseId = id;
 
-                if (db.Users.Any(u => u.UserName == applicationUser.Email))
+                if (db.Users.Any(u => u.UserName == applicationUser.Email) && db.Users.FirstOrDefault(u => u.UserName == applicationUser.Email).isActive == true)
                 {
                     ViewBag.ErrMsg = "This email is existed in the database, try another one!";
                     ViewBag.CourseId = id;
@@ -81,6 +80,28 @@ namespace Project_LMS.Controllers
                     ViewBag.ErrMsg = "This email address is not valid!";
                     ViewBag.CourseId = id;
                     return View(applicationUser);
+                }
+
+                if (db.Users.FirstOrDefault(u => u.UserName == applicationUser.Email).isActive == false)
+                {
+                    var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
+                    var studentRole = roleManager.FindByName("Student");
+                    var list = db.Users.Where(x => x.Roles.Any(s => s.RoleId == studentRole.Id)).ToList();
+                    if (list.FirstOrDefault(s => s.UserName == applicationUser.Email) == null) {
+                        ViewBag.ErrMsg = "This email is existed in the database, try another one!";
+                        ViewBag.CourseId = id;
+                        return View(applicationUser);
+                    }
+                    else
+                    {
+                        ApplicationUser dbAU = db.Users.Find(list.FirstOrDefault(s => s.UserName == applicationUser.Email).Id);
+                        dbAU.GivenName = applicationUser.GivenName;
+                        dbAU.FamilyName = applicationUser.FamilyName;
+                        dbAU.isActive = true;
+                        db.Entry(dbAU).State = EntityState.Modified;
+                        db.SaveChanges();
+                        return RedirectToAction("Edit", "TeacherCourses", new { id = id });
+                    }
                 }
 
                 var userStore = new UserStore<ApplicationUser>(db);
@@ -147,7 +168,7 @@ namespace Project_LMS.Controllers
                 applicationUser.TimeOfRegistration = DateTime.Now;
                 applicationUser.UserName = applicationUser.Email;
 
-                if (db.Users.Any(u => u.UserName == applicationUser.Email))
+                if (db.Users.Any(u => u.UserName == applicationUser.Email) && db.Users.FirstOrDefault(u => u.UserName == applicationUser.Email).isActive == true)
                 {
                     ViewBag.ErrMsg = "This email is existed in the database, try another one!";
                     return View(applicationUser);
@@ -156,6 +177,29 @@ namespace Project_LMS.Controllers
                 {
                     ViewBag.ErrMsg = "This email address is not valid!";
                     return View(applicationUser);
+                }
+
+                if (db.Users.FirstOrDefault(u => u.UserName == applicationUser.Email).isActive == false)
+                {
+                    var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
+                    var teacherRole = roleManager.FindByName("Teacher");
+                    var list = db.Users.Where(x => x.Roles.Any(s => s.RoleId == teacherRole.Id)).ToList();
+                    if (list.FirstOrDefault(s => s.UserName == applicationUser.Email) == null)
+                    {
+                        ViewBag.ErrMsg = "This email is existed in the database, try another one!";
+                        return View(applicationUser);
+                    }
+                    else
+                    {
+                        ApplicationUser dbAU = db.Users.Find(list.FirstOrDefault(s => s.UserName == applicationUser.Email).Id);
+                        dbAU.GivenName = applicationUser.GivenName;
+                        dbAU.FamilyName = applicationUser.FamilyName;
+                        dbAU.PhoneNumber = applicationUser.PhoneNumber;
+                        dbAU.isActive = true;
+                        db.Entry(dbAU).State = EntityState.Modified;
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
                 }
 
                 var userStore = new UserStore<ApplicationUser>(db);
@@ -335,7 +379,8 @@ namespace Project_LMS.Controllers
         public ActionResult DeleteStudentFromCourseConfirmed(string studnetId, int id)
         {
             ApplicationUser applicationUser = db.Users.Find(studnetId);
-            db.Users.Remove(applicationUser);
+            applicationUser.isActive = false;
+            db.Entry(applicationUser).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("Edit", "TeacherCourses", new { id = id });
         }
@@ -362,7 +407,9 @@ namespace Project_LMS.Controllers
         public ActionResult DeleteConfirmed(string id)
         {
             ApplicationUser applicationUser = db.Users.Find(id);
-            db.Users.Remove(applicationUser);
+            //db.Users.Remove(applicationUser);
+            applicationUser.isActive = false;
+            db.Entry(applicationUser).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("Index");
         }

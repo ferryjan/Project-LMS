@@ -95,7 +95,9 @@ namespace Project_LMS.Migrations
                         ProfileImageRef = "",
                         UserName = email,
                         Email = email,
-                        TimeOfRegistration = DateTime.Now
+                        TimeOfRegistration = DateTime.Now,
+                        FirstTimeLogin = false,
+                        isActive = true
                     },
                     "password");
                 if (!result.Succeeded) { throw new Exception(string.Join("\n", result.Errors)); }
@@ -117,7 +119,8 @@ namespace Project_LMS.Migrations
                         UserName = email,
                         Email = email,
                         TimeOfRegistration = DateTime.Now,
-                        FirstTimeLogin = false
+                        FirstTimeLogin = false,
+                        isActive = true
                     },
                     "Ante_007");
                 if (!result.Succeeded) { throw new Exception(string.Join("\n", result.Errors)); }
@@ -138,7 +141,8 @@ namespace Project_LMS.Migrations
                         UserName = email,
                         Email = email,
                         CourseId = courses[0].CourseId,
-                        TimeOfRegistration = DateTime.Now
+                        TimeOfRegistration = DateTime.Now,
+                        isActive = true
                     },
                     "password");
                 if (!result.Succeeded) { throw new Exception(string.Join("\n", result.Errors)); }
@@ -159,7 +163,8 @@ namespace Project_LMS.Migrations
                         UserName = email,
                         Email = email,
                         CourseId = courses[0].CourseId,
-                        TimeOfRegistration = DateTime.Now
+                        TimeOfRegistration = DateTime.Now,
+                        isActive = true
                     },
                     "password");
                 if (!result.Succeeded) { throw new Exception(string.Join("\n", result.Errors)); }
