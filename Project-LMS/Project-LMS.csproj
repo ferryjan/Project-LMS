@@ -209,9 +209,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201807241453369_redo.cs" />
-    <Compile Include="Migrations\201807241453369_redo.Designer.cs">
-      <DependentUpon>201807241453369_redo.cs</DependentUpon>
+    <Compile Include="Migrations\201807250642302_redo.cs" />
+    <Compile Include="Migrations\201807250642302_redo.Designer.cs">
+      <DependentUpon>201807250642302_redo.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -450,8 +450,8 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201807241453369_redo.resx">
-      <DependentUpon>201807241453369_redo.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201807250642302_redo.resx">
+      <DependentUpon>201807250642302_redo.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

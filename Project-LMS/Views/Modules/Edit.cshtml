@@ -12,7 +12,7 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Module</h4>
+        <h4>@Html.DisplayFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })</h4>
         <h4 style="color:red">Course Start Time: @ViewBag.CourseStartDate</h4>
         <h4 style="color:red">Course End Time: @ViewBag.CourseEndDate</h4>
         <hr />
