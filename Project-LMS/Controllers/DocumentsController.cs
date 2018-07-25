@@ -317,7 +317,7 @@ namespace Project_LMS.Controllers
             var moduleId = document.ModuleId;
             db.Documents.Remove(document);
             db.SaveChanges();
-            return RedirectToAction("Edit", "Module", new { id = moduleId });
+            return RedirectToAction("Edit", "Modules", new { id = moduleId });
         }
 
         // GET: Documents/Delete/5

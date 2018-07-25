@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "RedirectToPage";
+}
+
+<script>
+
+
+    var interval = 1000,
+        ms = 5000,
+        count = 0,
+        startTime = new Date().getTime();
+    if (ms >= 0) {
+        var timeCounter = setTimeout(countDownStart, interval);
+    }
+
+    function countDownStart() {
+        document.getElementById("time").innerText = "You have changed your email, redirect to login page in " + ms / 1000 + " seconds..";
+        count++;
+        var offset = new Date().getTime() - (startTime + count * interval);
+        var nextTime = interval - offset;
+        var daytohour = 0;
+        if (nextTime < 0) { nextTime = 0 };
+        ms -= interval;
+        if (ms < 0) {
+            clearTimeout(timeCounter);
+            window.location.href="@Url.Action("Login", "Account")";
+        } else {
+            timeCounter = setTimeout(countDownStart, nextTime);
+        }
+    }
+</script>
+
+<span id='time' style="font-size:x-large; color: red"></span>
+

@@ -229,7 +229,7 @@ namespace Project_LMS.Controllers
             {
                 Request.GetOwinContext().Authentication.SignOut(Microsoft.AspNet.Identity.DefaultAuthenticationTypes.ApplicationCookie);
                 Session.Abandon();
-                return RedirectToAction("Login", "Account");
+                return RedirectToAction("RedirectToPage", "ApplicationUser");
             }
             if (User.IsInRole("Teacher"))
             {
@@ -301,10 +301,15 @@ namespace Project_LMS.Controllers
             {
                 Request.GetOwinContext().Authentication.SignOut(Microsoft.AspNet.Identity.DefaultAuthenticationTypes.ApplicationCookie);
                 Session.Abandon();
-                return RedirectToAction("Login", "Account");
+                return RedirectToAction("RedirectToPage", "ApplicationUser");
             }
 
             return RedirectToAction("Index");
+        }
+
+        public ActionResult RedirectToPage()
+        {
+            return View();
         }
 
 
