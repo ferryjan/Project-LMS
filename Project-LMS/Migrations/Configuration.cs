@@ -145,6 +145,69 @@ namespace Project_LMS.Migrations
             }
             adminUser = userManager.FindByName(email);
             userManager.AddToRole(adminUser.Id, rolestring);
+
+            email = "Ante@topstudent.se";
+            rolestring = "Student";
+            if (!db.Users.Any(u => u.UserName == email))
+            {
+                var result = userManager.Create(
+                    new ApplicationUser
+                    {
+                        GivenName = "Ante",
+                        FamilyName = "Bante",
+                        ProfileImageRef = "",
+                        UserName = email,
+                        Email = email,
+                        CourseId = courses[0].CourseId,
+                        TimeOfRegistration = DateTime.Now
+                    },
+                    "password");
+                if (!result.Succeeded) { throw new Exception(string.Join("\n", result.Errors)); }
+            }
+            adminUser = userManager.FindByName(email);
+            userManager.AddToRole(adminUser.Id, rolestring);
+
+            email = "StenSture@svea.se";
+            rolestring = "Student";
+            if (!db.Users.Any(u => u.UserName == email))
+            {
+                var result = userManager.Create(
+                    new ApplicationUser
+                    {
+                        GivenName = "Sten Sture",
+                        FamilyName = "Den Äldre",
+                        ProfileImageRef = "",
+                        UserName = email,
+                        Email = email,
+                        CourseId = courses[0].CourseId,
+                        TimeOfRegistration = DateTime.Now
+                    },
+                    "password");
+                if (!result.Succeeded) { throw new Exception(string.Join("\n", result.Errors)); }
+            }
+            adminUser = userManager.FindByName(email);
+            userManager.AddToRole(adminUser.Id, rolestring);
+
+            email = "Gorm@asa.dk";
+            rolestring = "Student";
+            if (!db.Users.Any(u => u.UserName == email))
+            {
+                var result = userManager.Create(
+                    new ApplicationUser
+                    {
+                        GivenName = "Gorm",
+                        FamilyName = "Den Gamle",
+                        ProfileImageRef = "",
+                        UserName = email,
+                        Email = email,
+                        CourseId = courses[0].CourseId,
+                        TimeOfRegistration = DateTime.Now
+                    },
+                    "password");
+                if (!result.Succeeded) { throw new Exception(string.Join("\n", result.Errors)); }
+            }
+            adminUser = userManager.FindByName(email);
+            userManager.AddToRole(adminUser.Id, rolestring);
         }
     }
 }

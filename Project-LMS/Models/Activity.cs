@@ -49,7 +49,8 @@ namespace Project_LMS.Models
             List<ValidationResult> res = new List<ValidationResult>();
             ApplicationDbContext db = new ApplicationDbContext();
 
-            var result = db.Activities.FirstOrDefault(v => v.ActivityName == ActivityName);
+            var result = db.Activities.FirstOrDefault(v => v.ActivityName == ActivityName && v.ModuleId == ModuleId);
+
             if (result != null && ActivityId == 0)
             {
                 ValidationResult mss = new ValidationResult("There is already an activity with this name in this module");
@@ -58,6 +59,11 @@ namespace Project_LMS.Models
             if (Start < DateTime.Now.Date && ActivityId == 0)
             {
                 ValidationResult mss = new ValidationResult("You cannot add an activity in the past!");
+                res.Add(mss);
+            }
+            else if(Module != null && Start < Module.StartDate)
+            {
+                ValidationResult mss = new ValidationResult("You cannot set an activity start ahead of the start of its module!");
                 res.Add(mss);
             }
             else if (Start >= DateTime.Now.AddYears(5) && ActivityId == 0)
@@ -70,6 +76,12 @@ namespace Project_LMS.Models
                 ValidationResult mss = new ValidationResult("An activity must start before it ends");
                 res.Add(mss);
             }
+            else if (Module != null && End > Module.EndDate)
+            {
+                ValidationResult mss = new ValidationResult("You cannot set an activity endtime to later tan the end of its module");
+                res.Add(mss);
+            }
+
             return res;
         }
 

@@ -103,6 +103,8 @@ namespace Project_LMS.Controllers
             ViewBag.ActivityTypeId = new SelectList(db.ActivityTypes, "ActivityTypeId", "Type", activity.ActivityTypeId);
             ViewBag.ModuleId = new SelectList(db.Modules, "ModuleId", "CourseName", activity.ModuleId);
             ViewBag.Id = activity.ActivityId;
+            ViewBag.ModuleStartDate = activity.Module.StartDate;
+            ViewBag.ModuleEndDate = activity.Module.EndDate;
             return View(activity);
         }
 
