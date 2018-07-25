@@ -33,7 +33,8 @@
                         <li>@Html.ActionLink("Administrate Courses", "Index", "TeacherCourses")</li>
                     }
                 </ul>
-                @Html.Partial("_LoginPartial")
+                @Html.Action("GetUserProfile", "ApplicationUser")
+                @*@Html.Partial("_LoginPartial")*@
             </div>
         </div>
     </div>

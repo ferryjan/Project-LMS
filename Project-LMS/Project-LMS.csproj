@@ -435,6 +435,7 @@
     <Content Include="Views\Activities\_homeworkList.cshtml" />
     <Content Include="Views\Documents\GiveFeedback.cshtml" />
     <Content Include="Views\ApplicationUser\RedirectToPage.cshtml" />
+    <Content Include="Views\ApplicationUser\_LoginPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

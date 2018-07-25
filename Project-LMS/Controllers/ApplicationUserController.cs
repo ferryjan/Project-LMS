@@ -48,6 +48,13 @@ namespace Project_LMS.Controllers
             return PartialView(list);
         }
 
+        public ActionResult GetUserProfile()
+        {
+            var userId = User.Identity.GetUserId();
+            ApplicationUser applicationUser = db.Users.Find(userId);
+            return PartialView("_LoginPartial", applicationUser);
+        }
+
         // GET: ApplicationUser/Create
         public ActionResult CreateStudent(int id)
         {
