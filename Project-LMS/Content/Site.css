@@ -120,6 +120,7 @@ body {
         }
 
 #cssmenu > ul > li > a {
+    /*more comments for the people!*/
     margin-top: 25px;
     color: wheat;
     text-transform: uppercase;
