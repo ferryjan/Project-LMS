@@ -29,40 +29,44 @@
     </tr>
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.GivenName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FamilyName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                <a href="@Url.Action("Edit", "ApplicationUser", new { id = item.Id })" class="btn btn-primary">
-                    <i class="glyphicon glyphicon-edit"></i>
-                    <span>
-                        <strong>Edit</strong>
-                    </span>
-                </a>
-                <a href="@Url.Action("Details", "ApplicationUser", new { id = item.Id })" class="btn btn-info">
-                    <i class="glyphicon glyphicon-list"></i>
-                    <span>
-                        <strong>Details</strong>
-                    </span>
-                </a>
-                @if (item.UserName != User.Identity.Name && item.Email != "admin@admin.se")
-                {
-                    <a href="@Url.Action("Delete", "ApplicationUser", new { id = item.Id })" class="btn btn-danger">
-                        <i class="glyphicon glyphicon-erase"></i>
+        if (item.Email != "admin@admin.se")
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GivenName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FamilyName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    <a href="@Url.Action("Edit", "ApplicationUser", new { id = item.Id })" class="btn btn-primary">
+                        <i class="glyphicon glyphicon-edit"></i>
                         <span>
-                            <strong>Delete</strong>
+                            <strong>Edit</strong>
                         </span>
                     </a>
-                }
-            </td>
-        </tr>
+                    <a href="@Url.Action("Details", "ApplicationUser", new { id = item.Id })" class="btn btn-info">
+                        <i class="glyphicon glyphicon-list"></i>
+                        <span>
+                            <strong>Details</strong>
+                        </span>
+                    </a>
+                    @if (item.UserName != User.Identity.Name)
+                    {
+                        <a href="@Url.Action("Delete", "ApplicationUser", new { id = item.Id })" class="btn btn-danger">
+                            <i class="glyphicon glyphicon-erase"></i>
+                            <span>
+                                <strong>Delete</strong>
+                            </span>
+                        </a>
+                    }
+                </td>
+            </tr>
+        }
+
     }
 
 </table>
