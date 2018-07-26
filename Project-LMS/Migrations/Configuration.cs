@@ -115,7 +115,7 @@ namespace Project_LMS.Migrations
                     ModuleId = modules[0].ModuleId,
                     Start = modules[0].StartDate,
                     End = modules[0].StartDate.AddDays(1),
-                    ActivityName = "Homework: Choosing the right blend",
+                    ActivityName = "Choosing the right blend",
                     ActivityTypeId = activityTypes[3].ActivityTypeId,
                     Description = "Choose 7 cookies that mix well and can make the base for a good fika. To pass your written report must be uploaded in time."
                 },
