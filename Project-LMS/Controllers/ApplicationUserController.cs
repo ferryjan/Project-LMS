@@ -16,11 +16,13 @@ using Project_LMS.ViewModels;
 
 namespace Project_LMS.Controllers
 {
+    [Authorize]
     public class ApplicationUserController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: ApplicationUser
+        [Authorize(Roles = "Teacher")]
         public ActionResult Index(string search)
         {
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
@@ -39,6 +41,7 @@ namespace Project_LMS.Controllers
 
         }
 
+        [Authorize(Roles = "Teacher")]
         public ActionResult StudentIndex(int id)
         {
             ViewBag.CourseId = id;
@@ -48,6 +51,7 @@ namespace Project_LMS.Controllers
             return PartialView(list);
         }
 
+        [AllowAnonymous]
         public ActionResult GetUserProfile()
         {
             var userId = User.Identity.GetUserId();
@@ -56,6 +60,7 @@ namespace Project_LMS.Controllers
         }
 
         // GET: ApplicationUser/Create
+        [Authorize(Roles = "Teacher")]
         public ActionResult CreateStudent(int id)
         {
             ViewBag.CourseId = id;
@@ -67,6 +72,7 @@ namespace Project_LMS.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "Teacher")]
         [ValidateAntiForgeryToken]
         public ActionResult CreateStudent(int id, [Bind(Include = "GivenName,FamilyName,Email")] ApplicationUser applicationUser)
         {
@@ -129,6 +135,7 @@ namespace Project_LMS.Controllers
         }
 
         // GET: ApplicationUser/Details/5
+        [Authorize(Roles = "Student, Teacher")]
         public ActionResult Details(string id)
         {
             if (id == null)
@@ -144,6 +151,7 @@ namespace Project_LMS.Controllers
         }
 
         // GET: ApplicationUser/Create
+        [Authorize(Roles = "Teacher")]
         public ActionResult Create()
         {
             ViewBag.UserExist = "";
@@ -167,6 +175,7 @@ namespace Project_LMS.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "Teacher")]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "GivenName,FamilyName,Email,PhoneNumber")] ApplicationUser applicationUser)
         {
@@ -225,6 +234,7 @@ namespace Project_LMS.Controllers
             return View(applicationUser);
         }
 
+        [Authorize(Roles = "Student, Teacher")]
         public ActionResult ChangeProfile()
         {
             var userId = User.Identity.GetUserId();
@@ -249,6 +259,7 @@ namespace Project_LMS.Controllers
 
         // POST: /Manage/ChangePassword
         [HttpPost]
+        [Authorize(Roles = "Student, Teacher")]
         [ValidateAntiForgeryToken]
         public ActionResult ChangeProfile(ChangeProfileViewModels model)
         {
@@ -294,6 +305,7 @@ namespace Project_LMS.Controllers
 
 
         // GET: ApplicationUser/Edit/5
+        [Authorize(Roles = "Teacher")]
         public ActionResult Edit(string id)
         {
             ApplicationUser applicationUser = db.Users.Find(id);
@@ -322,6 +334,7 @@ namespace Project_LMS.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "Teacher")]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(ChangeProfileViewModels model)
         {
@@ -360,6 +373,7 @@ namespace Project_LMS.Controllers
             return RedirectToAction("Index");
         }
 
+        [AllowAnonymous]
         public ActionResult RedirectToPage()
         {
             return View();
@@ -367,6 +381,7 @@ namespace Project_LMS.Controllers
 
 
         // GET: ApplicationUser/Delete/5
+        [Authorize(Roles = "Teacher")]
         public ActionResult DeleteStudentFromCourse(string studnetId, int id)
         {
             if (studnetId == null)
@@ -384,6 +399,7 @@ namespace Project_LMS.Controllers
 
         // POST: ApplicationUser/Delete/5
         [HttpPost, ActionName("DeleteStudentFromCourse")]
+        [Authorize(Roles = "Teacher")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteStudentFromCourseConfirmed(string studnetId, int id)
         {
@@ -396,6 +412,7 @@ namespace Project_LMS.Controllers
 
 
         // GET: ApplicationUser/Delete/5
+        [Authorize(Roles = "Teacher")]
         public ActionResult Delete(string id)
         {
             if (id == null)
@@ -412,6 +429,7 @@ namespace Project_LMS.Controllers
 
         // POST: ApplicationUser/Delete/5
         [HttpPost, ActionName("Delete")]
+        [Authorize(Roles = "Teacher")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
