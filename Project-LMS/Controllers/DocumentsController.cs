@@ -10,11 +10,13 @@ using Project_LMS.Models;
 
 namespace Project_LMS.Controllers
 {
+    [Authorize]
     public class DocumentsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Documents
+        [Authorize(Roles = "Teacher")]
         public ActionResult Index()
         {
             var documents = db.Documents.Include(d => d.Activity).Include(d => d.ApplicationUser).Include(d => d.Course).Include(d => d.Module);
@@ -22,6 +24,7 @@ namespace Project_LMS.Controllers
         }
 
         [ChildActionOnly]
+        [Authorize(Roles = "Teacher")]
         public ActionResult ShowCourseDocuments(int? courseId)
         {
             var documents = db.Documents.Where(i => i.CourseId == courseId && !i.ModuleId.HasValue && !i.ActivityId.HasValue);
@@ -29,6 +32,7 @@ namespace Project_LMS.Controllers
         }
 
         // GET: Documents/Details/5
+        [Authorize(Roles = "Teacher")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -44,6 +48,7 @@ namespace Project_LMS.Controllers
         }
 
         // GET: Documents/Details/5
+        [Authorize(Roles = "Teacher")]
         public ActionResult ModuleDocumentDetails(int? id)
         {
             if (id == null)
@@ -59,6 +64,7 @@ namespace Project_LMS.Controllers
         }
 
         // GET: Documents/Details/5
+        [Authorize(Roles = "Teacher")]
         public ActionResult ActivityDocumentDetails(int? id)
         {
             if (id == null)
@@ -74,6 +80,7 @@ namespace Project_LMS.Controllers
         }
 
         // GET: Documents/Create
+        [Authorize(Roles = "Teacher")]
         public ActionResult CreateCourseDocument(int id)
         {
 
@@ -86,6 +93,7 @@ namespace Project_LMS.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "Teacher")]
         public ActionResult CreateCourseDocument(Document doc, int id)
         {
             if (ModelState.IsValid)
@@ -119,6 +127,7 @@ namespace Project_LMS.Controllers
         }
 
         // GET: Documents/Create
+        [Authorize(Roles = "Teacher")]
         public ActionResult CreateModuleDocument(int? id)
         {
             ViewBag.ModuleId = id;
@@ -129,6 +138,7 @@ namespace Project_LMS.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "Teacher")]
         public ActionResult CreateModuleDocument(Document doc, int id)
         {
             if (ModelState.IsValid)
@@ -163,6 +173,7 @@ namespace Project_LMS.Controllers
         }
 
         // GET: Documents/Create
+        [Authorize(Roles = "Teacher")]
         public ActionResult CreateActivityDocument(int? id)
         {
             ViewBag.ActivityId = id;
@@ -173,6 +184,7 @@ namespace Project_LMS.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "Teacher")]
         public ActionResult CreateActivityDocument(Document doc, int id)
         {
             if (ModelState.IsValid)
@@ -209,6 +221,7 @@ namespace Project_LMS.Controllers
 
 
         [HttpGet]
+        [Authorize(Roles = "Teacher")]
         public FileResult DownLoadFile(int? id)
         {
             ViewBag.CourseId = id;
@@ -218,6 +231,7 @@ namespace Project_LMS.Controllers
         }
 
         // GET: Documents/GiveFeedback
+        [Authorize(Roles = "Teacher")]
         public ActionResult GiveFeedback(int id)
         {
             var doc = db.Documents.FirstOrDefault(i => i.DocumentId == id);
@@ -234,6 +248,7 @@ namespace Project_LMS.Controllers
 
         // POST: Documents/GiveFeedback/5
         [HttpPost, ActionName("GiveFeedback")]
+        [Authorize(Roles = "Teacher")]
         [ValidateAntiForgeryToken]
         public ActionResult GiveFeedbackConfirmed([Bind(Include = "DocumentId,FeedBack")] Document doc)
         {
@@ -245,6 +260,7 @@ namespace Project_LMS.Controllers
             return RedirectToAction("Edit", "Activities", new { id = dbdoc.ActivityId });
         }
 
+        [Authorize(Roles = "Teacher")]
         public PartialViewResult FileDetails(int? id)
         {
             ViewBag.Id = id;
@@ -252,6 +268,7 @@ namespace Project_LMS.Controllers
             return PartialView("FileDetails", documents.ToList());
         }
 
+        [Authorize(Roles = "Teacher")]
         public PartialViewResult ModuleFileDetails(int? moduleId)
         {
             ViewBag.Id = moduleId;
@@ -259,6 +276,7 @@ namespace Project_LMS.Controllers
             return PartialView("ModuleFileDetails", documents.ToList());
         }
 
+        [Authorize(Roles = "Teacher")]
         public PartialViewResult ActivityFileDetails(int? activityId)
         {
             ViewBag.Id = activityId;
@@ -267,6 +285,7 @@ namespace Project_LMS.Controllers
         }
 
         // GET: Documents/Delete/5
+        [Authorize(Roles = "Teacher")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -283,6 +302,7 @@ namespace Project_LMS.Controllers
 
         // POST: Documents/Delete/5
         [HttpPost, ActionName("Delete")]
+        [Authorize(Roles = "Teacher")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
@@ -294,6 +314,7 @@ namespace Project_LMS.Controllers
         }
 
         // GET: Documents/Delete/5
+        [Authorize(Roles = "Teacher")]
         public ActionResult DeleteModuleDocument(int? id)
         {
             if (id == null)
@@ -310,6 +331,7 @@ namespace Project_LMS.Controllers
 
         // POST: Documents/Delete/5
         [HttpPost, ActionName("DeleteModuleDocument")]
+        [Authorize(Roles = "Teacher")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteModuleDocumentConfirmed(int id)
         {
@@ -321,6 +343,7 @@ namespace Project_LMS.Controllers
         }
 
         // GET: Documents/Delete/5
+        [Authorize(Roles = "Teacher")]
         public ActionResult DeleteActivityDocument(int? id)
         {
             if (id == null)
@@ -337,6 +360,7 @@ namespace Project_LMS.Controllers
 
         // POST: Documents/Delete/5
         [HttpPost, ActionName("DeleteActivityDocument")]
+        [Authorize(Roles = "Teacher")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteActivityDocumentConfirmed(int id)
         {

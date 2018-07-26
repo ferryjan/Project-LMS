@@ -12,10 +12,12 @@ using Project_LMS.Models;
 
 namespace Project_LMS.Controllers
 {
+    [Authorize]
     public class ActivitiesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        [Authorize(Roles = "Teacher")]
         // GET: Activities
         public ActionResult Index(int? id)
         {
@@ -31,6 +33,7 @@ namespace Project_LMS.Controllers
         }
 
         [ChildActionOnly]
+        [Authorize(Roles = "Teacher")]
         public ActionResult ShowActivities(int? id)
         {
             ViewBag.ModuleId = id;
@@ -39,6 +42,7 @@ namespace Project_LMS.Controllers
         }
 
         // GET: Activities/Details/5
+        [Authorize(Roles = "Teacher")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -56,6 +60,7 @@ namespace Project_LMS.Controllers
         }
 
         // GET: Activities/Create
+        [Authorize(Roles = "Teacher")]
         public ActionResult Create(int id)
         {
             ViewBag.ActivityTypeId = new SelectList(db.ActivityTypes, "ActivityTypeId", "Type");
@@ -70,6 +75,7 @@ namespace Project_LMS.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "Teacher")]
         [ValidateAntiForgeryToken]
         public ActionResult Create(int id, [Bind(Include = "ActivityId,ActivityName,Start,End,Description,ModuleId,ActivityTypeId")] Activity activity)
         {
@@ -89,6 +95,7 @@ namespace Project_LMS.Controllers
         }
 
         // GET: Activities/Edit/5
+        [Authorize(Roles = "Teacher")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -112,6 +119,7 @@ namespace Project_LMS.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "Teacher")]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id,[Bind(Include = "ActivityId,ActivityName,Start,End,Description,ActivityTypeId")] Activity activity)
         {
@@ -128,6 +136,7 @@ namespace Project_LMS.Controllers
         }
 
         // GET: Activities/Delete/5
+        [Authorize(Roles = "Teacher")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -144,6 +153,7 @@ namespace Project_LMS.Controllers
 
         // POST: Activities/Delete/5
         [HttpPost, ActionName("Delete")]
+        [Authorize(Roles = "Teacher")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
@@ -155,6 +165,7 @@ namespace Project_LMS.Controllers
             return RedirectToAction("Edit", "Modules" , new { id = ModuleId });
         }
 
+        [Authorize(Roles = "Teacher")]
         public ActionResult ShowHomeworkList(int id)
         {
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
@@ -176,7 +187,7 @@ namespace Project_LMS.Controllers
         //    return PartialView("_activityFileDetails", documents.ToList());
         //}
 
-
+        [Authorize(Roles = "Teacher")]
         public PartialViewResult ActivityFileDetails(int? activityId)
         {
             ViewBag.Id = activityId;

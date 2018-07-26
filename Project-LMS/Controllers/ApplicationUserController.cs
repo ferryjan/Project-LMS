@@ -16,11 +16,13 @@ using Project_LMS.ViewModels;
 
 namespace Project_LMS.Controllers
 {
+    [Authorize]
     public class ApplicationUserController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: ApplicationUser
+        [Authorize(Roles = "Teacher")]
         public ActionResult Index(string search)
         {
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
@@ -39,6 +41,7 @@ namespace Project_LMS.Controllers
 
         }
 
+        [Authorize(Roles = "Teacher")]
         public ActionResult StudentIndex(int id)
         {
             ViewBag.CourseId = id;
@@ -48,6 +51,7 @@ namespace Project_LMS.Controllers
             return PartialView(list);
         }
 
+        [AllowAnonymous]
         public ActionResult GetUserProfile()
         {
             var userId = User.Identity.GetUserId();
@@ -56,6 +60,7 @@ namespace Project_LMS.Controllers
         }
 
         // GET: ApplicationUser/Create
+        [Authorize(Roles = "Teacher")]
         public ActionResult CreateStudent(int id)
         {
             ViewBag.CourseId = id;
@@ -67,6 +72,7 @@ namespace Project_LMS.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "Teacher")]
         [ValidateAntiForgeryToken]
         public ActionResult CreateStudent(int id, [Bind(Include = "GivenName,FamilyName,Email")] ApplicationUser applicationUser)
         {
@@ -76,7 +82,7 @@ namespace Project_LMS.Controllers
                 applicationUser.UserName = applicationUser.Email;
                 applicationUser.CourseId = id;
 
-                if (db.Users.Any(u => u.UserName == applicationUser.Email) && db.Users.FirstOrDefault(u => u.UserName == applicationUser.Email).isActive == true)
+                if (db.Users.Any(u => u.UserName == applicationUser.Email) && (db.Users.FirstOrDefault(u => u.UserName == applicationUser.Email) != null && db.Users.FirstOrDefault(u => u.UserName == applicationUser.Email).isActive == true))
                 {
                     ViewBag.ErrMsg = "This email is existed in the database, try another one!";
                     ViewBag.CourseId = id;
@@ -89,7 +95,7 @@ namespace Project_LMS.Controllers
                     return View(applicationUser);
                 }
 
-                if (db.Users.FirstOrDefault(u => u.UserName == applicationUser.Email).isActive == false)
+                if (db.Users.FirstOrDefault(u => u.UserName == applicationUser.Email) != null && db.Users.FirstOrDefault(u => u.UserName == applicationUser.Email).isActive == false)
                 {
                     var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
                     var studentRole = roleManager.FindByName("Student");
@@ -113,7 +119,8 @@ namespace Project_LMS.Controllers
 
                 var userStore = new UserStore<ApplicationUser>(db);
                 var userManager = new UserManager<ApplicationUser>(userStore);
-
+                applicationUser.isActive = true;
+                applicationUser.ProfileImageRef = "defaultImage.png";
                 var result = userManager.Create(applicationUser, "Ante_007");
                 if (!result.Succeeded) { throw new Exception(string.Join("\n", result.Errors)); }
 
@@ -128,6 +135,7 @@ namespace Project_LMS.Controllers
         }
 
         // GET: ApplicationUser/Details/5
+        [Authorize(Roles = "Student, Teacher")]
         public ActionResult Details(string id)
         {
             if (id == null)
@@ -143,6 +151,7 @@ namespace Project_LMS.Controllers
         }
 
         // GET: ApplicationUser/Create
+        [Authorize(Roles = "Teacher")]
         public ActionResult Create()
         {
             ViewBag.UserExist = "";
@@ -166,6 +175,7 @@ namespace Project_LMS.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "Teacher")]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "GivenName,FamilyName,Email,PhoneNumber")] ApplicationUser applicationUser)
         {
@@ -175,7 +185,7 @@ namespace Project_LMS.Controllers
                 applicationUser.TimeOfRegistration = DateTime.Now;
                 applicationUser.UserName = applicationUser.Email;
 
-                if (db.Users.Any(u => u.UserName == applicationUser.Email) && db.Users.FirstOrDefault(u => u.UserName == applicationUser.Email).isActive == true)
+                if (db.Users.Any(u => u.UserName == applicationUser.Email) && (db.Users.FirstOrDefault(u => u.UserName == applicationUser.Email) != null && db.Users.FirstOrDefault(u => u.UserName == applicationUser.Email).isActive == true))
                 {
                     ViewBag.ErrMsg = "This email is existed in the database, try another one!";
                     return View(applicationUser);
@@ -186,7 +196,7 @@ namespace Project_LMS.Controllers
                     return View(applicationUser);
                 }
 
-                if (db.Users.FirstOrDefault(u => u.UserName == applicationUser.Email).isActive == false)
+                if (db.Users.FirstOrDefault(u => u.UserName == applicationUser.Email) != null && db.Users.FirstOrDefault(u => u.UserName == applicationUser.Email).isActive == false)
                 {
                     var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
                     var teacherRole = roleManager.FindByName("Teacher");
@@ -211,7 +221,8 @@ namespace Project_LMS.Controllers
 
                 var userStore = new UserStore<ApplicationUser>(db);
                 var userManager = new UserManager<ApplicationUser>(userStore);
-
+                applicationUser.isActive = true;
+                applicationUser.ProfileImageRef = "defaultImage.png";
                 var result = userManager.Create(applicationUser, "Ante_007");
                 if (!result.Succeeded) { throw new Exception(string.Join("\n", result.Errors)); }
 
@@ -223,6 +234,7 @@ namespace Project_LMS.Controllers
             return View(applicationUser);
         }
 
+        [Authorize(Roles = "Student, Teacher")]
         public ActionResult ChangeProfile()
         {
             var userId = User.Identity.GetUserId();
@@ -247,6 +259,7 @@ namespace Project_LMS.Controllers
 
         // POST: /Manage/ChangePassword
         [HttpPost]
+        [Authorize(Roles = "Student, Teacher")]
         [ValidateAntiForgeryToken]
         public ActionResult ChangeProfile(ChangeProfileViewModels model)
         {
@@ -292,6 +305,7 @@ namespace Project_LMS.Controllers
 
 
         // GET: ApplicationUser/Edit/5
+        [Authorize(Roles = "Teacher")]
         public ActionResult Edit(string id)
         {
             ApplicationUser applicationUser = db.Users.Find(id);
@@ -320,6 +334,7 @@ namespace Project_LMS.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "Teacher")]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(ChangeProfileViewModels model)
         {
@@ -358,6 +373,7 @@ namespace Project_LMS.Controllers
             return RedirectToAction("Index");
         }
 
+        [AllowAnonymous]
         public ActionResult RedirectToPage()
         {
             return View();
@@ -365,6 +381,7 @@ namespace Project_LMS.Controllers
 
 
         // GET: ApplicationUser/Delete/5
+        [Authorize(Roles = "Teacher")]
         public ActionResult DeleteStudentFromCourse(string studnetId, int id)
         {
             if (studnetId == null)
@@ -382,6 +399,7 @@ namespace Project_LMS.Controllers
 
         // POST: ApplicationUser/Delete/5
         [HttpPost, ActionName("DeleteStudentFromCourse")]
+        [Authorize(Roles = "Teacher")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteStudentFromCourseConfirmed(string studnetId, int id)
         {
@@ -394,6 +412,7 @@ namespace Project_LMS.Controllers
 
 
         // GET: ApplicationUser/Delete/5
+        [Authorize(Roles = "Teacher")]
         public ActionResult Delete(string id)
         {
             if (id == null)
@@ -410,6 +429,7 @@ namespace Project_LMS.Controllers
 
         // POST: ApplicationUser/Delete/5
         [HttpPost, ActionName("Delete")]
+        [Authorize(Roles = "Teacher")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
@@ -419,6 +439,16 @@ namespace Project_LMS.Controllers
             db.Entry(applicationUser).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        // GET: StudentStart/
+        [Authorize(Roles = "Student")]
+        public ActionResult StudentStart()
+        {
+            var userId = User.Identity.GetUserId();
+            var appUser = db.Users.Find(userId);
+            var MyCourse = db.Courses.Include(m => m.CourseModules).Include(s => s.AttendingStudents).First(u => u.CourseId == appUser.CourseId);
+            return View("StudentStartPage", MyCourse);
         }
 
         protected override void Dispose(bool disposing)

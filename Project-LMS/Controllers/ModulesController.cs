@@ -10,11 +10,13 @@ using Project_LMS.Models;
 
 namespace Project_LMS.Controllers
 {
+    [Authorize]
     public class ModulesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Modules
+        [Authorize(Roles = "Teacher")]
         public ActionResult Index()
         {
             var modules = db.Modules.Include(m => m.Course);
@@ -22,6 +24,7 @@ namespace Project_LMS.Controllers
         }
 
         [ChildActionOnly]
+        [Authorize(Roles = "Teacher")]
         public ActionResult ShowCourseModules(int? id)
         {
             ViewBag.CourseId = id;
@@ -31,6 +34,7 @@ namespace Project_LMS.Controllers
 
 
         // GET: Modules/Details/5
+        [Authorize(Roles = "Teacher")]
         public ActionResult Details(int id, int? moduleId)
         {
             if (moduleId == null)
@@ -47,6 +51,7 @@ namespace Project_LMS.Controllers
         }
 
         // GET: Modules/Create
+        [Authorize(Roles = "Teacher")]
         public ActionResult Create(int id)
         {
             ViewBag.CourseStartDate = db.Courses.FirstOrDefault(c => c.CourseId == id).StartDate.Date;
@@ -58,6 +63,7 @@ namespace Project_LMS.Controllers
 
         // POST: Modules/Create
         [HttpPost]
+        [Authorize(Roles = "Teacher")]
         [ValidateAntiForgeryToken]
         public ActionResult Create(int id, [Bind(Include = "Name,StartDate,EndDate,Description")] Module module)
         {
@@ -86,6 +92,7 @@ namespace Project_LMS.Controllers
         }
 
         // GET: Modules/Edit/5
+        [Authorize(Roles = "Teacher")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -107,6 +114,7 @@ namespace Project_LMS.Controllers
 
         // POST: Modules/Edit/5
         [HttpPost]
+        [Authorize(Roles = "Teacher")]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, [Bind(Include = "ModuleId,Name,StartDate,EndDate,Description")] Module module)
         {
@@ -136,6 +144,7 @@ namespace Project_LMS.Controllers
         }
 
         // GET: Modules/Delete/5
+        [Authorize(Roles = "Teacher")]
         public ActionResult Delete(int id, int? moduleId)
         {
             if (moduleId == null)
@@ -153,6 +162,7 @@ namespace Project_LMS.Controllers
 
         // POST: Modules/Delete/5
         [HttpPost, ActionName("Delete")]
+        [Authorize(Roles = "Teacher")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int moduleId, int id)
         {
