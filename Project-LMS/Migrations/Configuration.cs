@@ -215,7 +215,8 @@ namespace Project_LMS.Migrations
                             Email = item.Email,
                             TimeOfRegistration = DateTime.Now,
                             FirstTimeLogin = false,
-                            isActive = true                          
+                            isActive = true,
+                            CourseId = item.CourseId
                         },
                         "Ante_007");
                     if (!result.Succeeded) { throw new Exception(string.Join("\n", result.Errors)); }
