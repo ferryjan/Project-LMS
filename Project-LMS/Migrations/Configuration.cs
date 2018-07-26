@@ -15,8 +15,20 @@ namespace Project_LMS.Migrations
             AutomaticMigrationsEnabled = false;
         }
 
+        //Struct for seeding users. using properties instead of fields due to VisualStudio recommendations
+        private struct NewUser
+        {
+            public string Email { get; set; }
+            public string Rolestring { get; set; }
+            public string GivenName { get; set; }
+            public string FamilyName { get; set; }
+            public int? CourseId { get; set; }
+        }
+
         protected override void Seed(Project_LMS.Models.ApplicationDbContext db)
         {
+
+            // Seeding Roles. Changes to roles will affect the application
             var roleStore = new RoleStore<IdentityRole>(db);
             var roleManager = new RoleManager<IdentityRole>(roleStore);
 
@@ -32,6 +44,7 @@ namespace Project_LMS.Migrations
                 }
             }
 
+            //Seeding ActivityTypes. Changes to the type "Homework" might affect the application. The order in wich these entities are seeded reflects the order shown in relevant dropdownboxes.
             var activityTypes = new[] {
                 new ActivityType { Type = "Lecture" },
                 new ActivityType { Type = "Exercise" },
@@ -41,6 +54,7 @@ namespace Project_LMS.Migrations
             };
             db.ActivityTypes.AddOrUpdate(s => new { s.Type }, activityTypes);
 
+            //Seeding courses
             var courses = new[] {
                 new Course {    CourseName = "Swedish fika done right",
                                 StartDate = DateTime.Now.Date,
@@ -58,6 +72,7 @@ namespace Project_LMS.Migrations
             db.Courses.AddOrUpdate(n => n.CourseName, courses);
             db.SaveChanges();
 
+            //Seeding modules, referencing courses
             var modules = new[] {
                 new Module {
                     CourseId = courses[0].CourseId,
@@ -77,142 +92,110 @@ namespace Project_LMS.Migrations
             db.Modules.AddOrUpdate(m => m.Name, modules);
             db.SaveChanges();
 
+            //Seeding Activities
+            var activities = new[] {
+                new Activity {
+                    ModuleId = modules[0].ModuleId,
+                    Start = modules[0].StartDate,
+                    End = modules[0].StartDate.AddDays(1),
+                    ActivityName = "Fine dining",
+                    ActivityTypeId = activityTypes[1].ActivityTypeId,
+                    Description = "Eating cookies without leaving ccrumbles requires lots of training"
+                },
+                new Activity {
+                    ModuleId = modules[0].ModuleId,
+                    Start = modules[0].StartDate.AddDays(1),
+                    End = modules[0].StartDate.AddDays(2),
+                    ActivityName = "Conversation",
+                    ActivityTypeId = activityTypes[1].ActivityTypeId,
+                    Description = "How to make fine conversation while eating cookies. Keeping your mouth shut until all crumbles have been swallowed and other essential skills."
+                },
+                //Lets seed a homework (activityTypes[3]). Lets also seed it so the start and end interferes with another activity.
+                new Activity { 
+                    ModuleId = modules[0].ModuleId,
+                    Start = modules[0].StartDate,
+                    End = modules[0].StartDate.AddDays(1),
+                    ActivityName = "Homework: Choosing the right blend",
+                    ActivityTypeId = activityTypes[3].ActivityTypeId,
+                    Description = "Choose 7 cookies that mix well and can make the base for a good fika. To pass your written report must be uploaded in time."
+                },
+            };
+            db.Activities.AddOrUpdate(a => a.ActivityName, activities);
+            db.SaveChanges();
 
+
+            //Seeding users
             var userStore = new UserStore<ApplicationUser>(db);
             var userManager = new UserManager<ApplicationUser>(userStore);
-            string email, rolestring;
             ApplicationUser adminUser;
 
-            email = "admin@admin.se";
-            rolestring = "Teacher";
-            if (!db.Users.Any(u => u.UserName == email))
-            {
-                var result = userManager.Create(
-                    new ApplicationUser
-                    {
-                        GivenName = "Boris",
-                        FamilyName = "Jeltsin",
-                        ProfileImageRef = "",
-                        UserName = email,
-                        Email = email,
-                        TimeOfRegistration = DateTime.Now,
-                        FirstTimeLogin = false,
-                        isActive = true
-                    },
-                    "password");
-                if (!result.Succeeded) { throw new Exception(string.Join("\n", result.Errors)); }
-            }
-            adminUser = userManager.FindByName(email);
-            userManager.AddToRole(adminUser.Id, rolestring);
+            //Students must be linked to courses, teachers must not
+            var newUser = new[]
+{
+                new NewUser
+                {
+                    Email = "admin@admin.se",
+                    Rolestring = "Teacher",
+                    GivenName = "Boris",
+                    FamilyName= "Jeltsin",
+                    CourseId = null
+                },
+                new NewUser
+                {
+                    Email = "Donald@duck.se",
+                    Rolestring = "Teacher",
+                    GivenName = "Donald",
+                    FamilyName= "Duck",
+                    CourseId = null
+                },
+                new NewUser
+                {
+                    Email = "student@student.se",
+                    Rolestring = "Student",
+                    GivenName = "Kattis",
+                    FamilyName= "Hoppsan",
+                    CourseId = courses[0].CourseId
+                },
+                new NewUser
+                {
+                    Email = "Sten.Sture@svea.se",
+                    Rolestring = "Student",
+                    GivenName = "Sten Sture",
+                    FamilyName= "Den Äldre",
+                    CourseId = courses[0].CourseId
+                },
+                new NewUser
+                {
+                    Email = "Gorm@asa.dk",
+                    Rolestring = "Student",
+                    GivenName = "Gorm",
+                    FamilyName= "Den Gamle",
+                    CourseId = courses[0].CourseId
+                }
+            };
 
-
-            email = "Donald@duck.se";
-            rolestring = "Teacher";
-            if (!db.Users.Any(u => u.UserName == email))
+            foreach (var item in newUser)
             {
-                var result = userManager.Create(
-                    new ApplicationUser
-                    {
-                        GivenName = "Donald",
-                        FamilyName = "Duck",
-                        ProfileImageRef = "",
-                        UserName = email,
-                        Email = email,
-                        TimeOfRegistration = DateTime.Now,
-                        FirstTimeLogin = false,
-                        isActive = true
-                    },
-                    "Ante_007");
-                if (!result.Succeeded) { throw new Exception(string.Join("\n", result.Errors)); }
+                if (!db.Users.Any(u => u.UserName == item.Email))
+                {
+                    var result = userManager.Create(
+                        new ApplicationUser
+                        {
+                            GivenName = item.GivenName,
+                            FamilyName = item.FamilyName,
+                            ProfileImageRef = "",
+                            UserName = item.Email,
+                            Email = item.Email,
+                            TimeOfRegistration = DateTime.Now,
+                            FirstTimeLogin = false,
+                            isActive = true
+                        },
+                        "Ante_007");
+                    if (!result.Succeeded) { throw new Exception(string.Join("\n", result.Errors)); }
+                }
+                adminUser = userManager.FindByName(item.Email);
+                userManager.AddToRole(adminUser.Id, item.Rolestring);
             }
-            adminUser = userManager.FindByName(email);
-            userManager.AddToRole(adminUser.Id, rolestring);
-
-            email = "student@student.se";
-            rolestring = "Student";
-            if (!db.Users.Any(u => u.UserName == email))
-            {
-                var result = userManager.Create(
-                    new ApplicationUser
-                    {
-                        GivenName = "Kattis",
-                        FamilyName = "Hoppsan",
-                        ProfileImageRef = "",
-                        UserName = email,
-                        Email = email,
-                        CourseId = courses[0].CourseId,
-                        TimeOfRegistration = DateTime.Now,
-                        isActive = true
-                    },
-                    "password");
-                if (!result.Succeeded) { throw new Exception(string.Join("\n", result.Errors)); }
-            }
-            adminUser = userManager.FindByName(email);
-            userManager.AddToRole(adminUser.Id, rolestring);
-
-            email = "Ante@topstudent.se";
-            rolestring = "Student";
-            if (!db.Users.Any(u => u.UserName == email))
-            {
-                var result = userManager.Create(
-                    new ApplicationUser
-                    {
-                        GivenName = "Ante",
-                        FamilyName = "Bante",
-                        ProfileImageRef = "",
-                        UserName = email,
-                        Email = email,
-                        CourseId = courses[0].CourseId,
-                        TimeOfRegistration = DateTime.Now,
-                        isActive = true
-                    },
-                    "password");
-                if (!result.Succeeded) { throw new Exception(string.Join("\n", result.Errors)); }
-            }
-            adminUser = userManager.FindByName(email);
-            userManager.AddToRole(adminUser.Id, rolestring);
-
-            email = "StenSture@svea.se";
-            rolestring = "Student";
-            if (!db.Users.Any(u => u.UserName == email))
-            {
-                var result = userManager.Create(
-                    new ApplicationUser
-                    {
-                        GivenName = "Sten Sture",
-                        FamilyName = "Den Äldre",
-                        ProfileImageRef = "",
-                        UserName = email,
-                        Email = email,
-                        CourseId = courses[0].CourseId,
-                        TimeOfRegistration = DateTime.Now
-                    },
-                    "password");
-                if (!result.Succeeded) { throw new Exception(string.Join("\n", result.Errors)); }
-            }
-            adminUser = userManager.FindByName(email);
-            userManager.AddToRole(adminUser.Id, rolestring);
-
-            email = "Gorm@asa.dk";
-            rolestring = "Student";
-            if (!db.Users.Any(u => u.UserName == email))
-            {
-                var result = userManager.Create(
-                    new ApplicationUser
-                    {
-                        GivenName = "Gorm",
-                        FamilyName = "Den Gamle",
-                        ProfileImageRef = "",
-                        UserName = email,
-                        Email = email,
-                        CourseId = courses[0].CourseId,
-                        TimeOfRegistration = DateTime.Now
-                    },
-                    "password");
-                if (!result.Succeeded) { throw new Exception(string.Join("\n", result.Errors)); }
-            }
-            adminUser = userManager.FindByName(email);
-            userManager.AddToRole(adminUser.Id, rolestring);
         }
     }
 }
