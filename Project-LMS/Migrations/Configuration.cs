@@ -183,12 +183,12 @@ namespace Project_LMS.Migrations
                         {
                             GivenName = item.GivenName,
                             FamilyName = item.FamilyName,
-                            ProfileImageRef = "",
+                            ProfileImageRef = "defaultImage.png", 
                             UserName = item.Email,
                             Email = item.Email,
                             TimeOfRegistration = DateTime.Now,
                             FirstTimeLogin = false,
-                            isActive = true
+                            isActive = true                          
                         },
                         "Ante_007");
                     if (!result.Succeeded) { throw new Exception(string.Join("\n", result.Errors)); }

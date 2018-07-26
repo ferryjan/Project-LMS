@@ -76,7 +76,7 @@ namespace Project_LMS.Controllers
                 applicationUser.UserName = applicationUser.Email;
                 applicationUser.CourseId = id;
 
-                if (db.Users.Any(u => u.UserName == applicationUser.Email) && db.Users.FirstOrDefault(u => u.UserName == applicationUser.Email).isActive == true)
+                if (db.Users.Any(u => u.UserName == applicationUser.Email) && (db.Users.FirstOrDefault(u => u.UserName == applicationUser.Email) != null && db.Users.FirstOrDefault(u => u.UserName == applicationUser.Email).isActive == true))
                 {
                     ViewBag.ErrMsg = "This email is existed in the database, try another one!";
                     ViewBag.CourseId = id;
@@ -89,7 +89,7 @@ namespace Project_LMS.Controllers
                     return View(applicationUser);
                 }
 
-                if (db.Users.FirstOrDefault(u => u.UserName == applicationUser.Email).isActive == false)
+                if (db.Users.FirstOrDefault(u => u.UserName == applicationUser.Email) != null && db.Users.FirstOrDefault(u => u.UserName == applicationUser.Email).isActive == false)
                 {
                     var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
                     var studentRole = roleManager.FindByName("Student");
@@ -113,7 +113,8 @@ namespace Project_LMS.Controllers
 
                 var userStore = new UserStore<ApplicationUser>(db);
                 var userManager = new UserManager<ApplicationUser>(userStore);
-
+                applicationUser.isActive = true;
+                applicationUser.ProfileImageRef = "defaultImage.png";
                 var result = userManager.Create(applicationUser, "Ante_007");
                 if (!result.Succeeded) { throw new Exception(string.Join("\n", result.Errors)); }
 
@@ -175,7 +176,7 @@ namespace Project_LMS.Controllers
                 applicationUser.TimeOfRegistration = DateTime.Now;
                 applicationUser.UserName = applicationUser.Email;
 
-                if (db.Users.Any(u => u.UserName == applicationUser.Email) && db.Users.FirstOrDefault(u => u.UserName == applicationUser.Email).isActive == true)
+                if (db.Users.Any(u => u.UserName == applicationUser.Email) && (db.Users.FirstOrDefault(u => u.UserName == applicationUser.Email) != null && db.Users.FirstOrDefault(u => u.UserName == applicationUser.Email).isActive == true))
                 {
                     ViewBag.ErrMsg = "This email is existed in the database, try another one!";
                     return View(applicationUser);
@@ -186,7 +187,7 @@ namespace Project_LMS.Controllers
                     return View(applicationUser);
                 }
 
-                if (db.Users.FirstOrDefault(u => u.UserName == applicationUser.Email).isActive == false)
+                if (db.Users.FirstOrDefault(u => u.UserName == applicationUser.Email) != null && db.Users.FirstOrDefault(u => u.UserName == applicationUser.Email).isActive == false)
                 {
                     var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
                     var teacherRole = roleManager.FindByName("Teacher");
@@ -211,7 +212,8 @@ namespace Project_LMS.Controllers
 
                 var userStore = new UserStore<ApplicationUser>(db);
                 var userManager = new UserManager<ApplicationUser>(userStore);
-
+                applicationUser.isActive = true;
+                applicationUser.ProfileImageRef = "defaultImage.png";
                 var result = userManager.Create(applicationUser, "Ante_007");
                 if (!result.Succeeded) { throw new Exception(string.Join("\n", result.Errors)); }
 
