@@ -4,9 +4,13 @@ namespace Project_LMS.Migrations
     using Microsoft.AspNet.Identity.EntityFramework;
     using Project_LMS.Models;
     using System;
+    using System.IO;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
+    using System.Web;
+    using System.Web.Hosting;
+    using System.Reflection;
 
     internal sealed class Configuration : DbMigrationsConfiguration<Project_LMS.Models.ApplicationDbContext>
     {
@@ -25,8 +29,23 @@ namespace Project_LMS.Migrations
             public int? CourseId { get; set; }
         }
 
+        //Function for using relative paths in seed
+        private string MapPath(string seedFile)
+        {
+            if (HttpContext.Current != null) return HostingEnvironment.MapPath(seedFile);
+            var absolutePath = new Uri(Assembly.GetExecutingAssembly().CodeBase).LocalPath; //was AbsolutePath but didn't work with spaces according to comments
+            var directoryName = Path.GetDirectoryName(absolutePath);
+            var path = Path.Combine(directoryName, ".." + seedFile.TrimStart('~').Replace('/', '\\'));
+            return path;
+        }
+
         protected override void Seed(Project_LMS.Models.ApplicationDbContext db)
         {
+            //Enables debugging of seed, comment out to disable
+            //if (!System.Diagnostics.Debugger.IsAttached)
+            //{
+            //    System.Diagnostics.Debugger.Launch();
+            //}
 
             // Seeding Roles. Changes to roles will affect the application
             var roleStore = new RoleStore<IdentityRole>(db);
@@ -74,14 +93,14 @@ namespace Project_LMS.Migrations
 
             //Seeding modules, referencing courses
             var modules = new[] {
-                new Module {
+                new Project_LMS.Models.Module {
                     CourseId = courses[0].CourseId,
                     StartDate = courses[0].StartDate,
                     EndDate = courses[0].StartDate.AddDays(2),
                     Name = "Cookies, not just for web-pages",
                     Description = "An introduction to Cookies: the common combinations."
                 },
-                new Module {
+                new Project_LMS.Models.Module {
                     CourseId = courses[0].CourseId,
                     StartDate = courses[0].StartDate.AddDays(2),
                     EndDate = courses[0].StartDate.AddDays(4),
@@ -171,6 +190,14 @@ namespace Project_LMS.Migrations
                     GivenName = "Gorm",
                     FamilyName= "Den Gamle",
                     CourseId = courses[0].CourseId
+                },
+                new NewUser
+                {
+                    Email = "MrCool@mail.com",
+                    Rolestring = "Student",
+                    GivenName = "Anders",
+                    FamilyName= "Göransson",
+                    CourseId = courses[0].CourseId
                 }
             };
 
@@ -196,6 +223,25 @@ namespace Project_LMS.Migrations
                 adminUser = userManager.FindByName(item.Email);
                 userManager.AddToRole(adminUser.Id, item.Rolestring);
             }
+            db.SaveChanges();
+
+            //Seeding documents
+            var email = newUser[5].Email;
+            var appUserId = db.Users.FirstOrDefault(u => u.Email == email).Id;
+            Document doc = new Document
+            {
+                FileData = File.ReadAllBytes(MapPath("~/Resources/MySevenCookies.txt")),
+                ApplicationUserId = appUserId,
+                ActivityId = activities[0].ActivityId,
+                isHomework = true,
+                DocumentFileType = "text/plain",
+                UploadingTime = DateTime.Now,
+                DocumentName = "MySevenCookies.txt",
+                Description = "I did the best I could, please dont kick me from class"
+            };
+            db.Documents.Add(doc);
+            db.SaveChanges();
+
         }
     }
 }
