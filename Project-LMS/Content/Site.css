@@ -45,6 +45,14 @@ textarea {
 }
 
 /* Bootstrap overrides */
+
+.Mytable {
+    font-size: 14px;
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 20px;
+}
+
 body {
     font-size: 17px;
     background-color: lightgrey;

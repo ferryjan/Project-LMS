@@ -2,7 +2,8 @@
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
 <link href="~/Content/jquery-ui-timepicker-addon.min.css" rel="stylesheet" />
-<script src="~/Scripts/jquery-ui-timepicker-addon.min.js"></script>@model Project_LMS.Models.Activity
+<script src="~/Scripts/jquery-ui-timepicker-addon.min.js"></script>
+@model Project_LMS.Models.ActivityViewModels
 
 @{
     ViewBag.Title = "Edit";
@@ -14,76 +15,81 @@
 {
     @Html.AntiForgeryToken()
 
-<div class="form-horizontal">
-    <h4>@Html.DisplayFor(model => model.ActivityName, new { htmlAttributes = new { @class = "form-control" } })</h4>
-    <hr />
-    <h4 style="color:red">Module Start Time: @ViewBag.ModuleStartDate</h4>
-    <h4 style="color:red">Module End Time: @ViewBag.ModuleEndDate</h4>
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @Html.HiddenFor(model => model.ActivityId)
+    <div class="form-horizontal">
+        <h3 style="color:red">@Model.CourseName&nbsp;@Model.CourseStartDate.ToString("yyyy-MM-dd")&nbsp;-&nbsp;@Model.CourseEndDate.ToString("yyyy-MM-dd")</h3>
+        <h4 style="color:red">@Model.ModuleName&nbsp;@Model.ModuleStartDate.ToString("yyyy-MM-dd")&nbsp;-&nbsp;@Model.ModuleEndDate.ToString("yyyy-MM-dd")</h4>
+        <hr />
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.ActivityName, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.ActivityName, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.ActivityName, "", new { @class = "text-danger" })
-        </div>
-    </div>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ActivityId)
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Start, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Start, new { htmlAttributes = new { @class = "form-control date-picker", autocomplete = "off" } })
-            @Html.ValidationMessageFor(model => model.Start, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.ActivityName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ActivityName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ActivityName, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.End, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.End, new { htmlAttributes = new { @class = "form-control date-picker", autocomplete = "off" } })
-            @Html.ValidationMessageFor(model => model.End, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Start, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Start, new { htmlAttributes = new { @class = "form-control date-picker", autocomplete = "off" } })
+                @Html.ValidationMessageFor(model => model.Start, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.End, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.End, new { htmlAttributes = new { @class = "form-control date-picker", autocomplete = "off" } })
+                @Html.ValidationMessageFor(model => model.End, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.ActivityTypeId, "Activity Type", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownList("ActivityTypeId", null, htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.ActivityTypeId, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Save" class="btn btn-primary" />
+        <div class="form-group">
+            @Html.LabelFor(model => model.ActivityTypeId, "Activity Type", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("ActivityTypeId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ActivityTypeId, "", new { @class = "text-danger" })
+            </div>
         </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+                @Html.ActionLink("Back to Modules", "Edit", "Modules", new { id = @Model.ModuleId }, new { @class = "btn btn-primary btn-large" })
+            </div>
+            <div class="col-md-10">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </div>
+        <hr />
     </div>
-</div>
 }
 
 <br />
 <br />
-@Html.Action("ActivityFileDetails", "Documents", new { activityId = Model.ActivityId })
+@Html.Action("ActivityFileDetails", "Documents", new { activityId = @Model.ActivityId })
 <br />
 <br />
-@if (Model.ActivityType.Type == "Homework")
+
+@if (@Model.ActivityType.Type == "Homework")
 {
-    @Html.Action("ShowHomeworkList", "Activities", new { id = Model.ActivityId })
+    @Html.Action("ShowHomeworkList", "Activities", new { id = @Model.ActivityId })
 }
 
 <br />
 
 <div>
-    @Html.ActionLink("Back to Modules", "Edit", "Modules", new { id = Model.ModuleId }, new { @class = "btn btn-primary btn-large" })
+    @Html.ActionLink("Back to Modules", "Edit", "Modules", new { id = @Model.ModuleId }, new { @class = "btn btn-primary btn-large" })
 </div>
 
 @section Scripts {
@@ -96,7 +102,7 @@
                 $(".date-picker").datetimepicker({
                     changeMonth: true,
                     changeYear: true,
-                    yearRange: "-100:+0",
+                    yearRange: "-100:+2",
                     dateFormat: 'yy-mm-dd',
                     controlType: 'select',
                     timeFormat: 'HH:mm:ss'

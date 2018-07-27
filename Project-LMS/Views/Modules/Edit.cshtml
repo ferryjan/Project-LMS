@@ -12,9 +12,7 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>@Html.DisplayFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })</h4>
-        <h4 style="color:red">Course Start Time: @ViewBag.CourseStartDate</h4>
-        <h4 style="color:red">Course End Time: @ViewBag.CourseEndDate</h4>
+        <h4 style="color:red">@Model.Course.CourseName&nbsp;@Model.Course.StartDate.ToString("yyyy-MM-dd")&nbsp;-&nbsp;@Model.Course.EndDate.ToString("yyyy-MM-dd")</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <h4 style="color:indianred"> @ViewBag.DateNotValidMessage </h4>
@@ -53,10 +51,16 @@
         </div>
 
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
+
+            <div class="col-md-2">
+                @Html.ActionLink("Back to Course edit", "Edit", "TeacherCourses", new { id = Model.CourseId }, new { @class = "btn btn-primary btn-large" })
+            </div>
+
+            <div class="col-md-10">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </div>
+        <hr />
     </div>
 }
 
@@ -71,7 +75,7 @@
 @Html.Action("ModuleFileDetails", "Documents", new { moduleId = Model.ModuleId })
 
 <div>
-    @Html.ActionLink("Go Back", "Edit", "TeacherCourses", new { id = Model.CourseId }, new { @class = "btn btn-primary btn-large" })
+    @Html.ActionLink("Back to Course edit", "Edit", "TeacherCourses", new { id = Model.CourseId }, new { @class = "btn btn-primary btn-large" })
 </div>
 
 @section Scripts {

@@ -55,6 +55,14 @@
                     <strong>Delete</strong>
                 </span>
             </a>
+
+            <a href="@Url.Action("Schedule", "TeacherCourses", new { id = item.CourseId })" class="btn btn-success">
+                <i class="glyphicon glyphicon-list-alt"></i>
+                <span>
+                    <strong>Schedule</strong>
+                </span>
+            </a>
+
         </td>
     </tr>
 }

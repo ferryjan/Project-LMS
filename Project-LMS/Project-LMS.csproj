@@ -221,6 +221,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Activity.cs" />
     <Compile Include="Models\ActivityType.cs" />
+    <Compile Include="Models\ActivityViewModels.cs" />
     <Compile Include="Models\ApplicationUserViewModels.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\Document.cs" />
@@ -229,6 +230,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Module.cs" />
     <Compile Include="Models\NaviItem.cs" />
+    <Compile Include="Models\ScheduleViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -436,6 +438,7 @@
     <Content Include="Views\Documents\GiveFeedback.cshtml" />
     <Content Include="Views\ApplicationUser\RedirectToPage.cshtml" />
     <Content Include="Views\ApplicationUser\_LoginPartial.cshtml" />
+    <Content Include="Views\TeacherCourses\Schedule.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

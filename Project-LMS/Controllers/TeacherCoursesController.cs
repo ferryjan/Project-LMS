@@ -29,7 +29,7 @@ namespace Project_LMS.Controllers
         {
             return View(db.Courses.ToList().Where(i => DateTime.Compare(i.EndDate, DateTime.Now) <= 0).OrderBy(c => c.StartDate).ToList());
         }
-        
+
         // GET: TeacherCourses/Details/5
         public ActionResult Details(int? id)
         {
@@ -124,6 +124,38 @@ namespace Project_LMS.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        // GET: TeacherCourses/Schedule/6
+        public ActionResult Schedule(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Course course = db.Courses.Find(id);
+            if (course == null) { return HttpNotFound(); }
+            //
+            List<ScheduleViewModels> myList = new List<ScheduleViewModels>();
+            //
+            var activites = course.CourseModules.SelectMany(m => m.Activities).OrderBy(a => a.Start);
+
+            foreach (var activity in activites)
+            {
+                var model = new ScheduleViewModels();
+                model.Date = activity.Start.ToString("yyyy-MM-dd");
+                model.Day = activity.Start.ToString("ddddd");
+                model.Modul = activity.ActivityId.ToString();
+                model.PM = "Förmiddag";
+                model.AM = "Eftermiddag";
+                model.Extern =  "Nej";
+                myList.Add(model);
+            }
+
+
+            return View(myList);
+        }
+
 
         protected override void Dispose(bool disposing)
         {

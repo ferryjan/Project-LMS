@@ -55,15 +55,31 @@ namespace Project_LMS.Controllers
             return View(activity);
         }
 
+
         // GET: Activities/Create
         public ActionResult Create(int id)
         {
             ViewBag.ActivityTypeId = new SelectList(db.ActivityTypes, "ActivityTypeId", "Type");
-            ViewBag.ModuleId = id;
-            ViewBag.ModuleName = db.Modules.FirstOrDefault(n => n.ModuleId == id).Name;
-            ViewBag.CourseName = db.Modules.FirstOrDefault(n => n.ModuleId == id).Course.CourseName;
+            // create a new model
+            ActivityViewModels activityModel = new ActivityViewModels();
+            Module module = db.Modules.Find(id);
+            if (module == null) { return HttpNotFound(); }
 
-            return View();
+            activityModel.ModuleId = id;
+            activityModel.ModuleName = module.Name;
+            activityModel.ModuleStartDate = module.StartDate;
+            activityModel.ModuleEndDate = module.EndDate;
+            //
+            Course course = db.Courses.Find(module.CourseId);
+            if (course == null) { return HttpNotFound(); }
+            activityModel.CourseName = course.CourseName;
+            activityModel.CourseStartDate = course.StartDate;
+            activityModel.CourseEndDate = course.EndDate;
+            //
+            activityModel.Start = db.Modules.FirstOrDefault(n => n.ModuleId == id).StartDate;
+            activityModel.End = db.Modules.FirstOrDefault(n => n.ModuleId == id).EndDate;
+
+            return View(activityModel);
         }
 
         // POST: Activities/Create
@@ -71,41 +87,80 @@ namespace Project_LMS.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(int id, [Bind(Include = "ActivityId,ActivityName,Start,End,Description,ModuleId,ActivityTypeId")] Activity activity)
+        public ActionResult Create(int id, ActivityViewModels activityModel)
         {
-            if(activity != null){ activity.ModuleId = id; }
+            if(activityModel != null){ activityModel.ModuleId = id; }
+            Activity activity = new Activity();
+
             if (ModelState.IsValid)
             {
+                activity.ModuleId = activityModel.ModuleId;
+                activity.ActivityName = activityModel.ActivityName;
+                activity.ActivityTypeId = activityModel.ActivityTypeId;
+                activity.Description = activityModel.Description;
+                activity.Start = activityModel.Start;
+                activity.End = activityModel.End;
+
                 db.Activities.Add(activity);
                 db.SaveChanges();
                 return RedirectToAction("Edit", "Modules", new { id = activity.ModuleId });
             }
 
+
             ViewBag.ActivityTypeId = new SelectList(db.ActivityTypes, "ActivityTypeId", "Type", activity.ActivityTypeId);
-            ViewBag.ModuleId = new SelectList(db.Modules, "ModuleId", "CourseName", activity.ModuleId);
-            ViewBag.ModuleName = db.Modules.FirstOrDefault(n => n.ModuleId == activity.ModuleId).Name;
-            ViewBag.CourseName = db.Modules.FirstOrDefault(n => n.ModuleId == activity.ModuleId).Course.CourseName;
-            return View(activity);
+            Module module = db.Modules.Find(id);
+            if (module == null) { return HttpNotFound(); }
+
+            activityModel.ModuleId = id;
+            activityModel.ModuleName = module.Name;
+            activityModel.ModuleStartDate = module.StartDate;
+            activityModel.ModuleEndDate = module.EndDate;
+            //
+            Course course = db.Courses.Find(module.CourseId);
+            if (course == null) { return HttpNotFound(); }
+            activityModel.CourseName = course.CourseName;
+            activityModel.CourseStartDate = course.StartDate;
+            activityModel.CourseEndDate = course.EndDate;
+            //
+            activityModel.Start = db.Modules.FirstOrDefault(n => n.ModuleId == id).StartDate;
+            activityModel.End = db.Modules.FirstOrDefault(n => n.ModuleId == id).EndDate;
+
+            return View(activityModel);
         }
 
         // GET: Activities/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+            if (id == null){ return new HttpStatusCodeResult(HttpStatusCode.BadRequest); }
             Activity activity = db.Activities.Find(id);
-            if (activity == null)
-            {
-                return HttpNotFound();
-            }
+            if (activity == null) { return HttpNotFound(); }
+
+            // create a new model
+            ActivityViewModels activityModel = new ActivityViewModels();
+            activityModel.ActivityId = activity.ActivityId;
+            activityModel.ActivityName = activity.ActivityName;
+            activityModel.ActivityTypeId = activity.ActivityTypeId;
+            activityModel.ActivityType = activity.ActivityType;
+            activityModel.Description = activity.Description;
+            activityModel.Start = activity.Start;
+            activityModel.End = activity.End;
+            //
             ViewBag.ActivityTypeId = new SelectList(db.ActivityTypes, "ActivityTypeId", "Type", activity.ActivityTypeId);
-            ViewBag.ModuleId = new SelectList(db.Modules, "ModuleId", "CourseName", activity.ModuleId);
-            ViewBag.Id = activity.ActivityId;
-            ViewBag.ModuleStartDate = activity.Module.StartDate;
-            ViewBag.ModuleEndDate = activity.Module.EndDate;
-            return View(activity);
+            //
+            Module module = db.Modules.Find(activity.ModuleId);
+            if (module == null) { return HttpNotFound(); }
+            activityModel.ModuleId = activity.ModuleId;
+            activityModel.ModuleName = module.Name;
+            activityModel.ModuleStartDate = module.StartDate;
+            activityModel.ModuleEndDate = module.EndDate;
+            //
+            Course course = db.Courses.Find(module.CourseId);
+            if (course == null) { return HttpNotFound(); }
+            activityModel.CourseName = course.CourseName;
+            activityModel.CourseStartDate = course.StartDate;
+            activityModel.CourseEndDate = course.EndDate;
+            //
+            return View(activityModel);
         }
 
         // POST: Activities/Edit/5
@@ -113,7 +168,7 @@ namespace Project_LMS.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id,[Bind(Include = "ActivityId,ActivityName,Start,End,Description,ActivityTypeId")] Activity activity)
+        public ActionResult Edit(int id, Activity activity)
         {
             if (ModelState.IsValid)
             {

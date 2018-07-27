@@ -49,11 +49,17 @@ namespace Project_LMS.Controllers
         // GET: Modules/Create
         public ActionResult Create(int id)
         {
-            ViewBag.CourseStartDate = db.Courses.FirstOrDefault(c => c.CourseId == id).StartDate.Date;
-            ViewBag.CourseEndDate = db.Courses.FirstOrDefault(c => c.CourseId == id).EndDate.Date;
-            ViewBag.CourseId = id;
+            Course course = db.Courses.Find(id);
+            if (course == null){ return HttpNotFound(); }
+
+            Module model = new Module();
+            model.StartDate = course.StartDate;
+            model.EndDate = course.EndDate;
+            model.CourseId = course.CourseId;
+            model.Course = course;
+
             ViewBag.DateNotValidMessage = "";
-            return View();
+            return View(model);
         }
 
         // POST: Modules/Create
@@ -62,6 +68,7 @@ namespace Project_LMS.Controllers
         public ActionResult Create(int id, [Bind(Include = "Name,StartDate,EndDate,Description")] Module module)
         {
             module.CourseId = id;
+
             var courseStartDate = db.Courses.FirstOrDefault(c => c.CourseId == id).StartDate.Date;
             var courseEndDate = db.Courses.FirstOrDefault(c => c.CourseId == id).EndDate.Date;
             if (DateTime.Compare(courseStartDate, module.StartDate) > 0 || DateTime.Compare(courseEndDate, module.EndDate) < 0)
@@ -97,11 +104,14 @@ namespace Project_LMS.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.CourseStartDate = db.Courses.FirstOrDefault(c => c.CourseId == module.CourseId).StartDate.Date;
-            ViewBag.CourseEndDate = db.Courses.FirstOrDefault(c => c.CourseId == module.CourseId).EndDate.Date;
-            ViewBag.CourseId = module.CourseId;
+
+            Course course = db.Courses.Find(module.CourseId);
+            if (course == null)
+            {
+                return HttpNotFound();
+            }
+
             ViewBag.DateNotValidMessage = "";
-            // ViewBag.CourseId = new SelectList(db.Courses, "CourseId", "CourseName", module.CourseId);
             return View(module);
         }
 
