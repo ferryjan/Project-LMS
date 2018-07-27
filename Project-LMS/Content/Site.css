@@ -87,9 +87,10 @@ body {
 }
 
 #cssmenu > ul > li > a {
+    /*add lot of stuff here*/
 }
 
-@import url(http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300);
+/*@import url(http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300);*/
 
 #cssmenu {
     height: 100%;
@@ -127,6 +128,7 @@ body {
         }
 
 #cssmenu > ul > li > a {
+    /*more comments for the people!*/
     margin-top: 25px;
     color: wheat;
     text-transform: uppercase;
