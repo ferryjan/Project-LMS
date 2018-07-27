@@ -68,7 +68,7 @@ namespace Project_LMS.Controllers
             }
             else if (User.IsInRole("Student"))
             {
-                return RedirectToAction("StudentStart", "ApplicationUser");
+                return RedirectToAction("StudentStart", "StudentCourses");
             }
             else
             {

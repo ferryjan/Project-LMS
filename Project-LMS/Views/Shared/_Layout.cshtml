@@ -29,10 +29,11 @@
                 <ul class="nav navbar-nav">
                     @if (User.IsInRole("Teacher"))
                     {
-                        <li>@Html.ActionLink("Administrate Teachers", "Index", "ApplicationUser")</li>
-                        <li>@Html.ActionLink("Administrate Courses", "Index", "TeacherCourses")</li>
+                         <li>@Html.ActionLink("Administrate Teachers", "Index", "ApplicationUser")</li>
+                         <li>@Html.ActionLink("Administrate Courses", "Index", "TeacherCourses")</li>
                     }
                 </ul>
+
                 @Html.Action("GetUserProfile", "ApplicationUser")
                 @*@Html.Partial("_LoginPartial")*@
             </div>

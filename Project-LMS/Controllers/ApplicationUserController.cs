@@ -441,16 +441,6 @@ namespace Project_LMS.Controllers
             return RedirectToAction("Index");
         }
 
-        // GET: StudentStart/
-        [Authorize(Roles = "Student")]
-        public ActionResult StudentStart()
-        {
-            var userId = User.Identity.GetUserId();
-            var appUser = db.Users.Find(userId);
-            var MyCourse = db.Courses.Include(m => m.CourseModules).Include(s => s.AttendingStudents).First(u => u.CourseId == appUser.CourseId);
-            return View("StudentStartPage", MyCourse);
-        }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)
