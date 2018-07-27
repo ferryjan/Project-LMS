@@ -446,9 +446,9 @@
     <Content Include="Views\ApplicationUser\RedirectToPage.cshtml" />
     <Content Include="Views\ApplicationUser\_LoginPartial.cshtml" />
     <Content Include="Views\TeacherCourses\Schedule.cshtml" />
-    <Content Include="Views\StudentCourses\Details.cshtml" />
     <Content Include="Views\StudentCourses\Index.cshtml" />
     <Content Include="Views\StudentCourses\StudentStart.cshtml" />
+    <Content Include="Views\StudentCourses\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

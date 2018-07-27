@@ -211,14 +211,11 @@ namespace Project_LMS.Controllers
                         ViewBag.ActivityId = id;
                         return View(doc);
                     }
-                    
                 }
             }
             ViewBag.ModuleId = id;
             return View(doc);
         }
-
-
 
         [HttpGet]
         [Authorize(Roles = "Teacher")]

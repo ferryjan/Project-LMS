@@ -1,50 +1,38 @@
-﻿@model Project_LMS.Models.Course
+﻿@model Project_LMS.Models.ApplicationUser
 
 @{
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Classmate</h2>
 
 <div>
-    <h4>Course</h4>
+    <h4>@Html.DisplayFor(model => model.GivenName) @Html.DisplayFor(model => model.FamilyName)</h4>
     <hr />
+
+    @if (Model.ProfileImageRef != "")
+    {
+        <img alt="" src="~/Pictures/@Model.ProfileImageRef" data-radium="true" style="width: 128px; height: 128px; border-radius: 00%">
+    }
+    else
+    {
+        <img alt="" src="~/Pictures/defaultavatar.png" data-radium="true" style="width: 128px; height: 128px; border-radius: 00%">
+    }
+
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.CourseName)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.CourseName)
-        </dd>
+        <dt>@Html.DisplayNameFor(model => model.TimeOfRegistration)</dt>
+        <dd>@Html.DisplayFor(model => model.TimeOfRegistration)</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.StartDate)
-        </dt>
+        <dt>@Html.DisplayNameFor(model => model.Email)</dt>
+        <dd>@Html.DisplayFor(model => model.Email)</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.StartDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.EndDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.EndDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CourseDescription)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CourseDescription)
-        </dd>
+        <dt>@Html.DisplayNameFor(model => model.PhoneNumber)</dt>
+        <dd>@Html.DisplayFor(model => model.PhoneNumber)</dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.CourseId }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary btn-large" }) 
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary btn-large" })
 </p>

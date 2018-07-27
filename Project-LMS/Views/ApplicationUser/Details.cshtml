@@ -9,51 +9,42 @@
 <div>
     <h4>@Html.DisplayFor(model => model.GivenName) @Html.DisplayFor(model => model.FamilyName)</h4>
     <hr />
-    <dl class="dl-horizontal">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.GivenName)
-        </dt>
+    @ViewBag.ImgSrc
+    <img src=@ViewBag.ImgSrc alt="Profile picture not found">
 
-        <dd>
-            @Html.DisplayFor(model => model.GivenName)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.FamilyName)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.FamilyName)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.TimeOfRegistration)
-        </dt>
+    <div class="row no-gutters container">
+        <div class="col-3">
+            @if (Model.ProfileImageRef != "")
+            {
+                <img alt="" src="~/Pictures/@Model.ProfileImageRef" data-radium="true" style="width: 128px; height: 128px; border-radius: 00%">
+            }
+            else
+            {
+                <img alt="" src="~/Pictures/defaultavatar.png" data-radium="true" style="width: 128px; height: 128px; border-radius: 00%">
+            }
+        </div>
+        <div class="col-9">
+            <dl class="dl-horizontal">
+                <dt>@Html.DisplayNameFor(model => model.FullName)</dt>
+                <dd>@Html.DisplayFor(model => model.FullName)</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.TimeOfRegistration)
-        </dd>
+                <dt>@Html.DisplayNameFor(model => model.TimeOfRegistration)</dt>
+                <dd>@Html.DisplayFor(model => model.TimeOfRegistration)</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
+                <dt>@Html.DisplayNameFor(model => model.Email)</dt>
+                <dd>@Html.DisplayFor(model => model.Email)</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PhoneNumber)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PhoneNumber)
-        </dd>
-
-    </dl>
+                <dt>@Html.DisplayNameFor(model => model.PhoneNumber)</dt>
+                <dd>@Html.DisplayFor(model => model.PhoneNumber)</dd>
+            </dl>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary btn-large" }) 
-    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary btn-large" })
-</p>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary btn-large" })
+        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary btn-large" })
+    </p>

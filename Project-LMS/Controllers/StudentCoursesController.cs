@@ -30,21 +30,24 @@ namespace Project_LMS.Controllers
         }
 
 
-
         // GET: StudentCourses/Details/5
-        public ActionResult Details(int? id)
+        [Authorize(Roles = "Student")]
+        public ActionResult Details(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Course course = db.Courses.Find(id);
-            if (course == null)
+            ApplicationUser applicationUser = db.Users.Find(id);
+            var userId = User.Identity.GetUserId();
+            var appUser = db.Users.Find(userId);
+            if (applicationUser == null || appUser.CourseId == applicationUser.CourseId)
             {
                 return HttpNotFound();
             }
-            return View(course);
+            return View(applicationUser);
         }
+
 
 
         protected override void Dispose(bool disposing)
