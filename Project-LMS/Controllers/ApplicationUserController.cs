@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Security.Principal;
@@ -100,7 +101,8 @@ namespace Project_LMS.Controllers
                     var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
                     var studentRole = roleManager.FindByName("Student");
                     var list = db.Users.Where(x => x.Roles.Any(s => s.RoleId == studentRole.Id)).ToList();
-                    if (list.FirstOrDefault(s => s.UserName == applicationUser.Email) == null) {
+                    if (list.FirstOrDefault(s => s.UserName == applicationUser.Email) == null)
+                    {
                         ViewBag.ErrMsg = "This email is existed in the database, try another one!";
                         ViewBag.CourseId = id;
                         return View(applicationUser);
@@ -190,7 +192,7 @@ namespace Project_LMS.Controllers
                     ViewBag.ErrMsg = "This email is existed in the database, try another one!";
                     return View(applicationUser);
                 }
-                if (!IsValidEmail(applicationUser.Email) || applicationUser.Email==null)
+                if (!IsValidEmail(applicationUser.Email) || applicationUser.Email == null)
                 {
                     ViewBag.ErrMsg = "This email address is not valid!";
                     return View(applicationUser);
@@ -245,7 +247,7 @@ namespace Project_LMS.Controllers
                 return HttpNotFound();
             }
 
-//          return View(applicationUser);
+            //          return View(applicationUser);
 
             var model = new ChangeProfileViewModels();
             model.GivenName = applicationUser.GivenName;
@@ -253,7 +255,6 @@ namespace Project_LMS.Controllers
             model.Email = applicationUser.Email;
             model.ProfileImageRef = applicationUser.ProfileImageRef;
             model.PhoneNumber = applicationUser.PhoneNumber;
-
             return View(model);
         }
 
@@ -267,13 +268,38 @@ namespace Project_LMS.Controllers
             {
                 return View(model);
             }
-
             var userId = User.Identity.GetUserId();
             ApplicationUser dbAU = db.Users.Find(userId);
             dbAU.GivenName = model.GivenName;
             dbAU.FamilyName = model.FamilyName;
-            dbAU.ProfileImageRef = model.ProfileImageRef;
             var oldEmail = dbAU.Email;
+
+            if (Request.Files.Count > 0)
+            {
+                string base64 = Request.Form["imgCropped"];
+                if (base64 != null && base64 != "")
+                {
+                    byte[] bytes = Convert.FromBase64String(base64.Split(',')[1]);
+                    HttpPostedFileBase file = Request.Files[0];
+                    Random rnd = new Random();
+                    var a = rnd.Next(100000);
+                    using (FileStream stream = new FileStream(Server.MapPath("~/Pictures/" + a + "-" + file.FileName), FileMode.Create))
+                    {
+                        stream.Write(bytes, 0, bytes.Length);
+                        stream.Flush();
+                        dbAU.ProfileImageRef = +a + "-" + file.FileName;
+                    }
+                }
+
+                //HttpPostedFileBase file = Request.Files[0];
+                //if (file.ContentLength > 0)
+                //{
+                //    file.SaveAs(HttpContext.Server.MapPath("~/Pictures/")
+                //                                      + file.FileName);
+                //    dbAU.ProfileImageRef = file.FileName;
+                //}
+            }
+
             if (db.Users.Any(u => u.UserName == model.Email) && dbAU.UserName != model.Email)
             {
                 ViewBag.Errmsg = "This email is existed in the database, try another one!";
@@ -295,12 +321,8 @@ namespace Project_LMS.Controllers
                 Session.Abandon();
                 return RedirectToAction("RedirectToPage", "ApplicationUser");
             }
-            if (User.IsInRole("Teacher"))
-            {
-                return RedirectToAction("Index", "ApplicationUser");
-            }
+            return RedirectToAction("Login", "Account");
 
-            return RedirectToAction("Index");
         }
 
 
@@ -328,7 +350,7 @@ namespace Project_LMS.Controllers
             return View(model);
         }
 
-       
+
 
         // POST: ApplicationUser/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -346,8 +368,34 @@ namespace Project_LMS.Controllers
             ApplicationUser dbAU = db.Users.Find(model.UserId);
             dbAU.GivenName = model.GivenName;
             dbAU.FamilyName = model.FamilyName;
-            dbAU.ProfileImageRef = model.ProfileImageRef;
             var oldEmail = dbAU.Email;
+
+            if (Request.Files.Count > 0)
+            {
+                string base64 = Request.Form["imgCropped"];
+                if (base64 != null && base64 != "")
+                {
+                    byte[] bytes = Convert.FromBase64String(base64.Split(',')[1]);
+                    HttpPostedFileBase file = Request.Files[0];
+                    Random rnd = new Random();
+                    var a = rnd.Next(100000);
+                    using (FileStream stream = new FileStream(Server.MapPath("~/Pictures/" + a + "-" + file.FileName), FileMode.Create))
+                    {
+                        stream.Write(bytes, 0, bytes.Length);
+                        stream.Flush();
+                        dbAU.ProfileImageRef = +a + "-" + file.FileName;
+                    }
+                }
+
+                //HttpPostedFileBase file = Request.Files[0];
+                //if (file.ContentLength > 0)
+                //{
+                //    file.SaveAs(HttpContext.Server.MapPath("~/Pictures/")
+                //                                      + file.FileName);
+                //    dbAU.ProfileImageRef = file.FileName;
+                //}
+            }
+
             if (db.Users.Any(u => u.UserName == model.Email) && dbAU.UserName != model.Email)
             {
                 ViewBag.Errmsg = "This email is existed in the database, try another one!";
