@@ -4,31 +4,22 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Details for @Html.DisplayFor(model => model.GivenName) @Html.DisplayFor(model => model.FamilyName)</h2>
+@if (User.IsInRole("Teacher"))
+{<h4>Teacher</h4>}
 
 <div>
-    <h4>@Html.DisplayFor(model => model.GivenName) @Html.DisplayFor(model => model.FamilyName)</h4>
-    <hr />
-
-    @ViewBag.ImgSrc
-    <img src=@ViewBag.ImgSrc alt="Profile picture not found">
-
-
-
 
     <div class="row no-gutters container">
-        <div class="col-3">
+        <div class="col-md-1">
             @if (Model.ProfileImageRef != "")
-            {
-                <img alt="" src="~/Pictures/@Model.ProfileImageRef" data-radium="true" style="width: 128px; height: 128px; border-radius: 00%">
-            }
+            {<img alt="" src="~/Pictures/@Model.ProfileImageRef" data-radium="true" style="width: 128px; height: 128px; border-radius: 00%">}
             else
-            {
-                <img alt="" src="~/Pictures/defaultavatar.png" data-radium="true" style="width: 128px; height: 128px; border-radius: 00%">
-            }
+            {<img alt="" src="~/Pictures/defaultavatar.png" data-radium="true" style="width: 128px; height: 128px; border-radius: 00%">            }
         </div>
-        <div class="col-9">
+        <div class="col-md-11">
             <dl class="dl-horizontal">
+
                 <dt>@Html.DisplayNameFor(model => model.FullName)</dt>
                 <dd>@Html.DisplayFor(model => model.FullName)</dd>
 
