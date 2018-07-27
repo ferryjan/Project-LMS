@@ -66,10 +66,10 @@ namespace Project_LMS.Controllers
             {
                 return RedirectToAction("Index", "TeacherCourses");
             }
-            //else if (User.IsInRole("Student"))
-            //{
-            //    return RedirectToAction("Login", "Account");
-            //}
+            else if (User.IsInRole("Student"))
+            {
+                return RedirectToAction("StudentStart", "StudentCourses");
+            }
             else
             {
                 ViewBag.ReturnUrl = returnUrl;

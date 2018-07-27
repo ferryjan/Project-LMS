@@ -204,6 +204,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ModulesController.cs" />
     <Compile Include="Controllers\NavController.cs" />
+    <Compile Include="Controllers\StudentCoursesController.cs" />
     <Compile Include="Controllers\TeacherCoursesController.cs" />
     <Compile Include="Excensions\IdentityExtensions.cs" />
     <Compile Include="Global.asax.cs">
@@ -442,6 +443,9 @@
     <Content Include="Views\Documents\GiveFeedback.cshtml" />
     <Content Include="Views\ApplicationUser\RedirectToPage.cshtml" />
     <Content Include="Views\ApplicationUser\_LoginPartial.cshtml" />
+    <Content Include="Views\StudentCourses\Details.cshtml" />
+    <Content Include="Views\StudentCourses\Index.cshtml" />
+    <Content Include="Views\StudentCourses\StudentStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
