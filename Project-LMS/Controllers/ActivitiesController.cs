@@ -22,13 +22,13 @@ namespace Project_LMS.Controllers
         public ActionResult Index(int? id)
         {
             //Fix do allow dev on activities before Modules are checked in.
-            if (!id.HasValue) {id = db.Modules.FirstOrDefault().ModuleId;}
+            if (!id.HasValue) { id = db.Modules.FirstOrDefault().ModuleId; }
 
             ViewBag.ModuleName = db.Modules.FirstOrDefault(n => n.ModuleId == id).Name;
             ViewBag.CourseName = db.Modules.FirstOrDefault(n => n.ModuleId == id).Course.CourseName;
             ViewBag.ModuleId = id;
 
-            var activities = db.Activities.Where(n => n.ModuleId == id ).Include(a => a.ActivityType);
+            var activities = db.Activities.Where(n => n.ModuleId == id).Include(a => a.ActivityType);
             return View(activities.OrderBy(s => s.Start).ToList());
         }
 
@@ -95,7 +95,7 @@ namespace Project_LMS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(int id, ActivityViewModels activityModel)
         {
-            if(activityModel != null){ activityModel.ModuleId = id; }
+            if (activityModel != null) { activityModel.ModuleId = id; }
             Activity activity = new Activity();
 
             if (ModelState.IsValid)
@@ -138,7 +138,7 @@ namespace Project_LMS.Controllers
         [Authorize(Roles = "Teacher")]
         public ActionResult Edit(int? id)
         {
-            if (id == null){ return new HttpStatusCodeResult(HttpStatusCode.BadRequest); }
+            if (id == null) { return new HttpStatusCodeResult(HttpStatusCode.BadRequest); }
             Activity activity = db.Activities.Find(id);
             if (activity == null) { return HttpNotFound(); }
 
@@ -192,18 +192,30 @@ namespace Project_LMS.Controllers
 
         // GET: Activities/Delete/5
         [Authorize(Roles = "Teacher")]
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(int? id, bool isVerified)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Activity activity = db.Activities.Find(id);
+            if (db.Documents.FirstOrDefault(d => d.ActivityId == id) != null) {
+                ViewBag.IsEmpty = "No";
+            }
             if (activity == null)
             {
                 return HttpNotFound();
             }
-            return View(activity);
+            if (isVerified)
+            {
+                ViewBag.VerifyComfirmed = "Yes";
+
+            }
+            else
+            {
+                ViewBag.VerifyComfirmed = "No";
+            }
+                return View(activity);
         }
 
         // POST: Activities/Delete/5
@@ -212,12 +224,20 @@ namespace Project_LMS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            var listOfDoc = db.Documents.Where(d => d.ActivityId == id).ToList();
+            if (listOfDoc != null)
+            {
+                foreach (var doc in listOfDoc)
+                {
+                    db.Documents.Remove(doc);
+                }
+            }
             
             Activity activity = db.Activities.Find(id);
             var ModuleId = activity.ModuleId;
             db.Activities.Remove(activity);
             db.SaveChanges();
-            return RedirectToAction("Edit", "Modules" , new { id = ModuleId });
+            return RedirectToAction("Edit", "Modules", new { id = ModuleId });
         }
 
         [Authorize(Roles = "Teacher")]
@@ -227,10 +247,10 @@ namespace Project_LMS.Controllers
             var studentRole = roleManager.FindByName("Student");
             var courseId = db.Activities.FirstOrDefault(a => a.ActivityId == id).Module.CourseId;
             var studentList = db.Users.Where(x => x.Roles.Any(s => s.RoleId == studentRole.Id)).Where(s => s.CourseId == courseId).OrderBy(i => i.GivenName).ThenBy(i => i.FamilyName).ToList();
-            var documentList = db.Documents.ToList();
+            var documentList = db.Documents.Where(d => d.ActivityId == id && d.isHomework == true).ToList();
 
             List<HomeworkViewModels> homeworkVM = new List<HomeworkViewModels>();
-            HomeworkViewModels hvm = new HomeworkViewModels() { Documents = documentList, Students = studentList};
+            HomeworkViewModels hvm = new HomeworkViewModels() { Documents = documentList, Students = studentList };
             homeworkVM.Add(hvm);
             return PartialView("_homeworkList", homeworkVM);
         }

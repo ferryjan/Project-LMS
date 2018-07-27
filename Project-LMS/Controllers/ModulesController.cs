@@ -155,16 +155,32 @@ namespace Project_LMS.Controllers
 
         // GET: Modules/Delete/5
         [Authorize(Roles = "Teacher")]
-        public ActionResult Delete(int id, int? moduleId)
+        public ActionResult Delete(int id, int? moduleId, bool isVerified)
         {
             if (moduleId == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Module module = db.Modules.Find(moduleId);
+
+            if (db.Documents.FirstOrDefault(d => d.ModuleId == moduleId) != null || db.Activities.FirstOrDefault(d => d.ModuleId == moduleId) != null)
+            {
+                ViewBag.IsEmpty = "No";
+            }
+
             if (module == null)
             {
                 return HttpNotFound();
+            }
+
+            if (isVerified)
+            {
+                ViewBag.VerifyComfirmed = "Yes";
+
+            }
+            else
+            {
+                ViewBag.VerifyComfirmed = "No";
             }
             ViewBag.CourseID = id;
             return View(module);
@@ -176,6 +192,32 @@ namespace Project_LMS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int moduleId, int id)
         {
+            var listOfModDoc = db.Documents.Where(d => d.ModuleId == moduleId);
+            if (listOfModDoc != null)
+            {
+                foreach (var doc in listOfModDoc)
+                {
+                    db.Documents.Remove(doc);
+                }
+            }
+
+            var listOfActivity = db.Activities.Where(d => d.ModuleId == moduleId).ToList();
+            if (listOfActivity != null)
+            {
+                foreach (var act in listOfActivity)
+                {
+                    var listOfActDoc = db.Documents.Where(d => d.ActivityId == act.ActivityId).ToList();
+                    if (listOfActDoc != null)
+                    {
+                        foreach (var doc in listOfActDoc)
+                        {
+                            db.Documents.Remove(doc);
+                        }
+                    }
+                    db.Activities.Remove(act);
+                }
+            }
+
             Module module = db.Modules.Find(moduleId);
             db.Modules.Remove(module);
             db.SaveChanges();
