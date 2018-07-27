@@ -66,6 +66,10 @@ namespace Project_LMS.Controllers
             {
                 return RedirectToAction("Index", "TeacherCourses");
             }
+            else if (User.IsInRole("Student"))
+            {
+                return RedirectToAction("StudentStart", "StudentCourses");
+            }
             else
             {
                 ViewBag.ReturnUrl = returnUrl;
@@ -156,7 +160,7 @@ namespace Project_LMS.Controllers
 
         //
         // GET: /Account/Register
-        [AllowAnonymous]
+        [Authorize (Roles = "Teacher")]
         public ActionResult Register()
         {
             return View();
@@ -165,7 +169,7 @@ namespace Project_LMS.Controllers
         //
         // POST: /Account/Register
         [HttpPost]
-        [AllowAnonymous]
+        [Authorize(Roles = "Teacher")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {

@@ -10,27 +10,32 @@ using Project_LMS.Models;
 
 namespace Project_LMS.Controllers
 {
+    [Authorize]
     public class TeacherCoursesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: TeacherCourses
+        [Authorize(Roles = "Teacher")]
         public ActionResult Index()
         {
             return View(db.Courses.ToList().Where(i => DateTime.Compare(i.EndDate, DateTime.Now) > 0).OrderBy(c => c.StartDate).ToList());
         }
 
+        [Authorize(Roles = "Teacher")]
         public ActionResult ShowUndergoingCourses()
         {
             return View(db.Courses.ToList().Where(i => DateTime.Compare(i.StartDate, DateTime.Now) < 0 && DateTime.Compare(i.EndDate, DateTime.Now) >= 0).OrderBy(c => c.StartDate).ToList());
         }
 
+        [Authorize(Roles = "Teacher")]
         public ActionResult ShowExpiredCourses()
         {
             return View(db.Courses.ToList().Where(i => DateTime.Compare(i.EndDate, DateTime.Now) <= 0).OrderBy(c => c.StartDate).ToList());
         }
 
         // GET: TeacherCourses/Details/5
+        [Authorize(Roles = "Teacher")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -46,6 +51,7 @@ namespace Project_LMS.Controllers
         }
 
         // GET: TeacherCourses/Create
+        [Authorize(Roles = "Teacher")]
         public ActionResult Create()
         {
             return View();
@@ -55,6 +61,7 @@ namespace Project_LMS.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "Teacher")]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "CourseId,CourseName,StartDate,EndDate,CourseDescription")] Course course)
         {
@@ -69,6 +76,7 @@ namespace Project_LMS.Controllers
         }
 
         // GET: TeacherCourses/Edit/5
+        [Authorize(Roles = "Teacher")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -87,6 +95,7 @@ namespace Project_LMS.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "Teacher")]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "CourseId,CourseName,StartDate,EndDate,CourseDescription")] Course course)
         {
@@ -100,6 +109,7 @@ namespace Project_LMS.Controllers
         }
 
         // GET: TeacherCourses/Delete/5
+        [Authorize(Roles = "Teacher")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -116,6 +126,7 @@ namespace Project_LMS.Controllers
 
         // POST: TeacherCourses/Delete/5
         [HttpPost, ActionName("Delete")]
+        [Authorize(Roles = "Teacher")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
