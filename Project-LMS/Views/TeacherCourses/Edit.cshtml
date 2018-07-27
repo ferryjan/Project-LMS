@@ -14,6 +14,7 @@
     <div class="form-horizontal">
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <h4 style="color:red">OBS! Editing start/end date of a course may affect on the modules and activities under this course!</h4>
         @Html.HiddenFor(model => model.CourseId)
 
         <div class="form-group">

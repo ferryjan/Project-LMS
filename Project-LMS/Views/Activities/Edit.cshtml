@@ -22,7 +22,7 @@
 
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.ActivityId)
-
+        <h4 style="color:indianred"> @ViewBag.DateNotValidMessage </h4>
         <div class="form-group">
             @Html.LabelFor(model => model.ActivityName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -63,6 +63,9 @@
             </div>
         </div>
 
+        @Html.HiddenFor(model => model.ModuleId)
+
+
         <div class="form-group">
             <div class="col-md-2">
                 @Html.ActionLink("Back to Modules", "Edit", "Modules", new { id = @Model.ModuleId }, new { @class = "btn btn-primary btn-large" })
@@ -81,7 +84,7 @@
 <br />
 <br />
 
-@if (@Model.ActivityType.Type == "Homework")
+@if (@Model.ActivityTypeId == 4)
 {
     @Html.Action("ShowHomeworkList", "Activities", new { id = @Model.ActivityId })
 }
