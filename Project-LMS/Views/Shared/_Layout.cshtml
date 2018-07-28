@@ -30,8 +30,12 @@
                 <ul class="nav navbar-nav">
                     @if (User.IsInRole("Teacher"))
                     {
-                         <li>@Html.ActionLink("Administrate Teachers", "Index", "ApplicationUser")</li>
-                         <li>@Html.ActionLink("Administrate Courses", "Index", "TeacherCourses")</li>
+                        <li>@Html.ActionLink("Administrate Teachers", "Index", "ApplicationUser")</li>
+                        <li>@Html.ActionLink("Administrate Courses", "Index", "TeacherCourses")</li>
+                    }
+                    else if (User.IsInRole("Student"))
+                    {
+                        <li>@Html.ActionLink("Message Center", "MessageBox", "Messages")</li>
                     }
                 </ul>
 

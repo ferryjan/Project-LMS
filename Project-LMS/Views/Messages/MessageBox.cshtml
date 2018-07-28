@@ -1,0 +1,92 @@
+﻿@model IEnumerable<Project_LMS.Models.Message>
+
+@{
+    ViewBag.Title = "MessageBox";
+}
+
+<h2>Message Box</h2>
+
+<p>
+    @Html.ActionLink("Open A New Private Chat", "SendMessage", new { id = "" }, new { @class = "btn btn-primary btn-large" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Topic)
+        </th>
+        <th>
+            @Html.Raw("Chat With")
+        </th>
+        <th>
+            @Html.Raw("Last Sent/Receive Date")
+        </th>
+        <th>
+            @Html.Raw("Unread Messages")
+        </th>
+        <th></th>
+    </tr>
+
+    @{
+        var tempMBN = "";
+        DateTime tempDT = DateTime.Now.AddYears(-10);
+    }
+    @foreach (var item in Model)
+    {
+        if (item.MessageBoxNumber != tempMBN)
+        {
+            var totalUnreadMsg = Model.Where(a => a.MessageBoxNumber == item.MessageBoxNumber && a.isRead == false && a.SentTo == User.Identity.Name).Count();
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Topic)
+                </td>
+                @if (item.SentFrom == User.Identity.Name)
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SentToFullName)
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SentFromFullName)
+                    </td>
+                }
+                <td>
+                    @Html.DisplayFor(modelItem => item.SentDate)
+                </td>
+                <td>
+                    @Html.Raw(totalUnreadMsg)
+                </td>
+                <td>
+                    <a href="@Url.Action("Reply", "Messages", new { id = item.MessageBoxNumber })" class="btn btn-primary">
+                        <i class="glyphicon glyphicon-pencil"></i>
+                        <span>
+                            <strong>Check&Reply</strong>
+                        </span>
+                    </a>
+                    <a href="@Url.Action("LeaveChat", "Messages", new { id = item.MessageBoxNumber })" class="btn btn-danger">
+                        <i class="glyphicon glyphicon-erase"></i>
+                        <span>
+                            <strong>Leave The Chat</strong>
+                        </span>
+                    </a>
+                </td>
+            </tr>
+            tempMBN = item.MessageBoxNumber;
+            tempDT = DateTime.Now.AddYears(-10);
+        }
+        else
+        {
+            if (DateTime.Compare(tempDT, item.SentDate) < 0)
+            {
+                tempDT = item.SentDate;
+            }
+        }
+    }
+
+</table>
+
+<p>
+    @Html.ActionLink("Back to List", "StudentStart", "StudentCourses", null, new { @class = "btn btn-primary btn-large" })
+</p>
+

@@ -9,6 +9,23 @@
     }
 }
 
+.well {
+    background: #e1e2c0;
+}
+
+
+.bodycontainer {
+    max-height: 450px;
+    width: 100%;
+    margin: 0;
+    overflow-y: auto;
+}
+
+.table-scrollable {
+    margin: 0;
+    padding: 0;
+}
+
 body {
     padding-top: 100px;
     padding-bottom: 20px;

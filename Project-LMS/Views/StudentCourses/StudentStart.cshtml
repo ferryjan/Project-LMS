@@ -4,6 +4,8 @@
     ViewBag.Title = "StudentStartPage";
 }
 
+@Html.Action("ShowStudentList", "Nav")
+
 <h2>@ViewBag.CourseName</h2>
 <h4>@ViewBag.TimePeriod</h4>
 
@@ -26,25 +28,23 @@
         </tr>
 
         @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StartDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EndDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                
-            </td>
-        </tr>
-}
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td></td>
+            </tr>
+        }
 
     </table>
 

@@ -22,6 +22,7 @@ namespace Project_LMS.Controllers
             var userId = User.Identity.GetUserId();
             var appUser = db.Users.Find(userId);
             var course = db.Courses.First(u => u.CourseId == appUser.CourseId);
+            ViewBag.CourseId = course.CourseId;
             ViewBag.CourseName = course.CourseName;
             ViewBag.TimePeriod = course.StartDate.ToString() + " - " + course.EndDate.ToString();
             ViewBag.CourseDescription = course.CourseDescription;
@@ -41,7 +42,7 @@ namespace Project_LMS.Controllers
             ApplicationUser applicationUser = db.Users.Find(id);
             var userId = User.Identity.GetUserId();
             var appUser = db.Users.Find(userId);
-            if (applicationUser == null || appUser.CourseId == applicationUser.CourseId)
+            if (applicationUser == null || appUser.CourseId != applicationUser.CourseId)
             {
                 return HttpNotFound();
             }

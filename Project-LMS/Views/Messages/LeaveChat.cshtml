@@ -1,0 +1,21 @@
+﻿@model Project_LMS.Models.Message
+
+@{
+    ViewBag.Title = "LeaveChat";
+}
+
+<h2>Leave Private Chat</h2>
+
+<h3>Are you sure you want to leave the chat?</h3>
+<h4>Warning! Once you leave the chat, you won't be able to see the chat message again!</h4>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color">
+        <input type="submit" value="Leave The Chat" class="btn btn-danger" />
+        @Html.ActionLink("Back To Message Center", "MessageBox", null, new { @class = "btn btn-primary btn-large" })
+    </div>
+}
+

@@ -1,0 +1,53 @@
+﻿@model Project_LMS.Models.Message
+
+@{
+    ViewBag.Title = "Reply";
+}
+
+<h2>Private Chat</h2>
+
+@Html.Action("ShowPrivateChats", "Messages", new { id = Model.MessageBoxNumber })
+
+<br />
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @if (ViewBag.HasLeft == "Yes")
+        {
+            <h4 style="color:red">@Model.SentToFullName has left the chat room, you cannot send message to him/her in this chat!</h4>
+        }
+        else
+        {
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            @Html.HiddenFor(model => model.isPublic)
+            @Html.HiddenFor(model => model.isRead)
+            @Html.HiddenFor(model => model.MessageBoxNumber)
+            @Html.HiddenFor(model => model.Topic)
+            @Html.HiddenFor(model => model.SentFrom)
+            @Html.HiddenFor(model => model.SentFromFullName)
+            @Html.HiddenFor(model => model.SentTo)
+            @Html.HiddenFor(model => model.SentToFullName)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Msg, "Reply:", htmlAttributes: new { @class = "control-label" })
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.Msg, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Msg, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <input type="submit" value="Reply" class="btn btn-primary" />
+                </div>
+            </div>
+        }
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back To Message Center", "MessageBox", null, new { @class = "btn btn-primary btn-large" })
+</div>

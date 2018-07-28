@@ -202,6 +202,7 @@
     <Compile Include="Controllers\ApplicationUserController.cs" />
     <Compile Include="Controllers\DocumentsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Controllers\ModulesController.cs" />
     <Compile Include="Controllers\NavController.cs" />
     <Compile Include="Controllers\StudentCoursesController.cs" />
@@ -218,6 +219,22 @@
     <Compile Include="Migrations\201807251612547_add-isActive-field-in-applicationUser.Designer.cs">
       <DependentUpon>201807251612547_add-isActive-field-in-applicationUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201807280622513_Add-Msg-Entity.cs" />
+    <Compile Include="Migrations\201807280622513_Add-Msg-Entity.Designer.cs">
+      <DependentUpon>201807280622513_Add-Msg-Entity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807280922573_Add-Msg-Entity-Change.cs" />
+    <Compile Include="Migrations\201807280922573_Add-Msg-Entity-Change.Designer.cs">
+      <DependentUpon>201807280922573_Add-Msg-Entity-Change.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807280931309_Add-Msg-Entity-Change1.cs" />
+    <Compile Include="Migrations\201807280931309_Add-Msg-Entity-Change1.Designer.cs">
+      <DependentUpon>201807280931309_Add-Msg-Entity-Change1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807281121428_changes-messages.cs" />
+    <Compile Include="Migrations\201807281121428_changes-messages.Designer.cs">
+      <DependentUpon>201807281121428_changes-messages.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Activity.cs" />
@@ -229,9 +246,11 @@
     <Compile Include="Models\HomeworkViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Message.cs" />
     <Compile Include="Models\Module.cs" />
     <Compile Include="Models\NaviItem.cs" />
     <Compile Include="Models\ScheduleViewModels.cs" />
+    <Compile Include="Models\StudentListNavItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -449,6 +468,15 @@
     <Content Include="Views\StudentCourses\Index.cshtml" />
     <Content Include="Views\StudentCourses\StudentStart.cshtml" />
     <Content Include="Views\StudentCourses\Details.cshtml" />
+    <Content Include="Views\Nav\_StudentListNav.cshtml" />
+    <Content Include="Views\Messages\LeaveChat.cshtml" />
+    <Content Include="Views\Messages\Details.cshtml" />
+    <Content Include="Views\Messages\Edit.cshtml" />
+    <Content Include="Views\Messages\Index.cshtml" />
+    <Content Include="Views\Messages\MessageBox.cshtml" />
+    <Content Include="Views\Messages\SendMessage.cshtml" />
+    <Content Include="Views\Messages\_showPrivateChats.cshtml" />
+    <Content Include="Views\Messages\Reply.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -473,6 +501,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201807251612547_add-isActive-field-in-applicationUser.resx">
       <DependentUpon>201807251612547_add-isActive-field-in-applicationUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807280622513_Add-Msg-Entity.resx">
+      <DependentUpon>201807280622513_Add-Msg-Entity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807280922573_Add-Msg-Entity-Change.resx">
+      <DependentUpon>201807280922573_Add-Msg-Entity-Change.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807280931309_Add-Msg-Entity-Change1.resx">
+      <DependentUpon>201807280931309_Add-Msg-Entity-Change1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807281121428_changes-messages.resx">
+      <DependentUpon>201807281121428_changes-messages.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
