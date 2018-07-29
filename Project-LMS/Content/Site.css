@@ -27,6 +27,7 @@
 }
 
 .tabs {
+    font-size: 18px;
     display: block;
     padding: 10px;
     background: #000000;
@@ -39,6 +40,9 @@
         font-weight: bold;
     }
 
+.well {
+    background-color: #ccccff;
+}
 
 .bodycontainer {
     max-height: 450px;

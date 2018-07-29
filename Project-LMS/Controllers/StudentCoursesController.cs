@@ -49,6 +49,22 @@ namespace Project_LMS.Controllers
             return View(applicationUser);
         }
 
+        [Authorize(Roles = "Student")]
+        public PartialViewResult StudentModuleFie(int? moduleId)
+        {
+            ViewBag.Id = moduleId;
+            var documents = db.Documents.Where(i => i.ModuleId == moduleId && !i.ActivityId.HasValue);
+            return PartialView("_studentModuleFile", documents.ToList());
+        }
+
+        [Authorize(Roles = "Student")]
+        public PartialViewResult StudentCourseFile(int? id)
+        {
+            ViewBag.Id = id;
+            var documents = db.Documents.Where(i => i.CourseId == id && !i.ModuleId.HasValue && !i.ActivityId.HasValue);
+            return PartialView("_studentCourseFile", documents.ToList());
+        }
+
 
 
         protected override void Dispose(bool disposing)

@@ -10,6 +10,7 @@
 <h4>@ViewBag.TimePeriod</h4>
 
 <br />
+@Html.Action("StudentCourseFile", "StudentCourses", new { id = ViewBag.CourseId })
 <br />
 
 <div class="container">
@@ -26,7 +27,20 @@
                     <a data-target=@target class="tabs" data-group="footer-blocks" data-toggle="collapse">Module: @mod.Name</a>
                 </div>
                 <div id=@id class="collapse show-in-md">
-                    @Html.Raw(mod.Name + " info");
+                    <div class="well">
+                        <section style="color:blue; font-weight:bold; max-width: 800px; word-wrap:break-word;word-break:break-all">
+                            <p> Module Start Date: </p>
+                            <p style="font-weight:normal"> @mod.StartDate.Date.ToString("yyyy-MM-dd")</p>
+                            <p> Module End Date: </p>
+                            <p style="font-weight:normal"> @mod.EndDate.Date.ToString("yyyy-MM-dd") </p>
+                            <p> Module Description: </p>
+                            <p style="font-weight:normal"> @mod.Description</p>
+                        </section>
+                        <br />
+                        <div>
+                            @Html.Action("StudentModuleFie", "StudentCourses", new { moduleId = mod.ModuleId })
+                        </div>
+                    </div>
                 </div>
             </div>
             <br />

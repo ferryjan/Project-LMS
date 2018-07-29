@@ -478,6 +478,8 @@
     <Content Include="Views\Messages\_showPrivateChats.cshtml" />
     <Content Include="Views\Messages\Reply.cshtml" />
     <Content Include="Views\TeacherCourses\SC.cshtml" />
+    <Content Include="Views\StudentCourses\_studentModuleFile.cshtml" />
+    <Content Include="Views\StudentCourses\_studentCourseFile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
