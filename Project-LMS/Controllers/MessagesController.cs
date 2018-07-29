@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using Project_LMS.Models;
 using Microsoft.AspNet.Identity;
+using System.Web.Services;
 
 namespace Project_LMS.Controllers
 {
@@ -16,6 +17,14 @@ namespace Project_LMS.Controllers
     public class MessagesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+
+        [HttpPost]
+        public ActionResult GetUnreadMessages()
+        {
+            var unreadMessages = db.Messages.Where(m => m.SentTo == User.Identity.Name && m.isRead == false).Count().ToString();
+            return Json(new { Data = unreadMessages }, JsonRequestBehavior.AllowGet);
+
+        }
 
         // GET: Messages
         [Authorize(Roles = "Student, Teacher")]
