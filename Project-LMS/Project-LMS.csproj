@@ -235,6 +235,10 @@
     <Compile Include="Migrations\201807281121428_changes-messages.Designer.cs">
       <DependentUpon>201807281121428_changes-messages.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201807291315539_add-color-field-activity.cs" />
+    <Compile Include="Migrations\201807291315539_add-color-field-activity.Designer.cs">
+      <DependentUpon>201807291315539_add-color-field-activity.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Activity.cs" />
@@ -243,6 +247,7 @@
     <Compile Include="Models\ApplicationUserViewModels.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\Document.cs" />
+    <Compile Include="Models\Event.cs" />
     <Compile Include="Models\HomeworkViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -477,9 +482,9 @@
     <Content Include="Views\Messages\SendMessage.cshtml" />
     <Content Include="Views\Messages\_showPrivateChats.cshtml" />
     <Content Include="Views\Messages\Reply.cshtml" />
-    <Content Include="Views\TeacherCourses\SC.cshtml" />
     <Content Include="Views\StudentCourses\_studentModuleFile.cshtml" />
     <Content Include="Views\StudentCourses\_studentCourseFile.cshtml" />
+    <Content Include="Views\StudentCourses\StudentSchedule.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -516,6 +521,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201807281121428_changes-messages.resx">
       <DependentUpon>201807281121428_changes-messages.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807291315539_add-color-field-activity.resx">
+      <DependentUpon>201807291315539_add-color-field-activity.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

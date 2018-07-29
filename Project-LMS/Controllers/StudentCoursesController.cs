@@ -65,7 +65,30 @@ namespace Project_LMS.Controllers
             return PartialView("_studentCourseFile", documents.ToList());
         }
 
+        [Authorize(Roles = "Student")]
+        public ActionResult StudentSchedule(int id)
+        {
+            ViewBag.CourseId = id;
+            return View();
+        }
 
+        public JsonResult GetEvents(int id)
+        {
+            IEnumerable<Event> eventsModelList = new List<Event>();
+
+            var eventsList = db.Activities.Where(a => a.Module.CourseId == id).ToList();
+            eventsModelList = eventsList.Select(x =>
+                       new Event()
+                       {
+                           Subject = x.ActivityName,
+                           Description = x.Description,
+                           Start = x.Start,
+                           End = x.End,
+                           ThemeColor = x.Color,
+                           IsFullDay = false
+                       });
+            return Json(eventsModelList, JsonRequestBehavior.AllowGet);
+        }
 
         protected override void Dispose(bool disposing)
         {

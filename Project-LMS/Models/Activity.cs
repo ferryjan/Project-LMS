@@ -32,6 +32,8 @@ namespace Project_LMS.Models
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
+        public string Color { get; set; }
+
         //Navigational properties
         [Display(Name = "Module ID")]
         public int? ModuleId { get; set; }

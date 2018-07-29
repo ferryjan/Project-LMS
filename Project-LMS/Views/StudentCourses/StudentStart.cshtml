@@ -8,11 +8,15 @@
 
 <h2>@ViewBag.CourseName</h2>
 <h4>@ViewBag.TimePeriod</h4>
-
+<br />
+<div>
+    @Html.ActionLink("View Schedule", "StudentSchedule", new { id = ViewBag.CourseId }, new { @class = "btn btn-primary btn-large" })
+</div>
 <br />
 @Html.Action("StudentCourseFile", "StudentCourses", new { id = ViewBag.CourseId })
 <br />
-
+<h3 style="color:crimson">Modules</h3>
+<br />
 <div class="container">
     <div class="row">
         @{ int i = 1;}

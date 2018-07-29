@@ -142,6 +142,27 @@ namespace Project_LMS.Controllers
                 activity.Description = activityModel.Description;
                 activity.Start = activityModel.Start;
                 activity.End = activityModel.End;
+                switch (activityModel.ActivityTypeId)
+                {
+                    case 1:
+                        activity.Color = "red";
+                        break;
+                    case 2:
+                        activity.Color = "blue";
+                        break;
+                    case 3:
+                        activity.Color = "green";
+                        break;
+                    case 4:
+                        activity.Color = "navy";
+                        break;
+                    case 5:
+                        activity.Color = "purple";
+                        break;
+                    default:
+                        activity.Color = "black";
+                        break;
+                }
 
                 db.Activities.Add(activity);
                 db.SaveChanges();
@@ -241,6 +262,27 @@ namespace Project_LMS.Controllers
             if (ModelState.IsValid)
             {
                 activity.ModuleId = id;
+                switch (activityModel.ActivityTypeId)
+                {
+                    case 1:
+                        activity.Color = "red";
+                        break;
+                    case 2:
+                        activity.Color = "blue";
+                        break;
+                    case 3:
+                        activity.Color = "green";
+                        break;
+                    case 4:
+                        activity.Color = "navy";
+                        break;
+                    case 5:
+                        activity.Color = "purple";
+                        break;
+                    default:
+                        activity.Color = "black";
+                        break;
+                }
                 db.Entry(activity).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Edit", "Modules", new { id });

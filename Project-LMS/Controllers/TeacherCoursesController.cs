@@ -159,7 +159,7 @@ namespace Project_LMS.Controllers
                 model.Modul = activity.ActivityId.ToString();
                 model.PM = "Förmiddag";
                 model.AM = "Eftermiddag";
-                model.Extern =  "Nej";
+                model.Extern = "Nej";
                 myList.Add(model);
             }
 
