@@ -515,6 +515,8 @@ namespace Project_LMS.Migrations
             string appUserId;
             Document doc;
 
+
+
             if (!db.Documents.Any(u => u.DocumentName == "MySevenCookies.txt"))
             {
                 email = newUser[5].Email;
@@ -547,8 +549,27 @@ namespace Project_LMS.Migrations
                     isHomework = false,
                     DocumentFileType = "pdf",
                     UploadingTime = DateTime.Now,
-                    DocumentName = "Ansvarsfriskrivning",
+                    DocumentName = "Disclaimer",
                     Description = "Lexicon does not take responsibility for any negative health effects occuring during, or after, this course."
+                };
+                db.Documents.Add(doc);
+                db.SaveChanges();
+            }
+
+            if (!db.Documents.Any(u => u.DocumentName == "Baking cookies from scratch"))
+            {
+                email = newUser[0].Email;
+                appUserId = db.Users.FirstOrDefault(u => u.Email == email).Id;
+                doc = new Document
+                {
+                    FileData = File.ReadAllBytes(MapPath("~/Resources/Baking cookies from scratch.docx")),
+                    ApplicationUserId = appUserId,
+                    ModuleId = modules[0].ModuleId,
+                    isHomework = false,
+                    DocumentFileType = "docx",
+                    UploadingTime = DateTime.Now,
+                    DocumentName = "Baking cookies from scratch.docx",
+                    Description = "Detailed description of the basics of cookie-baking."
                 };
                 db.Documents.Add(doc);
                 db.SaveChanges();
