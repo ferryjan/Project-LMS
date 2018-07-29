@@ -119,7 +119,8 @@ namespace Project_LMS.Migrations
                     End = modules[0].StartDate.AddDays(1),
                     ActivityName = "Fine dining",
                     ActivityTypeId = activityTypes[1].ActivityTypeId,
-                    Description = "Eating cookies without leaving ccrumbles requires lots of training"
+                    Description = "Eating cookies without leaving ccrumbles requires lots of training",
+                    Color = "red"
                 },
                 new Activity {
                     ModuleId = modules[0].ModuleId,
@@ -127,7 +128,8 @@ namespace Project_LMS.Migrations
                     End = modules[0].StartDate.AddDays(2),
                     ActivityName = "Conversation",
                     ActivityTypeId = activityTypes[1].ActivityTypeId,
-                    Description = "How to make fine conversation while eating cookies. Keeping your mouth shut until all crumbles have been swallowed and other essential skills."
+                    Description = "How to make fine conversation while eating cookies. Keeping your mouth shut until all crumbles have been swallowed and other essential skills.",
+                    Color = "red"
                 },
                 //Lets seed a homework (activityTypes[3]). Lets also seed it so the start and end interferes with another activity.
                 new Activity { 
@@ -136,7 +138,8 @@ namespace Project_LMS.Migrations
                     End = modules[0].StartDate.AddDays(1),
                     ActivityName = "Choosing the right blend",
                     ActivityTypeId = activityTypes[3].ActivityTypeId,
-                    Description = "Choose 7 cookies that mix well and can make the base for a good fika. To pass your written report must be uploaded in time."
+                    Description = "Choose 7 cookies that mix well and can make the base for a good fika. To pass your written report must be uploaded in time.",
+                    Color = "green"
                 },
             };
             db.Activities.AddOrUpdate(a => a.ActivityName, activities);
