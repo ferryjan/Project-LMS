@@ -106,6 +106,20 @@ namespace Project_LMS.Migrations
                     EndDate = courses[0].StartDate.AddDays(4),
                     Name = "Coffie, the black gold",
                     Description = "An introduction to Coffie: Brew or boil?"
+                },
+                new Project_LMS.Models.Module {
+                    CourseId = courses[0].CourseId,
+                    StartDate = courses[0].StartDate.AddDays(4),
+                    EndDate = courses[0].StartDate.AddDays(6),
+                    Name = "fika: rest, recreation or regulation",
+                    Description = "A theoretical glance at the position of fika in todays society."
+                },
+                new Project_LMS.Models.Module {
+                    CourseId = courses[0].CourseId,
+                    StartDate = courses[0].StartDate.AddDays(6),
+                    EndDate = courses[0].StartDate.AddDays(8),
+                    Name = "Fika: the F-word in Sweden",
+                    Description = "Fika is a coffee break in Sweden, but it is invested with considerable socio-cultural and symbolic significance."
                 }
             };
             db.Modules.AddOrUpdate(m => m.Name, modules);
@@ -131,6 +145,15 @@ namespace Project_LMS.Migrations
                     Description = "How to make fine conversation while eating cookies. Keeping your mouth shut until all crumbles have been swallowed and other essential skills.",
                     Color = "red"
                 },
+                new Activity {
+                    ModuleId = modules[2].ModuleId,
+                    Start = modules[2].StartDate,
+                    End = modules[0].StartDate.AddDays(1),
+                    ActivityName = "Conversation",
+                    ActivityTypeId = activityTypes[0].ActivityTypeId,
+                    Description = "Fika, as a noun, refers to the combination of coffee and usually some sort of sweet snack. But fika, as a verb, is the act of partaking in a Swedish social institution.",
+                    Color = "red"
+                },
                 //Lets seed a homework (activityTypes[3]). Lets also seed it so the start and end interferes with another activity.
                 new Activity { 
                     ModuleId = modules[0].ModuleId,
@@ -153,7 +176,7 @@ namespace Project_LMS.Migrations
 
             //Students must be linked to courses, teachers must not
             var newUser = new[]
-{
+            {
                 new NewUser
                 {
                     Email = "admin@admin.se",
@@ -201,8 +224,265 @@ namespace Project_LMS.Migrations
                     GivenName = "Anders",
                     FamilyName= "Göransson",
                     CourseId = courses[0].CourseId
+                },
+                new NewUser
+                {
+                    Email = "bakihozab2984@yopmail.com",
+                    Rolestring = "Student",
+                    GivenName = "Boring",
+                    FamilyName= "Larsson",
+                    CourseId = courses[0].CourseId
+                },
+                new NewUser
+                {
+                    Email = "Exate1968@gustr.com",
+                    Rolestring = "Student",
+                    GivenName = "Regata",
+                    FamilyName= "Gustavsson",
+                    CourseId = courses[0].CourseId
+                },
+                new NewUser
+                {
+                    Email = "Gamer@Lexicon.com",
+                    Rolestring = "Student",
+                    GivenName = "Dimitri",
+                    FamilyName= "The Shadow",
+                    CourseId = courses[0].CourseId
+                },
+                new NewUser
+                {
+                    Email = "Edlin.Pettiglio@yahoo.com",
+                    Rolestring = "Student",
+                    GivenName = "Edlin",
+                    FamilyName= "Pettiglio",
+                    CourseId = courses[0].CourseId
+                },
+                new NewUser
+                {
+                    Email = "Madelle.Leger@yahoo.com",
+                    Rolestring = "Student",
+                    GivenName = "Madelle",
+                    FamilyName= "Leger",
+                    CourseId = courses[0].CourseId
+                },
+                new NewUser
+                {
+                    Email = "Cross.Szporluk@brzy.ru",
+                    Rolestring = "Student",
+                    GivenName = "Cross",
+                    FamilyName= "Szporluk",
+                    CourseId = courses[0].CourseId
+                },
+                new NewUser
+                {
+                    Email = "Cody.Viglionese@yandex.com",
+                    Rolestring = "Student",
+                    GivenName = "Cody",
+                    FamilyName= "Viglionese",
+                    CourseId = courses[0].CourseId
+                },
+                new NewUser
+                {
+                    Email = "Vincenz.Henck@outlook.com",
+                    Rolestring = "Student",
+                    GivenName = "Vincenz",
+                    FamilyName= "Henck",
+                    CourseId = courses[0].CourseId
+                },
+                new NewUser
+                {
+                    Email = "Eddy.Meserve@gmail.com",
+                    Rolestring = "Student",
+                    GivenName = "Eddy",
+                    FamilyName= "Meserve",
+                    CourseId = courses[0].CourseId
+                },
+                new NewUser
+                {
+                    Email = "Gian.Albran@protonmail.com",
+                    Rolestring = "Student",
+                    GivenName = "Gian",
+                    FamilyName= "Albran",
+                    CourseId = courses[0].CourseId
+                },
+                new NewUser
+                {
+                    Email = "Guenna.Jarrett@aol.com",
+                    Rolestring = "Student",
+                    GivenName = "Guenna",
+                    FamilyName= "Jarrett",
+                    CourseId = courses[0].CourseId
+                },
+                new NewUser
+                {
+                    Email = "Arel.Carvalho@aim.com",
+                    Rolestring = "Student",
+                    GivenName = "Arel",
+                    FamilyName= "Carvalho",
+                    CourseId = courses[0].CourseId
+                },
+                new NewUser
+                {
+                    Email = "Audra.Gustafson@aol.com",
+                    Rolestring = "Student",
+                    GivenName = "Audra",
+                    FamilyName= "Gustafson",
+                    CourseId = courses[0].CourseId
+                },
+                new NewUser
+                {
+                    Email = "Avram.Silvers@icloud.com",
+                    Rolestring = "Student",
+                    GivenName = "Audra",
+                    FamilyName= "Gustafson",
+                    CourseId = courses[0].CourseId
+                },
+                new NewUser
+                {
+                    Email = "Modestia.Michaud@icloud.com",
+                    Rolestring = "Student",
+                    GivenName = "Modestia",
+                    FamilyName= "Michaud",
+                    CourseId = courses[0].CourseId
+                },
+                new NewUser
+                {
+                    Email = "Boris.Cronan@yahoo.com",
+                    Rolestring = "Student",
+                    GivenName = "Boris",
+                    FamilyName= "Cronan",
+                    CourseId = courses[0].CourseId
+                },
+                new NewUser
+                {
+                    Email = "Kyrstin.Blake@mail.com",
+                    Rolestring = "Student",
+                    GivenName = "Kyrstin",
+                    FamilyName= "Blake",
+                    CourseId = courses[0].CourseId
+                },
+                new NewUser 
+                {
+                    Email = "Reinwald.Reggiani@gmx.com",
+                    Rolestring = "Student",
+                    GivenName = "Reinwald",
+                    FamilyName= "Reggiani",
+                    CourseId = courses[0].CourseId
+                },
+                new NewUser
+                {
+                    Email = "Katuscha.Mccabe@gmail.com",
+                    Rolestring = "Student",
+                    GivenName = "Katuscha",
+                    FamilyName= "Mccabe",
+                    CourseId = courses[0].CourseId
+                },
+                new NewUser
+                {
+                    Email = "Gallard.Cripps@gmail.com",
+                    Rolestring = "Student",
+                    GivenName = "Gallard",
+                    FamilyName= "Cripps",
+                    CourseId = courses[0].CourseId
+                },
+                new NewUser
+                {
+                    Email = "Anallise.Cedillo@aol.com",
+                    Rolestring = "Student",
+                    GivenName = "Anallise",
+                    FamilyName= "Cedillo",
+                    CourseId = courses[0].CourseId
+                },
+                new NewUser
+                {
+                    Email = "Gayelord.Roels@bredbandsbolaget.se",
+                    Rolestring = "Student",
+                    GivenName = "Gayelord",
+                    FamilyName= "Roels",
+                    CourseId = courses[0].CourseId
+                },
+                new NewUser
+                {
+                    Email = "Kelila.Von.hoffman@fastmail.se",
+                    Rolestring = "Student",
+                    GivenName = "Kelila",
+                    FamilyName= "Von Hoffman",
+                    CourseId = courses[0].CourseId
+                },
+                new NewUser
+                {
+                    Email = "Silvester.Heck@Hushmail.il",
+                    Rolestring = "Student",
+                    GivenName = "Kelila",
+                    FamilyName= "Von Hoffman",
+                    CourseId = courses[0].CourseId
+                },
+                new NewUser
+                {
+                    Email = "Anna.diana.Teitz@Lycos.com",
+                    Rolestring = "Student",
+                    GivenName = "Anna-Diana",
+                    FamilyName= "Teitz",
+                    CourseId = courses[0].CourseId
+                },
+                new NewUser
+                {
+                    Email = "Laird.Penkethman@mail.ru",
+                    Rolestring = "Student",
+                    GivenName = "Laird",
+                    FamilyName= "Penkethman",
+                    CourseId = courses[0].CourseId
+                },
+                new NewUser
+                {
+                    Email = "Lauralee.Salvemini@Mailfence.com",
+                    Rolestring = "Student",
+                    GivenName = "Lauralee",
+                    FamilyName= "Salvemini",
+                    CourseId = courses[0].CourseId
+                },
+                new NewUser
+                {
+                    Email = "Muhammad.Spaur@hotmail.com",
+                    Rolestring = "Student",
+                    GivenName = "Muhammad",
+                    FamilyName= "Spaur",
+                    CourseId = courses[0].CourseId
+                },
+                new NewUser
+                {
+                    Email = "Marrilee.Renzella@livemail.com",
+                    Rolestring = "Student",
+                    GivenName = "Marrilee",
+                    FamilyName= "Renzella",
+                    CourseId = courses[0].CourseId
+                },
+                new NewUser
+                {
+                    Email = "Lyn.Viglionese@livemail.com",
+                    Rolestring = "Student",
+                    GivenName = "Lyn",
+                    FamilyName= "Viglionese",
+                    CourseId = courses[0].CourseId
+                },
+                new NewUser
+                {
+                    Email = "Jacquette.Mcarthur@protonmail.com",
+                    Rolestring = "Student",
+                    GivenName = "Jacquette",
+                    FamilyName= "Mcarthur",
+                    CourseId = courses[0].CourseId
+                },
+                new NewUser
+                {
+                    Email = "Frasco.Jarrett@rackspace.com",
+                    Rolestring = "Student",
+                    GivenName = "Frasco",
+                    FamilyName= "Jarrett",
+                    CourseId = courses[0].CourseId
                 }
             };
+        
 
             foreach (var item in newUser)
             {
@@ -230,21 +510,49 @@ namespace Project_LMS.Migrations
             db.SaveChanges();
 
             //Seeding documents
-            var email = newUser[5].Email;
-            var appUserId = db.Users.FirstOrDefault(u => u.Email == email).Id;
-            Document doc = new Document
+
+            string email;
+            string appUserId;
+            Document doc;
+
+            if (!db.Documents.Any(u => u.DocumentName == "MySevenCookies.txt"))
             {
-                FileData = File.ReadAllBytes(MapPath("~/Resources/MySevenCookies.txt")),
-                ApplicationUserId = appUserId,
-                ActivityId = activities[0].ActivityId,
-                isHomework = true,
-                DocumentFileType = "text/plain",
-                UploadingTime = DateTime.Now,
-                DocumentName = "MySevenCookies.txt",
-                Description = "I did the best I could, please dont kick me from class"
-            };
-            db.Documents.Add(doc);
-            db.SaveChanges();
+                email = newUser[5].Email;
+                appUserId = db.Users.FirstOrDefault(u => u.Email == email).Id;
+                doc = new Document
+                {
+                    FileData = File.ReadAllBytes(MapPath("~/Resources/MySevenCookies.txt")),
+                    ApplicationUserId = appUserId,
+                    ActivityId = activities[0].ActivityId,
+                    isHomework = true,
+                    DocumentFileType = "text/plain",
+                    UploadingTime = DateTime.Now,
+                    DocumentName = "MySevenCookies.txt",
+                    Description = "I did the best I could, please dont kick me from class"
+                };
+                db.Documents.Add(doc);
+                db.SaveChanges();
+            }
+
+
+            if (!db.Documents.Any(u => u.DocumentName == "Ansvarsfriskrivning"))
+            {
+                email = newUser[0].Email;
+                appUserId = db.Users.FirstOrDefault(u => u.Email == email).Id;
+                doc = new Document
+                {
+                    FileData = File.ReadAllBytes(MapPath("~/Resources/Ansvarsfriskrivning.pdf")),
+                    ApplicationUserId = appUserId,
+                    CourseId = courses[0].CourseId,
+                    isHomework = false,
+                    DocumentFileType = "pdf",
+                    UploadingTime = DateTime.Now,
+                    DocumentName = "Ansvarsfriskrivning",
+                    Description = "Lexicon does not take responsibility for any negative health effects occuring during, or after, this course."
+                };
+                db.Documents.Add(doc);
+                db.SaveChanges();
+            }
 
         }
     }
