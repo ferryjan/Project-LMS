@@ -35,6 +35,7 @@
         if (item.MessageBoxNumber != tempMBN)
         {
             var totalUnreadMsg = Model.Where(a => a.MessageBoxNumber == item.MessageBoxNumber && a.isRead == false && a.SentTo == User.Identity.Name).Count();
+            var lastSent = Model.Where(a => a.MessageBoxNumber == item.MessageBoxNumber).OrderByDescending(a => a.SentDate).First().SentDate;
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.Topic)
@@ -52,7 +53,7 @@
                     </td>
                 }
                 <td>
-                    @Html.DisplayFor(modelItem => item.SentDate)
+                    @lastSent
                 </td>
                 <td>
                     @Html.Raw(totalUnreadMsg)
