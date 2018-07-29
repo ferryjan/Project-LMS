@@ -41,9 +41,12 @@
 
                 </ul>
 
-                <ul class="nav navbar-nav navbar-right">
-                    <li id="UnreadMessages" class="messages" style="float:right; cursor: pointer"></li>
-                </ul>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <ul class="nav navbar-nav navbar-right">
+                        <li id="UnreadMessages" class="messages" style="float:right; cursor: pointer"></li>
+                    </ul>
+                }
                 @Html.Action("GetUserProfile", "ApplicationUser")
 
                 @*@Html.Partial("_LoginPartial")*@
