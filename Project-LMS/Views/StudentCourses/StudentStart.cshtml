@@ -11,9 +11,8 @@
 <br />
 <div>
     @Html.ActionLink("View Schedule", "StudentSchedule", new { id = ViewBag.CourseId }, new { @class = "btn btn-primary btn-large" })
+    <a href="#CourseDocument" class="btn btn-primary"> Jump To Course Document</a>
 </div>
-<br />
-@Html.Action("StudentCourseFile", "StudentCourses", new { id = ViewBag.CourseId })
 <br />
 <h3 style="color:crimson">Modules</h3>
 <br />
@@ -62,6 +61,12 @@
         }
     </div>
 </div>
+
+<br />
+<div id="CourseDocument">
+    @Html.Action("StudentCourseFile", "StudentCourses", new { id = ViewBag.CourseId })
+</div>
+<br />
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

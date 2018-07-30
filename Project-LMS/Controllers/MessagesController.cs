@@ -104,6 +104,8 @@ namespace Project_LMS.Controllers
 
                 if (message.SentFrom == message.SentTo || db.Users.FirstOrDefault(u => u.Email == message.SentTo) == null)
                 {
+                    message.SentTo = "";
+                    message.SentToFullName = "";
                     ViewBag.Err = "Error: The message receiver cannot be found in the database or you are sending message to yourself!";
                     return View(message);
                 }

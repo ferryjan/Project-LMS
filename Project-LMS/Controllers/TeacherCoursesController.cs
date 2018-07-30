@@ -19,19 +19,19 @@ namespace Project_LMS.Controllers
         [Authorize(Roles = "Teacher")]
         public ActionResult Index()
         {
-            return View(db.Courses.ToList().Where(i => DateTime.Compare(i.EndDate, DateTime.Now) > 0).OrderBy(c => c.StartDate).ToList());
+            return View(db.Courses.ToList().Where(i => DateTime.Compare(i.EndDate.Date, DateTime.Now.Date) >= 0).OrderBy(c => c.StartDate).ToList());
         }
 
         [Authorize(Roles = "Teacher")]
         public ActionResult ShowUndergoingCourses()
         {
-            return View(db.Courses.ToList().Where(i => DateTime.Compare(i.StartDate, DateTime.Now) < 0 && DateTime.Compare(i.EndDate, DateTime.Now) >= 0).OrderBy(c => c.StartDate).ToList());
+            return View(db.Courses.ToList().Where(i => DateTime.Compare(i.StartDate.Date, DateTime.Now.Date) <= 0 && DateTime.Compare(i.EndDate.Date, DateTime.Now.Date) >= 0).OrderBy(c => c.StartDate).ToList());
         }
 
         [Authorize(Roles = "Teacher")]
         public ActionResult ShowExpiredCourses()
         {
-            return View(db.Courses.ToList().Where(i => DateTime.Compare(i.EndDate, DateTime.Now) <= 0).OrderBy(c => c.StartDate).ToList());
+            return View(db.Courses.ToList().Where(i => DateTime.Compare(i.EndDate.Date, DateTime.Now.Date) < 0).OrderBy(c => c.StartDate).ToList());
         }
 
         // GET: TeacherCourses/Details/5
@@ -161,7 +161,9 @@ namespace Project_LMS.Controllers
             {
                 foreach (var student in listOfStudent)
                 {
-                    db.Users.Remove(student);
+                    student.isActive = false;
+                    db.Entry(student).State = EntityState.Modified;
+                    db.SaveChanges(); ;
                 }
             }
 

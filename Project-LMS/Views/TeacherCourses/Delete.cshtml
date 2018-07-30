@@ -83,15 +83,17 @@
 
             <h6 id="currentCourseId" style="display:none">@Model.CourseId</h6>
         }
-        using (Html.BeginForm())
+        else
         {
-            @Html.AntiForgeryToken()
+            using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
 
-            <div class="form-actions no-color">
-                <input type="submit" value="Delete" class="btn btn-primary" />
-            </div>
+                <div class="form-actions no-color">
+                    <input type="submit" value="Delete" class="btn btn-primary" />
+                </div>
+            }
         }
-
     }
     <br />
     @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary btn-large" })

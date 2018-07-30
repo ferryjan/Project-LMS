@@ -582,7 +582,6 @@ namespace Project_LMS.Migrations
                 db.Documents.Add(doc);
                 db.SaveChanges();
             }
-
         }
     }
 }
