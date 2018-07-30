@@ -223,7 +223,7 @@ namespace Project_LMS.Controllers
         {
             ViewBag.CourseId = id;
             var FileById = db.Documents.Where(i => i.DocumentId == id).ToList().FirstOrDefault();
-            return File(FileById.FileData, FileById.DocumentFileType, FileById.DocumentName);
+            return File(FileById.FileData, FileById.DocumentFileType);
 
         }
 
