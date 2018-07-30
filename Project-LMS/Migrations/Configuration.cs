@@ -480,6 +480,14 @@ namespace Project_LMS.Migrations
                     GivenName = "Frasco",
                     FamilyName= "Jarrett",
                     CourseId = courses[0].CourseId
+                },
+                new NewUser
+                {
+                    Email = "Ante.Bante@topstudent.se",
+                    Rolestring = "Student",
+                    GivenName = "Ante",
+                    FamilyName= "Bante",
+                    CourseId = courses[1].CourseId
                 }
             };
         
