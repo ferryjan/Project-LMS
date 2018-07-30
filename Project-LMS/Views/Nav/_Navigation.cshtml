@@ -108,7 +108,7 @@
     <div id='cssmenu'>
         @if (undergoingAndFutureCourseList.Count() != 0 && CurrentSelectedCourseInHistoryCourse == null)
         {
-            <ul>
+            <ul style=" overflow-y: auto;  height: 70%; width: 280px">
                 <li class='has-sub open'>
                     <a href='#'><span>Courses</span></a>
                     <ul style="display:block">
@@ -144,7 +144,7 @@
                     </ul>
                 </li>
             </ul>
-            <ul>
+            <ul style=" overflow-y: auto;  height: 70%; width: 280px">
                 @if (historyCourseList.Count() != 0)
                 {
                     <li class='has-sub'>
@@ -171,7 +171,7 @@
 
         @if (historyCourseList.Count() != 0 && CurrentSelectedCourseInHistoryCourse != null)
         {
-            <ul>
+            <ul style=" overflow-y: auto;  height: 70%; width: 280px">
                 @if (undergoingAndFutureCourseList.Count() != 0)
                 {
                     <li class='has-sub'>
@@ -194,7 +194,7 @@
                     </li>
                 }
             </ul>
-            <ul>
+            <ul style=" overflow-y: auto;  height: 70%; width: 280px">
                 <li class='has-sub open'>
                     <a href='#'><span>Earlier Courses</span></a>
                     <ul style="display:block">
@@ -237,7 +237,7 @@
 else
 {
     <div id='cssmenu'>
-        <ul>
+        <ul style=" overflow-y: auto;  height: 70%; width: 280px">
             @if (undergoingAndFutureCourseList.Count() != 0)
             {
                 <li class='has-sub'>
@@ -260,7 +260,7 @@ else
                 </li>
             }
         </ul>
-        <ul>
+        <ul style=" overflow-y: auto;  height: 70%; width: 280px">
             @if (historyCourseList.Count() != 0)
             {
                 <li class='has-sub'>
