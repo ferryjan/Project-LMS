@@ -45,12 +45,98 @@
 
     </dl>
 
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
+    @if (ViewBag.VerifyComfirmed == "Yes")
+    {
+        if (ViewBag.IsEmpty == "No")
+        {
+            <h3 style="color:red">There are some modules/activities/documents stored in this course, you are not allowed to delete this course until these modules/activities/documents are deleted!</h3>
+        }
+        using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> 
-            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary btn-large" })
-        </div>
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-primary" />
+            </div>
+        }
     }
+
+    else if (ViewBag.VerifyComfirmed == "No")
+    {
+        if (ViewBag.IsEmpty == "No")
+        {
+            <h3 style="color:red">Warning! There are some modules/activities/documents stored in this course, they will also be deleted while you delete this course!</h3>
+            <div>
+                <button onclick="OpenDialog()" class="btn btn-primary">
+                    Verify Your Identity First Please!
+                </button>
+            </div>
+
+            <div id="Dialog-Box">
+                <p>Email:</p>
+                <input type="text" autocomplete="nope" id="Dialog-Email" />
+                <p>Password:</p>
+                <input type="password" autocomplete="new-password" id="Dialog-Password" />
+                <br />
+                <input type="submit" onclick="verify()" value="verify" class="btn btn-primary" />
+            </div>
+
+            <h6 id="currentCourseId" style="display:none">@Model.CourseId</h6>
+        }
+        using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-primary" />
+            </div>
+        }
+
+    }
+    <br />
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary btn-large" })
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript" src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <link href="@Url.Content("~/Content/themes/base/jquery-ui.min.css")" rel="stylesheet" type="text/css" />
+
+    <script type="text/javascript">
+        $(".ui-widget-overlay").attr('style', 'background-color: #000; opacity:1; z-index:1000;');
+
+        $('#Dialog-Box').dialog({
+            autoOpen: false,
+            height: 300,
+            width: 300,
+            modal: true
+        });
+
+        function OpenDialog() {
+            $('#Dialog-Email').val();
+            $('#Dialog-Password').val();
+            $('#Dialog-Box').dialog('open');
+        }
+
+        function verify() {
+            $('#Dialog-Box').hide;
+        $.ajax({
+            url: '@Url.Action("VerifyUserCourse", "Account")',
+            type: 'POST',
+            data: {
+                email: $('#Dialog-Email').val(),
+                password: $('#Dialog-Password').val(),
+                courseid: $("h6").text()
+            },
+            success: function (msg) {
+                window.location.href
+                    = msg.redirectUrl;
+            },
+            error: function (msg) {
+            }
+        });
+
+    }
+    </script>
+}

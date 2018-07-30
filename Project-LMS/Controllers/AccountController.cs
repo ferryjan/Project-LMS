@@ -429,6 +429,73 @@ namespace Project_LMS.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        [Authorize(Roles = "Teacher")]
+        public ActionResult VerifyUserActivity(string email, string password, string activityid)
+        {
+            var user = UserManager.Find(email, password);
+            int.TryParse(activityid, out int aid);
+            if (user != null && User.Identity.Name == user.Email)
+            {
+                return Json(new
+                {
+                    redirectUrl = Url.Action("Delete", "Activities", new { id = aid, isVerified = true })
+                });
+            }
+            else
+            {
+                return Json(new
+                {
+                    redirectUrl = Url.Action("Delete", "Activities", new { id = aid, isVerified = false })
+                });
+            }      
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Teacher")]
+        public ActionResult VerifyUserModule(string email, string password, string courseid, string moduleid)
+        {
+            var user = UserManager.Find(email, password);
+            int.TryParse(moduleid, out int mid);
+            int.TryParse(courseid, out int cid);
+            if (user != null && User.Identity.Name == user.Email)
+            {
+                return Json(new
+                {
+                    redirectUrl = Url.Action("Delete", "Modules", new { id = cid, moduleId = mid, isVerified = true })
+                });
+            }
+            else
+            {
+                return Json(new
+                {
+                    redirectUrl = Url.Action("Delete", "Modules", new { id = cid, moduleId = mid, isVerified = false })
+                });
+            }
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Teacher")]
+        public ActionResult VerifyUserCourse(string email, string password, string courseid)
+        {
+            var user = UserManager.Find(email, password);
+            int.TryParse(courseid, out int cid);
+            if (user != null && User.Identity.Name == user.Email)
+            {
+                return Json(new
+                {
+                    redirectUrl = Url.Action("Delete", "TeacherCourses", new { id = cid, isVerified = true })
+                });
+            }
+            else
+            {
+                return Json(new
+                {
+                    redirectUrl = Url.Action("Delete", "TeacherCourses", new { id = cid, isVerified = false })
+                });
+            }
+        }
+
         //
         // POST: /Account/LogOff
         [HttpPost]

@@ -295,18 +295,30 @@ namespace Project_LMS.Controllers
 
         // GET: Activities/Delete/5
         [Authorize(Roles = "Teacher")]
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(int? id, bool isVerified)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Activity activity = db.Activities.Find(id);
+            if (db.Documents.FirstOrDefault(d => d.ActivityId == id) != null) {
+                ViewBag.IsEmpty = "No";
+            }
             if (activity == null)
             {
                 return HttpNotFound();
             }
-            return View(activity);
+            if (isVerified)
+            {
+                ViewBag.VerifyComfirmed = "Yes";
+
+            }
+            else
+            {
+                ViewBag.VerifyComfirmed = "No";
+            }
+                return View(activity);
         }
 
         // POST: Activities/Delete/5
@@ -315,7 +327,15 @@ namespace Project_LMS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-
+            var listOfDoc = db.Documents.Where(d => d.ActivityId == id).ToList();
+            if (listOfDoc != null)
+            {
+                foreach (var doc in listOfDoc)
+                {
+                    db.Documents.Remove(doc);
+                }
+            }
+            
             Activity activity = db.Activities.Find(id);
             var ModuleId = activity.ModuleId;
             db.Activities.Remove(activity);
@@ -330,7 +350,7 @@ namespace Project_LMS.Controllers
             var studentRole = roleManager.FindByName("Student");
             var courseId = db.Activities.FirstOrDefault(a => a.ActivityId == id).Module.CourseId;
             var studentList = db.Users.Where(x => x.Roles.Any(s => s.RoleId == studentRole.Id)).Where(s => s.CourseId == courseId).OrderBy(i => i.GivenName).ThenBy(i => i.FamilyName).ToList();
-            var documentList = db.Documents.ToList();
+            var documentList = db.Documents.Where(d => d.ActivityId == id && d.isHomework == true).ToList();
 
             List<HomeworkViewModels> homeworkVM = new List<HomeworkViewModels>();
             HomeworkViewModels hvm = new HomeworkViewModels() { Documents = documentList, Students = studentList };
