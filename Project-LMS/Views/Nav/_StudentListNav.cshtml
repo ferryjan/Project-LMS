@@ -1,0 +1,29 @@
+﻿@model List<Project_LMS.Models.StudentListNavItem>
+
+
+@{
+    var studentList = Model.Select(i => i.Students).FirstOrDefault().ToList();
+}
+
+<div id='cssmenu'>
+    <ul>
+        <li class='has-sub'>
+            <a href='#'><span>Student List</span></a>
+            <ul>
+                @foreach (var student in studentList)
+                {
+                    if (student.Email != User.Identity.Name)
+                    {
+                        <li class='has-sub'>
+                            <a href='#'><span>@Html.Raw(student.FullName)</span></a>
+                            <ul>
+                                <li><a href="@Url.Action("Details", "StudentCourses", new { id = student.Id })"><span><i class="glyphicon glyphicon-info-sign"></i>@Html.Raw(" Contact Info")</span></a></li>
+                                <li><a href="@Url.Action("SendMessage", "Messages", new { id = student.Id })"><span><i class="glyphicon glyphicon-pencil"></i>@Html.Raw(" Send Message")</span></a></li>
+                            </ul>
+                        </li>
+                    }
+                }
+            </ul>
+        </li>
+    </ul>
+</div>

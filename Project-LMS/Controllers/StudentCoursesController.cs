@@ -22,6 +22,7 @@ namespace Project_LMS.Controllers
             var userId = User.Identity.GetUserId();
             var appUser = db.Users.Find(userId);
             var course = db.Courses.First(u => u.CourseId == appUser.CourseId);
+            ViewBag.CourseId = course.CourseId;
             ViewBag.CourseName = course.CourseName;
             ViewBag.TimePeriod = course.StartDate.ToString() + " - " + course.EndDate.ToString();
             ViewBag.CourseDescription = course.CourseDescription;
@@ -30,22 +31,64 @@ namespace Project_LMS.Controllers
         }
 
 
-
         // GET: StudentCourses/Details/5
-        public ActionResult Details(int? id)
+        [Authorize(Roles = "Student")]
+        public ActionResult Details(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Course course = db.Courses.Find(id);
-            if (course == null)
+            ApplicationUser applicationUser = db.Users.Find(id);
+            var userId = User.Identity.GetUserId();
+            var appUser = db.Users.Find(userId);
+            if (applicationUser == null || appUser.CourseId != applicationUser.CourseId)
             {
                 return HttpNotFound();
             }
-            return View(course);
+            return View(applicationUser);
         }
 
+        [Authorize(Roles = "Student")]
+        public PartialViewResult StudentModuleFie(int? moduleId)
+        {
+            ViewBag.Id = moduleId;
+            var documents = db.Documents.Where(i => i.ModuleId == moduleId && !i.ActivityId.HasValue);
+            return PartialView("_studentModuleFile", documents.ToList());
+        }
+
+        [Authorize(Roles = "Student")]
+        public PartialViewResult StudentCourseFile(int? id)
+        {
+            ViewBag.Id = id;
+            var documents = db.Documents.Where(i => i.CourseId == id && !i.ModuleId.HasValue && !i.ActivityId.HasValue);
+            return PartialView("_studentCourseFile", documents.ToList());
+        }
+
+        [Authorize(Roles = "Student")]
+        public ActionResult StudentSchedule(int id)
+        {
+            ViewBag.CourseId = id;
+            return View();
+        }
+
+        public JsonResult GetEvents(int id)
+        {
+            IEnumerable<Event> eventsModelList = new List<Event>();
+
+            var eventsList = db.Activities.Where(a => a.Module.CourseId == id).ToList();
+            eventsModelList = eventsList.Select(x =>
+                       new Event()
+                       {
+                           Subject = x.ActivityName,
+                           Description = x.Description,
+                           Start = x.Start,
+                           End = x.End,
+                           ThemeColor = x.Color,
+                           IsFullDay = false
+                       });
+            return Json(eventsModelList, JsonRequestBehavior.AllowGet);
+        }
 
         protected override void Dispose(bool disposing)
         {

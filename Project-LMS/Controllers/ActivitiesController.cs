@@ -37,6 +37,10 @@ namespace Project_LMS.Controllers
         public ActionResult ShowActivities(int? id)
         {
             ViewBag.ModuleId = id;
+            ViewBag.ModuleStartDate = db.Modules.FirstOrDefault(c => c.ModuleId == id).StartDate.Date;
+            ViewBag.ModuleEndDate = db.Modules.FirstOrDefault(c => c.ModuleId == id).EndDate.Date;
+            ViewBag.CourseStartDate = db.Modules.FirstOrDefault(c => c.ModuleId == id).Course.StartDate.Date;
+            ViewBag.CourseEndDate = db.Modules.FirstOrDefault(c => c.ModuleId == id).Course.EndDate.Date;
             var activities = db.Activities.Where(i => i.ModuleId == id).OrderBy(o => o.Start);
             return PartialView("_Index", activities.ToList());
         }
@@ -84,6 +88,7 @@ namespace Project_LMS.Controllers
             activityModel.Start = db.Modules.FirstOrDefault(n => n.ModuleId == id).StartDate;
             activityModel.End = db.Modules.FirstOrDefault(n => n.ModuleId == id).EndDate;
 
+            ViewBag.DateNotValidMessage = "";
             return View(activityModel);
         }
 
@@ -97,21 +102,6 @@ namespace Project_LMS.Controllers
         {
             if (activityModel != null) { activityModel.ModuleId = id; }
             Activity activity = new Activity();
-
-            if (ModelState.IsValid)
-            {
-                activity.ModuleId = activityModel.ModuleId;
-                activity.ActivityName = activityModel.ActivityName;
-                activity.ActivityTypeId = activityModel.ActivityTypeId;
-                activity.Description = activityModel.Description;
-                activity.Start = activityModel.Start;
-                activity.End = activityModel.End;
-
-                db.Activities.Add(activity);
-                db.SaveChanges();
-                return RedirectToAction("Edit", "Modules", new { id = activity.ModuleId });
-            }
-
 
             ViewBag.ActivityTypeId = new SelectList(db.ActivityTypes, "ActivityTypeId", "Type", activity.ActivityTypeId);
             Module module = db.Modules.Find(id);
@@ -128,9 +118,60 @@ namespace Project_LMS.Controllers
             activityModel.CourseStartDate = course.StartDate;
             activityModel.CourseEndDate = course.EndDate;
             //
+
+            if (db.Activities.FirstOrDefault(a => a.ActivityName == activityModel.ActivityName && a.ModuleId == activityModel.ModuleId) != null)
+            {
+                ViewBag.ActivityTypeId = new SelectList(db.ActivityTypes, "ActivityTypeId", "Type", activity.ActivityTypeId);
+                ViewBag.DateNotValidMessage = ("There is already an activity called " + activityModel.ActivityName + " in the module, please try another name!");
+                return View(activityModel);
+            }
+
+            if (DateTime.Compare(activityModel.CourseStartDate.Date, activityModel.Start.Date) > 0 || DateTime.Compare(activityModel.CourseEndDate.Date, activityModel.End.Date) < 0
+                || DateTime.Compare(activityModel.ModuleStartDate.Date, activityModel.Start.Date) > 0 || DateTime.Compare(activityModel.ModuleEndDate.Date, activityModel.End.Date) < 0)
+            {
+                ViewBag.ActivityTypeId = new SelectList(db.ActivityTypes, "ActivityTypeId", "Type", activity.ActivityTypeId);
+                ViewBag.DateNotValidMessage = ("Please make sure that the activity start/end date is within the range of course and module start/end date!");
+                return View(activityModel);
+            }
+
+            if (ModelState.IsValid)
+            {
+                activity.ModuleId = activityModel.ModuleId;
+                activity.ActivityName = activityModel.ActivityName;
+                activity.ActivityTypeId = activityModel.ActivityTypeId;
+                activity.Description = activityModel.Description;
+                activity.Start = activityModel.Start;
+                activity.End = activityModel.End;
+                switch (activityModel.ActivityTypeId)
+                {
+                    case 1:
+                        activity.Color = "red";
+                        break;
+                    case 2:
+                        activity.Color = "blue";
+                        break;
+                    case 3:
+                        activity.Color = "green";
+                        break;
+                    case 4:
+                        activity.Color = "navy";
+                        break;
+                    case 5:
+                        activity.Color = "purple";
+                        break;
+                    default:
+                        activity.Color = "black";
+                        break;
+                }
+
+                db.Activities.Add(activity);
+                db.SaveChanges();
+                return RedirectToAction("Edit", "Modules", new { id = activity.ModuleId });
+            }
+
             activityModel.Start = db.Modules.FirstOrDefault(n => n.ModuleId == id).StartDate;
             activityModel.End = db.Modules.FirstOrDefault(n => n.ModuleId == id).EndDate;
-
+            ViewBag.DateNotValidMessage = "";
             return View(activityModel);
         }
 
@@ -167,6 +208,7 @@ namespace Project_LMS.Controllers
             activityModel.CourseStartDate = course.StartDate;
             activityModel.CourseEndDate = course.EndDate;
             //
+            ViewBag.DateNotValidMessage = "";
             return View(activityModel);
         }
 
@@ -178,16 +220,77 @@ namespace Project_LMS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, Activity activity)
         {
+            Module module = db.Modules.Find(id);
+            if (module == null) { return HttpNotFound(); }
+
+            ActivityViewModels activityModel = new ActivityViewModels();
+            activityModel.ActivityId = activity.ActivityId;
+            activityModel.ActivityName = activity.ActivityName;
+            activityModel.ActivityTypeId = activity.ActivityTypeId;
+            activityModel.Description = activity.Description;
+            activityModel.Start = activity.Start;
+            activityModel.End = activity.End;
+
+            if (module == null) { return HttpNotFound(); }
+            activityModel.ModuleId = activity.ModuleId;
+            activityModel.ModuleName = module.Name;
+            activityModel.ModuleStartDate = module.StartDate;
+            activityModel.ModuleEndDate = module.EndDate;
+            //
+            Course course = db.Courses.Find(module.CourseId);
+            if (course == null) { return HttpNotFound(); }
+            activityModel.CourseName = course.CourseName;
+            activityModel.CourseStartDate = course.StartDate;
+            activityModel.CourseEndDate = course.EndDate;
+
+            if (db.Activities.FirstOrDefault(a => a.ActivityName == activity.ActivityName && a.ModuleId == activity.ModuleId && a.ActivityId != activity.ActivityId) != null)
+            {
+                ViewBag.ActivityTypeId = new SelectList(db.ActivityTypes, "ActivityTypeId", "Type", activity.ActivityTypeId);
+                ViewBag.ModuleId = new SelectList(db.Modules, "ModuleId", "CourseName", activity.ModuleId);
+                ViewBag.DateNotValidMessage = "There is already an activity called " + activity.ActivityName + " in the module, please try another name!";
+                return View(activityModel);
+            }
+
+            if (DateTime.Compare(activityModel.CourseStartDate.Date, activity.Start.Date) > 0 || DateTime.Compare(activityModel.CourseEndDate.Date, activity.End.Date) < 0
+                || DateTime.Compare(activityModel.ModuleStartDate.Date, activity.Start.Date) > 0 || DateTime.Compare(activityModel.ModuleEndDate.Date, activity.End.Date) < 0)
+            {
+                ViewBag.ActivityTypeId = new SelectList(db.ActivityTypes, "ActivityTypeId", "Type", activity.ActivityTypeId);
+                ViewBag.ModuleId = new SelectList(db.Modules, "ModuleId", "CourseName", activity.ModuleId);
+                ViewBag.DateNotValidMessage = "Please make sure that the activity start/end date is within the range of course and module start/end date!";
+                return View(activityModel);
+            }
             if (ModelState.IsValid)
             {
                 activity.ModuleId = id;
+                switch (activityModel.ActivityTypeId)
+                {
+                    case 1:
+                        activity.Color = "red";
+                        break;
+                    case 2:
+                        activity.Color = "blue";
+                        break;
+                    case 3:
+                        activity.Color = "green";
+                        break;
+                    case 4:
+                        activity.Color = "navy";
+                        break;
+                    case 5:
+                        activity.Color = "purple";
+                        break;
+                    default:
+                        activity.Color = "black";
+                        break;
+                }
                 db.Entry(activity).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Edit", "Modules", new { id });
             }
             ViewBag.ActivityTypeId = new SelectList(db.ActivityTypes, "ActivityTypeId", "Type", activity.ActivityTypeId);
             ViewBag.ModuleId = new SelectList(db.Modules, "ModuleId", "CourseName", activity.ModuleId);
-            return View(activity);
+            ViewBag.DateNotValidMessage = "";
+            return View(activityModel);
         }
 
         // GET: Activities/Delete/5

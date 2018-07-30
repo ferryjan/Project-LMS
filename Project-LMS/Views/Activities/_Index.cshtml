@@ -2,7 +2,10 @@
 
 <p>
     @Html.ActionLink("Add New Activity to The Module", "Create", new { id = ViewBag.ModuleId }, new { @class = "btn btn-primary btn-large" })
+    <h4 style="color:red">Please edit the start/end date of the activities in red color in this list!</h4>
 </p>
+<!-- html comment-->
+@*C sharp comment*@
 <table class="table">
     <tr>
         <th>@Html.DisplayNameFor(model => model.ActivityName)</th>
@@ -13,42 +16,51 @@
 
     @foreach (var item in Model)
     {
-    <tr>
-        @if (item.ActivityType.Type == "Homework")
-        {
-        <td>
-            <div><i class="glyphicon glyphicon-home"></i> @Html.DisplayFor(modelItem => item.ActivityName)</div>
-           
-        </td>
-        }
-        else
-        {
-            <td>@Html.DisplayFor(modelItem => item.ActivityName)</td>
-        }
+        <tr>
+            @if (DateTime.Compare(ViewBag.CourseStartDate, item.Start.Date) > 0 || DateTime.Compare(ViewBag.CourseEndDate, item.End.Date) < 0
+        || DateTime.Compare(ViewBag.ModuleStartDate, item.Start.Date) > 0 || DateTime.Compare(ViewBag.ModuleEndDate, item.End.Date) < 0)
+            {
+                if (item.ActivityType.Type == "Homework")
+                {
+                    <td style="color:red">
+                        <div><i class="glyphicon glyphicon-home"></i> @Html.DisplayFor(modelItem => item.ActivityName)</div>
 
-        <td>@Html.DisplayFor(modelItem => item.Start)</td>
-        <td>@Html.DisplayFor(modelItem => item.End)</td>
-        <td>
-            <a href="@Url.Action("Edit", "Activities", new { id = item.ActivityId})" class="btn btn-primary">
-                <i class="glyphicon glyphicon-edit"></i>
-                <span>
-                    <strong>Edit</strong>
-                </span>
-            </a>
-            <a href="@Url.Action("Details", "Activities", new { id = item.ActivityId })" class="btn btn-info">
-                <i class="glyphicon glyphicon-list"></i>
-                <span>
-                    <strong>Details</strong>
-                </span>
-            </a>
-            <a href="@Url.Action("Delete", "Activities", new { id = item.ActivityId, isVerified = false })" class="btn btn-danger">
-                <i class="glyphicon glyphicon-erase"></i>
-                <span>
-                    <strong>Remove Activity</strong>
-                </span>
-            </a>
-        </td>
-    </tr>
+                    </td>
+                }
+                else
+                {
+                    <td style="color:red">@Html.DisplayFor(modelItem => item.ActivityName)</td>
+                }
+            }
+            else
+            {
+                <td>@Html.DisplayFor(modelItem => item.ActivityName)</td>
+            }
+
+
+            <td>@Html.DisplayFor(modelItem => item.Start)</td>
+            <td>@Html.DisplayFor(modelItem => item.End)</td>
+            <td>
+                <a href="@Url.Action("Edit", "Activities", new { id = item.ActivityId})" class="btn btn-primary">
+                    <i class="glyphicon glyphicon-edit"></i>
+                    <span>
+                        <strong>Edit</strong>
+                    </span>
+                </a>
+                <a href="@Url.Action("Details", "Activities", new { id = item.ActivityId })" class="btn btn-info">
+                    <i class="glyphicon glyphicon-list"></i>
+                    <span>
+                        <strong>Details</strong>
+                    </span>
+                </a>
+                <a href="@Url.Action("Delete", "Activities", new { id = item.ActivityId })" class="btn btn-danger">
+                    <i class="glyphicon glyphicon-erase"></i>
+                    <span>
+                        <strong>Remove Activity</strong>
+                    </span>
+                </a>
+            </td>
+        </tr>
     }
 
 </table>

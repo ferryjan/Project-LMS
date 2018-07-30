@@ -2,6 +2,7 @@
 
 <p>
     @Html.ActionLink("Add New Module to The Course", "Create", new { id = ViewBag.CourseId }, new { @class = "btn btn-primary btn-large" })
+    <h4 style="color:red">Please edit the start/end date of the modules in red color in this list!</h4>
 </p>
 <table class="table">
     <tr>
@@ -18,39 +19,49 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            @if (DateTime.Compare(ViewBag.CourseStartDate, item.StartDate.Date) > 0 || DateTime.Compare(ViewBag.CourseEndDate, item.EndDate.Date) < 0)
+            {
+                <td style="color:red">
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+            }
+            else
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+            }
 
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StartDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EndDate)
-        </td>
-        <td>
-            <a href="@Url.Action("Edit", "Modules", new { id = item.ModuleId})" class="btn btn-primary">
-                <i class="glyphicon glyphicon-edit"></i>
-                <span>
-                    <strong>Edit</strong>
-                </span>
-            </a>
-            <a href="@Url.Action("Details", "Modules", new { id = ViewBag.CourseId, moduleId = item.ModuleId})" class="btn btn-info">
-                <i class="glyphicon glyphicon-list"></i>
-                <span>
-                    <strong>Details</strong>
-                </span>
-            </a>
-            <a href="@Url.Action("Delete", "Modules", new { id = ViewBag.CourseId, moduleId = item.ModuleId, isVerified = false })" class="btn btn-danger">
-                <i class="glyphicon glyphicon-erase"></i>
-                <span>
-                    <strong>Delete</strong>
-                </span>
-            </a>
-        </td>
-    </tr>
-}
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndDate)
+            </td>
+            <td>
+                <a href="@Url.Action("Edit", "Modules", new { id = item.ModuleId})" class="btn btn-primary">
+                    <i class="glyphicon glyphicon-edit"></i>
+                    <span>
+                        <strong>Edit</strong>
+                    </span>
+                </a>
+                <a href="@Url.Action("Details", "Modules", new { id = ViewBag.CourseId, moduleId = item.ModuleId })" class="btn btn-info">
+                    <i class="glyphicon glyphicon-list"></i>
+                    <span>
+                        <strong>Details</strong>
+                    </span>
+                </a>
+                <a href="@Url.Action("Delete", "Modules", new { id = ViewBag.CourseId, moduleId = item.ModuleId })" class="btn btn-danger">
+                    <i class="glyphicon glyphicon-erase"></i>
+                    <span>
+                        <strong>Delete</strong>
+                    </span>
+                </a>
+            </td>
+        </tr>
+    }
 
 </table>

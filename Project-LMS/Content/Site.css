@@ -9,6 +9,53 @@
     }
 }
 
+.well {
+    background: #e1e2c0;
+}
+
+.messages {
+    display: inline-block;
+    background: red;
+    text-align: center;
+    color: #FFF;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    line-height: 26px;
+    top: 15px;
+    left: 15px
+}
+
+.tabs {
+    font-size: 18px;
+    display: block;
+    padding: 10px;
+    background: #000000;
+    margin-bottom: 2px;
+    color: #d8c813;
+}
+
+    .tabs:hover {
+        color: #d8c813;
+        font-weight: bold;
+    }
+
+.well {
+    background-color: #ccccff;
+}
+
+.bodycontainer {
+    max-height: 450px;
+    width: 100%;
+    margin: 0;
+    overflow-y: auto;
+}
+
+.table-scrollable {
+    margin: 0;
+    padding: 0;
+}
+
 body {
     padding-top: 100px;
     padding-bottom: 20px;
@@ -87,9 +134,10 @@ body {
 }
 
 #cssmenu > ul > li > a {
+    /*add lot of stuff here*/
 }
 
-@import url(http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300);
+/*@import url(http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300);*/
 
 #cssmenu {
     height: 100%;
@@ -127,6 +175,7 @@ body {
         }
 
 #cssmenu > ul > li > a {
+    /*more comments for the people!*/
     margin-top: 25px;
     color: wheat;
     text-transform: uppercase;
@@ -277,9 +326,9 @@ body {
         transition: all 0.25s ease-in;
     }
 
-        #cssmenu ul ul li:first-child > a {
-            padding-top: 18px;
-        }
+    #cssmenu ul ul li:first-child > a {
+        padding-top: 18px;
+    }
 
     #cssmenu ul ul ul li {
         border: 0;
@@ -320,7 +369,8 @@ body {
 .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
     padding: 20px 12px;
 }
- .form-horizontal .control-label {
+
+.form-horizontal .control-label {
     padding-top: 7px;
     margin-bottom: 0;
     text-align: right;

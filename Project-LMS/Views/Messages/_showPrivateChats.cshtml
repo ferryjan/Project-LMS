@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Project_LMS.Models.Message>
+
+<h3>@Model.First().Topic</h3>
+
+<div class="bodycontainer scrollable">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.Raw("Me")
+            </th>
+            <th>
+            </th>
+        </tr>
+        @foreach (var msg in Model)
+        {
+            <tr>
+                @if (msg.SentFrom == User.Identity.Name)
+                {
+                    <td style="color:red; font-weight:bold; max-width: 400px; word-wrap:break-word;word-break:break-all" align="left">
+                        @msg.SentFromFullName @msg.SentDate says:
+                        <br />@msg.Msg
+                    </td>
+                    <td></td>
+                }
+                else
+                {
+                    <td></td>
+                    <td style="color:blue; font-weight:bold; max-width: 400px; word-wrap:break-word;word-break:break-all;" align="right">
+                        @msg.SentFromFullName&nbsp;@msg.SentDate&nbsp; says:
+                        <br />@msg.Msg
+                    </td>
+
+                }
+            </tr>
+        }
+    </table>
+</div>
+
