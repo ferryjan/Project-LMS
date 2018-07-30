@@ -64,7 +64,7 @@ namespace Project_LMS.Models
                 ValidationResult mss = new ValidationResult("You cannot add a course more than 5 years in the future!");
                 res.Add(mss);
             }
-            if (EndDate < StartDate)
+            if (EndDate <= StartDate)
             {
                 ValidationResult mss = new ValidationResult("End date must be greater than start date");
                 res.Add(mss);

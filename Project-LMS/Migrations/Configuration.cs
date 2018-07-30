@@ -545,7 +545,7 @@ namespace Project_LMS.Migrations
             }
 
 
-            if (!db.Documents.Any(u => u.DocumentName == "Ansvarsfriskrivning"))
+            if (!db.Documents.Any(u => u.DocumentName == "Disclaimer"))
             {
                 email = newUser[0].Email;
                 appUserId = db.Users.FirstOrDefault(u => u.Email == email).Id;
