@@ -50,6 +50,22 @@ namespace Project_LMS.Controllers
         }
 
         [Authorize(Roles = "Student")]
+        public PartialViewResult StudentUpcomingActivities(int? id)
+        {
+            ViewBag.Id = id;
+            var todaysActivities = db.Activities.Where(i => i.Module.CourseId == id && (DateTime.Compare(i.Start, DateTime.Now) <= 0 && DateTime.Compare(i.End, DateTime.Now) >= 0));
+            if (todaysActivities == null)
+            {
+                ViewBag.IsEmpty = "Yes";
+            }
+            else
+            {
+                ViewBag.IsEmpty = "No";
+            }
+            return PartialView("_studentUpcomingActivities", todaysActivities.ToList());
+        }
+
+        [Authorize(Roles = "Student")]
         public PartialViewResult StudentModuleFie(int? moduleId)
         {
             ViewBag.Id = moduleId;

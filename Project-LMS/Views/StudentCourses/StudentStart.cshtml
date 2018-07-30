@@ -11,13 +11,15 @@
 <br />
 <div>
     @Html.ActionLink("View Schedule", "StudentSchedule", new { id = ViewBag.CourseId }, new { @class = "btn btn-primary btn-large" })
+    <a href="#CourseDocument" class="btn btn-primary"> Jump To Course Document</a>
+    <a href="#Modules" class="btn btn-primary"> Jump To Modules</a>
 </div>
 <br />
-@Html.Action("StudentCourseFile", "StudentCourses", new { id = ViewBag.CourseId })
+@Html.Action("StudentUpcomingActivities", "StudentCourses", new { id = ViewBag.CourseId })
 <br />
 <h3 style="color:crimson">Modules</h3>
 <br />
-<div class="container">
+<div class="container" id="Modules">
     <div class="row">
         @{ int i = 1;}
         @foreach (var mod in Model)
@@ -40,18 +42,40 @@
                             <p> Module Description: </p>
                             <p style="font-weight:normal"> @mod.Description</p>
                         </section>
-                        <br />
-                        <section style="color:blue; font-weight:bold; max-width: 800px; word-wrap:break-word;word-break:break-all">
-                            <p> Activities: </p>
-                            @foreach (var item in mod.Activities)
-                            {
-                                <p> @item.ActivityName @item.Start.Date.ToString("yyyy-MM-dd hh:mm:ss") - @item.End.Date.ToString("yyyy-MM-dd hh:mm:ss")</p>
-                                <p style="font-weight:normal"> @item.Description</p>
-                            }
+
+                        <hr />
+                        @if (mod.Activities.Count() > 0)    {<h3 style="color:crimson">Activities</h3>}
+                        else                                {<h3 style="color:crimson">No activities registered for this module</h3>}
+                        <hr />
+
+                        @{ int a = 1;}
+                        @foreach (var activity in mod.Activities)
+                        {
+                            <div>
+                                @{ string atarget = "#am" + a;
+                                    string aid = "am" + a;
+                                    a++;
+                                }
+                                <div style="width:80%">
+                                    @if (activity.ActivityType.Type == "Homework")
+                                    {
+                                        <a data-target=@atarget class="activitytabs" data-group="footer-blocks" data-toggle="collapse"><i class="glyphicon glyphicon-home"></i> @activity.Start.Date.ToString("yyyy-MM-dd hh:mm:ss") - @activity.End.Date.ToString("yyyy-MM-dd hh:mm:ss") : @activity.ActivityName</a>
+                                    }
+                                    else
+                                    {
+                                        <a data-target=@atarget class="activitytabs" data-group="footer-blocks" data-toggle="collapse">@activity.Start.Date.ToString("yyyy-MM-dd hh:mm:ss") - @activity.End.Date.ToString("yyyy-MM-dd hh:mm:ss") : @activity.ActivityName</a>
+                                    }
+                                </div>
+                                <div id=@aid class="collapse show-in-md well">
+                                    <section style="color:blue; font-weight:bold; max-width: 800px; word-wrap:break-word;word-break:break-all">
+                                        <p style="font-weight:normal"> @activity.Description</p>
+                                    </section>
+                                </div>
+                            </div>
+                        }
 
 
-                        </section>
-                        <br />
+
                         <div>
                             @Html.Action("StudentModuleFie", "StudentCourses", new { moduleId = mod.ModuleId })
                         </div>
@@ -62,6 +86,12 @@
         }
     </div>
 </div>
+
+<br />
+<div id="CourseDocument">
+    @Html.Action("StudentCourseFile", "StudentCourses", new { id = ViewBag.CourseId })
+</div>
+<br />
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

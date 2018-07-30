@@ -134,7 +134,7 @@ namespace Project_LMS.Migrations
                     End = modules[0].StartDate.AddDays(1),
                     ActivityName = "Fine dining",
                     ActivityTypeId = activityTypes[1].ActivityTypeId,
-                    Description = "Eating cookies without leaving ccrumbles requires lots of training",
+                    Description = "Eating cookies without leaving crumbles requires lots of training",
                     Color = "red"
                 },
                 new Activity {
@@ -546,7 +546,7 @@ namespace Project_LMS.Migrations
             }
 
 
-            if (!db.Documents.Any(u => u.DocumentName == "Ansvarsfriskrivning"))
+            if (!db.Documents.Any(u => u.DocumentName == "Disclaimer"))
             {
                 email = newUser[0].Email;
                 appUserId = db.Users.FirstOrDefault(u => u.Email == email).Id;
@@ -558,7 +558,7 @@ namespace Project_LMS.Migrations
                     isHomework = false,
                     DocumentFileType = "pdf",
                     UploadingTime = DateTime.Now,
-                    DocumentName = "Disclaimer",
+                    DocumentName = "Disclaimer.pdf",
                     Description = "Lexicon does not take responsibility for any negative health effects occuring during, or after, this course."
                 };
                 db.Documents.Add(doc);

@@ -35,6 +35,16 @@
     color: #d8c813;
 }
 
+.activitytabs {
+    font-size: 18px;
+    display: block;
+    padding: 10px;
+    background: #00008f;
+    margin-bottom: 2px;
+    color: #ccccff;
+    border-radius: 9px;
+}
+
     .tabs:hover {
         color: #d8c813;
         font-weight: bold;
@@ -168,7 +178,7 @@ body {
 
 #cssmenu > ul > li > a {
     /*more comments for the people!*/
-    margin-top: 25px;
+    /*margin-top: 25px;*/
     color: wheat;
     text-transform: uppercase;
     display: block;
@@ -296,7 +306,6 @@ body {
             padding: 14px 20px;
             border-bottom: 1px solid #dddddd;
             color: #666666;
-            font-weight: 300;
             -webkit-transition: all 0.25s ease-in;
             -moz-transition: all 0.25s ease-in;
             -o-transition: all 0.25s ease-in;

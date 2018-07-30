@@ -46,7 +46,7 @@ namespace Project_LMS.Controllers
         }
 
         // GET: Activities/Details/5
-        [Authorize(Roles = "Teacher")]
+        [Authorize(Roles = "Teacher, Student")]
         public ActionResult Details(int? id)
         {
             if (id == null)
