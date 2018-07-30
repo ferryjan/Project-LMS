@@ -487,6 +487,7 @@
     <Content Include="Views\StudentCourses\_studentModuleFile.cshtml" />
     <Content Include="Views\StudentCourses\_studentCourseFile.cshtml" />
     <Content Include="Views\StudentCourses\StudentSchedule.cshtml" />
+    <Content Include="Views\StudentCourses\_studentUpcomingActivities.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
