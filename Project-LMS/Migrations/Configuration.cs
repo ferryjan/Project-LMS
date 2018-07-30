@@ -557,7 +557,7 @@ namespace Project_LMS.Migrations
                     isHomework = false,
                     DocumentFileType = "pdf",
                     UploadingTime = DateTime.Now,
-                    DocumentName = "Disclaimer",
+                    DocumentName = "Disclaimer.pdf",
                     Description = "Lexicon does not take responsibility for any negative health effects occuring during, or after, this course."
                 };
                 db.Documents.Add(doc);

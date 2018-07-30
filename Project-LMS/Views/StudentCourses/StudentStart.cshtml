@@ -57,7 +57,14 @@
                                     a++;
                                 }
                                 <div style="width:80%">
-                                    <a data-target=@atarget class="activitytabs" data-group="footer-blocks" data-toggle="collapse">@activity.Start.Date.ToString("yyyy-MM-dd hh:mm:ss") - @activity.End.Date.ToString("yyyy-MM-dd hh:mm:ss") : @activity.ActivityName</a>
+                                    @if (activity.ActivityType.Type == "Homework")
+                                    {
+                                        <a data-target=@atarget class="activitytabs" data-group="footer-blocks" data-toggle="collapse"><i class="glyphicon glyphicon-home"></i> @activity.Start.Date.ToString("yyyy-MM-dd hh:mm:ss") - @activity.End.Date.ToString("yyyy-MM-dd hh:mm:ss") : @activity.ActivityName</a>
+                                    }
+                                    else
+                                    {
+                                        <a data-target=@atarget class="activitytabs" data-group="footer-blocks" data-toggle="collapse">@activity.Start.Date.ToString("yyyy-MM-dd hh:mm:ss") - @activity.End.Date.ToString("yyyy-MM-dd hh:mm:ss") : @activity.ActivityName</a>
+                                    }
                                 </div>
                                 <div id=@aid class="collapse show-in-md well">
                                     <section style="color:blue; font-weight:bold; max-width: 800px; word-wrap:break-word;word-break:break-all">
