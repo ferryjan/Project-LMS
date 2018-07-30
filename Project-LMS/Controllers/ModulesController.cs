@@ -28,6 +28,8 @@ namespace Project_LMS.Controllers
         public ActionResult ShowCourseModules(int? id)
         {
             ViewBag.CourseId = id;
+            ViewBag.CourseStartDate = db.Courses.FirstOrDefault(c => c.CourseId == id).StartDate.Date;
+            ViewBag.CourseEndDate = db.Courses.FirstOrDefault(c => c.CourseId == id).EndDate.Date;
             var modules = db.Modules.Where(i => i.CourseId == id);
             return PartialView(modules.ToList());
         }
@@ -74,14 +76,12 @@ namespace Project_LMS.Controllers
         public ActionResult Create(int id, [Bind(Include = "Name,StartDate,EndDate,Description")] Module module)
         {
             module.CourseId = id;
-
+            Course course = db.Courses.Find(id);
             var courseStartDate = db.Courses.FirstOrDefault(c => c.CourseId == id).StartDate.Date;
             var courseEndDate = db.Courses.FirstOrDefault(c => c.CourseId == id).EndDate.Date;
             if (DateTime.Compare(courseStartDate, module.StartDate) > 0 || DateTime.Compare(courseEndDate, module.EndDate) < 0)
             {
-                ViewBag.CourseStartDate = db.Courses.FirstOrDefault(c => c.CourseId == id).StartDate.Date;
-                ViewBag.CourseEndDate = db.Courses.FirstOrDefault(c => c.CourseId == id).EndDate.Date;
-                ViewBag.CourseId = id;
+                module.Course = course;
                 ViewBag.DateNotValidMessage = ("Please make sure that the module start/end date is within the range of course start/end date!");
                 return View(module);
             }
@@ -91,9 +91,7 @@ namespace Project_LMS.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Edit", "TeacherCourses", new { id });
             }
-            ViewBag.CourseStartDate = db.Courses.FirstOrDefault(c => c.CourseId == id).StartDate.Date;
-            ViewBag.CourseEndDate = db.Courses.FirstOrDefault(c => c.CourseId == id).EndDate.Date;
-            ViewBag.CourseId = id;
+            module.Course = course;
             ViewBag.DateNotValidMessage = "";
             return View(module);
         }
@@ -117,7 +115,6 @@ namespace Project_LMS.Controllers
             {
                 return HttpNotFound();
             }
-
             ViewBag.DateNotValidMessage = "";
             return View(module);
         }
@@ -131,11 +128,11 @@ namespace Project_LMS.Controllers
             module.CourseId = id;
             var courseStartDate = db.Courses.FirstOrDefault(c => c.CourseId == id).StartDate.Date;
             var courseEndDate = db.Courses.FirstOrDefault(c => c.CourseId == id).EndDate.Date;
+            Course course = db.Courses.Find(id);
             if (DateTime.Compare(courseStartDate, module.StartDate) > 0 || DateTime.Compare(courseEndDate, module.EndDate) < 0)
             {
-                ViewBag.CourseStartDate = db.Courses.FirstOrDefault(c => c.CourseId == id).StartDate.Date;
-                ViewBag.CourseEndDate = db.Courses.FirstOrDefault(c => c.CourseId == id).EndDate.Date;
                 ViewBag.CourseId = id;
+                module.Course = course;
                 ViewBag.DateNotValidMessage = ("Please make sure that the module start/end date is within the range of course start/end date!");
                 return View(module);
             }
@@ -145,9 +142,8 @@ namespace Project_LMS.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Edit", "TeacherCourses", new { id = module.CourseId });
             }
-            ViewBag.CourseStartDate = db.Courses.FirstOrDefault(c => c.CourseId == id).StartDate.Date;
-            ViewBag.CourseEndDate = db.Courses.FirstOrDefault(c => c.CourseId == id).EndDate.Date;
             ViewBag.CourseId = id;
+            module.Course = course;
             ViewBag.DateNotValidMessage = "";
             // ViewBag.CourseId = new SelectList(db.Courses, "CourseId", "CourseName", module.CourseId);
             return View(module);
@@ -155,16 +151,32 @@ namespace Project_LMS.Controllers
 
         // GET: Modules/Delete/5
         [Authorize(Roles = "Teacher")]
-        public ActionResult Delete(int id, int? moduleId)
+        public ActionResult Delete(int id, int? moduleId, bool isVerified)
         {
             if (moduleId == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Module module = db.Modules.Find(moduleId);
+
+            if (db.Documents.FirstOrDefault(d => d.ModuleId == moduleId) != null || db.Activities.FirstOrDefault(d => d.ModuleId == moduleId) != null)
+            {
+                ViewBag.IsEmpty = "No";
+            }
+
             if (module == null)
             {
                 return HttpNotFound();
+            }
+
+            if (isVerified)
+            {
+                ViewBag.VerifyComfirmed = "Yes";
+
+            }
+            else
+            {
+                ViewBag.VerifyComfirmed = "No";
             }
             ViewBag.CourseID = id;
             return View(module);
@@ -176,6 +188,32 @@ namespace Project_LMS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int moduleId, int id)
         {
+            var listOfModDoc = db.Documents.Where(d => d.ModuleId == moduleId);
+            if (listOfModDoc != null)
+            {
+                foreach (var doc in listOfModDoc)
+                {
+                    db.Documents.Remove(doc);
+                }
+            }
+
+            var listOfActivity = db.Activities.Where(d => d.ModuleId == moduleId).ToList();
+            if (listOfActivity != null)
+            {
+                foreach (var act in listOfActivity)
+                {
+                    var listOfActDoc = db.Documents.Where(d => d.ActivityId == act.ActivityId).ToList();
+                    if (listOfActDoc != null)
+                    {
+                        foreach (var doc in listOfActDoc)
+                        {
+                            db.Documents.Remove(doc);
+                        }
+                    }
+                    db.Activities.Remove(act);
+                }
+            }
+
             Module module = db.Modules.Find(moduleId);
             db.Modules.Remove(module);
             db.SaveChanges();

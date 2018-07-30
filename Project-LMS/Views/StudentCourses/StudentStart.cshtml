@@ -4,53 +4,77 @@
     ViewBag.Title = "StudentStartPage";
 }
 
+@Html.Action("ShowStudentList", "Nav")
+
 <h2>@ViewBag.CourseName</h2>
 <h4>@ViewBag.TimePeriod</h4>
-
+<br />
 <div>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StartDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EndDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th></th>
-        </tr>
-
-        @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StartDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EndDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                
-            </td>
-        </tr>
-}
-
-    </table>
-
-
-
+    @Html.ActionLink("View Schedule", "StudentSchedule", new { id = ViewBag.CourseId }, new { @class = "btn btn-primary btn-large" })
 </div>
-<p>
+<br />
+@Html.Action("StudentCourseFile", "StudentCourses", new { id = ViewBag.CourseId })
+<br />
+<h3 style="color:crimson">Modules</h3>
+<br />
+<div class="container">
+    <div class="row">
+        @{ int i = 1;}
+        @foreach (var mod in Model)
+        {
+            <div>
+                @{ string target = "#fm" + i;
+                    string id = "fm" + i;
+                    i++;
+                }
+                <div>
+                    <a data-target=@target class="tabs" data-group="footer-blocks" data-toggle="collapse">@mod.StartDate.ToShortDateString() - @mod.EndDate.ToShortDateString() : @mod.Name</a>
+                </div>
+                <div id=@id class="collapse show-in-md">
+                    <div class="well">
+                        <section style="color:blue; font-weight:bold; max-width: 800px; word-wrap:break-word;word-break:break-all">
+                            <p> Module Start Date: </p>
+                            <p style="font-weight:normal"> @mod.StartDate.Date.ToString("yyyy-MM-dd")</p>
+                            <p> Module End Date: </p>
+                            <p style="font-weight:normal"> @mod.EndDate.Date.ToString("yyyy-MM-dd") </p>
+                            <p> Module Description: </p>
+                            <p style="font-weight:normal"> @mod.Description</p>
+                        </section>
+                        <br />
+                        <section style="color:blue; font-weight:bold; max-width: 800px; word-wrap:break-word;word-break:break-all">
+                            <p> Activities: </p>
+                            @foreach (var item in mod.Activities)
+                            {
+                                <p> @item.ActivityName @item.Start.Date.ToString("yyyy-MM-dd hh:mm:ss") - @item.End.Date.ToString("yyyy-MM-dd hh:mm:ss")</p>
+                                <p style="font-weight:normal"> @item.Description</p>
+                            }
 
-</p>
+
+                        </section>
+                        <br />
+                        <div>
+                            @Html.Action("StudentModuleFie", "StudentCourses", new { moduleId = mod.ModuleId })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+        }
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript">
+        $("a.tabs").click(function (e) {
+            e.preventDefault();
+            var $groupName = $(this).data("group");
+            var $this = $(this);
+            $("[data-group='" + $groupName + "']:not([data-target='" + $this.data("target") + "'])").each(function () {
+                $($(this).data("target")).removeClass("in").addClass('collapse');
+            });
+        });
+
+    </script>
+}

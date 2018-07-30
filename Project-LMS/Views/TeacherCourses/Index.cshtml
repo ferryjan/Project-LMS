@@ -49,7 +49,7 @@
                     <strong>Details</strong>
                 </span>
             </a>
-            <a href="@Url.Action("Delete", "TeacherCourses", new { id = item.CourseId })" class="btn btn-danger">
+            <a href="@Url.Action("Delete", "TeacherCourses", new { id = item.CourseId, isVerified = false })" class="btn btn-danger">
                 <i class="glyphicon glyphicon-erase"></i>
                 <span>
                     <strong>Delete</strong>

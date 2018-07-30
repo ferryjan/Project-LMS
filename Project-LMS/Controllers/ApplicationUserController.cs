@@ -149,6 +149,7 @@ namespace Project_LMS.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.ImgSrc = @"~/Pictures/" + applicationUser.ProfileImageRef;
             return View(applicationUser);
         }
 

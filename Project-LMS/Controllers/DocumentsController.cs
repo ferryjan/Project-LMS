@@ -32,7 +32,7 @@ namespace Project_LMS.Controllers
         }
 
         // GET: Documents/Details/5
-        [Authorize(Roles = "Teacher")]
+        [Authorize(Roles = "Teacher, Student")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -48,7 +48,7 @@ namespace Project_LMS.Controllers
         }
 
         // GET: Documents/Details/5
-        [Authorize(Roles = "Teacher")]
+        [Authorize(Roles = "Teacher, Student")]
         public ActionResult ModuleDocumentDetails(int? id)
         {
             if (id == null)
@@ -211,17 +211,14 @@ namespace Project_LMS.Controllers
                         ViewBag.ActivityId = id;
                         return View(doc);
                     }
-                    
                 }
             }
             ViewBag.ModuleId = id;
             return View(doc);
         }
 
-
-
         [HttpGet]
-        [Authorize(Roles = "Teacher")]
+        [Authorize(Roles = "Teacher, Student")]
         public FileResult DownLoadFile(int? id)
         {
             ViewBag.CourseId = id;

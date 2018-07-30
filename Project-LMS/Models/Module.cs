@@ -53,16 +53,16 @@ namespace Project_LMS.Models
                 ValidationResult mss = new ValidationResult("There is already a module by this name registered in this course");
                 res.Add(mss);
             }
-            if (StartDate < DateTime.Now.Date && ModuleId == 0)
-            {
-                ValidationResult mss = new ValidationResult("You cannot add a module in the past!");
-                res.Add(mss);
-            }
-            else if (StartDate >= DateTime.Now.AddYears(5) && ModuleId == 0)
-            {
-                ValidationResult mss = new ValidationResult("You cannot add a module more than 5 years in the future!");
-                res.Add(mss);
-            }
+            //if (StartDate < DateTime.Now.Date && ModuleId == 0)
+            //{
+            //    ValidationResult mss = new ValidationResult("You cannot add a module in the past!");
+            //    res.Add(mss);
+            //}
+            //else if (StartDate >= DateTime.Now.AddYears(5) && ModuleId == 0)
+            //{
+            //    ValidationResult mss = new ValidationResult("You cannot add a module more than 5 years in the future!");
+            //    res.Add(mss);
+            //}
             if (EndDate < StartDate)
             {
                 ValidationResult mss = new ValidationResult("End date must be greater than start date");

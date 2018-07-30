@@ -1,0 +1,90 @@
+﻿@model Project_LMS.Models.Message
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Message</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SentFrom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SentFrom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SentTo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SentTo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MessageBoxNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MessageBoxNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.isRead)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.isRead)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstPersonLeft)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstPersonLeft)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SecondPersonLeft)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SecondPersonLeft)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SentDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SentDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Topic)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Topic)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Msg)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Msg)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

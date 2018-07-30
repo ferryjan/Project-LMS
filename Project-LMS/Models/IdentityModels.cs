@@ -57,6 +57,7 @@ namespace Project_LMS.Models
         public DbSet<Course> Courses { get; set; }
         public DbSet<Document> Documents { get; set; }
         public DbSet<Module> Modules { get; set; }
+        public DbSet<Message> Messages { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

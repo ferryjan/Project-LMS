@@ -110,17 +110,34 @@ namespace Project_LMS.Controllers
 
         // GET: TeacherCourses/Delete/5
         [Authorize(Roles = "Teacher")]
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(int? id, bool isVerified)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Course course = db.Courses.Find(id);
+
+            if (db.Modules.FirstOrDefault(d => d.CourseId == id) != null || db.Documents.FirstOrDefault(d => d.CourseId == id) != null)
+            {
+                ViewBag.IsEmpty = "No";
+            }
+
             if (course == null)
             {
                 return HttpNotFound();
             }
+
+            if (isVerified)
+            {
+                ViewBag.VerifyComfirmed = "Yes";
+
+            }
+            else
+            {
+                ViewBag.VerifyComfirmed = "No";
+            }
+
             return View(course);
         }
 
@@ -130,6 +147,58 @@ namespace Project_LMS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            var listOfCourseDoc = db.Documents.Where(d => d.CourseId == id).ToList();
+            if (listOfCourseDoc != null)
+            {
+                foreach (var doc in listOfCourseDoc)
+                {
+                    db.Documents.Remove(doc);
+                }
+            }
+
+            var listOfStudent = db.Users.Where(d => d.CourseId == id).ToList();
+            if (listOfStudent != null)
+            {
+                foreach (var student in listOfStudent)
+                {
+                    db.Users.Remove(student);
+                }
+            }
+
+            var listOfModule = db.Modules.Where(m => m.CourseId == id).ToList();
+            if (listOfModule != null)
+            {
+                foreach (var mod in listOfModule)
+                {
+                    var listOfModDoc = db.Documents.Where(d => d.ModuleId == mod.ModuleId).ToList();
+                    if (listOfModDoc != null)
+                    {
+                        foreach (var doc in listOfModDoc)
+                        {
+                            db.Documents.Remove(doc);
+                        }
+                    }
+                    var listOfActivity = db.Activities.Where(a => a.ModuleId == mod.ModuleId).ToList();
+                    if (listOfActivity != null)
+                    {
+                        foreach (var act in listOfActivity)
+                        {
+                            var listOfActDoc = db.Documents.Where(d => d.ActivityId == act.ActivityId).ToList();
+                            if (listOfActDoc != null)
+                            {
+                                foreach (var doc in listOfActDoc)
+                                {
+                                    db.Documents.Remove(doc);
+                                }
+                            }
+                            db.Activities.Remove(act);
+                        }
+                    }
+                    db.Modules.Remove(mod);
+                }
+            }
+
+
             Course course = db.Courses.Find(id);
             db.Courses.Remove(course);
             db.SaveChanges();
@@ -159,7 +228,7 @@ namespace Project_LMS.Controllers
                 model.Modul = activity.ActivityId.ToString();
                 model.PM = "Förmiddag";
                 model.AM = "Eftermiddag";
-                model.Extern =  "Nej";
+                model.Extern = "Nej";
                 myList.Add(model);
             }
 

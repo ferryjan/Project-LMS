@@ -87,10 +87,11 @@
             <input type="submit" id="btnUpload" value="Save" class="btn btn-primary" />
         </div>
     </div>
-    <div>
-        @Html.ActionLink("Back to List", "Login", "Account", null, new { @class = "btn btn-primary btn-large" })
-    </div>
 }
+
+<div>
+    @Html.ActionLink("Back to List", "Login", "Account", null, new { @class = "btn btn-primary btn-large" })
+</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
