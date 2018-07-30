@@ -8,20 +8,30 @@ namespace Project_LMS.Models
 {
     public class ScheduleViewModels
     {
-        public int CourseId { get; set; }
-        public string CourseName { get; set; }
-
         [Display(Name = "Date")]
         public string Date { get; set; }
         [Display(Name = "Day")]
         public string Day { get; set; }
         [Display(Name = "Modul")]
         public string Modul { get; set; }
-        [Display(Name = "PM")]
-        public String PM { get; set; }
-        [Display(Name = "AM")]
+        [Display(Name = "AM (08:00 - 12:00)")]
         public String AM { get; set; }
+        [Display(Name = "PM (13:00 - 17:00)")]
+        public String PM { get; set; }
         [Display(Name = "Extern")]
         public String Extern { get; set; }
+
+        public string Year { get; set; }
+        public int DayOfYear { get; set; }
+        public DateTime ActuallDate { get; set; }
+        public string bgColor { get; set; }
+    }
+
+    public class ScheduleHeadViewModels
+    {
+        public int CourseId { get; set; }
+        public string CourseName { get; set; }
+        public ScheduleViewModels ViewModels { get; set; }
+        public List<ScheduleViewModels> myList;
     }
 }

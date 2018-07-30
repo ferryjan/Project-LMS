@@ -92,14 +92,6 @@ textarea {
 }
 
 /* Bootstrap overrides */
-
-.Mytable {
-    font-size: 14px;
-    width: 100%;
-    max-width: 100%;
-    margin-bottom: 20px;
-}
-
 body {
     font-size: 17px;
     background-color: lightgrey;
@@ -376,3 +368,34 @@ body {
     text-align: right;
     margin-top: -6px;
 }
+
+.mySchedule {
+    font-size: 15px;
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 20px;
+    max-height: 50%;
+}
+
+.mySchedule > tbody > tr > th:hover {
+    background-color: #f2dede;
+}
+
+    .mySchedule tr, .mySchedule th {
+        border-bottom: 1px solid #000000; /*#ddd;*/
+        padding: 2px;
+    }
+
+        .mySchedule tr:hover {
+            background-color: #ddd;
+        }
+
+    .mySchedule th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: #4CAF50;
+        color: white;
+    }
+

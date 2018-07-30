@@ -217,25 +217,220 @@ namespace Project_LMS.Controllers
 
             Course course = db.Courses.Find(id);
             if (course == null) { return HttpNotFound(); }
-            //
-            List<ScheduleViewModels> myList = new List<ScheduleViewModels>();
-            //
-            var activites = course.CourseModules.SelectMany(m => m.Activities).OrderBy(a => a.Start);
+            var courseStartDate = course.StartDate;
+            var courseStoppDate = course.EndDate;
+            var maxDates = 0;
 
-            foreach (var activity in activites)
+            while (courseStoppDate >= courseStartDate)
             {
-                var model = new ScheduleViewModels();
-                model.Date = activity.Start.ToString("yyyy-MM-dd");
-                model.Day = activity.Start.ToString("ddddd");
-                model.Modul = activity.ActivityId.ToString();
-                model.PM = "Förmiddag";
-                model.AM = "Eftermiddag";
-                model.Extern = "Nej";
-                myList.Add(model);
+                courseStartDate = courseStartDate.AddDays(1);
+                maxDates += 1;
+            }
+
+            ScheduleViewModels[] samling = new ScheduleViewModels[maxDates];
+            courseStartDate = course.StartDate;
+
+            var I = 0;
+            while (courseStoppDate >= courseStartDate)
+            {
+                samling[I] = new ScheduleViewModels();
+                samling[I].Date = courseStartDate.ToString("yyyy-MM-dd");
+                samling[I].Day = courseStartDate.DayOfWeek.ToString();
+                samling[I].Modul = "";
+                samling[I].PM = ""; // + courseStartDate.DayOfYear.ToString();
+                samling[I].AM = "";
+                samling[I].ActuallDate = courseStartDate;
+                samling[I].Year = courseStartDate.ToString("yyyy");
+                samling[I].DayOfYear = courseStartDate.DayOfYear;
+
+                if (I % 2 == 0) { samling[I].bgColor = "LightSteelBlue"; }
+                else samling[I].bgColor = "#ffffff";
+                courseStartDate = courseStartDate.AddDays(1);
+                I += 1;
+            }
+
+            var modules = db.Modules.Where(m => m.CourseId == course.CourseId).OrderBy(m => m.StartDate);
+            var moduleStartDate = course.StartDate;
+            var moduleStoppDate = course.StartDate;
+            foreach (var module in modules)
+            {
+                moduleStartDate = module.StartDate;
+                moduleStoppDate = module.EndDate;
+
+                // Lägg in data från Module för kursen
+                while (moduleStoppDate >= moduleStartDate)
+                {
+                    var dag = moduleStartDate.DayOfYear;
+                    var year = moduleStartDate.ToString("yyyy");
+                    var modul = module.Name.ToString();
+                    var found = false;
+                    var counter = 0;
+
+                    while (found == false)
+                    {
+                        if (year == samling[counter].Year && dag == samling[counter].DayOfYear)
+                        {
+                            samling[counter].Modul = modul;
+                            found = true;
+                        }
+                        counter += 1;
+                        if (counter > maxDates) found = true; //Säkerhet
+                    }
+
+                    moduleStartDate = moduleStartDate.AddDays(1);
+                }
             }
 
 
-            return View(myList);
+            //
+            var activites = course.CourseModules.SelectMany(m => m.Activities).OrderBy(a => a.Start);
+            courseStartDate = course.StartDate;
+            var activiStartDate = course.StartDate;
+            var activiStoppDate = course.StartDate;
+            foreach (var activity in activites)
+            {
+                activiStartDate = activity.Start;
+                activiStoppDate = activity.End;
+                var firstTime = true;
+
+                // Lägg in data för aktiviteten
+                while (activiStoppDate.Date >= activiStartDate.Date)
+                {
+                    var dag = activiStartDate.DayOfYear;
+                    var year = activiStartDate.ToString("yyyy");
+                    var name = activity.ActivityName.ToString();
+                    var found = false;
+                    var counter = 0;
+
+                    while (found == false)
+                    {
+                        if (year == samling[counter].Year && dag == samling[counter].DayOfYear)
+                        {
+                            if (activiStoppDate.Date == activiStartDate.Date)
+                            {
+                                if (activiStartDate.Hour >= 13)
+                                {
+                                    samling[counter].PM = name;
+                                }
+                                else if (activiStartDate.Hour >= 0 && activiStartDate.Hour < 13)
+                                {
+                                    samling[counter].AM = name;
+
+                                    if (activiStoppDate.Hour > 13 && activiStoppDate.Hour <= 24)
+                                    {
+                                        samling[counter].PM = name;
+                                    }
+                                }
+                                else
+                                {
+                                    samling[counter].PM = name;
+                                }
+
+                            }
+                            else if (activiStoppDate.Date > activiStartDate.Date)
+                            {
+                                if (firstTime == true)
+                                {
+                                    if (activiStartDate.Hour >= 13)
+                                    {
+                                        samling[counter].PM = name;
+                                    }
+                                    else if (activiStartDate.Hour >= 0 && activiStartDate.Hour < 13)
+                                    {
+                                        samling[counter].AM = name;
+
+                                        if (activiStoppDate.Hour > 13 && activiStoppDate.Hour <= 24)
+                                            samling[counter].PM = name;
+                                    }
+                                    else
+                                    {
+                                        samling[counter].PM = name;
+                                    }
+
+                                    firstTime = false;
+                                }
+                                else
+                                {
+                                    samling[counter].AM = name;
+                                    samling[counter].PM = name;
+                                }
+                            }
+
+                            if (activity.ActivityType.Type == "Lecture")
+                            {
+                                samling[counter].Extern = "Yes";
+                            }
+                            else if (activity.ActivityType.Type == "Holiday")
+                            {
+                                samling[counter].Extern = "Holiday";
+                            }
+
+                            found = true;
+                        }
+
+                        counter += 1;
+                        if (counter > maxDates) found = true; //Säkerhet
+                    }
+
+                    activiStartDate = activiStartDate.AddDays(1);
+                }
+            }
+
+
+            ScheduleHeadViewModels schedule = new ScheduleHeadViewModels();
+            schedule.CourseId = course.CourseId;
+            schedule.CourseName = course.CourseName;
+            //
+            schedule.myList = new List<ScheduleViewModels>();
+            for (int i = 0; i < I; i++)
+            {
+                var model = new ScheduleViewModels();
+                // Om lördag eller söndag, blanka fälten sam sätt backgrundsfärgen till Helgdag
+                var bgColorHoliday = "#FFDAB9";
+                var dayOfWeek = samling[i].ActuallDate.DayOfWeek.ToString();
+                if (dayOfWeek == "Saturday" || dayOfWeek == "Sunday")
+                {
+                    samling[i].Modul = "";
+                    samling[i].AM = "";
+                    samling[i].PM = "";
+                    samling[i].Extern = "";
+                    samling[i].bgColor = bgColorHoliday;
+                }
+
+                var dag = samling[i].DayOfYear;
+                var year = samling[i].Year;
+                if (year == "2018" && (dag == 1 || dag == 6 || dag == 88 || dag == 89 | dag == 90 || dag == 91 || dag == 92 || dag == 121 || dag == 130 || dag == 140 || dag == 157 || dag == 174 || dag == 307 || dag == 359 || dag == 360))
+                {
+                    samling[i].Modul = "";
+                    samling[i].AM = "";
+                    samling[i].PM = "";
+                    samling[i].Extern = "";
+                    samling[i].bgColor = bgColorHoliday;
+                }
+
+                if (year == "2019" && (dag == 1 || dag == 6 || dag == 109 | dag == 111 || dag == 112 || dag == 150 || dag == 157 || dag == 160 || dag == 173 || dag == 306 || dag == 359 || dag == 360))
+                {
+                    samling[i].Modul = "";
+                    samling[i].AM = "";
+                    samling[i].PM = "";
+                    samling[i].Extern = "";
+                    samling[i].bgColor = bgColorHoliday;
+                }
+
+                if (samling[i].Extern == "Holiday")
+                {
+                    samling[i].Modul = "";
+                    samling[i].AM = "";
+                    samling[i].PM = "";
+                    samling[i].Extern = "";
+                    samling[i].bgColor = bgColorHoliday;
+                }
+
+                model = samling[i];
+                schedule.myList.Add(model);
+            }
+
+            return View(schedule);
         }
 
 

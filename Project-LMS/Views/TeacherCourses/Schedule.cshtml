@@ -1,63 +1,66 @@
 ﻿@using Project_LMS.Models
-@model IEnumerable<Project_LMS.Models.ScheduleViewModels>
+@model Project_LMS.Models.ScheduleHeadViewModels
 
 @{
     ViewBag.Title = "Schedule";
 }
 
 <h4>
-    Premilary Schedule @*@Html.DisplayFor(model => model.CourseName)*@
+    Premilary Schedule  <b>@Html.DisplayFor(model => model.CourseName)</b>
 </h4>
 
-<table class="Mytable table-striped">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Date)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Day)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Modul)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AM)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PM)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Extern)
-        </th>
-    </tr>
+<table class="mySchedule">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ViewModels.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ViewModels.Day)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ViewModels.Modul)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ViewModels.AM)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ViewModels.PM)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ViewModels.Extern)
+            </th>
+        </tr>
+    </thead>
 
-    @foreach (var item in Model)
+    @foreach (var item in Model.myList)
     {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Date)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Day)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Modul)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PM)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AM)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Extern)
-        </td>
-
-    </tr>
+        <tbody>
+            <tr style="background-color:@item.bgColor;">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Day)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Modul)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AM)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PM)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Extern)
+                </td>
+            </tr>
+        </tbody>
     }
 
 </table>
 
 <p>
-    @*@Html.ActionLink("Back to Course list", "Index", "TeacherCourses", new { id = Model.CourseId }, new { @class = "btn btn-primary btn-large" })*@
+    @Html.ActionLink("Back to Course list", "Index", "TeacherCourses", new { id = Model.CourseId }, new { @class = "btn btn-primary btn-large" })
 </p>
