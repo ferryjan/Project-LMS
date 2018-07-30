@@ -50,12 +50,24 @@
         font-weight: bold;
     }
 
+.activitytabs:hover {
+    color: #dddcf4;
+    font-weight: bold;
+}
+
 .well {
     background-color: #ccccff;
 }
 
 .bodycontainer {
     max-height: 450px;
+    width: 100%;
+    margin: 0;
+    overflow-y: auto;
+}
+
+.schedulecontainer {
+    max-height: 700px;
     width: 100%;
     margin: 0;
     overflow-y: auto;

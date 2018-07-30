@@ -66,10 +66,13 @@
                                         <a data-target=@atarget class="activitytabs" data-group="footer-blocks" data-toggle="collapse">@activity.Start.Date.ToString("yyyy-MM-dd hh:mm:ss") - @activity.End.Date.ToString("yyyy-MM-dd hh:mm:ss") : @activity.ActivityName</a>
                                     }
                                 </div>
-                                <div id=@aid class="collapse show-in-md well">
+                                <div id=@aid class="collapse show-in-md well" style="width:80%; background-color: #f5c6ff">
                                     <section style="color:blue; font-weight:bold; max-width: 800px; word-wrap:break-word;word-break:break-all">
                                         <p style="font-weight:normal"> @activity.Description</p>
                                     </section>
+                                    <div>
+                                        @Html.Action("StudentActivityFie", "StudentCourses", new { activityId = activity.ActivityId })
+                                    </div>
                                 </div>
                             </div>
                         }

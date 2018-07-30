@@ -9,58 +9,61 @@
     Premilary Schedule  <b>@Html.DisplayFor(model => model.CourseName)</b>
 </h4>
 
-<table class="mySchedule">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ViewModels.Date)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ViewModels.Day)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ViewModels.Modul)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ViewModels.AM)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ViewModels.PM)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ViewModels.Extern)
-            </th>
-        </tr>
-    </thead>
-
-    @foreach (var item in Model.myList)
-    {
-        <tbody>
-            <tr style="background-color:@item.bgColor;">
-                <td>
-                    @Html.DisplayFor(modelItem => item.Date)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Day)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Modul)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.AM)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PM)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Extern)
-                </td>
+<div class="schedulecontainer scrollable">
+    <table class="mySchedule">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.ViewModels.Date)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ViewModels.Day)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ViewModels.Modul)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ViewModels.AM)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ViewModels.PM)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ViewModels.Extern)
+                </th>
             </tr>
-        </tbody>
-    }
+        </thead>
 
-</table>
+        @foreach (var item in Model.myList)
+        {
+            <tbody>
+                <tr style="background-color:@item.bgColor;">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Day)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Modul)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AM)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PM)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Extern)
+                    </td>
+                </tr>
+            </tbody>
+        }
 
+    </table>
+</div>
+
+<br />
 <p>
     @Html.ActionLink("Back to Course list", "Index", "TeacherCourses", new { id = Model.CourseId }, new { @class = "btn btn-primary btn-large" })
 </p>
