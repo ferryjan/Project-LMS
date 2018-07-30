@@ -22,6 +22,15 @@
                             </ul>
                         </li>
                     }
+                    else
+                    {
+                        <li class='has-sub'>
+                            <a href='#'><span>@Html.Raw(student.FullName)</span></a>
+                            <ul>
+                                <li><a href="@Url.Action("Details", "StudentCourses", new { id = student.Id })"><span><i class="glyphicon glyphicon-info-sign"></i>@Html.Raw(" Contact Info")</span></a></li>
+                            </ul>
+                        </li>
+                    }
                 }
             </ul>
         </li>
