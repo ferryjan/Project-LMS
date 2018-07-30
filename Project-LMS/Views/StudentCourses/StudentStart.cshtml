@@ -12,11 +12,14 @@
 <div>
     @Html.ActionLink("View Schedule", "StudentSchedule", new { id = ViewBag.CourseId }, new { @class = "btn btn-primary btn-large" })
     <a href="#CourseDocument" class="btn btn-primary"> Jump To Course Document</a>
+    <a href="#Modules" class="btn btn-primary"> Jump To Modules</a>
 </div>
+<br />
+@Html.Action("StudentUpcomingActivities", "StudentCourses", new { id = ViewBag.CourseId })
 <br />
 <h3 style="color:crimson">Modules</h3>
 <br />
-<div class="container">
+<div class="container" id="Modules">
     <div class="row">
         @{ int i = 1;}
         @foreach (var mod in Model)

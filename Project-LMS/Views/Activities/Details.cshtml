@@ -11,11 +11,11 @@
     <hr />
     <dl class="dl-horizontal">
 
-        <dt>Course:</dt> 
+        <dt>Course:</dt>
         <dd>@ViewBag.CourseName</dd>
 
         <dt>Module:</dt>
-        <dd>@ViewBag.ModuleName</dd>    
+        <dd>@ViewBag.ModuleName</dd>
 
         <dt>@Html.DisplayNameFor(model => model.ActivityType.Type)</dt>
         <dd>@Html.DisplayFor(model => model.ActivityType.Type)</dd>
@@ -34,7 +34,16 @@
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", "Activities", new { id = Model.ActivityId }, new { @class = "btn btn-primary btn-large" })
-    @Html.ActionLink("Back to Modules", "Edit", "Modules", new { id = Model.ModuleId }, new { @class = "btn btn-primary btn-large" })
-</p>
+
+@if (User.IsInRole("Teacher"))
+{
+    <p>
+        @Html.ActionLink("Edit", "Edit", "Activities", new { id = Model.ActivityId }, new { @class = "btn btn-primary btn-large" })
+        @Html.ActionLink("Back to Modules", "Edit", "Modules", new { id = Model.ModuleId }, new { @class = "btn btn-primary btn-large" })
+    </p>
+}
+else if (User.IsInRole("Student"))
+{
+    @Html.ActionLink("Back to Start Page", "StudentStart", "StudentCourses", null, new { @class = "btn btn-primary btn-large" })
+}
+
