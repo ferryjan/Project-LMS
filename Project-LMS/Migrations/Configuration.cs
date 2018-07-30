@@ -42,10 +42,10 @@ namespace Project_LMS.Migrations
         protected override void Seed(Project_LMS.Models.ApplicationDbContext db)
         {
             //Enables debugging of seed, comment out to disable
-            if (!System.Diagnostics.Debugger.IsAttached)
-            {
-                System.Diagnostics.Debugger.Launch();
-            }
+            //if (!System.Diagnostics.Debugger.IsAttached)
+            //{
+            //    System.Diagnostics.Debugger.Launch();
+            //}
 
             // Seeding Roles. Changes to roles will affect the application
             var roleStore = new RoleStore<IdentityRole>(db);
