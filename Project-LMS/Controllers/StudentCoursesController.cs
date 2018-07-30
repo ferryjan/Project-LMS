@@ -74,7 +74,7 @@ namespace Project_LMS.Controllers
         }
 
         [Authorize(Roles = "Student")]
-        public PartialViewResult StudentModuleFie(int? moduleId)
+        public PartialViewResult StudentModuleFile(int? moduleId)
         {
             ViewBag.Id = moduleId;
             var documents = db.Documents.Where(i => i.ModuleId == moduleId && !i.ActivityId.HasValue);

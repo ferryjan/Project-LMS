@@ -42,10 +42,10 @@ namespace Project_LMS.Migrations
         protected override void Seed(Project_LMS.Models.ApplicationDbContext db)
         {
             //Enables debugging of seed, comment out to disable
-            //if (!System.Diagnostics.Debugger.IsAttached)
-            //{
-            //    System.Diagnostics.Debugger.Launch();
-            //}
+            if (!System.Diagnostics.Debugger.IsAttached)
+            {
+                System.Diagnostics.Debugger.Launch();
+            }
 
             // Seeding Roles. Changes to roles will affect the application
             var roleStore = new RoleStore<IdentityRole>(db);
@@ -73,6 +73,7 @@ namespace Project_LMS.Migrations
                 new ActivityType { Type = "Other" }
             };
             db.ActivityTypes.AddOrUpdate(s => new { s.Type }, activityTypes);
+            db.SaveChanges();
 
             //Seeding courses
             var courses = new[] {
@@ -149,8 +150,8 @@ namespace Project_LMS.Migrations
                 new Activity {
                     ModuleId = modules[2].ModuleId,
                     Start = modules[2].StartDate,
-                    End = modules[0].StartDate.AddDays(1),
-                    ActivityName = "Conversation",
+                    End = modules[2].StartDate.AddDays(1),
+                    ActivityName = "Definition",
                     ActivityTypeId = activityTypes[0].ActivityTypeId,
                     Description = "Fika, as a noun, refers to the combination of coffee and usually some sort of sweet snack. But fika, as a verb, is the act of partaking in a Swedish social institution.",
                     Color = "red"
@@ -164,7 +165,7 @@ namespace Project_LMS.Migrations
                     ActivityTypeId = activityTypes[3].ActivityTypeId,
                     Description = "Choose 7 cookies that mix well and can make the base for a good fika. To pass your written report must be uploaded in time.",
                     Color = "green"
-                },
+                }
             };
             db.Activities.AddOrUpdate(a => a.ActivityName, activities);
             db.SaveChanges();
