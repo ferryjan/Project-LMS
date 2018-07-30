@@ -161,7 +161,9 @@ namespace Project_LMS.Controllers
             {
                 foreach (var student in listOfStudent)
                 {
-                    db.Users.Remove(student);
+                    student.isActive = false;
+                    db.Entry(student).State = EntityState.Modified;
+                    db.SaveChanges(); ;
                 }
             }
 
