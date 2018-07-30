@@ -133,7 +133,7 @@ namespace Project_LMS.Migrations
                     End = modules[0].StartDate.AddDays(1),
                     ActivityName = "Fine dining",
                     ActivityTypeId = activityTypes[1].ActivityTypeId,
-                    Description = "Eating cookies without leaving ccrumbles requires lots of training",
+                    Description = "Eating cookies without leaving crumbles requires lots of training",
                     Color = "red"
                 },
                 new Activity {
