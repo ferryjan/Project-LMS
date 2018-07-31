@@ -46,12 +46,46 @@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Modul)
+
+                        @{
+                            if (item.ErrModul.Count > 0)
+                            {
+                                foreach (var err in item.ErrModul)
+                                {
+                                    <br /><b style="color:red">
+                                        @Html.DisplayFor(modelItem => err)
+                                    </b>
+                                }
+                            }
+                        }
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.AM)
+                        @{
+                            if (item.ErrAM.Count > 0)
+                            {
+                                foreach (var err in item.ErrAM)
+                                {
+                                    <br /><b style="color:red">
+                                        @Html.DisplayFor(modelItem => err)
+                                    </b>
+                                }
+                            }
+                        }
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.PM)
+                        @{
+                            if (item.ErrPM.Count > 0)
+                            {
+                                foreach (var err in item.ErrPM)
+                                {
+                                    <br /><b style="color:red">
+                                        @Html.DisplayFor(modelItem => err)
+                                    </b>
+                                }
+                            }
+                        }
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Extern)

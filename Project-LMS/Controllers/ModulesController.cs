@@ -30,7 +30,7 @@ namespace Project_LMS.Controllers
             ViewBag.CourseId = id;
             ViewBag.CourseStartDate = db.Courses.FirstOrDefault(c => c.CourseId == id).StartDate.Date;
             ViewBag.CourseEndDate = db.Courses.FirstOrDefault(c => c.CourseId == id).EndDate.Date;
-            var modules = db.Modules.Where(i => i.CourseId == id);
+            var modules = db.Modules.Where(i => i.CourseId == id).OrderBy(i => i.StartDate).OrderBy(i => i.EndDate);
             return PartialView(modules.ToList());
         }
 
