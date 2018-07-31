@@ -335,6 +335,7 @@
     </Content>
     <Content Include="Resources\Ansvarsfriskrivning.pdf" />
     <Content Include="Resources\Baking cookies from scratch.docx" />
+    <Content Include="Resources\conversation_skills.pdf" />
     <Content Include="Resources\BestCookies.docx" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\i18n\jquery-ui-timepicker-addon-i18n.js" />

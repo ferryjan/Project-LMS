@@ -664,7 +664,7 @@ namespace Project_LMS.Migrations
                 db.SaveChanges();
             }
 
-            documentName = "Baking cookies from scratch";
+            documentName = "Baking cookies from scratch.docx";
             if (!db.Documents.Any(u => u.DocumentName == documentName))
             {
                 email = newUser[0].Email;
@@ -679,6 +679,26 @@ namespace Project_LMS.Migrations
                     UploadingTime = DateTime.Now,
                     DocumentName = documentName,
                     Description = "Detailed description of the basics of cookie-baking."
+                };
+                db.Documents.Add(doc);
+                db.SaveChanges();
+            }
+
+            documentName = "Maintaining a conversation.pdf";
+            if (!db.Documents.Any(u => u.DocumentName == documentName))
+            {
+                email = newUser[1].Email;
+                appUserId = db.Users.FirstOrDefault(u => u.Email == email).Id;
+                doc = new Document
+                {
+                    FileData = File.ReadAllBytes(MapPath("~/Resources/conversation_skills.pdf")),
+                    ApplicationUserId = appUserId,
+                    ActivityId = activities[1].ActivityId,
+                    isHomework = false,
+                    DocumentFileType = "pdf",
+                    UploadingTime = DateTime.Now,
+                    DocumentName = documentName,
+                    Description = "How to maintain a conversation."
                 };
                 db.Documents.Add(doc);
                 db.SaveChanges();

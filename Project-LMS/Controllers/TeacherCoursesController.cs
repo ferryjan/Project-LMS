@@ -207,6 +207,51 @@ namespace Project_LMS.Controllers
             return RedirectToAction("Index");
         }
 
+        // UpdateModelName
+        private ScheduleViewModels UpdateModelName(ScheduleViewModels model, string name)
+        {
+            if (model.Modul == "")
+            {
+                model.Modul = name;
+            }
+            else
+            {
+                model.ErrModul.Add(name);
+            }
+
+            return model;
+        }
+
+        // UpdatePMName
+        private ScheduleViewModels UpdatePMName(ScheduleViewModels model, string name)
+        {
+            if (model.PM == "")
+            {
+                model.PM = name;
+            }
+            else
+            {
+                model.ErrPM.Add(name);
+            }
+
+            return model;
+        }
+
+        // UpdateAMName
+        private ScheduleViewModels UpdateAMName(ScheduleViewModels model, string name)
+        {
+            if (model.AM == "")
+            {
+                model.AM = name;
+            }
+            else
+            {
+                model.ErrAM.Add(name);
+            }
+
+            return model;
+        }
+
         // GET: TeacherCourses/Schedule/6
         public ActionResult Schedule(int? id)
         {
@@ -242,6 +287,9 @@ namespace Project_LMS.Controllers
                 samling[I].ActuallDate = courseStartDate;
                 samling[I].Year = courseStartDate.ToString("yyyy");
                 samling[I].DayOfYear = courseStartDate.DayOfYear;
+                samling[I].ErrModul = new List<string>();
+                samling[I].ErrAM = new List<string>();
+                samling[I].ErrPM = new List<string>();
 
                 if (I % 2 == 0) { samling[I].bgColor = "LightSteelBlue"; }
                 else samling[I].bgColor = "#ffffff";
@@ -249,7 +297,7 @@ namespace Project_LMS.Controllers
                 I += 1;
             }
 
-            var modules = db.Modules.Where(m => m.CourseId == course.CourseId).OrderBy(m => m.StartDate);
+            var modules = db.Modules.Where(m => m.CourseId == course.CourseId).OrderBy(m => m.StartDate).OrderBy(m => m.EndDate);
             var moduleStartDate = course.StartDate;
             var moduleStoppDate = course.StartDate;
             foreach (var module in modules)
@@ -270,7 +318,7 @@ namespace Project_LMS.Controllers
                     {
                         if (year == samling[counter].Year && dag == samling[counter].DayOfYear)
                         {
-                            samling[counter].Modul = modul;
+                            samling[counter] = UpdateModelName(samling[counter], modul);
                             found = true;
                         }
                         counter += 1;
@@ -283,7 +331,7 @@ namespace Project_LMS.Controllers
 
 
             //
-            var activites = course.CourseModules.SelectMany(m => m.Activities).OrderBy(a => a.Start);
+            var activites = course.CourseModules.SelectMany(m => m.Activities).OrderBy(a => a.Start).OrderBy(a => a.End);
             courseStartDate = course.StartDate;
             var activiStartDate = course.StartDate;
             var activiStoppDate = course.StartDate;
@@ -293,9 +341,11 @@ namespace Project_LMS.Controllers
                 activiStoppDate = activity.End;
                 var firstTime = true;
 
-                // Lägg in data för aktiviteten
-                while (activiStoppDate.Date >= activiStartDate.Date)
+
+                if (activity.ActivityType.Type == "Homework")
                 {
+                    activiStartDate = activity.End;
+
                     var dag = activiStartDate.DayOfYear;
                     var year = activiStartDate.ToString("yyyy");
                     var name = activity.ActivityName.ToString();
@@ -306,73 +356,99 @@ namespace Project_LMS.Controllers
                     {
                         if (year == samling[counter].Year && dag == samling[counter].DayOfYear)
                         {
-                            if (activiStoppDate.Date == activiStartDate.Date)
-                            {
-                                if (activiStartDate.Hour >= 13)
-                                {
-                                    samling[counter].PM = name;
-                                }
-                                else if (activiStartDate.Hour >= 0 && activiStartDate.Hour < 13)
-                                {
-                                    samling[counter].AM = name;
-
-                                    if (activiStoppDate.Hour > 13 && activiStoppDate.Hour <= 24)
-                                    {
-                                        samling[counter].PM = name;
-                                    }
-                                }
-                                else
-                                {
-                                    samling[counter].PM = name;
-                                }
-
-                            }
-                            else if (activiStoppDate.Date > activiStartDate.Date)
-                            {
-                                if (firstTime == true)
-                                {
-                                    if (activiStartDate.Hour >= 13)
-                                    {
-                                        samling[counter].PM = name;
-                                    }
-                                    else if (activiStartDate.Hour >= 0 && activiStartDate.Hour < 13)
-                                    {
-                                        samling[counter].AM = name;
-
-                                        if (activiStoppDate.Hour > 13 && activiStoppDate.Hour <= 24)
-                                            samling[counter].PM = name;
-                                    }
-                                    else
-                                    {
-                                        samling[counter].PM = name;
-                                    }
-
-                                    firstTime = false;
-                                }
-                                else
-                                {
-                                    samling[counter].AM = name;
-                                    samling[counter].PM = name;
-                                }
-                            }
-
-                            if (activity.ActivityType.Type == "Lecture")
-                            {
-                                samling[counter].Extern = "Yes";
-                            }
-                            else if (activity.ActivityType.Type == "Holiday")
-                            {
-                                samling[counter].Extern = "Holiday";
-                            }
-
+                            samling[counter].Extern = "HomeWork";
                             found = true;
                         }
 
                         counter += 1;
                         if (counter > maxDates) found = true; //Säkerhet
                     }
+                }
+                else
+                {
 
-                    activiStartDate = activiStartDate.AddDays(1);
+                    // Lägg in data för aktiviteten
+                    while (activiStoppDate.Date >= activiStartDate.Date)
+                    {
+                        var dag = activiStartDate.DayOfYear;
+                        var year = activiStartDate.ToString("yyyy");
+                        var name = activity.ActivityName.ToString();
+                        var found = false;
+                        var counter = 0;
+
+                        while (found == false)
+                        {
+                            if (year == samling[counter].Year && dag == samling[counter].DayOfYear)
+                            {
+                                if (activiStoppDate.Date == activiStartDate.Date)
+                                {
+
+                                    if (activiStartDate.Hour >= 13)
+                                    {
+                                        samling[counter] = UpdatePMName(samling[counter], name);
+                                    }
+                                    else if (activiStartDate.Hour >= 0 && activiStartDate.Hour < 13)
+                                    {
+                                        samling[counter] = UpdateAMName(samling[counter], name);
+
+                                        if (activiStoppDate.Hour > 13 && activiStoppDate.Hour <= 24)
+                                        {
+                                            samling[counter] = UpdatePMName(samling[counter], name);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        samling[counter] = UpdatePMName(samling[counter], name);
+                                    }
+
+                                }
+                                else if (activiStoppDate.Date > activiStartDate.Date)
+                                {
+                                    if (firstTime == true)
+                                    {
+                                        if (activiStartDate.Hour >= 13)
+                                        {
+                                            samling[counter] = UpdatePMName(samling[counter], name);
+                                        }
+                                        else if (activiStartDate.Hour >= 0 && activiStartDate.Hour < 13)
+                                        {
+                                            samling[counter] = UpdateAMName(samling[counter], name);
+
+                                            if (activiStoppDate.Hour > 13 && activiStoppDate.Hour <= 24)
+                                                samling[counter] = UpdatePMName(samling[counter], name);
+                                        }
+                                        else
+                                        {
+                                            samling[counter] = UpdatePMName(samling[counter], name);
+                                        }
+
+                                        firstTime = false;
+                                    }
+                                    else
+                                    {
+                                        samling[counter] = UpdateAMName(samling[counter], name);
+                                        samling[counter] = UpdatePMName(samling[counter], name);
+                                    }
+                                }
+
+                                if (activity.ActivityType.Type == "Lecture")
+                                {
+                                    samling[counter].Extern = "Extern";
+                                }
+                                else if (activity.ActivityType.Type == "Holiday")
+                                {
+                                    samling[counter].Extern = "Holiday";
+                                }
+
+                                found = true;
+                            }
+
+                            counter += 1;
+                            if (counter > maxDates) found = true; //Säkerhet
+                        }
+
+                        activiStartDate = activiStartDate.AddDays(1);
+                    }
                 }
             }
 
@@ -394,6 +470,9 @@ namespace Project_LMS.Controllers
                     samling[i].AM = "";
                     samling[i].PM = "";
                     samling[i].Extern = "";
+                    samling[i].ErrModul = new List<string>();
+                    samling[i].ErrAM = new List<string>();
+                    samling[i].ErrPM = new List<string>();
                     samling[i].bgColor = bgColorHoliday;
                 }
 
@@ -405,6 +484,9 @@ namespace Project_LMS.Controllers
                     samling[i].AM = "";
                     samling[i].PM = "";
                     samling[i].Extern = "";
+                    samling[i].ErrModul = new List<string>();
+                    samling[i].ErrAM = new List<string>();
+                    samling[i].ErrPM = new List<string>();
                     samling[i].bgColor = bgColorHoliday;
                 }
 
@@ -415,6 +497,9 @@ namespace Project_LMS.Controllers
                     samling[i].PM = "";
                     samling[i].Extern = "";
                     samling[i].bgColor = bgColorHoliday;
+                    samling[i].ErrModul = new List<string>();
+                    samling[i].ErrAM = new List<string>();
+                    samling[i].ErrPM = new List<string>();
                 }
 
                 if (samling[i].Extern == "Holiday")
@@ -424,6 +509,9 @@ namespace Project_LMS.Controllers
                     samling[i].PM = "";
                     samling[i].Extern = "";
                     samling[i].bgColor = bgColorHoliday;
+                    samling[i].ErrModul = new List<string>();
+                    samling[i].ErrAM = new List<string>();
+                    samling[i].ErrPM = new List<string>();
                 }
 
                 model = samling[i];
