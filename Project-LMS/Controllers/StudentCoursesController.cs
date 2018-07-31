@@ -69,8 +69,16 @@ namespace Project_LMS.Controllers
         public PartialViewResult StudentActivityFile(int? activityId)
         {
             ViewBag.Id = activityId;
-            var documents = db.Documents.Where(i => i.ActivityId == activityId && i.isHomework != false);
+            var documents = db.Documents.Where(i => i.ActivityId == activityId && i.isHomework != true);
             return PartialView("_studentActivityFile", documents.ToList());
+        }
+
+        [Authorize(Roles = "Student")]
+        public PartialViewResult StudentHomeworkFile(int? activityId)
+        {
+            ViewBag.Id = activityId;
+            var documents = db.Documents.Where(i => i.ActivityId == activityId && i.isHomework == true);
+            return PartialView("_studentHomeworkFile", documents.ToList());
         }
 
         [Authorize(Roles = "Student")]

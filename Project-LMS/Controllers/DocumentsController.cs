@@ -218,14 +218,50 @@ namespace Project_LMS.Controllers
         }
 
         //// GET: Documents/Create
-        //[Authorize(Roles = "Student")]
-        //public ActionResult CreateStudentActivityDocument(int? id)
-        //{
-        //    ViewBag.ActivityId = id;
-        //    return View();
-        //}
+        [Authorize(Roles = "Student")]
+        public ActionResult CreateStudentActivityDocument(int? id)
+        {
+            ViewBag.ActivityId = id;
+            return View();
+        }
 
-
+        // POST: Documents/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [Authorize(Roles = "Student")]
+        public ActionResult CreateSt5udentActivityDocument(Document doc, int id)
+        {
+            if (ModelState.IsValid)
+            {
+                if (Request.Files.Count > 0)
+                {
+                    HttpPostedFileBase file = Request.Files[0];
+                    if (file.ContentLength > 0)
+                    {
+                        doc.ApplicationUserId = db.Users.FirstOrDefault(u => u.UserName == User.Identity.Name).Id;
+                        doc.ActivityId = id;
+                        doc.DocumentFileType = file.ContentType;
+                        doc.UploadingTime = DateTime.Now;
+                        doc.FileData = new byte[file.ContentLength];
+                        doc.DocumentName = file.FileName;
+                        doc.isHomework = true;
+                        file.InputStream.Read(doc.FileData, 0, file.ContentLength);
+                        db.Documents.Add(doc);
+                        db.SaveChanges();
+                        return RedirectToAction("Edit", "Activities", new { id });
+                    }
+                    else
+                    {
+                        ViewBag.NoFileSelectedMsg = "No file has been selected!";
+                        ViewBag.ActivityId = id;
+                        return View(doc);
+                    }
+                }
+            }
+            ViewBag.ModuleId = id;
+            return View(doc);
+        }
 
 
         [HttpGet]

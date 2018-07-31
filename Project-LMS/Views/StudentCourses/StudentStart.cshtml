@@ -73,6 +73,12 @@
                                     <div>
                                         @Html.Action("StudentActivityFile", "StudentCourses", new { activityId = activity.ActivityId })
                                     </div>
+                                    @if (activity.ActivityType.Type == "Homework")
+                                    {
+                                        <div>
+                                            @Html.Action("StudentHomeworkFile", "StudentCourses", new { activityId = activity.ActivityId })
+                                        </div>
+                                    }
                                 </div>
                             </div>
                         }
