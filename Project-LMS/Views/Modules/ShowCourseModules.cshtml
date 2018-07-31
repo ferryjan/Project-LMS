@@ -54,7 +54,7 @@
                         <strong>Details</strong>
                     </span>
                 </a>
-                <a href="@Url.Action("Delete", "Modules", new { id = ViewBag.CourseId, moduleId = item.ModuleId })" class="btn btn-danger">
+                <a href="@Url.Action("Delete", "Modules", new { id = ViewBag.CourseId, moduleId = item.ModuleId, isVerified = false })" class="btn btn-danger">
                     <i class="glyphicon glyphicon-erase"></i>
                     <span>
                         <strong>Delete</strong>

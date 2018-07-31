@@ -28,7 +28,7 @@ namespace Project_LMS.Models
 
         [Required]
         [Display(Name = "Description")]
-        [StringLength(255)]
+        [StringLength(500)]
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 

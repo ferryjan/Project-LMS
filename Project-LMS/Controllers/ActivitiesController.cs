@@ -159,8 +159,11 @@ namespace Project_LMS.Controllers
                     case 5:
                         activity.Color = "purple";
                         break;
-                    default:
+                    case 6:
                         activity.Color = "black";
+                        break;
+                    default:
+                        activity.Color = "gray";
                         break;
                 }
 
@@ -279,8 +282,11 @@ namespace Project_LMS.Controllers
                     case 5:
                         activity.Color = "purple";
                         break;
-                    default:
+                    case 6:
                         activity.Color = "black";
+                        break;
+                    default:
+                        activity.Color = "gray";
                         break;
                 }
                 db.Entry(activity).State = EntityState.Modified;
