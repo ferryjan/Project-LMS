@@ -64,7 +64,7 @@ namespace Project_LMS.Controllers
         }
 
         // GET: Documents/Details/5
-        [Authorize(Roles = "Teacher")]
+        [Authorize(Roles = "Teacher, Student")]
         public ActionResult ActivityDocumentDetails(int? id)
         {
             if (id == null)
@@ -230,7 +230,7 @@ namespace Project_LMS.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [Authorize(Roles = "Student")]
-        public ActionResult CreateSt5udentActivityDocument(Document doc, int id)
+        public ActionResult CreateStudentActivityDocument(Document doc, int id)
         {
             if (ModelState.IsValid)
             {
@@ -415,6 +415,34 @@ namespace Project_LMS.Controllers
             return RedirectToAction("Edit", "Activities", new { id = activityId });
         }
 
+        // GET: Documents/Delete/5
+        [Authorize(Roles = "Student")]
+        public ActionResult DeleteHomeworkDocument(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Document document = db.Documents.Find(id);
+            if (document == null)
+            {
+                return HttpNotFound();
+            }
+            return View(document);
+        }
+
+        // POST: Documents/Delete/5
+        [HttpPost, ActionName("DeleteHomeworkDocument")]
+        [Authorize(Roles = "Student")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteHomeworkDocumentConfirmed(int id)
+        {
+            Document document = db.Documents.Find(id);
+            var activityId = document.ActivityId;
+            db.Documents.Remove(document);
+            db.SaveChanges();
+            return RedirectToAction("StudentStart", "StudentCourses", new { id = activityId });
+        }
 
         protected override void Dispose(bool disposing)
         {

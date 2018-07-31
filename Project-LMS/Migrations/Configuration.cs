@@ -163,7 +163,7 @@ namespace Project_LMS.Migrations
                     End = modules[0].StartDate.AddDays(1),
                     ActivityName = "Choosing the right blend",
                     ActivityTypeId = activityTypes[3].ActivityTypeId,
-                    Description = "Choose 7 cookies that mix well and can make the base for a good fika. To pass your written report must be uploaded in time.",
+                    Description = "Choose 7 cookies that mix well and can make the base for a good fika. Don't forget to upload your written report on time.",
                     Color = "green"
                 }
             };
@@ -179,7 +179,7 @@ namespace Project_LMS.Migrations
             //Students must be linked to courses, teachers must not
             var newUser = new[]
             {
-                new NewUser
+                new NewUser //0
                 {
                     Email = "admin@admin.se",
                     Rolestring = "Teacher",
@@ -187,7 +187,7 @@ namespace Project_LMS.Migrations
                     FamilyName= "Jeltsin",
                     CourseId = null
                 },
-                new NewUser
+                new NewUser //1
                 {
                     Email = "Donald@duck.se",
                     Rolestring = "Teacher",
@@ -195,7 +195,7 @@ namespace Project_LMS.Migrations
                     FamilyName= "Duck",
                     CourseId = null
                 },
-                new NewUser
+                new NewUser //2
                 {
                     Email = "student@student.se",
                     Rolestring = "Student",
@@ -203,7 +203,7 @@ namespace Project_LMS.Migrations
                     FamilyName= "Hoppsan",
                     CourseId = courses[0].CourseId
                 },
-                new NewUser
+                new NewUser //3
                 {
                     Email = "Sten.Sture@svea.se",
                     Rolestring = "Student",
@@ -211,7 +211,7 @@ namespace Project_LMS.Migrations
                     FamilyName= "Den Äldre",
                     CourseId = courses[0].CourseId
                 },
-                new NewUser
+                new NewUser //4
                 {
                     Email = "Gorm@asa.dk",
                     Rolestring = "Student",
@@ -219,7 +219,7 @@ namespace Project_LMS.Migrations
                     FamilyName= "Den Gamle",
                     CourseId = courses[0].CourseId
                 },
-                new NewUser
+                new NewUser //5
                 {
                     Email = "MrCool@mail.com",
                     Rolestring = "Student",
@@ -227,7 +227,7 @@ namespace Project_LMS.Migrations
                     FamilyName= "Göransson",
                     CourseId = courses[0].CourseId
                 },
-                new NewUser
+                new NewUser //6
                 {
                     Email = "bakihozab2984@yopmail.com",
                     Rolestring = "Student",
@@ -235,7 +235,7 @@ namespace Project_LMS.Migrations
                     FamilyName= "Larsson",
                     CourseId = courses[0].CourseId
                 },
-                new NewUser
+                new NewUser //7
                 {
                     Email = "Exate1968@gustr.com",
                     Rolestring = "Student",
@@ -243,8 +243,8 @@ namespace Project_LMS.Migrations
                     FamilyName= "Gustavsson",
                     CourseId = courses[0].CourseId
                 },
-                new NewUser
-                {
+                new NewUser //8
+                { 
                     Email = "Gamer@Lexicon.com",
                     Rolestring = "Student",
                     GivenName = "Dimitri",
@@ -528,7 +528,7 @@ namespace Project_LMS.Migrations
             documentName = "MySevenCookies.txt";
             if (!db.Documents.Any(u => u.DocumentName == documentName))
             {
-                email = newUser[5].Email;
+                email = newUser[8].Email;
                 appUserId = db.Users.FirstOrDefault(u => u.Email == email).Id;
                 doc = new Document
                 {

@@ -1,0 +1,35 @@
+﻿@model Project_LMS.Models.Document
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete homework document</h2>
+
+<h3>Are you sure you want to delete your homework ?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>@Html.DisplayNameFor(model => model.Activity.ActivityName)</dt>
+        <dd>@Html.DisplayFor(model => model.Activity.ActivityName)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.DocumentName)</dt>
+        <dd>@Html.DisplayFor(model => model.DocumentName)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.UploadingTime)</dt>
+        <dd>@Html.DisplayFor(model => model.UploadingTime)</dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-danger" /> 
+            @Html.ActionLink("Back", "Edit", "Activities", new { id = Model.ActivityId }, new { @class = "btn btn-primary btn-large" })
+        </div>
+    }
+</div>
+

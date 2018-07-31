@@ -492,6 +492,8 @@
     <Content Include="Views\StudentCourses\_studentActivityFile.cshtml" />
     <Content Include="Views\Documents\_createStudentActivityDocument.cshtml" />
     <Content Include="Views\StudentCourses\_studentHomeworkFile.cshtml" />
+    <Content Include="Views\Documents\DeleteHomeworkDocument.cshtml" />
+    <Content Include="Views\Documents\CreateStudentActivityDocument.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
