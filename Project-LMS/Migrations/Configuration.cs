@@ -625,6 +625,7 @@ namespace Project_LMS.Migrations
                 db.SaveChanges();
             }
 
+            documentName = "BestCookies.docx";
             if (!db.Documents.Any(u => u.DocumentName == "BestCookies.docx"))
             {
                 email = newUser[38].Email;
@@ -635,7 +636,7 @@ namespace Project_LMS.Migrations
                     ApplicationUserId = appUserId,
                     ActivityId = activities[0].ActivityId,
                     isHomework = true,
-                    DocumentFileType = "docx",
+                    DocumentFileType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
                     UploadingTime = DateTime.Now,
                     DocumentName = "BestCookies.docx",
                     Description = "Each cookie cost 1M USD!",
@@ -645,7 +646,8 @@ namespace Project_LMS.Migrations
                 db.SaveChanges();
             }
 
-            if (!db.Documents.Any(u => u.DocumentName == "Disclaimer"))
+            documentName = "Ansvarsfriskrivning.pdf";
+            if (!db.Documents.Any(u => u.DocumentName == "Ansvarsfriskrivning.pdf"))
             {
                 email = newUser[0].Email;
                 appUserId = db.Users.FirstOrDefault(u => u.Email == email).Id;
@@ -655,7 +657,7 @@ namespace Project_LMS.Migrations
                     ApplicationUserId = appUserId,
                     CourseId = courses[0].CourseId,
                     isHomework = false,
-                    DocumentFileType = "pdf",
+                    DocumentFileType = "application/pdf",
                     UploadingTime = DateTime.Now,
                     DocumentName = documentName,
                     Description = "Lexicon does not take responsibility for any negative health effects occuring during, or after, this course."
@@ -675,7 +677,7 @@ namespace Project_LMS.Migrations
                     ApplicationUserId = appUserId,
                     ModuleId = modules[0].ModuleId,
                     isHomework = false,
-                    DocumentFileType = "docx",
+                    DocumentFileType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
                     UploadingTime = DateTime.Now,
                     DocumentName = documentName,
                     Description = "Detailed description of the basics of cookie-baking."
@@ -695,7 +697,7 @@ namespace Project_LMS.Migrations
                     ApplicationUserId = appUserId,
                     ActivityId = activities[1].ActivityId,
                     isHomework = false,
-                    DocumentFileType = "pdf",
+                    DocumentFileType = "application/pdf",
                     UploadingTime = DateTime.Now,
                     DocumentName = documentName,
                     Description = "How to maintain a conversation."
