@@ -98,30 +98,44 @@ namespace Project_LMS.Migrations
                 new Project_LMS.Models.Module {
                     CourseId = courses[0].CourseId,
                     StartDate = courses[0].StartDate,
-                    EndDate = courses[0].StartDate.AddDays(2),
+                    EndDate = courses[0].StartDate.AddDays(8),
                     Name = "Cookies, not just for web-pages",
                     Description = "An introduction to Cookies: the common combinations."
                 },
                 new Project_LMS.Models.Module {
                     CourseId = courses[0].CourseId,
-                    StartDate = courses[0].StartDate.AddDays(2),
-                    EndDate = courses[0].StartDate.AddDays(4),
+                    StartDate = courses[0].StartDate.AddDays(8),
+                    EndDate = courses[0].StartDate.AddDays(10),
                     Name = "Coffie, the black gold",
                     Description = "An introduction to Coffie: Brew or boil?"
                 },
                 new Project_LMS.Models.Module {
                     CourseId = courses[0].CourseId,
-                    StartDate = courses[0].StartDate.AddDays(4),
-                    EndDate = courses[0].StartDate.AddDays(6),
+                    StartDate = courses[0].StartDate.AddDays(11),
+                    EndDate = courses[0].StartDate.AddDays(15),
                     Name = "fika: rest, recreation or regulation",
                     Description = "A theoretical glance at the position of fika in todays society."
                 },
                 new Project_LMS.Models.Module {
                     CourseId = courses[0].CourseId,
-                    StartDate = courses[0].StartDate.AddDays(6),
-                    EndDate = courses[0].StartDate.AddDays(8),
+                    StartDate = courses[0].StartDate.AddDays(16),
+                    EndDate = courses[0].StartDate.AddDays(30),
                     Name = "Fika: the F-word in Sweden",
                     Description = "Fika is a coffee break in Sweden, but it is invested with considerable socio-cultural and symbolic significance."
+                },
+                new Project_LMS.Models.Module {
+                    CourseId = courses[1].CourseId,
+                    StartDate = courses[1].StartDate,
+                    EndDate = courses[1].StartDate.AddDays(8),
+                    Name = "Fika is polyvalent and paradoxical ",
+                    Description = "It can be a signifier of employer recognition and generosity, and a challenge to the mind/body dualism in academic work cultures."
+                },
+                new Project_LMS.Models.Module {
+                    CourseId = courses[1].CourseId,
+                    StartDate = courses[1].StartDate.AddDays(9),
+                    EndDate = courses[1].StartDate.AddDays(30),
+                    Name = "Fika: research",
+                    Description = "Our research interrogates and deconstructs fika in the context of the political economy of neoliberalism. "
                 }
             };
             db.Modules.AddOrUpdate(m => m.Name, modules);
@@ -129,45 +143,99 @@ namespace Project_LMS.Migrations
 
             //Seeding Activities
             var activities = new[] {
+                //Lets seed a homework (activityTypes[3]). Lets also seed it so the start and end interferes with another activity.
                 new Activity {
                     ModuleId = modules[0].ModuleId,
                     Start = modules[0].StartDate,
-                    End = modules[0].StartDate.AddDays(1),
+                    End = modules[0].StartDate,
+                    ActivityName = "The multiple interpretations of fika.",
+                    ActivityTypeId = activityTypes[3].ActivityTypeId,
+                    Description = "Homework: List, and explain the 5 common interpretations of fika",
+                    Color = "navy"
+                },
+                new Activity {
+                    ModuleId = modules[0].ModuleId,
+                    Start = modules[0].StartDate.AddDays(1),
+                    End = modules[0].StartDate.AddDays(3),
                     ActivityName = "Fine dining",
-                    ActivityTypeId = activityTypes[1].ActivityTypeId,
+                    ActivityTypeId = activityTypes[0].ActivityTypeId,
                     Description = "Eating cookies without leaving crumbles requires lots of training",
                     Color = "red"
                 },
                 new Activity {
                     ModuleId = modules[0].ModuleId,
-                    Start = modules[0].StartDate.AddDays(1),
-                    End = modules[0].StartDate.AddDays(2),
+                    Start = modules[0].StartDate.AddDays(4),
+                    End = modules[0].StartDate.AddDays(6),
                     ActivityName = "Conversation",
                     ActivityTypeId = activityTypes[1].ActivityTypeId,
                     Description = "How to make fine conversation while eating cookies. Keeping your mouth shut until all crumbles have been swallowed and other essential skills.",
-                    Color = "red"
+                    Color = "blue"
+                },              
+                new Activity {
+                    ModuleId = modules[1].ModuleId,
+                    Start = modules[0].StartDate.AddDays(8),
+                    End = modules[0].StartDate.AddDays(10),
+                    ActivityName = "Definition",
+                    ActivityTypeId = activityTypes[2].ActivityTypeId,
+                    Description = "Fika, as a noun, refers to the combination of coffee and usually some sort of sweet snack. But fika, as a verb, is the act of partaking in a Swedish social institution.",
+                    Color = "green"
                 },
                 new Activity {
                     ModuleId = modules[2].ModuleId,
-                    Start = modules[2].StartDate,
-                    End = modules[2].StartDate.AddDays(1),
-                    ActivityName = "Definition",
-                    ActivityTypeId = activityTypes[0].ActivityTypeId,
-                    Description = "Fika, as a noun, refers to the combination of coffee and usually some sort of sweet snack. But fika, as a verb, is the act of partaking in a Swedish social institution.",
-                    Color = "red"
-                },
-                //Lets seed a homework (activityTypes[3]). Lets also seed it so the start and end interferes with another activity.
-                new Activity { 
-                    ModuleId = modules[0].ModuleId,
-                    Start = modules[0].StartDate,
-                    End = modules[0].StartDate.AddDays(1),
+                    Start = modules[0].StartDate.AddDays(12),
+                    End = modules[0].StartDate.AddDays(13),
                     ActivityName = "Choosing the right blend",
                     ActivityTypeId = activityTypes[3].ActivityTypeId,
                     Description = "Choose 7 cookies that mix well and can make the base for a good fika. To pass your written report must be uploaded in time.",
+                    Color = "navy"
+                },
+                new Activity {
+                    ModuleId = modules[2].ModuleId,
+                    Start = modules[0].StartDate.AddDays(12),
+                    End = modules[0].StartDate.AddDays(15),
+                    ActivityName = "The classical utility of fika",
+                    ActivityTypeId = activityTypes[5].ActivityTypeId,
+                    Description = "Traditionally, fika has been used as a site for team-building, democratization, and well-being at work.",
+                    Color = "gray"
+                },
+                new Activity {
+                    ModuleId = modules[3].ModuleId,
+                    Start = modules[0].StartDate.AddDays(16),
+                    End = modules[0].StartDate.AddDays(19),
+                    ActivityName = "The modern utility of fika",
+                    ActivityTypeId = activityTypes[2].ActivityTypeId,
+                    Description = "Can it be that in modern life the utility of fika have tranhsformed into a neoliberal surveillance and normalization technologies in which one's corporate loyalty and interpersonal skills are made visible for assessment?",
                     Color = "green"
+                },
+                new Activity {
+                    ModuleId = modules[3].ModuleId,
+                    Start = modules[0].StartDate.AddDays(20),
+                    End = modules[0].StartDate.AddDays(24),
+                    ActivityName = "Economy of fika in the workplace",
+                    ActivityTypeId = activityTypes[1].ActivityTypeId,
+                    Description = "Twice a day, in mornings and afternoons, Swedish workers can gather for a short break, in the internal fika-area. Employers are expected to bear most of the cost of breaks as an investment in their employees (Spross 2016 Spross, Linn. 2016. [A Dilemma of the Welfare State: Formulations State of the Working Hours Question 1919-2002]. Uppsala: Uppsala University.",
+                    Color = "blue"
+                },
+                new Activity {
+                    ModuleId = modules[3].ModuleId,
+                    Start = modules[0].StartDate.AddDays(25),
+                    End = modules[0].StartDate.AddDays(30),
+                    ActivityName = "Exploring our feelings.",
+                    ActivityTypeId = activityTypes[0].ActivityTypeId,
+                    Description = "We noted an affective and gendered economy with fika eliciting feelings of pleasure in the social and recreational aspects, but shame and anger at what was perceived as coercion to perform a particular type of sociable subjectivity.",
+                    Color = "red"
+                },
+                new Activity {
+                    ModuleId = modules[4].ModuleId,
+                    Start = modules[0].StartDate.AddDays(8),
+                    End = modules[0].StartDate.AddDays(16),
+                    ActivityName = "Picnic",
+                    ActivityTypeId = activityTypes[2].ActivityTypeId,
+                    Description = "Acronym for Problem in chair. Not in computer. Used by Sysadmins to covertly describe user error to each other. Some snickering usually involved.",
+                    Color = "purple"
                 }
             };
-            db.Activities.AddOrUpdate(a => a.ActivityId, activities);
+            db.Activities.AddOrUpdate(a => a.ActivityName, activities);
             db.SaveChanges();
 
 
@@ -179,7 +247,7 @@ namespace Project_LMS.Migrations
             //Students must be linked to courses, teachers must not
             var newUser = new[]
             {
-                new NewUser
+                new NewUser //0
                 {
                     Email = "admin@admin.se",
                     Rolestring = "Teacher",
@@ -187,15 +255,15 @@ namespace Project_LMS.Migrations
                     FamilyName= "Jeltsin",
                     CourseId = null
                 },
-                new NewUser
+                new NewUser //1
                 {
                     Email = "Donald@duck.se",
                     Rolestring = "Teacher",
                     GivenName = "Donald",
                     FamilyName= "Duck",
-                    CourseId = null
+                    CourseId = null,
                 },
-                new NewUser
+                new NewUser //2
                 {
                     Email = "student@student.se",
                     Rolestring = "Student",
@@ -203,7 +271,7 @@ namespace Project_LMS.Migrations
                     FamilyName= "Hoppsan",
                     CourseId = courses[0].CourseId
                 },
-                new NewUser
+                new NewUser //3
                 {
                     Email = "Sten.Sture@svea.se",
                     Rolestring = "Student",
@@ -211,7 +279,7 @@ namespace Project_LMS.Migrations
                     FamilyName= "Den Äldre",
                     CourseId = courses[0].CourseId
                 },
-                new NewUser
+                new NewUser //4
                 {
                     Email = "Gorm@asa.dk",
                     Rolestring = "Student",
@@ -219,7 +287,7 @@ namespace Project_LMS.Migrations
                     FamilyName= "Den Gamle",
                     CourseId = courses[0].CourseId
                 },
-                new NewUser
+                new NewUser //5
                 {
                     Email = "MrCool@mail.com",
                     Rolestring = "Student",
@@ -227,7 +295,7 @@ namespace Project_LMS.Migrations
                     FamilyName= "Göransson",
                     CourseId = courses[0].CourseId
                 },
-                new NewUser
+                new NewUser //6
                 {
                     Email = "bakihozab2984@yopmail.com",
                     Rolestring = "Student",
@@ -235,7 +303,7 @@ namespace Project_LMS.Migrations
                     FamilyName= "Larsson",
                     CourseId = courses[0].CourseId
                 },
-                new NewUser
+                new NewUser //7
                 {
                     Email = "Exate1968@gustr.com",
                     Rolestring = "Student",
@@ -243,8 +311,8 @@ namespace Project_LMS.Migrations
                     FamilyName= "Gustavsson",
                     CourseId = courses[0].CourseId
                 },
-                new NewUser
-                {
+                new NewUser //8
+                { 
                     Email = "Gamer@Lexicon.com",
                     Rolestring = "Student",
                     GivenName = "Dimitri",
@@ -474,7 +542,7 @@ namespace Project_LMS.Migrations
                     Rolestring = "Student",
                     GivenName = "Jacquette",
                     FamilyName= "Mcarthur",
-                    CourseId = courses[0].CourseId
+                    CourseId = courses[1].CourseId
                 },
                 new NewUser
                 {
@@ -490,7 +558,7 @@ namespace Project_LMS.Migrations
                     Rolestring = "Student",
                     GivenName = "Ante",
                     FamilyName= "Bante",
-                    CourseId = courses[1].CourseId
+                    CourseId = courses[0].CourseId
                 }
             };
         
@@ -520,33 +588,62 @@ namespace Project_LMS.Migrations
             }
             db.SaveChanges();
 
-            //Seeding documents
+            //seed profile image
+            var em = newUser[1].Email;
+            var appUser = db.Users.FirstOrDefault(a => a.Email == em);
+            if (appUser != null)
+            {
+                appUser.ProfileImageRef = "Duck.png";
+                db.Entry(appUser).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+            
 
+            //Seeding documents
             string email;
             string appUserId;
+            string documentName;
             Document doc;
 
-
-
-            if (!db.Documents.Any(u => u.DocumentName == "MySevenCookies.txt"))
+            documentName = "MySevenCookies.txt";
+            if (!db.Documents.Any(u => u.DocumentName == documentName))
             {
-                email = newUser[5].Email;
+                email = newUser[8].Email;
                 appUserId = db.Users.FirstOrDefault(u => u.Email == email).Id;
                 doc = new Document
                 {
                     FileData = File.ReadAllBytes(MapPath("~/Resources/MySevenCookies.txt")),
                     ApplicationUserId = appUserId,
-                    ActivityId = activities[0].ActivityId,
+                    ActivityId = activities[3].ActivityId,
                     isHomework = true,
                     DocumentFileType = "text/plain",
                     UploadingTime = DateTime.Now,
-                    DocumentName = "MySevenCookies.txt",
+                    DocumentName = documentName,
                     Description = "I did the best I could, please dont kick me from class"
                 };
                 db.Documents.Add(doc);
                 db.SaveChanges();
             }
 
+            if (!db.Documents.Any(u => u.DocumentName == "BestCookies.docx"))
+            {
+                email = newUser[38].Email;
+                appUserId = db.Users.FirstOrDefault(u => u.Email == email).Id;
+                doc = new Document
+                {
+                    FileData = File.ReadAllBytes(MapPath("~/Resources/BestCookies.docx")),
+                    ApplicationUserId = appUserId,
+                    ActivityId = activities[0].ActivityId,
+                    isHomework = true,
+                    DocumentFileType = "docx",
+                    UploadingTime = DateTime.Now,
+                    DocumentName = "BestCookies.docx",
+                    Description = "Each cookie cost 1M USD!",
+                    FeedBack = "Well done!"
+                };
+                db.Documents.Add(doc);
+                db.SaveChanges();
+            }
 
             if (!db.Documents.Any(u => u.DocumentName == "Disclaimer"))
             {
@@ -560,14 +657,15 @@ namespace Project_LMS.Migrations
                     isHomework = false,
                     DocumentFileType = "pdf",
                     UploadingTime = DateTime.Now,
-                    DocumentName = "Disclaimer.pdf",
+                    DocumentName = documentName,
                     Description = "Lexicon does not take responsibility for any negative health effects occuring during, or after, this course."
                 };
                 db.Documents.Add(doc);
                 db.SaveChanges();
             }
 
-            if (!db.Documents.Any(u => u.DocumentName == "Baking cookies from scratch"))
+            documentName = "Baking cookies from scratch";
+            if (!db.Documents.Any(u => u.DocumentName == documentName))
             {
                 email = newUser[0].Email;
                 appUserId = db.Users.FirstOrDefault(u => u.Email == email).Id;
@@ -579,7 +677,7 @@ namespace Project_LMS.Migrations
                     isHomework = false,
                     DocumentFileType = "docx",
                     UploadingTime = DateTime.Now,
-                    DocumentName = "Baking cookies from scratch.docx",
+                    DocumentName = documentName,
                     Description = "Detailed description of the basics of cookie-baking."
                 };
                 db.Documents.Add(doc);
@@ -589,9 +687,9 @@ namespace Project_LMS.Migrations
             var messages = new[] {
                 new Message {
                     SentFrom = newUser[2].Email,
-                    SentFromFullName = newUser[2].GivenName + newUser[2].FamilyName,
+                    SentFromFullName = newUser[2].GivenName + " " + newUser[2].FamilyName,
                     SentTo = newUser[38].Email,
-                    SentToFullName = newUser[38].GivenName + newUser[38].FamilyName,
+                    SentToFullName = newUser[38].GivenName + " " + newUser[38].FamilyName,
                     SentDate = DateTime.Now.AddDays(-10),
                     isRead = false,
                     Topic = "Buy me some icecream!",
@@ -603,9 +701,9 @@ namespace Project_LMS.Migrations
                 },
                 new Message {
                     SentFrom = newUser[38].Email,
-                    SentFromFullName = newUser[38].GivenName + newUser[38].FamilyName,
+                    SentFromFullName = newUser[38].GivenName + " " + newUser[38].FamilyName,
                     SentTo = newUser[2].Email,
-                    SentToFullName = newUser[2].GivenName + newUser[2].FamilyName,
+                    SentToFullName = newUser[2].GivenName + " " + newUser[2].FamilyName,
                     SentDate = DateTime.Now.AddDays(-9),
                     isRead = false,
                     Topic = "Buy me some icecream!",
@@ -617,9 +715,9 @@ namespace Project_LMS.Migrations
                 },
                 new Message {
                     SentFrom = newUser[2].Email,
-                    SentFromFullName = newUser[2].GivenName + newUser[2].FamilyName,
+                    SentFromFullName = newUser[2].GivenName + " " + newUser[2].FamilyName,
                     SentTo = newUser[38].Email,
-                    SentToFullName = newUser[38].GivenName + newUser[38].FamilyName,
+                    SentToFullName = newUser[38].GivenName + " " + newUser[38].FamilyName,
                     SentDate = DateTime.Now.AddDays(-8),
                     isRead = false,
                     Topic = "Buy me some icecream!",
@@ -631,9 +729,9 @@ namespace Project_LMS.Migrations
                 },
                 new Message {
                     SentFrom = newUser[38].Email,
-                    SentFromFullName = newUser[38].GivenName + newUser[38].FamilyName,
+                    SentFromFullName = newUser[38].GivenName + " " + newUser[38].FamilyName,
                     SentTo = newUser[2].Email,
-                    SentToFullName = newUser[2].GivenName + newUser[2].FamilyName,
+                    SentToFullName = newUser[2].GivenName + " " + newUser[2].FamilyName,
                     SentDate = DateTime.Now.AddDays(-7),
                     isRead = false,
                     Topic = "Buy me some icecream!",
@@ -645,9 +743,9 @@ namespace Project_LMS.Migrations
                 },
                 new Message {
                     SentFrom = newUser[2].Email,
-                    SentFromFullName = newUser[2].GivenName + newUser[2].FamilyName,
+                    SentFromFullName = newUser[2].GivenName + " " + newUser[2].FamilyName,
                     SentTo = newUser[38].Email,
-                    SentToFullName = newUser[38].GivenName + newUser[38].FamilyName,
+                    SentToFullName = newUser[38].GivenName + " " + newUser[38].FamilyName,
                     SentDate = DateTime.Now.AddDays(-6),
                     isRead = false,
                     Topic = "Buy me some icecream!",
@@ -659,9 +757,9 @@ namespace Project_LMS.Migrations
                 },
                 new Message {
                     SentFrom = newUser[38].Email,
-                    SentFromFullName = newUser[38].GivenName + newUser[38].FamilyName,
+                    SentFromFullName = newUser[38].GivenName + " " + newUser[38].FamilyName,
                     SentTo = newUser[2].Email,
-                    SentToFullName = newUser[2].GivenName + newUser[2].FamilyName,
+                    SentToFullName = newUser[2].GivenName + " " + newUser[2].FamilyName,
                     SentDate = DateTime.Now.AddDays(-5),
                     isRead = false,
                     Topic = "Buy me some icecream!",
@@ -673,9 +771,9 @@ namespace Project_LMS.Migrations
                 },
                 new Message {
                     SentFrom = newUser[2].Email,
-                    SentFromFullName = newUser[2].GivenName + newUser[2].FamilyName,
+                    SentFromFullName = newUser[2].GivenName + " " + newUser[2].FamilyName,
                     SentTo = newUser[38].Email,
-                    SentToFullName = newUser[38].GivenName + newUser[38].FamilyName,
+                    SentToFullName = newUser[38].GivenName + " " + newUser[38].FamilyName,
                     SentDate = DateTime.Now.AddDays(-4),
                     isRead = false,
                     Topic = "Buy me some icecream!",
@@ -687,9 +785,9 @@ namespace Project_LMS.Migrations
                 },
                 new Message {
                     SentFrom = newUser[38].Email,
-                    SentFromFullName = newUser[38].GivenName + newUser[38].FamilyName,
+                    SentFromFullName = newUser[38].GivenName + " " + newUser[38].FamilyName,
                     SentTo = newUser[2].Email,
-                    SentToFullName = newUser[2].GivenName + newUser[2].FamilyName,
+                    SentToFullName = newUser[2].GivenName + " " + newUser[2].FamilyName,
                     SentDate = DateTime.Now.AddDays(-3),
                     isRead = false,
                     Topic = "Buy me some icecream!",
@@ -701,9 +799,9 @@ namespace Project_LMS.Migrations
                 },
                 new Message {
                     SentFrom = newUser[2].Email,
-                    SentFromFullName = newUser[2].GivenName + newUser[2].FamilyName,
+                    SentFromFullName = newUser[2].GivenName + " " + newUser[2].FamilyName,
                     SentTo = newUser[38].Email,
-                    SentToFullName = newUser[38].GivenName + newUser[38].FamilyName,
+                    SentToFullName = newUser[38].GivenName + " " + newUser[38].FamilyName,
                     SentDate = DateTime.Now.AddDays(-2),
                     isRead = false,
                     Topic = "Buy me some icecream!",
@@ -715,9 +813,9 @@ namespace Project_LMS.Migrations
                 },
                 new Message {
                     SentFrom = newUser[38].Email,
-                    SentFromFullName = newUser[38].GivenName + newUser[38].FamilyName,
+                    SentFromFullName = newUser[38].GivenName + " " + newUser[38].FamilyName,
                     SentTo = newUser[2].Email,
-                    SentToFullName = newUser[2].GivenName + newUser[2].FamilyName,
+                    SentToFullName = newUser[2].GivenName + " " + newUser[2].FamilyName,
                     SentDate = DateTime.Now.AddDays(-1),
                     isRead = false,
                     Topic = "Buy me some icecream!",
@@ -727,8 +825,78 @@ namespace Project_LMS.Migrations
                     SecondPersonLeft = null,
                     isPublic = false
                 },
+                new Message {
+                    SentFrom = newUser[8].Email,
+                    SentFromFullName = newUser[8].GivenName + " " + newUser[8].FamilyName,
+                    SentTo = newUser[38].Email,
+                    SentToFullName = newUser[38].GivenName + " " + newUser[38].FamilyName,
+                    SentDate = DateTime.Now.AddDays(-6),
+                    isRead = false,
+                    Topic = "Help me to do the homework!",
+                    Msg = "Please help me to do the homework!",
+                    MessageBoxNumber = "abc456",
+                    FirstPersonLeft = null,
+                    SecondPersonLeft = null,
+                    isPublic = false
+                },
+                new Message {
+                    SentFrom = newUser[38].Email,
+                    SentFromFullName = newUser[38].GivenName + " " + newUser[38].FamilyName,
+                    SentTo = newUser[8].Email,
+                    SentToFullName = newUser[8].GivenName + " " + newUser[8].FamilyName,
+                    SentDate = DateTime.Now.AddDays(-5),
+                    isRead = false,
+                    Topic = "Help me to do the homework!",
+                    Msg = "You should do it by yourself!",
+                    MessageBoxNumber = "abc456",
+                    FirstPersonLeft = null,
+                    SecondPersonLeft = null,
+                    isPublic = false
+                },
+                 new Message {
+                    SentFrom = newUser[8].Email,
+                    SentFromFullName = newUser[8].GivenName + " " + newUser[8].FamilyName,
+                    SentTo = newUser[38].Email,
+                    SentToFullName = newUser[38].GivenName + " " + newUser[38].FamilyName,
+                    SentDate = DateTime.Now.AddDays(-4),
+                    isRead = false,
+                    Topic = "Help me to do the homework!",
+                    Msg = "I know, but I can't!",
+                    MessageBoxNumber = "abc456",
+                    FirstPersonLeft = null,
+                    SecondPersonLeft = null,
+                    isPublic = false
+                },
+                new Message {
+                    SentFrom = newUser[38].Email,
+                    SentFromFullName = newUser[38].GivenName + " " + newUser[38].FamilyName,
+                    SentTo = newUser[8].Email,
+                    SentToFullName = newUser[8].GivenName + " " + newUser[8].FamilyName,
+                    SentDate = DateTime.Now.AddDays(-3),
+                    isRead = false,
+                    Topic = "Help me to do the homework!",
+                    Msg = "It's not my problem! :D  Kidding, I will help you!",
+                    MessageBoxNumber = "abc456",
+                    FirstPersonLeft = null,
+                    SecondPersonLeft = null,
+                    isPublic = false
+                },
+                new Message {
+                    SentFrom = newUser[8].Email,
+                    SentFromFullName = newUser[8].GivenName + " " + newUser[8].FamilyName,
+                    SentTo = newUser[38].Email,
+                    SentToFullName = newUser[38].GivenName + " " + newUser[38].FamilyName,
+                    SentDate = DateTime.Now.AddDays(-4),
+                    isRead = false,
+                    Topic = "Help me to do the homework!",
+                    Msg = "Thanks!",
+                    MessageBoxNumber = "abc456",
+                    FirstPersonLeft = null,
+                    SecondPersonLeft = null,
+                    isPublic = false
+                }
             };
-            if (db.Messages.Count() == 0)
+            if (db.Messages.FirstOrDefault() == null)
             {
                 db.Messages.AddOrUpdate(a => a.Id, messages);
                 db.SaveChanges();

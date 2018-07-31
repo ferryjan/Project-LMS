@@ -239,6 +239,10 @@
     <Compile Include="Migrations\201807291315539_add-color-field-activity.Designer.cs">
       <DependentUpon>201807291315539_add-color-field-activity.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201807311019596_small-change-activity.cs" />
+    <Compile Include="Migrations\201807311019596_small-change-activity.Designer.cs">
+      <DependentUpon>201807311019596_small-change-activity.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Activity.cs" />
@@ -321,6 +325,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Pictures\Duck.png" />
+    <Content Include="Resources\Ante.png" />
     <Content Include="Resources\MySevenCookies.txt" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -329,6 +335,7 @@
     </Content>
     <Content Include="Resources\Ansvarsfriskrivning.pdf" />
     <Content Include="Resources\Baking cookies from scratch.docx" />
+    <Content Include="Resources\BestCookies.docx" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\i18n\jquery-ui-timepicker-addon-i18n.js" />
     <Content Include="Scripts\i18n\jquery-ui-timepicker-addon-i18n.min.js" />
@@ -490,10 +497,13 @@
     <Content Include="Views\StudentCourses\StudentSchedule.cshtml" />
     <Content Include="Views\StudentCourses\_studentUpcomingActivities.cshtml" />
     <Content Include="Views\StudentCourses\_studentActivityFile.cshtml" />
+    <Content Include="Views\Documents\_createStudentActivityDocument.cshtml" />
+    <Content Include="Views\StudentCourses\_studentHomeworkFile.cshtml" />
+    <Content Include="Views\Documents\DeleteHomeworkDocument.cshtml" />
+    <Content Include="Views\Documents\CreateStudentActivityDocument.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Pictures\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -529,6 +539,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201807291315539_add-color-field-activity.resx">
       <DependentUpon>201807291315539_add-color-field-activity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807311019596_small-change-activity.resx">
+      <DependentUpon>201807311019596_small-change-activity.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
