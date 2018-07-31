@@ -695,7 +695,7 @@ namespace Project_LMS.Migrations
                 {
                     FileData = File.ReadAllBytes(MapPath("~/Resources/conversation_skills.pdf")),
                     ApplicationUserId = appUserId,
-                    ActivityId = activities[1].ActivityId,
+                    ActivityId = activities[2].ActivityId,
                     isHomework = false,
                     DocumentFileType = "application/pdf",
                     UploadingTime = DateTime.Now,
