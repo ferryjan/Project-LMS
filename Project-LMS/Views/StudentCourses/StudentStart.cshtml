@@ -22,6 +22,7 @@
 <div class="container" id="Modules">
     <div class="row">
         @{ int i = 1;}
+        @{ int a = 1;}
         @foreach (var mod in Model)
         {
             <div>
@@ -44,11 +45,13 @@
                         </section>
 
                         <hr />
-                        @if (mod.Activities.Count() > 0)    {<h3 style="color:crimson">Activities</h3>}
-                        else                                {<h3 style="color:crimson">No activities registered for this module</h3>}
+                        @if (mod.Activities.Count() > 0)
+                        {<h3 style="color:crimson">Activities</h3>}
+                        else
+                        {<h3 style="color:crimson">No activities registered for this module</h3>}
                         <hr />
 
-                        @{ int a = 1;}
+
                         @foreach (var activity in mod.Activities)
                         {
                             <div>
