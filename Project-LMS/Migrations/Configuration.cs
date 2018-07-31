@@ -193,7 +193,7 @@ namespace Project_LMS.Migrations
                     Rolestring = "Teacher",
                     GivenName = "Donald",
                     FamilyName= "Duck",
-                    CourseId = null
+                    CourseId = null,
                 },
                 new NewUser //2
                 {
@@ -519,6 +519,17 @@ namespace Project_LMS.Migrations
                 userManager.AddToRole(adminUser.Id, item.Rolestring);
             }
             db.SaveChanges();
+
+            //seed profile image
+            var em = newUser[1].Email;
+            var appUser = db.Users.FirstOrDefault(a => a.Email == em);
+            if (appUser != null)
+            {
+                appUser.ProfileImageRef = "Duck.png";
+                db.Entry(appUser).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+            
 
             //Seeding documents
             string email;

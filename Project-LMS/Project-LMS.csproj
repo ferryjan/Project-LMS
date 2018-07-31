@@ -321,6 +321,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Pictures\Duck.png" />
     <Content Include="Resources\Ante.png" />
     <Content Include="Resources\MySevenCookies.txt" />
     <Content Include="Scripts\bootstrap.js" />
@@ -498,7 +499,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Pictures\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
