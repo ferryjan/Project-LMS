@@ -646,14 +646,14 @@ namespace Project_LMS.Migrations
                 db.SaveChanges();
             }
 
-            documentName = "Ansvarsfriskrivning.pdf";
-            if (!db.Documents.Any(u => u.DocumentName == "Ansvarsfriskrivning.pdf"))
+            documentName = "Kursschema .NET ND18.pdf";
+            if (!db.Documents.Any(u => u.DocumentName == "Kursschema .NET ND18.pdf"))
             {
                 email = newUser[0].Email;
                 appUserId = db.Users.FirstOrDefault(u => u.Email == email).Id;
                 doc = new Document
                 {
-                    FileData = File.ReadAllBytes(MapPath("~/Resources/Ansvarsfriskrivning.pdf")),
+                    FileData = File.ReadAllBytes(MapPath("~/Resources/Kursschema .NET ND18.pdf")),
                     ApplicationUserId = appUserId,
                     CourseId = courses[0].CourseId,
                     isHomework = false,

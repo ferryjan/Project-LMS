@@ -337,6 +337,7 @@
     <Content Include="Resources\Baking cookies from scratch.docx" />
     <Content Include="Resources\conversation_skills.pdf" />
     <Content Include="Resources\BestCookies.docx" />
+    <Content Include="Resources\Kursschema .NET ND18.pdf" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\i18n\jquery-ui-timepicker-addon-i18n.js" />
     <Content Include="Scripts\i18n\jquery-ui-timepicker-addon-i18n.min.js" />

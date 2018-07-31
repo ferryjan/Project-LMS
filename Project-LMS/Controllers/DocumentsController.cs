@@ -270,7 +270,15 @@ namespace Project_LMS.Controllers
         {
             ViewBag.CourseId = id;
             var FileById = db.Documents.Where(i => i.DocumentId == id).ToList().FirstOrDefault();
-            return File(FileById.FileData, FileById.DocumentFileType);
+            if (FileById.DocumentFileType == "application/pdf" || FileById.DocumentFileType == "text/plain")
+            {
+                return File(FileById.FileData, FileById.DocumentFileType);
+            }
+            else
+            {
+                return File(FileById.FileData, FileById.DocumentFileType, FileById.DocumentName);
+            }
+            
 
         }
 
