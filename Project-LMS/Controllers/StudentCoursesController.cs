@@ -53,7 +53,7 @@ namespace Project_LMS.Controllers
         public PartialViewResult StudentUpcomingActivities(int? id)
         {
             ViewBag.Id = id;
-            var todaysActivities = db.Activities.Where(i => i.Module.CourseId == id && (DateTime.Compare(i.Start, DateTime.Now) <= 0 && DateTime.Compare(i.End, DateTime.Now) >= 0));
+            var todaysActivities = db.Activities.Where(i => i.Module.CourseId == id && (DateTime.Compare(i.Start, DateTime.Today) <= 0 && DateTime.Compare(i.End, DateTime.Today) >= 0));
             if (todaysActivities == null)
             {
                 ViewBag.IsEmpty = "Yes";
@@ -69,7 +69,7 @@ namespace Project_LMS.Controllers
         public PartialViewResult StudentActivityFile(int? activityId)
         {
             ViewBag.Id = activityId;
-            var documents = db.Documents.Where(i => i.ActivityId == activityId && i.isHomework != false);
+            var documents = db.Documents.Where(i => i.ActivityId == activityId && i.isHomework == false);
             return PartialView("_studentActivityFile", documents.ToList());
         }
 
