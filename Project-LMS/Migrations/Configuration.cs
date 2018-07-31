@@ -149,8 +149,8 @@ namespace Project_LMS.Migrations
                 new Activity {
                     ModuleId = modules[2].ModuleId,
                     Start = modules[2].StartDate,
-                    End = modules[0].StartDate.AddDays(1),
-                    ActivityName = "Conversation",
+                    End = modules[2].StartDate.AddDays(1),
+                    ActivityName = "Conversation - continue",
                     ActivityTypeId = activityTypes[0].ActivityTypeId,
                     Description = "Fika, as a noun, refers to the combination of coffee and usually some sort of sweet snack. But fika, as a verb, is the act of partaking in a Swedish social institution.",
                     Color = "red"
@@ -164,9 +164,9 @@ namespace Project_LMS.Migrations
                     ActivityTypeId = activityTypes[3].ActivityTypeId,
                     Description = "Choose 7 cookies that mix well and can make the base for a good fika. To pass your written report must be uploaded in time.",
                     Color = "green"
-                },
+                }
             };
-            db.Activities.AddOrUpdate(a => a.ActivityName, activities);
+            db.Activities.AddOrUpdate(a => a.ActivityId, activities);
             db.SaveChanges();
 
 
@@ -258,6 +258,7 @@ namespace Project_LMS.Migrations
                     FamilyName= "Pettiglio",
                     CourseId = courses[0].CourseId
                 },
+                //10
                 new NewUser
                 {
                     Email = "Madelle.Leger@yahoo.com",
@@ -583,6 +584,154 @@ namespace Project_LMS.Migrations
                 db.Documents.Add(doc);
                 db.SaveChanges();
             }
+
+            var messages = new[] {
+                new Message {
+                    SentFrom = newUser[2].Email,
+                    SentFromFullName = newUser[2].GivenName + newUser[2].FamilyName,
+                    SentTo = newUser[38].Email,
+                    SentToFullName = newUser[38].GivenName + newUser[38].FamilyName,
+                    SentDate = DateTime.Now.AddDays(-10),
+                    isRead = false,
+                    Topic = "Buy me some icecream!",
+                    Msg = "Please buy me some icecream!",
+                    MessageBoxNumber = "abc123",
+                    FirstPersonLeft = null,
+                    SecondPersonLeft = null,
+                    isPublic = false
+                },
+                new Message {
+                    SentFrom = newUser[38].Email,
+                    SentFromFullName = newUser[38].GivenName + newUser[38].FamilyName,
+                    SentTo = newUser[2].Email,
+                    SentToFullName = newUser[2].GivenName + newUser[2].FamilyName,
+                    SentDate = DateTime.Now.AddDays(-9),
+                    isRead = false,
+                    Topic = "Buy me some icecream!",
+                    Msg = "No!!!!!",
+                    MessageBoxNumber = "abc123",
+                    FirstPersonLeft = null,
+                    SecondPersonLeft = null,
+                    isPublic = false
+                },
+                new Message {
+                    SentFrom = newUser[2].Email,
+                    SentFromFullName = newUser[2].GivenName + newUser[2].FamilyName,
+                    SentTo = newUser[38].Email,
+                    SentToFullName = newUser[38].GivenName + newUser[38].FamilyName,
+                    SentDate = DateTime.Now.AddDays(-8),
+                    isRead = false,
+                    Topic = "Buy me some icecream!",
+                    Msg = "Yes!!!!",
+                    MessageBoxNumber = "abc123",
+                    FirstPersonLeft = null,
+                    SecondPersonLeft = null,
+                    isPublic = false
+                },
+                new Message {
+                    SentFrom = newUser[38].Email,
+                    SentFromFullName = newUser[38].GivenName + newUser[38].FamilyName,
+                    SentTo = newUser[2].Email,
+                    SentToFullName = newUser[2].GivenName + newUser[2].FamilyName,
+                    SentDate = DateTime.Now.AddDays(-7),
+                    isRead = false,
+                    Topic = "Buy me some icecream!",
+                    Msg = "No!!!!!",
+                    MessageBoxNumber = "abc123",
+                    FirstPersonLeft = null,
+                    SecondPersonLeft = null,
+                    isPublic = false
+                },
+                new Message {
+                    SentFrom = newUser[2].Email,
+                    SentFromFullName = newUser[2].GivenName + newUser[2].FamilyName,
+                    SentTo = newUser[38].Email,
+                    SentToFullName = newUser[38].GivenName + newUser[38].FamilyName,
+                    SentDate = DateTime.Now.AddDays(-6),
+                    isRead = false,
+                    Topic = "Buy me some icecream!",
+                    Msg = "Yes!!!!",
+                    MessageBoxNumber = "abc123",
+                    FirstPersonLeft = null,
+                    SecondPersonLeft = null,
+                    isPublic = false
+                },
+                new Message {
+                    SentFrom = newUser[38].Email,
+                    SentFromFullName = newUser[38].GivenName + newUser[38].FamilyName,
+                    SentTo = newUser[2].Email,
+                    SentToFullName = newUser[2].GivenName + newUser[2].FamilyName,
+                    SentDate = DateTime.Now.AddDays(-5),
+                    isRead = false,
+                    Topic = "Buy me some icecream!",
+                    Msg = "No!!!!!",
+                    MessageBoxNumber = "abc123",
+                    FirstPersonLeft = null,
+                    SecondPersonLeft = null,
+                    isPublic = false
+                },
+                new Message {
+                    SentFrom = newUser[2].Email,
+                    SentFromFullName = newUser[2].GivenName + newUser[2].FamilyName,
+                    SentTo = newUser[38].Email,
+                    SentToFullName = newUser[38].GivenName + newUser[38].FamilyName,
+                    SentDate = DateTime.Now.AddDays(-4),
+                    isRead = false,
+                    Topic = "Buy me some icecream!",
+                    Msg = "Yes!!!!",
+                    MessageBoxNumber = "abc123",
+                    FirstPersonLeft = null,
+                    SecondPersonLeft = null,
+                    isPublic = false
+                },
+                new Message {
+                    SentFrom = newUser[38].Email,
+                    SentFromFullName = newUser[38].GivenName + newUser[38].FamilyName,
+                    SentTo = newUser[2].Email,
+                    SentToFullName = newUser[2].GivenName + newUser[2].FamilyName,
+                    SentDate = DateTime.Now.AddDays(-3),
+                    isRead = false,
+                    Topic = "Buy me some icecream!",
+                    Msg = "No!!!!!",
+                    MessageBoxNumber = "abc123",
+                    FirstPersonLeft = null,
+                    SecondPersonLeft = null,
+                    isPublic = false
+                },
+                new Message {
+                    SentFrom = newUser[2].Email,
+                    SentFromFullName = newUser[2].GivenName + newUser[2].FamilyName,
+                    SentTo = newUser[38].Email,
+                    SentToFullName = newUser[38].GivenName + newUser[38].FamilyName,
+                    SentDate = DateTime.Now.AddDays(-2),
+                    isRead = false,
+                    Topic = "Buy me some icecream!",
+                    Msg = "Yes!!!!",
+                    MessageBoxNumber = "abc123",
+                    FirstPersonLeft = null,
+                    SecondPersonLeft = null,
+                    isPublic = false
+                },
+                new Message {
+                    SentFrom = newUser[38].Email,
+                    SentFromFullName = newUser[38].GivenName + newUser[38].FamilyName,
+                    SentTo = newUser[2].Email,
+                    SentToFullName = newUser[2].GivenName + newUser[2].FamilyName,
+                    SentDate = DateTime.Now.AddDays(-1),
+                    isRead = false,
+                    Topic = "Buy me some icecream!",
+                    Msg = "No!!!!!",
+                    MessageBoxNumber = "abc123",
+                    FirstPersonLeft = null,
+                    SecondPersonLeft = null,
+                    isPublic = false
+                },
+            };
+            if (db.Messages.Count() == 0)
+            {
+                db.Messages.AddOrUpdate(a => a.Id, messages);
+                db.SaveChanges();
+            }           
         }
     }
 }
