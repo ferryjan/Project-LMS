@@ -325,6 +325,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Pictures\Duck.png" />
+    <Content Include="Resources\Ante.png" />
     <Content Include="Resources\MySevenCookies.txt" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -495,10 +497,13 @@
     <Content Include="Views\StudentCourses\StudentSchedule.cshtml" />
     <Content Include="Views\StudentCourses\_studentUpcomingActivities.cshtml" />
     <Content Include="Views\StudentCourses\_studentActivityFile.cshtml" />
+    <Content Include="Views\Documents\_createStudentActivityDocument.cshtml" />
+    <Content Include="Views\StudentCourses\_studentHomeworkFile.cshtml" />
+    <Content Include="Views\Documents\DeleteHomeworkDocument.cshtml" />
+    <Content Include="Views\Documents\CreateStudentActivityDocument.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Pictures\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

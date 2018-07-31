@@ -6,9 +6,7 @@
 }
 else
 {
-
     <h3 style="color:crimson">Activity Documents</h3>
-
     <table class="table table-bordered">
         <tr>
             <th class="col-md-5">
@@ -17,10 +15,8 @@ else
             <th class="col-md-2">
                 @Html.DisplayNameFor(model => model.DocumentName)
             </th>
-
             <th class="col-md-5"></th>
         </tr>
-
         @foreach (var item in Model)
         {
             <tr>
@@ -30,7 +26,6 @@ else
                 <td class="col-md-2">
                     @Html.DisplayFor(modelItem => item.DocumentName)
                 </td>
-
                 <td class="col-md-5">
                     <a href="@Url.Action("DownLoadFile", "Documents", new { id = item.DocumentId })" class="btn btn-success">
                         <i class="glyphicon glyphicon-download"></i>

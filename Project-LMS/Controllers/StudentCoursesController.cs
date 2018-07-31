@@ -74,6 +74,15 @@ namespace Project_LMS.Controllers
         }
 
         [Authorize(Roles = "Student")]
+        public PartialViewResult StudentHomeworkFile(int? activityId)
+        {
+            ViewBag.Id = activityId;
+            var userId = User.Identity.GetUserId();
+            var documents = db.Documents.Where(i => i.ActivityId == activityId && i.isHomework == true && i.ApplicationUserId == userId);
+            return PartialView("_studentHomeworkFile", documents.ToList());
+        }
+
+        [Authorize(Roles = "Student")]
         public PartialViewResult StudentModuleFile(int? moduleId)
         {
             ViewBag.Id = moduleId;
