@@ -15,7 +15,16 @@
                     if (student.Email != User.Identity.Name)
                     {
                         <li class='has-sub'>
-                            <a href='#'><span>@Html.Raw(student.FullName)</span></a>
+                            @if (student.ProfileImageRef != null || student.ProfileImageRef != "")
+                            {
+                                <a href='#'><span><img alt="" src="~/Pictures/@student.ProfileImageRef" data-radium="true" style="width: 32px; height: 32px; border-radius: 50%"> @Html.Raw(student.FullName)</span></a>
+                            }
+                            else
+                            {
+                                <a href='#'><span><img alt="" src="~/Pictures/defaultImage.png" data-radium="true" style="width: 32px; height: 32px; border-radius: 50%"> @Html.Raw(student.FullName)</span></a>
+
+                            }
+
                             <ul>
                                 <li><a href="@Url.Action("Details", "StudentCourses", new { id = student.Id })"><span><i class="glyphicon glyphicon-info-sign"></i>@Html.Raw(" Contact Info")</span></a></li>
                                 <li><a href="@Url.Action("SendMessage", "Messages", new { id = student.Id })"><span><i class="glyphicon glyphicon-pencil"></i>@Html.Raw(" Send Message")</span></a></li>
@@ -25,7 +34,16 @@
                     else
                     {
                         <li class='has-sub'>
-                            <a href='#'><span>@Html.Raw(student.FullName)</span></a>
+                            @if (student.ProfileImageRef != null || student.ProfileImageRef != "")
+                            {
+                                <a href='#'><span><img alt="" src="~/Pictures/@student.ProfileImageRef" data-radium="true" style="width: 32px; height: 32px; border-radius: 50%"> @Html.Raw(student.FullName)</span></a>
+                            }
+                            else
+                            {
+                                <a href='#'><span><img alt="" src="~/Pictures/defaultImage.png" data-radium="true" style="width: 32px; height: 32px; border-radius: 50%"> @Html.Raw(student.FullName)</span></a>
+
+                            }
+
                             <ul>
                                 <li><a href="@Url.Action("Details", "StudentCourses", new { id = student.Id })"><span><i class="glyphicon glyphicon-info-sign"></i>@Html.Raw(" Contact Info")</span></a></li>
                             </ul>
