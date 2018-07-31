@@ -11,19 +11,19 @@
 </p>
 <table class="table">
     <tr>
-        <th>
+        <th class="col-md-2">
             @Html.DisplayNameFor(model => model.Topic)
         </th>
-        <th>
+        <th class="col-md-2">
             @Html.Raw("Chat With")
         </th>
-        <th>
+        <th class="col-md-2">
             @Html.Raw("Last Sent/Receive Date")
         </th>
-        <th>
+        <th class="col-md-2">
             @Html.Raw("Unread Messages")
         </th>
-        <th></th>
+        <th class="col-md-4"></thclass="col-md-2">
     </tr>
 
     @{
@@ -37,28 +37,28 @@
             var totalUnreadMsg = Model.Where(a => a.MessageBoxNumber == item.MessageBoxNumber && a.isRead == false && a.SentTo == User.Identity.Name).Count();
             var lastSent = Model.Where(a => a.MessageBoxNumber == item.MessageBoxNumber).OrderByDescending(a => a.SentDate).First().SentDate;
             <tr>
-                <td>
+                <td class="col-md-2">
                     @Html.DisplayFor(modelItem => item.Topic)
                 </td>
                 @if (item.SentFrom == User.Identity.Name)
                 {
-                    <td>
+                    <td class="col-md-2">
                         @Html.DisplayFor(modelItem => item.SentToFullName)
                     </td>
                 }
                 else
                 {
-                    <td>
+                    <td class="col-md-2">
                         @Html.DisplayFor(modelItem => item.SentFromFullName)
                     </td>
                 }
-                <td>
+                <td class="col-md-2">
                     @lastSent
                 </td>
-                <td>
+                <td class="col-md-2">
                     @Html.Raw(totalUnreadMsg)
                 </td>
-                <td>
+                <td class="col-md-4">
                     <a href="@Url.Action("Reply", "Messages", new { id = item.MessageBoxNumber })" class="btn btn-primary">
                         <i class="glyphicon glyphicon-pencil"></i>
                         <span>
@@ -68,7 +68,7 @@
                     <a href="@Url.Action("LeaveChat", "Messages", new { id = item.MessageBoxNumber })" class="btn btn-danger">
                         <i class="glyphicon glyphicon-erase"></i>
                         <span>
-                            <strong>Leave The Chat</strong>
+                            <strong>Leave Chat</strong>
                         </span>
                     </a>
                 </td>

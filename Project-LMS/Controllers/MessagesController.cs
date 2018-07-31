@@ -79,14 +79,29 @@ namespace Project_LMS.Controllers
 
             List<String> classmates = new List<String>();
 
-            var classmatesList = db.Users.Where(u => (u.CourseId == sfu.CourseId || u.CourseId == null) && u.isActive == true && u.Email != User.Identity.Name).ToList();
-            foreach (var item in classmatesList)
+            if (User.IsInRole("Student"))
             {
-                classmates.Add(item.GivenName.ToString() + " " + item.FamilyName.ToString());
-            }
+                var classmatesList = db.Users.Where(u => (u.CourseId == sfu.CourseId || u.CourseId == null) && u.isActive == true && u.Email != User.Identity.Name)
+                    .OrderBy(u => u.FamilyName).ThenBy(u => u.GivenName).ToList();
+                foreach (var item in classmatesList)
+                {
+                    classmates.Add(item.FamilyName.ToString() + " " + item.GivenName.ToString());
+                }
 
-            ViewBag.Classmates = new SelectList(classmates);
-           
+                ViewBag.Classmates = new SelectList(classmates);
+            }
+            else if (User.IsInRole("Teacher"))
+            {
+                var list = db.Users.Where(u => u.isActive == true && u.Email != User.Identity.Name)
+                    .OrderBy(u => u.FamilyName).ThenBy(u => u.GivenName).ToList();
+                foreach (var item in list)
+                {
+                    classmates.Add(item.FamilyName.ToString() + " " + item.GivenName.ToString());
+                }
+
+                ViewBag.Classmates = new SelectList(classmates);
+            }
+                    
 
             if (id != null && id != "")
             {
@@ -126,7 +141,7 @@ namespace Project_LMS.Controllers
                 }
                 else
                 {
-                    var user = db.Users.FirstOrDefault(u => u.GivenName + " " + u.FamilyName == Classmates);
+                    var user = db.Users.FirstOrDefault(u => u.FamilyName + " " + u.GivenName == Classmates);
                     message.SentTo = user.Email;
                 }
 
@@ -148,13 +163,28 @@ namespace Project_LMS.Controllers
             ApplicationUser sfu = db.Users.Find(userId);
             List<String> classmates = new List<String>();
 
-            var classmatesList = db.Users.Where(u => (u.CourseId == sfu.CourseId || u.CourseId == null) && u.isActive == true && u.Email != User.Identity.Name).ToList();
-            foreach (var item in classmatesList)
+            if (User.IsInRole("Student"))
             {
-                classmates.Add(item.Email.ToString());
-            }
+                var classmatesList = db.Users.Where(u => (u.CourseId == sfu.CourseId || u.CourseId == null) && u.isActive == true && u.Email != User.Identity.Name)
+                    .OrderBy(u => u.FamilyName).ThenBy(u => u.GivenName).ToList();
+                foreach (var item in classmatesList)
+                {
+                    classmates.Add(item.FamilyName.ToString() + " " + item.GivenName.ToString());
+                }
 
-            ViewBag.Classmates = new SelectList(classmates);
+                ViewBag.Classmates = new SelectList(classmates);
+            }
+            else if (User.IsInRole("Teacher"))
+            {
+                var list = db.Users.Where(u => u.isActive == true && u.Email != User.Identity.Name)
+                    .OrderBy(u => u.FamilyName).ThenBy(u => u.GivenName).ToList();
+                foreach (var item in list)
+                {
+                    classmates.Add(item.FamilyName.ToString() + " " + item.GivenName.ToString());
+                }
+
+                ViewBag.Classmates = new SelectList(classmates);
+            }
             return View(smv);
         }
 
