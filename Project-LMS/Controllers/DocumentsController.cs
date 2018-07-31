@@ -217,6 +217,17 @@ namespace Project_LMS.Controllers
             return View(doc);
         }
 
+        //// GET: Documents/Create
+        //[Authorize(Roles = "Student")]
+        //public ActionResult CreateStudentActivityDocument(int? id)
+        //{
+        //    ViewBag.ActivityId = id;
+        //    return View();
+        //}
+
+
+
+
         [HttpGet]
         [Authorize(Roles = "Teacher, Student")]
         public FileResult DownLoadFile(int? id)

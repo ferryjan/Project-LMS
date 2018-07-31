@@ -70,12 +70,24 @@ namespace Project_LMS.Controllers
 
         // GET: Messages/Create
         public ActionResult SendMessage(string id)
-        {            
-            Message msg = new Message();
+        {
+            SendMessageViewModel msg = new SendMessageViewModel();
             msg.SentFrom = User.Identity.Name;
             var userId = User.Identity.GetUserId();
             ApplicationUser sfu = db.Users.Find(userId);
             msg.SentFromFullName = sfu.FullName;
+
+            List<String> classmates = new List<String>();
+
+            var classmatesList = db.Users.Where(u => (u.CourseId == sfu.CourseId || u.CourseId == null) && u.isActive == true && u.Email != User.Identity.Name).ToList();
+            foreach (var item in classmatesList)
+            {
+                classmates.Add(item.GivenName.ToString() + " " + item.FamilyName.ToString());
+            }
+
+            ViewBag.Classmates = new SelectList(classmates);
+           
+
             if (id != null && id != "")
             {
                 ApplicationUser stu = db.Users.Find(id);
@@ -86,15 +98,16 @@ namespace Project_LMS.Controllers
             {
                 msg.SentTo = "";
             }
-            ViewBag.Err = "";
+            //ViewBag.Err = "";
             return View(msg);
         }
 
         // POST: Messages/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SendMessage([Bind(Include = "SentFrom,SentFromFullName,SentTo,Topic,Msg")] Message message)
+        public ActionResult SendMessage(String Classmates, SendMessageViewModel smv)
         {
+            Message message = new Message();
             if (ModelState.IsValid)
             {
                 message.isPublic = false;
@@ -102,20 +115,47 @@ namespace Project_LMS.Controllers
                 message.SentDate = DateTime.Now;
                 message.MessageBoxNumber = RandomString(6);
 
-                if (message.SentFrom == message.SentTo || db.Users.FirstOrDefault(u => u.Email == message.SentTo) == null)
+                message.SentFrom = smv.SentFrom;
+                message.SentFromFullName = smv.SentFromFullName;
+                message.Topic = smv.Topic;
+                message.Msg = smv.Msg;
+    
+                if (smv.SentTo != null && smv.SentTo != "")
                 {
-                    message.SentTo = "";
-                    message.SentToFullName = "";
-                    ViewBag.Err = "Error: The message receiver cannot be found in the database or you are sending message to yourself!";
-                    return View(message);
+                    message.SentTo = smv.SentTo;
                 }
+                else
+                {
+                    var user = db.Users.FirstOrDefault(u => u.GivenName + " " + u.FamilyName == Classmates);
+                    message.SentTo = user.Email;
+                }
+
+                //if (message.SentFrom == message.SentTo || db.Users.FirstOrDefault(u => u.Email == message.SentTo) == null)
+                //{
+                //    message.SentTo = "";
+                //    message.SentToFullName = "";
+                //    ViewBag.Err = "Error: The message receiver cannot be found in the database or you are sending message to yourself!";
+                //    return View(message);
+                //}
                 message.SentToFullName = db.Users.FirstOrDefault(u => u.Email == message.SentTo).FullName;
                 db.Messages.Add(message);
                 db.SaveChanges();
                 return RedirectToAction("MessageBox");
             }
-            ViewBag.Err = "";
-            return View(message);
+            smv.SentTo = "";
+
+            var userId = User.Identity.GetUserId();
+            ApplicationUser sfu = db.Users.Find(userId);
+            List<String> classmates = new List<String>();
+
+            var classmatesList = db.Users.Where(u => (u.CourseId == sfu.CourseId || u.CourseId == null) && u.isActive == true && u.Email != User.Identity.Name).ToList();
+            foreach (var item in classmatesList)
+            {
+                classmates.Add(item.Email.ToString());
+            }
+
+            ViewBag.Classmates = new SelectList(classmates);
+            return View(smv);
         }
 
 

@@ -71,7 +71,7 @@
                                         <p style="font-weight:normal"> @activity.Description</p>
                                     </section>
                                     <div>
-                                        @Html.Action("StudentActivityFie", "StudentCourses", new { activityId = activity.ActivityId })
+                                        @Html.Action("StudentActivityFile", "StudentCourses", new { activityId = activity.ActivityId })
                                     </div>
                                 </div>
                             </div>
@@ -80,7 +80,7 @@
 
 
                         <div>
-                            @Html.Action("StudentModuleFie", "StudentCourses", new { moduleId = mod.ModuleId })
+                            @Html.Action("StudentModuleFile", "StudentCourses", new { moduleId = mod.ModuleId })
                         </div>
                     </div>
                 </div>

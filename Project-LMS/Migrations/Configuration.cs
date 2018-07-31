@@ -73,6 +73,7 @@ namespace Project_LMS.Migrations
                 new ActivityType { Type = "Other" }
             };
             db.ActivityTypes.AddOrUpdate(s => new { s.Type }, activityTypes);
+            db.SaveChanges();
 
             //Seeding courses
             var courses = new[] {
@@ -150,7 +151,7 @@ namespace Project_LMS.Migrations
                     ModuleId = modules[2].ModuleId,
                     Start = modules[2].StartDate,
                     End = modules[2].StartDate.AddDays(1),
-                    ActivityName = "Conversation - continue",
+                    ActivityName = "Definition",
                     ActivityTypeId = activityTypes[0].ActivityTypeId,
                     Description = "Fika, as a noun, refers to the combination of coffee and usually some sort of sweet snack. But fika, as a verb, is the act of partaking in a Swedish social institution.",
                     Color = "red"
