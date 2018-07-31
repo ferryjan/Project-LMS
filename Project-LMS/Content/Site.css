@@ -66,6 +66,14 @@
     overflow-y: auto;
 }
 
+
+.studentList {
+    max-height: 400px;
+    width: 100%;
+    margin: 0;
+    overflow-y: auto;
+}
+
 .schedulecontainer {
     max-height: 700px;
     width: 100%;

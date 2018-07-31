@@ -14,36 +14,42 @@ else
     <h3 style="color:crimson">Your homework</h3>
     <table class="table table-bordered">
         <tr>
-            <th class="col-md-4">
+            <th class="col-md-3">
                 @Html.DisplayNameFor(model => model.Description)
             </th>
             <th class="col-md-2; word-wrap:break-word;;word-break:break-all">
                 @Html.DisplayNameFor(model => model.DocumentName)
             </th>
-            <th class="col-md-6"></th>
+            <th class="col-md-3; word-wrap:break-word;;word-break:break-all">
+                @Html.DisplayNameFor(model => model.FeedBack)
+            </th>
+            <th class="col-md-4"></th>
         </tr>
         @foreach (var item in Model)
         {
             <tr>
-                <td class="col-md-4">
+                <td class="col-md-3">
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>
                 <td class="col-md-2; word-wrap:break-word;word-break:break-all">
                     @Html.DisplayFor(modelItem => item.DocumentName)
                 </td>
-                <td class="col-md-6">
+                <td class="col-md-3; word-wrap:break-word;word-break:break-all">
+                    @Html.DisplayFor(modelItem => item.FeedBack)
+                </td>
+                <td class="col-md-4">
                     <a href="@Url.Action("DownLoadFile", "Documents", new { id = item.DocumentId })" class="btn btn-success">
                         <i class="glyphicon glyphicon-download"></i>
                         <span>
                             <strong>Open</strong>
                         </span>
                     </a>
-                    <a href="@Url.Action("ActivityDocumentDetails", "Documents", new { id = item.DocumentId })" class="btn btn-info">
-                        <i class="glyphicon glyphicon-list"></i>
-                        <span>
-                            <strong>Details</strong>
-                        </span>
-                    </a>
+                    @*<a href="@Url.Action("ActivityDocumentDetails", "Documents", new { id = item.DocumentId })" class="btn btn-info">
+                            <i class="glyphicon glyphicon-list"></i>
+                            <span>
+                                <strong>Details</strong>
+                            </span>
+                        </a>*@
                     <a href="@Url.Action("DeleteHomeworkDocument", "Documents", new { id = item.DocumentId })" class="btn btn-danger">
                         <i class="glyphicon glyphicon-erase"></i>
                         <span>

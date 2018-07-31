@@ -8,79 +8,81 @@
 <h3>Homework and Feedback</h3>
 <br />
 
-<table class="table">
-    <tr>
-        <th>Student Name</th>
-        <th>Homework File</th>
-        <th>Handed-in on time</th>
-        <th>Feedback</th>
-        <th></th>
-    </tr>
-
-    @foreach (var student in studentList)
-    {
-        var doc = docList.FirstOrDefault(d => d.ApplicationUser.UserName == student.UserName);
+<div class="studentList scrollable">
+    <table class="table">
         <tr>
-            <td>@Html.Raw(student.GivenName + " " + student.FamilyName)</td>
-            <td>
-                @if (doc != null)
-                {
-                    @Html.Raw(doc.DocumentName);
-                }
-                else
-                {
-                    <div style="color: red"><i class="glyphicon glyphicon-ban-circle"></i>@Html.Raw(" No file detected")</div>
-                }
-            </td>
-            <td>
-                @if (doc != null)
-                {
-                    if (DateTime.Compare(doc.UploadingTime, doc.Activity.End) <= 0)
+            <th>Student Name</th>
+            <th>Homework File</th>
+            <th>Handed-in on time</th>
+            <th>Feedback</th>
+            <th></th>
+        </tr>
+
+        @foreach (var student in studentList)
+        {
+            var doc = docList.FirstOrDefault(d => d.ApplicationUser.UserName == student.UserName);
+            <tr>
+                <td>@Html.Raw(student.GivenName + " " + student.FamilyName)</td>
+                <td>
+                    @if (doc != null)
                     {
-                        <div style="color: green"><i class="glyphicon glyphicon-check"></i></div>
+                        @Html.Raw(doc.DocumentName);
+                    }
+                    else
+                    {
+                        <div style="color: red"><i class="glyphicon glyphicon-ban-circle"></i>@Html.Raw(" No file detected")</div>
+                    }
+                </td>
+                <td>
+                    @if (doc != null)
+                    {
+                        if (DateTime.Compare(doc.UploadingTime, doc.Activity.End) <= 0)
+                        {
+                            <div style="color: green"><i class="glyphicon glyphicon-check"></i></div>
+                        }
+                        else
+                        {
+                            <div style="color: red"><i class="glyphicon glyphicon-remove"></i></div>
+                        }
                     }
                     else
                     {
                         <div style="color: red"><i class="glyphicon glyphicon-remove"></i></div>
                     }
-                }
-                else
-                {
-                    <div style="color: red"><i class="glyphicon glyphicon-remove"></i></div>
-                }
-            </td>
-            <td>
-                @if (doc != null)
-                {
-                    if (doc.FeedBack != null)
+                </td>
+                <td>
+                    @if (doc != null)
                     {
-                        <div style="color: green"><i class="glyphicon glyphicon-thumbs-up"></i>@Html.Raw(" Feedback done")</div>
+                        if (doc.FeedBack != null)
+                        {
+                            <div style="color: green"><i class="glyphicon glyphicon-thumbs-up"></i>@Html.Raw(" Feedback done")</div>
+                        }
+                        else
+                        {
+                            <div style="color: red"><i class="glyphicon glyphicon-ban-circle"></i>@Html.Raw(" No feedback given")</div>
+                        }
                     }
-                    else
+                </td>
+                <td>
+                    @if (doc != null)
                     {
-                        <div style="color: red"><i class="glyphicon glyphicon-ban-circle"></i>@Html.Raw(" No feedback given")</div>
+                        <a href="@Url.Action("GiveFeedback", "Documents", new { id = doc.DocumentId })" class="btn btn-info">
+                            <i class="glyphicon glyphicon-bullhorn"></i>
+                            <span>
+                                <strong>Feedback</strong>
+                            </span>
+                        </a>
+                        <a href="@Url.Action("DownLoadFile", "Documents", new { id = doc.DocumentId })" class="btn btn-success">
+                            <i class="glyphicon glyphicon-download"></i>
+                            <span>
+                                <strong>Download</strong>
+                            </span>
+                        </a>
+
                     }
-                }
-            </td>
-            <td>
-                @if (doc != null)
-                {
-                    <a href="@Url.Action("GiveFeedback", "Documents", new { id = doc.DocumentId })" class="btn btn-info">
-                        <i class="glyphicon glyphicon-bullhorn"></i>
-                        <span>
-                            <strong>Feedback</strong>
-                        </span>
-                    </a>
-                    <a href="@Url.Action("DownLoadFile", "Documents", new { id = doc.DocumentId })" class="btn btn-success">
-                        <i class="glyphicon glyphicon-download"></i>
-                        <span>
-                            <strong>Download</strong>
-                        </span>
-                    </a>
+                </td>
+            </tr>
+        }
 
-                }
-            </td>
-        </tr>
-    }
-
-</table>
+    </table>
+</div>
