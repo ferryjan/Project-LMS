@@ -163,7 +163,7 @@ namespace Project_LMS.Migrations
                     End = modules[0].StartDate.AddDays(1),
                     ActivityName = "Choosing the right blend",
                     ActivityTypeId = activityTypes[3].ActivityTypeId,
-                    Description = "Choose 7 cookies that mix well and can make the base for a good fika. To pass your written report must be uploaded in time.",
+                    Description = "Choose 7 cookies that mix well and can make the base for a good fika. Don't forget to upload your written report on time.",
                     Color = "green"
                 }
             };
@@ -179,7 +179,7 @@ namespace Project_LMS.Migrations
             //Students must be linked to courses, teachers must not
             var newUser = new[]
             {
-                new NewUser
+                new NewUser //0
                 {
                     Email = "admin@admin.se",
                     Rolestring = "Teacher",
@@ -187,7 +187,7 @@ namespace Project_LMS.Migrations
                     FamilyName= "Jeltsin",
                     CourseId = null
                 },
-                new NewUser
+                new NewUser //1
                 {
                     Email = "Donald@duck.se",
                     Rolestring = "Teacher",
@@ -195,7 +195,7 @@ namespace Project_LMS.Migrations
                     FamilyName= "Duck",
                     CourseId = null
                 },
-                new NewUser
+                new NewUser //2
                 {
                     Email = "student@student.se",
                     Rolestring = "Student",
@@ -203,7 +203,7 @@ namespace Project_LMS.Migrations
                     FamilyName= "Hoppsan",
                     CourseId = courses[0].CourseId
                 },
-                new NewUser
+                new NewUser //3
                 {
                     Email = "Sten.Sture@svea.se",
                     Rolestring = "Student",
@@ -211,7 +211,7 @@ namespace Project_LMS.Migrations
                     FamilyName= "Den Äldre",
                     CourseId = courses[0].CourseId
                 },
-                new NewUser
+                new NewUser //4
                 {
                     Email = "Gorm@asa.dk",
                     Rolestring = "Student",
@@ -219,7 +219,7 @@ namespace Project_LMS.Migrations
                     FamilyName= "Den Gamle",
                     CourseId = courses[0].CourseId
                 },
-                new NewUser
+                new NewUser //5
                 {
                     Email = "MrCool@mail.com",
                     Rolestring = "Student",
@@ -227,7 +227,7 @@ namespace Project_LMS.Migrations
                     FamilyName= "Göransson",
                     CourseId = courses[0].CourseId
                 },
-                new NewUser
+                new NewUser //6
                 {
                     Email = "bakihozab2984@yopmail.com",
                     Rolestring = "Student",
@@ -235,7 +235,7 @@ namespace Project_LMS.Migrations
                     FamilyName= "Larsson",
                     CourseId = courses[0].CourseId
                 },
-                new NewUser
+                new NewUser //7
                 {
                     Email = "Exate1968@gustr.com",
                     Rolestring = "Student",
@@ -243,8 +243,8 @@ namespace Project_LMS.Migrations
                     FamilyName= "Gustavsson",
                     CourseId = courses[0].CourseId
                 },
-                new NewUser
-                {
+                new NewUser //8
+                { 
                     Email = "Gamer@Lexicon.com",
                     Rolestring = "Student",
                     GivenName = "Dimitri",
@@ -521,34 +521,33 @@ namespace Project_LMS.Migrations
             db.SaveChanges();
 
             //Seeding documents
-
             string email;
             string appUserId;
+            string documentName;
             Document doc;
 
-
-
-            if (!db.Documents.Any(u => u.DocumentName == "MySevenCookies.txt"))
+            documentName = "MySevenCookies.txt";
+            if (!db.Documents.Any(u => u.DocumentName == documentName))
             {
-                email = newUser[5].Email;
+                email = newUser[8].Email;
                 appUserId = db.Users.FirstOrDefault(u => u.Email == email).Id;
                 doc = new Document
                 {
                     FileData = File.ReadAllBytes(MapPath("~/Resources/MySevenCookies.txt")),
                     ApplicationUserId = appUserId,
-                    ActivityId = activities[0].ActivityId,
+                    ActivityId = activities[3].ActivityId,
                     isHomework = true,
                     DocumentFileType = "text/plain",
                     UploadingTime = DateTime.Now,
-                    DocumentName = "MySevenCookies.txt",
+                    DocumentName = documentName,
                     Description = "I did the best I could, please dont kick me from class"
                 };
                 db.Documents.Add(doc);
                 db.SaveChanges();
             }
 
-
-            if (!db.Documents.Any(u => u.DocumentName == "Disclaimer"))
+            documentName = "Disclaimer.pdf";
+            if (!db.Documents.Any(u => u.DocumentName == documentName))
             {
                 email = newUser[0].Email;
                 appUserId = db.Users.FirstOrDefault(u => u.Email == email).Id;
@@ -560,14 +559,15 @@ namespace Project_LMS.Migrations
                     isHomework = false,
                     DocumentFileType = "pdf",
                     UploadingTime = DateTime.Now,
-                    DocumentName = "Disclaimer.pdf",
+                    DocumentName = documentName,
                     Description = "Lexicon does not take responsibility for any negative health effects occuring during, or after, this course."
                 };
                 db.Documents.Add(doc);
                 db.SaveChanges();
             }
 
-            if (!db.Documents.Any(u => u.DocumentName == "Baking cookies from scratch"))
+            documentName = "Baking cookies from scratch";
+            if (!db.Documents.Any(u => u.DocumentName == documentName))
             {
                 email = newUser[0].Email;
                 appUserId = db.Users.FirstOrDefault(u => u.Email == email).Id;
@@ -579,7 +579,7 @@ namespace Project_LMS.Migrations
                     isHomework = false,
                     DocumentFileType = "docx",
                     UploadingTime = DateTime.Now,
-                    DocumentName = "Baking cookies from scratch.docx",
+                    DocumentName = documentName,
                     Description = "Detailed description of the basics of cookie-baking."
                 };
                 db.Documents.Add(doc);
