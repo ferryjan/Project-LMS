@@ -104,7 +104,7 @@ namespace Project_LMS.Migrations
                 },
                 new Project_LMS.Models.Module {
                     CourseId = courses[0].CourseId,
-                    StartDate = courses[0].StartDate.AddDays(8),
+                    StartDate = courses[0].StartDate.AddDays(7),
                     EndDate = courses[0].StartDate.AddDays(10),
                     Name = "Coffie, the black gold",
                     Description = "An introduction to Coffie: Brew or boil?"
@@ -165,7 +165,7 @@ namespace Project_LMS.Migrations
                 new Activity {
                     ModuleId = modules[0].ModuleId,
                     Start = modules[0].StartDate.AddDays(4),
-                    End = modules[0].StartDate.AddDays(6),
+                    End = modules[0].StartDate.AddDays(8),
                     ActivityName = "Conversation",
                     ActivityTypeId = activityTypes[1].ActivityTypeId,
                     Description = "How to make fine conversation while eating cookies. Keeping your mouth shut until all crumbles have been swallowed and other essential skills.",
@@ -173,7 +173,7 @@ namespace Project_LMS.Migrations
                 },              
                 new Activity {
                     ModuleId = modules[1].ModuleId,
-                    Start = modules[0].StartDate.AddDays(8),
+                    Start = modules[0].StartDate.AddDays(7),
                     End = modules[0].StartDate.AddDays(10),
                     ActivityName = "Definition",
                     ActivityTypeId = activityTypes[2].ActivityTypeId,
