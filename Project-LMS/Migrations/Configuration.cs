@@ -319,7 +319,7 @@ namespace Project_LMS.Migrations
                     FamilyName= "The Shadow",
                     CourseId = courses[0].CourseId
                 },
-                new NewUser
+                new NewUser //9
                 {
                     Email = "Edlin.Pettiglio@yahoo.com",
                     Rolestring = "Student",
@@ -327,8 +327,7 @@ namespace Project_LMS.Migrations
                     FamilyName= "Pettiglio",
                     CourseId = courses[0].CourseId
                 },
-                //10
-                new NewUser
+                new NewUser //10
                 {
                     Email = "Madelle.Leger@yahoo.com",
                     Rolestring = "Student",
@@ -336,7 +335,7 @@ namespace Project_LMS.Migrations
                     FamilyName= "Leger",
                     CourseId = courses[0].CourseId
                 },
-                new NewUser
+                new NewUser //11
                 {
                     Email = "Cross.Szporluk@brzy.ru",
                     Rolestring = "Student",
@@ -344,7 +343,7 @@ namespace Project_LMS.Migrations
                     FamilyName= "Szporluk",
                     CourseId = courses[0].CourseId
                 },
-                new NewUser
+                new NewUser //12
                 {
                     Email = "Cody.Viglionese@yandex.com",
                     Rolestring = "Student",
@@ -352,7 +351,7 @@ namespace Project_LMS.Migrations
                     FamilyName= "Viglionese",
                     CourseId = courses[0].CourseId
                 },
-                new NewUser
+                new NewUser //13
                 {
                     Email = "Vincenz.Henck@outlook.com",
                     Rolestring = "Student",
@@ -360,7 +359,7 @@ namespace Project_LMS.Migrations
                     FamilyName= "Henck",
                     CourseId = courses[0].CourseId
                 },
-                new NewUser
+                new NewUser //14
                 {
                     Email = "Eddy.Meserve@gmail.com",
                     Rolestring = "Student",
@@ -368,7 +367,7 @@ namespace Project_LMS.Migrations
                     FamilyName= "Meserve",
                     CourseId = courses[0].CourseId
                 },
-                new NewUser
+                new NewUser //15
                 {
                     Email = "Gian.Albran@protonmail.com",
                     Rolestring = "Student",
@@ -376,7 +375,7 @@ namespace Project_LMS.Migrations
                     FamilyName= "Albran",
                     CourseId = courses[0].CourseId
                 },
-                new NewUser
+                new NewUser //16
                 {
                     Email = "Guenna.Jarrett@aol.com",
                     Rolestring = "Student",
@@ -384,7 +383,7 @@ namespace Project_LMS.Migrations
                     FamilyName= "Jarrett",
                     CourseId = courses[0].CourseId
                 },
-                new NewUser
+                new NewUser //17
                 {
                     Email = "Arel.Carvalho@aim.com",
                     Rolestring = "Student",
@@ -621,6 +620,24 @@ namespace Project_LMS.Migrations
             if (appUser != null)
             {
                 appUser.ProfileImageRef = "80298-Dimitri.png";
+                db.Entry(appUser).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+
+            em = newUser[10].Email;
+            appUser = db.Users.FirstOrDefault(a => a.Email == em);
+            if (appUser != null)
+            {
+                appUser.ProfileImageRef = "GenericGirl.png";
+                db.Entry(appUser).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+
+            em = newUser[17].Email;
+            appUser = db.Users.FirstOrDefault(a => a.Email == em);
+            if (appUser != null)
+            {
+                appUser.ProfileImageRef = "blondGirl.png";
                 db.Entry(appUser).State = EntityState.Modified;
                 db.SaveChanges();
             }
