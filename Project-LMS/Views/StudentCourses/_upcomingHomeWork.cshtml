@@ -1,23 +1,20 @@
 ﻿@model IEnumerable<Project_LMS.Models.Activity>
 
-<h4 style="color:crimson">Upcoming Homework</h4>
+<h4 style="color:crimson; text-align:center"> Upcoming Homework </h4>
 
-<div class="well" style="width: 200px; max-width: 200px; word-wrap:break-word;word-break:break-all">
+<div class="well" style="width: 300px; max-width: 300px; word-wrap:break-word;word-break:break-all">
     @if (ViewBag.IsEmpty == "Yes")
     {
-        <p style="color: blue; font-weight: bold">No incoming homework detected!</p>
+        <p style="color: blue; font-weight: bold">No homework event detected!</p>
     }
     else if (ViewBag.IsEmpty == "No")
     {
         foreach (var activity in Model)
         {
-            <section style="color:blue; font-weight:bold; max-width: 200px; word-wrap:break-word;word-break:break-all">
-                <p> Module: </p>
-                <p style="font-weight:normal"> @activity.Module.Name</p>
-                <p> Activity: </p>
-                {<p style="font-weight:normal"><i class="glyphicon glyphicon-home"> </i> @activity.ActivityName </p>}
-                <p> Activity Description: </p>
-                <p style="font-weight:normal"> @activity.Description</p>
+            <section style="color:blue; font-weight:bold; max-width: 300px; word-wrap:break-word;word-break:break-all">
+                <p> @activity.Module.Name</p>
+                <p style="font-weight:normal"><i class="glyphicon glyphicon-home"> </i> @activity.ActivityName </p>
+                <p style="font-weight:normal"> Deadline: @activity.End</p>
                 <a href="@Url.Action("CreateStudentActivityDocument", "Documents", new { id = activity.ActivityId })" class="btn btn-info">
                     <i class="glyphicon glyphicon-paperclip"></i>
                     <span>

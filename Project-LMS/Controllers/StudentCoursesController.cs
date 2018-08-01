@@ -69,8 +69,19 @@ namespace Project_LMS.Controllers
         public PartialViewResult StudentUpcomingHomeWork(int? id)
         {
             ViewBag.Id = id;
-            var upcomingHomeWork = db.Activities.Where(i => i.Module.CourseId == id && i.ActivityTypeId == 4 );
-            if (upcomingHomeWork == null)
+            DateTime week = DateTime.Today.AddDays(7);
+            var tempList = db.Activities.Where(i => i.Module.CourseId == id && i.ActivityTypeId == 4 && DateTime.Compare(i.End, week) <= 0 && DateTime.Compare(i.End, DateTime.Today) > 0).ToList();
+            var upcomingHomeWork = new List<Activity>();
+
+            foreach (var activity in tempList)
+            {
+                if (db.Documents.FirstOrDefault(d => d.ActivityId == activity.ActivityId && d.ApplicationUser.Email == User.Identity.Name) == null)
+                {
+                    upcomingHomeWork.Add(activity);
+                }
+            }
+
+            if (upcomingHomeWork.Count() == 0)
             {
                 ViewBag.IsEmpty = "Yes";
             }
