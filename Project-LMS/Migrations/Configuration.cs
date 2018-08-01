@@ -597,7 +597,34 @@ namespace Project_LMS.Migrations
                 db.Entry(appUser).State = EntityState.Modified;
                 db.SaveChanges();
             }
-            
+
+            em = newUser[2].Email;
+            appUser = db.Users.FirstOrDefault(a => a.Email == em);
+            if (appUser != null)
+            {
+                appUser.ProfileImageRef = "72806-tombraidericon.png";
+                db.Entry(appUser).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+
+            em = newUser[7].Email;
+            appUser = db.Users.FirstOrDefault(a => a.Email == em);
+            if (appUser != null)
+            {
+                appUser.ProfileImageRef = "Blonde.png";
+                db.Entry(appUser).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+
+            em = newUser[8].Email;
+            appUser = db.Users.FirstOrDefault(a => a.Email == em);
+            if (appUser != null)
+            {
+                appUser.ProfileImageRef = "80298-Dimitri.png";
+                db.Entry(appUser).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+
 
             //Seeding documents
             string email;

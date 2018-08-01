@@ -325,8 +325,15 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Pictures\72806-tombraidericon.png" />
+    <Content Include="Pictures\80298-Dimitri.png" />
+    <Content Include="Pictures\Blonde.png" />
+    <Content Include="Pictures\defaultavatar.png" />
+    <Content Include="Pictures\defaultImage.png" />
     <Content Include="Pictures\Duck.png" />
-    <Content Include="Resources\Ante.png" />
+    <Content Include="Pictures\LexiconLMS.png" />
+    <Content Include="Pictures\Teacher.png" />
+    <Content Include="Pictures\Ante.png" />
     <Content Include="Resources\MySevenCookies.txt" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
