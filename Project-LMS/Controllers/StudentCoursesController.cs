@@ -66,6 +66,22 @@ namespace Project_LMS.Controllers
         }
 
         [Authorize(Roles = "Student")]
+        public PartialViewResult StudentUpcomingHomeWork(int? id)
+        {
+            ViewBag.Id = id;
+            var upcomingHomeWork = db.Activities.Where(i => i.Module.CourseId == id && i.ActivityTypeId == 4 );
+            if (upcomingHomeWork == null)
+            {
+                ViewBag.IsEmpty = "Yes";
+            }
+            else
+            {
+                ViewBag.IsEmpty = "No";
+            }
+            return PartialView("_upcomingHomeWork", upcomingHomeWork.ToList());
+        }
+
+        [Authorize(Roles = "Student")]
         public PartialViewResult StudentActivityFile(int? activityId)
         {
             ViewBag.Id = activityId;
@@ -102,6 +118,7 @@ namespace Project_LMS.Controllers
         public ActionResult StudentSchedule(int id)
         {
             ViewBag.CourseId = id;
+            ViewBag.CourseName = db.Courses.FirstOrDefault(c => c.CourseId == id).CourseName;
             return View();
         }
 

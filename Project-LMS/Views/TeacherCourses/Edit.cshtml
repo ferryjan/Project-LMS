@@ -63,18 +63,24 @@
 }
 
 <br />
+<div>
+    <a href="#CourseDocument" class="btn btn-info"> Jump To Course Module</a>
+    <a href="#Modules" class="btn btn-info"> Jump To Course Documents</a>
+</div>
+
+<br />
 <br />
 @Html.Action("StudentIndex", "ApplicationUser", new { id = Model.CourseId })
 <br />
 <br />
-
-@Html.Action("ShowCourseModules", "Modules", new { id = Model.CourseId })
-
+<div id="Modules">
+    @Html.Action("ShowCourseModules", "Modules", new { id = Model.CourseId })
+</div>
 <br />
 <br />
-
-@Html.Action("FileDetails", "Documents", new { id = Model.CourseId })
-
+<div id="CourseDocument">
+    @Html.Action("FileDetails", "Documents", new { id = Model.CourseId })
+</div>
 <br />
 
 <div>
