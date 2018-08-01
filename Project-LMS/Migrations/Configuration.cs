@@ -670,7 +670,7 @@ namespace Project_LMS.Migrations
             }
 
             documentName = "BestCookies.docx";
-            if (!db.Documents.Any(u => u.DocumentName == "BestCookies.docx"))
+            if (!db.Documents.Any(u => u.DocumentName == documentName))
             {
                 email = newUser[38].Email;
                 appUserId = db.Users.FirstOrDefault(u => u.Email == email).Id;
@@ -682,7 +682,7 @@ namespace Project_LMS.Migrations
                     isHomework = true,
                     DocumentFileType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
                     UploadingTime = DateTime.Now,
-                    DocumentName = "BestCookies.docx",
+                    DocumentName = documentName,
                     Description = "Each cookie cost 1M USD!",
                     FeedBack = "Well done!"
                 };
@@ -691,7 +691,27 @@ namespace Project_LMS.Migrations
             }
 
             documentName = "Kursschema .NET ND18.pdf";
-            if (!db.Documents.Any(u => u.DocumentName == "Kursschema .NET ND18.pdf"))
+            if (!db.Documents.Any(u => u.DocumentName == documentName))
+            {
+                email = newUser[0].Email;
+                appUserId = db.Users.FirstOrDefault(u => u.Email == email).Id;
+                doc = new Document
+                {
+                    FileData = File.ReadAllBytes(MapPath("~/Resources/Kursschema .NET ND18.pdf")),
+                    ApplicationUserId = appUserId,
+                    CourseId = courses[0].CourseId,
+                    isHomework = false,
+                    DocumentFileType = "application/pdf",
+                    UploadingTime = DateTime.Now,
+                    DocumentName = documentName,
+                    Description = "Course schedule for some other course, it could have been for you !!"
+                };
+                db.Documents.Add(doc);
+                db.SaveChanges();
+            }
+
+            documentName = "Ansvarsfriskrivning.pdf";
+            if (!db.Documents.Any(u => u.DocumentName == documentName))
             {
                 email = newUser[0].Email;
                 appUserId = db.Users.FirstOrDefault(u => u.Email == email).Id;
