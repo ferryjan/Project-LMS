@@ -504,14 +504,21 @@ namespace Project_LMS.Controllers
 
                 if (samling[i].Extern == "Holiday")
                 {
-                    samling[i].Modul = "";
-                    samling[i].AM = "";
-                    samling[i].PM = "";
-                    samling[i].Extern = "";
+                    //samling[i].Modul = "";
+                    //samling[i].AM = "";
+                    //samling[i].PM = "";
+                    //samling[i].Extern = "";
                     samling[i].bgColor = bgColorHoliday;
-                    samling[i].ErrModul = new List<string>();
-                    samling[i].ErrAM = new List<string>();
-                    samling[i].ErrPM = new List<string>();
+
+                    //if (samling[i].Modul != "")
+                    //{
+                    //    samling[i] = UpdateModelName(samling[i], samling[i].Modul);
+                    //    samling[i].Modul = "";
+                    //}
+
+                    //samling[i].ErrModul = new List<string>();
+                    //samling[i].ErrAM = new List<string>();
+                    //samling[i].ErrPM = new List<string>();
                 }
 
                 model = samling[i];
