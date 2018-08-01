@@ -175,7 +175,6 @@ namespace Project_LMS.Models
 
             var activiStartDate = startDate;
             var activiStoppDate = endDate;
-            var firstTime = true;
 
             while (activiStoppDate.Date >= activiStartDate.Date)
             {
