@@ -32,14 +32,14 @@
 
                 </a>
 
-                <ul class="dropdown-menu" style="background-color:darkgrey">
+                <ul class="dropdown-menu" style="background-color:black; width: 200px">
                     @if (User.Identity.Name != "admin@admin.se")
                     {
-                        <li>@Html.ActionLink("Change Profile", "ChangeProfile", "ApplicationUser", routeValues: null, htmlAttributes: new { title = "ApplicationUser", Style = "color:Red; Font-weight: Bold"  })</li>
-                        <li>@Html.ActionLink("Change Password", "ChangePassword", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", Style = "color:Red; Font-weight: Bold " })</li>
+                        <li>@Html.ActionLink("Change Profile", "ChangeProfile", "ApplicationUser", routeValues: null, htmlAttributes: new { title = "ApplicationUser", Style = "color:#c6c26b; Font-weight: Bold" })</li>
+                        <li>@Html.ActionLink("Change Password", "ChangePassword", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", Style = "color:#c6c26b; Font-weight: Bold " })</li>
                         <li role="separator" class="divider"></li>
                     }
-                    <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+                    <li><a href="javascript:document.getElementById('logoutForm').submit()" style="color:#c6c26b">Log off</a></li>
                 </ul>
 
             </li>
