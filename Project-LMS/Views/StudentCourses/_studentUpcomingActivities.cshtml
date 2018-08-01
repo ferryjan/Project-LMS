@@ -11,15 +11,18 @@
     {
         foreach (var activity in Model)
         {
-            <section style="color:blue; font-weight:bold; max-width: 800px; word-wrap:break-word;word-break:break-all">
-                <p> Module: </p>
-                <p style="font-weight:normal"> @activity.Module.Name</p>
-                <p> Activity: </p>
-                <p style="font-weight:normal"> @activity.ActivityName </p>
-                <p> Activity Description: </p>
-                <p style="font-weight:normal"> @activity.Description</p>
-                @Html.ActionLink("Details", "Details", "Activities", new { id = activity.ActivityId }, new { @class = "btn btn-primary btn-large" })
-            </section>
+        <section style="color:blue; font-weight:bold; max-width: 800px; word-wrap:break-word;word-break:break-all">
+            <p> Module: </p>
+            <p style="font-weight:normal"> @activity.Module.Name</p>
+            <p> Activity: </p>
+
+            @if (activity.ActivityType.Type == "Homework") {<p style="font-weight:normal"><i class="glyphicon glyphicon-home"> </i> @activity.ActivityName </p>}
+            else {<p style="font-weight:normal"> @activity.ActivityName </p> }
+
+            <p> Activity Description: </p>
+            <p style="font-weight:normal"> @activity.Description</p>
+            @Html.ActionLink("Details", "Details", "Activities", new { id = activity.ActivityId }, new { @class = "btn btn-primary btn-large" })
+        </section>
             <hr>
         }
     }

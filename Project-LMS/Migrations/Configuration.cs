@@ -150,7 +150,7 @@ namespace Project_LMS.Migrations
                     End = modules[0].StartDate,
                     ActivityName = "The multiple interpretations of fika.",
                     ActivityTypeId = activityTypes[3].ActivityTypeId,
-                    Description = "Homework: List, and explain the 5 common interpretations of fika",
+                    Description = "List, and explain the 5 common interpretations of fika",
                     Color = "navy"
                 },
                 new Activity {
