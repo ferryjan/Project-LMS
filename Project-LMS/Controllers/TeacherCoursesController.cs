@@ -25,7 +25,7 @@ namespace Project_LMS.Controllers
         [Authorize(Roles = "Teacher")]
         public ActionResult ShowUndergoingCourses()
         {
-            return View(db.Courses.ToList().Where(i => DateTime.Compare(i.StartDate.Date, DateTime.Now.Date) <= 0 && DateTime.Compare(i.EndDate.Date, DateTime.Now.Date) >= 0).OrderBy(c => c.StartDate).ToList());
+            return View(db.Courses.ToList().Where(i => DateTime.Compare(i.StartDate.Date, DateTime.Today) <= 0 && DateTime.Compare(i.EndDate.Date, DateTime.Today) >= 0).OrderBy(c => c.StartDate).ToList());
         }
 
         [Authorize(Roles = "Teacher")]
