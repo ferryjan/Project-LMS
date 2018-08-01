@@ -4,33 +4,40 @@
     @Html.ActionLink("Add New Student to The Course", "CreateStudent", new { id = ViewBag.CourseId }, new { @class = "btn btn-primary btn-large" })
 </p>
 <div class="bodycontainer scrollable">
-    <table class="table">
-        <tr>
-            <th>
+    <table class="table" >
+        <tr style="padding:0">
+            <th style="padding:0"></th>
+            <th style="padding:0">
                 @Html.DisplayNameFor(model => model.GivenName)
             </th>
-            <th>
+            <th style="padding:0">
                 @Html.DisplayNameFor(model => model.FamilyName)
             </th>
-            <th>
+            <th style="padding:0">
                 @Html.DisplayNameFor(model => model.Email)
             </th>
-            <th></th>
+            <th style="padding:0"></th>
         </tr>
 
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
+            <tr style="padding:0">
+                <td style="padding:0">
+                    @if (item.ProfileImageRef != "")
+                    {<img alt="" src="~/Pictures/@item.ProfileImageRef" data-radium="true" style="width: 48px; height: 48px; border-radius: 00%">}
+                    else
+                    {<img alt="" src="~/Pictures/defaultavatar.png" data-radium="true" style="width: 48px; height: 48px; border-radius: 00%">}
+                </td>
+                <td style="padding:0">
                     @Html.DisplayFor(modelItem => item.GivenName)
                 </td>
-                <td>
+                <td style="padding:0">
                     @Html.DisplayFor(modelItem => item.FamilyName)
                 </td>
-                <td>
+                <td style="padding:0">
                     @Html.DisplayFor(modelItem => item.Email)
                 </td>
-                <td>
+                <td style="padding:0">
                     <a href="@Url.Action("DeleteStudentFromCourse", "ApplicationUser", new {id = ViewBag.CourseId, studnetId = item.Id })" class="btn btn-danger">
                         <i class="glyphicon glyphicon-erase"></i>
                         <span>
