@@ -53,7 +53,7 @@
                         <strong>Details</strong>
                     </span>
                 </a>
-                <a href="@Url.Action("Delete", "Activities", new { id = item.ActivityId })" class="btn btn-danger">
+                <a href="@Url.Action("Delete", "Activities", new { id = item.ActivityId , isVerified = false })" class="btn btn-danger">
                     <i class="glyphicon glyphicon-erase"></i>
                     <span>
                         <strong>Remove Activity</strong>
