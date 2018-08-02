@@ -1,36 +1,19 @@
 ﻿@using Project_LMS.Models
 @model Project_LMS.Models.ScheduleHeadViewModels
 
-@{
-    ViewBag.Title = "Schedule";
-}
-
-<h4>
-    Premilary Schedule  <b>@Html.DisplayFor(model => model.CourseName)</b>
-</h4>
+@{ ViewBag.Title = "Schedule"; }
+<h4>Premilary Schedule  <b>@Html.DisplayFor(model => model.CourseName)</b></h4>
 
 <div class="schedulecontainer scrollable">
     <table class="mySchedule">
         <thead>
             <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.ViewModels.Date)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ViewModels.Day)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ViewModels.Modul)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ViewModels.AM)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ViewModels.PM)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ViewModels.Extern)
-                </th>
+                <th>@Html.DisplayNameFor(model => model.ViewModels.Date)</th>
+                <th>@Html.DisplayNameFor(model => model.ViewModels.Day)</th>
+                <th>@Html.DisplayNameFor(model => model.ViewModels.Modul)</th>
+                <th>@Html.DisplayNameFor(model => model.ViewModels.AM)</th>
+                <th>@Html.DisplayNameFor(model => model.ViewModels.PM)</th>
+                <th>@Html.DisplayNameFor(model => model.ViewModels.Extern)</th>
             </tr>
         </thead>
 
@@ -38,12 +21,8 @@
         {
             <tbody>
                 <tr style="background-color:@item.bgColor;">
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Date)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Day)
-                    </td>
+                    <td>@Html.DisplayFor(modelItem => item.Date)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Day)</td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Modul)
 
