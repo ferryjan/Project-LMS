@@ -71,10 +71,4 @@ namespace Project_LMS.Models
             return res;
         }
     }
-
-    //public class ViewModelMoveModule : Module
-    //{
-    //    [Display(Name = "Move by")]
-    //    public TimeSpan MoveBy { get; set; }
-    //}
 }

@@ -28,7 +28,7 @@
             <td>
                 <a href="@Url.Action("Edit", "Modules", new { id = item.ModuleId})" class="btn btn-primary"><i class="glyphicon glyphicon-edit"></i> <span><strong>Edit</strong></span></a>
                 <a href="@Url.Action("Details", "Modules", new { id = ViewBag.CourseId, moduleId = item.ModuleId })" class="btn btn-info"><i class="glyphicon glyphicon-list"></i> <span><strong>Details</strong></span></a>
-                <a href="@Url.Action("MoveModule", "Modules", new { id =  item.ModuleId })" class="btn btn-info"><i class="glyphicon glyphicon-move"></i> <span><strong>Move</strong></span></a>
+                <a href="@Url.Action("MoveModule", "Modules", new { id =  item.ModuleId })" class="modal-link btn btn-info"><i class="glyphicon glyphicon-move"></i> <span><strong>Move</strong></span></a>
                 <a href="@Url.Action("Delete", "Modules", new { id = ViewBag.CourseId, moduleId = item.ModuleId, isVerified = false })" class="btn btn-danger"><i class="glyphicon glyphicon-erase"></i><span><strong>Delete</strong> </span> </a>
             </td>
         </tr>
@@ -37,5 +37,31 @@
     }
 
 </table>
+
+<script type="text/javascript">
+        $(function () {
+            // Initialize numeric spinner input boxes
+            //$(".numeric-spinner").spinedit();
+            // Initialize modal dialog
+            // attach modal-container bootstrap attributes to links with .modal-link class.
+            // when a link is clicked with these attributes, bootstrap will display the href content in a modal dialog.
+            $('body').on('click', '.modal-link', function (e) {
+                e.preventDefault();
+                $(this).attr('data-target', '#modal-container');
+                $(this).attr('data-toggle', 'modal');
+            });
+            // Attach listener to .modal-close-btn's so that when the button is pressed the modal dialog disappears
+            $('body').on('click', '.modal-close-btn', function () {
+                $('#modal-container').modal('hide');
+            });
+            //clear modal cache, so that new content can be loaded
+            $('#modal-container').on('hidden.bs.modal', function () {
+                $(this).removeData('bs.modal');
+            });
+            $('#CancelModal').on('click', function () {
+                return false;
+            });
+        });
+</script>
 
 
