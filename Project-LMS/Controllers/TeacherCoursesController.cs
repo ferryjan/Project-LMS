@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using Project_LMS.Models;
+using Project_LMS.ScheduleUI;
 using Rotativa;
 
 namespace Project_LMS.Controllers

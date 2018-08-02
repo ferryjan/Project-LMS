@@ -220,6 +220,30 @@ namespace Project_LMS.Controllers
             return RedirectToAction("Edit", "TeacherCourses", new { id });
         }
 
+        //// GET: Modules/MoveModule/5
+        //[Authorize(Roles = "Teacher")]
+        //public ActionResult MoveModule(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Module module = db.Modules.Find(id);
+        //    if (module == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    ViewModelMoveModule mmodule = new ViewModelMoveModule
+        //    {
+        //        ModuleId = module.ModuleId,
+        //        Name = module.Name,
+        //        StartDate = module.StartDate,
+        //        EndDate = module.EndDate,
+        //        Description = module.Description
+        //    };
+        //    return View(mmodule);
+        //}
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
