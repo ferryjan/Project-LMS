@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using Project_LMS.Models;
+using Project_LMS.ScheduleUI;
 using Rotativa;
 
 namespace Project_LMS.Controllers
@@ -63,16 +64,16 @@ namespace Project_LMS.Controllers
 
 
         [Authorize(Roles = "Teacher")]
-        public ActionResult PrintAllReport()
+        public ActionResult PrintAllReport(int? id, string courseName)
         {
             Dictionary<string, string> cookieCollection = new Dictionary<string, string>();
             foreach (var key in Request.Cookies.AllKeys)
             {
                 cookieCollection.Add(key, Request.Cookies.Get(key).Value);
             }
-            return new ActionAsPdf("Schedule", new { id = 1})
+            return new ActionAsPdf("ShowPartialSchedule", new { id = id, courseName = courseName })
             {
-                FileName = "Name.pdf",
+                FileName = courseName + ".pdf",
                 Cookies = cookieCollection
             };
         }
@@ -238,6 +239,18 @@ namespace Project_LMS.Controllers
             var myScheduleManage = new ScheduleManage(db, listCourse);
             var mySchedule = myScheduleManage.RunAndGetList();
             return View(mySchedule);
+        }
+
+        public ActionResult ShowPartialSchedule(int? id)
+        {
+            if (id == null) { return new HttpStatusCodeResult(HttpStatusCode.BadRequest); }
+            Course listCourse = db.Courses.Find(id);
+            ViewBag.CourseId = id;
+            if (listCourse == null) { return HttpNotFound(); }
+            // create the schedule list
+            var myScheduleManage = new ScheduleManage(db, listCourse);
+            var mySchedule = myScheduleManage.RunAndGetList();
+            return PartialView("_showPartialSchedule", mySchedule);
         }
 
 

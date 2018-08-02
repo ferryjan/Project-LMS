@@ -1,0 +1,74 @@
+﻿@model Project_LMS.Models.ScheduleHeadViewModels
+
+
+<table class="mySchedule">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.ViewModels.Date)</th>
+            <th>@Html.DisplayNameFor(model => model.ViewModels.Day)</th>
+            <th>@Html.DisplayNameFor(model => model.ViewModels.Modul)</th>
+            <th>@Html.DisplayNameFor(model => model.ViewModels.AM)</th>
+            <th>@Html.DisplayNameFor(model => model.ViewModels.PM)</th>
+            <th>@Html.DisplayNameFor(model => model.ViewModels.Extern)</th>
+        </tr>
+    </thead>
+
+    @foreach (var item in Model.myList)
+    {
+        <tbody>
+            <tr style="background-color:@item.bgColor;">
+                <td>@Html.DisplayFor(modelItem => item.Date)</td>
+                <td>@Html.DisplayFor(modelItem => item.Day)</td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Modul)
+
+                    @{
+                        if (item.ErrModul.Count > 0)
+                        {
+                            foreach (var err in item.ErrModul)
+                            {
+                                <br /><b style="color:red">
+                                    @Html.DisplayFor(modelItem => err)
+                                </b>
+                            }
+                        }
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AM)
+                    @{
+                        if (item.ErrAM.Count > 0)
+                        {
+                            foreach (var err in item.ErrAM)
+                            {
+                                <br /><b style="color:red">
+                                    @Html.DisplayFor(modelItem => err)
+                                </b>
+                            }
+                        }
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PM)
+                    @{
+                        if (item.ErrPM.Count > 0)
+                        {
+                            foreach (var err in item.ErrPM)
+                            {
+                                <br /><b style="color:red">
+                                    @Html.DisplayFor(modelItem => err)
+                                </b>
+                            }
+                        }
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Extern)
+                </td>
+            </tr>
+        </tbody>
+    }
+
+</table>
+
+
