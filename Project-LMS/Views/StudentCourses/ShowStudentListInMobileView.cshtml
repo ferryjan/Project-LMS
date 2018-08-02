@@ -1,0 +1,27 @@
+﻿@model IEnumerable<Project_LMS.Models.ApplicationUser>
+
+@{
+    ViewBag.Title = "ShowStudentListInMobileView";
+}
+
+<h2>Classmates</h2>
+
+@foreach (var classmate in Model)
+{
+    if (classmate.Email != User.Identity.Name)
+    {
+        <p style="color: red; font-weight: bold">@classmate.FullName</p>
+        <a href="@Url.Action("Details", "StudentCourses", new { id = classmate.Id })"><span><i class="glyphicon glyphicon-info-sign"></i>@Html.Raw(" Contact Info")</span></a>
+        <a href="@Url.Action("SendMessage", "Messages", new { id = classmate.Id })"><span><i class="glyphicon glyphicon-pencil"></i>@Html.Raw(" Send Message")</span></a>
+    }
+    else
+    {
+        <p style="color: red; font-weight: bold">@classmate.FullName</p>
+        <a href="@Url.Action("Details", "StudentCourses", new { id = classmate.Id })"><span><i class="glyphicon glyphicon-info-sign"></i>@Html.Raw(" Contact Info")</span></a>
+    }
+    <hr>
+}
+
+<p>
+    @Html.ActionLink("Back to StartPage", "StudentStart", "StudentCourses", null, new { @class = "btn btn-primary btn-large" })
+</p>

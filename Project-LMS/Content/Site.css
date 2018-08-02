@@ -7,439 +7,514 @@
         display: none;
     }
 
-    .body-content {
-        padding-left: 15px;
-        padding-right: 15px;
+    #btn-upload-homework {
+        display: none;
+    }
+
+    #msg-homework {
+        display: block !important;
+    }
+   
+
+    .container.body-content {
+        margin-left: 0px;
+    }
+
+    #table-actdoc-pc {
+        display:none;
+    }
+
+    table#table-actdoc-mobile.table.table-bordered {
+        display: table !important;
+    }
+
+    #table-homework-pc {
+        display: none;
+    }
+
+    table#table-homework-mobile.table.table-bordered {
+        display: table !important;
+    }
+
+    #table-mb-pc {
+        display: none;
+    }
+
+    table#table-mb-moblie.table {
+        display: table !important;
+    }
+    table-mb-moblie
+
+    #Image1 {
+        max-height: 300px !important;
+        max-width: 300px !important;
+    }
+
+    .table.table-bordered {
+        min-width: 100px;
+        max-width: 100px;
+    }
+
+    #schedule_button {
+        display: none;
+    }
+
+    #classmate_button {
+        display: block;
+    }
+
+    /*.navbar-toggle {
+        margin-right: 100px;
+    }*/
+
+    #Logo {
+        display: none;
+    }
+
+    .navbar-header {
+        margin-right: 0px;
+        margin-left: 0px;
+    }
+
+    #UnreadMessages {
+        display: none;
     }
 }
 
-.well {
-    background: #e1e2c0;
+@media only screen and (max-width: 1860px) {
+    #homeworkView {
+        display: none;
+    }
 }
 
-.messages {
-    display: inline-block;
-    background: red;
-    text-align: center;
-    color: #FFF;
-    border-radius: 50%;
-    width: 24px;
-    height: 24px;
-    line-height: 26px;
-    top: 15px;
-    left: 15px
-}
+    .well {
+        background: #e1e2c0;
+    }
 
-.tabs {
-    font-size: 18px;
-    display: block;
-    padding: 10px;
-    background: #000000;
-    margin-bottom: 2px;
-    color: #d8c813;
-}
+    .messages {
+        display: inline-block;
+        background: red;
+        text-align: center;
+        color: #FFF;
+        border-radius: 50%;
+        width: 24px;
+        height: 24px;
+        line-height: 26px;
+        top: 15px;
+        left: 15px
+    }
 
-.activitytabs {
-    font-size: 18px;
-    display: block;
-    padding: 10px;
-    background: #00008f;
-    margin-bottom: 2px;
-    color: #ccccff;
-    border-radius: 9px;
-}
+    .tabs {
+        font-size: 18px;
+        display: block;
+        padding: 10px;
+        background: #000000;
+        margin-bottom: 2px;
+        color: #d8c813;
+    }
+
+    .activitytabs {
+        font-size: 18px;
+        display: block;
+        padding: 10px;
+        background: #00008f;
+        margin-bottom: 2px;
+        color: #ccccff;
+        border-radius: 9px;
+    }
 
     .tabs:hover {
         color: #d8c813;
         font-weight: bold;
     }
 
-.activitytabs:hover {
-    color: #dddcf4;
-    font-weight: bold;
-}
+    .activitytabs:hover {
+        color: #dddcf4;
+        font-weight: bold;
+    }
 
-.well {
-    background-color: #ccccff;
-}
+    .well {
+        background-color: #ccccff;
+    }
 
-.bodycontainer {
-    max-height: 450px;
-    width: 100%;
-    margin: 0;
-    overflow-y: auto;
-}
-
-
-.studentList {
-    max-height: 400px;
-    width: 100%;
-    margin: 0;
-    overflow-y: auto;
-}
-
-.schedulecontainer {
-    max-height: 700px;
-    width: 100%;
-    margin: 0;
-    overflow-y: auto;
-}
-
-.table-scrollable {
-    margin: 0;
-    padding: 0;
-}
-
-body {
-    padding-top: 100px;
-    padding-bottom: 20px;
-}
+    .bodycontainer {
+        max-height: 450px;
+        width: 100%;
+        margin: 0;
+        overflow-y: auto;
+    }
 
 
-.cut-text {
-    text-overflow: ellipsis;
-    overflow: hidden;
-    width: 160px;
-    height: 1.2em;
-    white-space: nowrap;
-}
+    .studentList {
+        max-height: 400px;
+        width: 100%;
+        margin: 0;
+        overflow-y: auto;
+    }
 
-/* Set padding to keep content from hitting the edges */
-.body-content {
-    margin-left: 380px;
-    padding-left: 15px;
-    padding-right: 15px;
-}
+    .schedulecontainer {
+        max-height: 700px;
+        width: 100%;
+        margin: 0;
+        overflow-y: auto;
+    }
 
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
-.dl-horizontal dt {
-    white-space: normal;
-}
-
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
-}
-
-/* Bootstrap overrides */
-body {
-    font-size: 17px;
-    background-color: lightgrey;
-}
-
-.navbar-inverse {
-    background-color: #222;
-    border-color: #080808;
-    padding: 10px 0px 2px 0px;
-}
-
-.btn-default {
-    color: #fff;
-    background-color: #2d4aa8;
-    border-color: #2d4aa8;
-}
-
-.navbar-inverse .navbar-nav > li > a {
-    color: wheat;
-    font-size: 18px;
-}
-
-.form-control {
-    font-size: 17px;
-    border-radius: 9px;
-}
-
-.btn {
-    font-size: 17px;
-    padding: 7px 20px;
-    border-radius: 9px;
-}
-
-#homeworkView {
-    height: 100%;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    right: 10px;
-    margin: 0;
-    margin-top: 100px;
-    line-height: 1;
-    width: 300px;
-}
-
-#cssmenu > ul > li > a {
-    /*add lot of stuff here*/
-}
-
-/*@import url(http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300);*/
-
-#cssmenu {
-    height: 100%;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 10px;
-    margin: 0;
-    margin-top: 100px;
-    font-family: 'Roboto Condensed';
-    line-height: 1;
-    width: 250px;
-}
-
-.align-right {
-    float: right;
-}
-
-#cssmenu ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    display: block;
-}
-
-    #cssmenu ul li {
-        position: relative;
+    .table-scrollable {
         margin: 0;
         padding: 0;
     }
 
-        #cssmenu ul li a {
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-#cssmenu > ul > li > a {
-    /*more comments for the people!*/
-    /*margin-top: 25px;*/
-    color: wheat;
-    text-transform: uppercase;
-    display: block;
-    padding: 20px;
-    border-top: 1px solid #000000;
-    border-left: 1px solid #000000;
-    border-right: 1px solid #000000;
-    background: #222222;
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    letter-spacing: 1px;
-    font-size: 16px;
-    font-weight: 300;
-    -webkit-transition: all 0.25s ease-in;
-    -moz-transition: all 0.25s ease-in;
-    -o-transition: all 0.25s ease-in;
-    transition: all 0.25s ease-in;
-    position: relative;
-}
-
-#cssmenu > ul > li:first-child > a {
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
-}
-
-#cssmenu > ul > li:last-child > a {
-    border-bottom-left-radius: 3px;
-    border-bottom-right-radius: 3px;
-    border-bottom: 1px solid #000000;
-}
-
-#cssmenu > ul > li:hover > a,
-#cssmenu > ul > li.open > a,
-#cssmenu > ul > li.active > a {
-    background: #151515;
-    color: #ffffff;
-}
-
-#cssmenu ul > li.has-sub > a::after {
-    content: "";
-    position: absolute;
-    display: block;
-    width: 0;
-    height: 0;
-    border-top: 13px solid #000000;
-    border-bottom: 13px solid transparent;
-    border-left: 125px solid transparent;
-    border-right: 125px solid transparent;
-    left: 0;
-    bottom: -13px;
-    z-index: 1;
-    opacity: 0;
-    -webkit-transition: all .2s ease;
-    -moz-transition: all .2s ease;
-    -o-transition: all .2s ease;
-    transition: all .2s ease;
-}
-
-#cssmenu ul > li.has-sub > a::before {
-    content: "";
-    position: absolute;
-    display: block;
-    width: 0;
-    height: 0;
-    border-top: 13px solid #151515;
-    border-bottom: 13px solid transparent;
-    border-left: 125px solid transparent;
-    border-right: 125px solid transparent;
-    left: 0;
-    bottom: -12px;
-    bottom: -1px;
-    z-index: 3;
-    opacity: 0;
-    -webkit-transition: all .2s ease;
-    -moz-transition: all .2s ease;
-    -o-transition: all .2s ease;
-    transition: all .2s ease;
-}
-
-#cssmenu ul > li.has-sub::after {
-    content: "";
-    display: block;
-    position: absolute;
-    width: 0;
-    height: 0;
-    border: 7px solid transparent;
-    border-top-color: #dddddd;
-    z-index: 2;
-    right: 20px;
-    top: 24.5px;
-    pointer-events: none;
-}
-
-#cssmenu ul > li:hover::after,
-#cssmenu ul > li.active::after,
-#cssmenu ul > li.open::after {
-    border-top-color: #ffffff;
-}
-
-#cssmenu ul > li.has-sub.open > a::after {
-    opacity: 1;
-    bottom: -13px;
-}
-
-#cssmenu ul > li.has-sub.open > a::before {
-    opacity: 1;
-    bottom: -12px;
-}
-
-#cssmenu ul ul {
-    display: none;
-}
-
-    #cssmenu ul ul li {
-        border-left: 1px solid #ccc;
-        border-right: 1px solid #ccc;
+    body {
+        padding-top: 100px;
+        padding-bottom: 20px;
     }
 
-        #cssmenu ul ul li a {
-            background: #e4e4e4;
-            font-weight: 300;
+
+    .cut-text {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        width: 160px;
+        height: 1.2em;
+        white-space: nowrap;
+    }
+
+    /* Set padding to keep content from hitting the edges */
+    .body-content {
+        margin-left: 380px;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    /* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+    .dl-horizontal dt {
+        white-space: normal;
+    }
+
+    /* Set width on the form input elements since they're 100% wide by default */
+    input,
+    select,
+    textarea {
+        max-width: 280px;
+    }
+
+    /* Bootstrap overrides */
+    body {
+        font-size: 17px;
+        background-color: lightgrey;
+    }
+
+    .navbar-inverse {
+        background-color: #222;
+        border-color: #080808;
+        padding: 10px 0px 2px 0px;
+    }
+
+    .btn-default {
+        color: #fff;
+        background-color: #2d4aa8;
+        border-color: #2d4aa8;
+    }
+
+    .navbar-inverse .navbar-nav > li > a {
+        color: wheat;
+        font-size: 18px;
+    }
+
+    .form-control {
+        font-size: 17px;
+        border-radius: 9px;
+    }
+
+    .btn {
+        font-size: 17px;
+        padding: 7px 20px;
+        border-radius: 9px;
+    }
+
+    #homeworkView {
+        height: 100%;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        right: 10px;
+        margin: 0;
+        margin-top: 100px;
+        line-height: 1;
+        width: 300px;
+    }
+
+    #cssmenu > ul > li > a {
+        /*add lot of stuff here*/
+    }
+
+    /*@import url(http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300);*/
+
+    #cssmenu {
+        height: 100%;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 10px;
+        margin: 0;
+        margin-top: 100px;
+        font-family: 'Roboto Condensed';
+        line-height: 1;
+        width: 250px;
+    }
+
+    .align-right {
+        float: right;
+    }
+
+    #cssmenu ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: block;
+    }
+
+        #cssmenu ul li {
+            position: relative;
+            margin: 0;
+            padding: 0;
+        }
+
+            #cssmenu ul li a {
+                text-decoration: none;
+                cursor: pointer;
+            }
+
+    #cssmenu > ul > li > a {
+        /*more comments for the people!*/
+        /*margin-top: 25px;*/
+        color: wheat;
+        text-transform: uppercase;
+        display: block;
+        padding: 20px;
+        border-top: 1px solid #000000;
+        border-left: 1px solid #000000;
+        border-right: 1px solid #000000;
+        background: #222222;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        letter-spacing: 1px;
+        font-size: 16px;
+        font-weight: 300;
+        -webkit-transition: all 0.25s ease-in;
+        -moz-transition: all 0.25s ease-in;
+        -o-transition: all 0.25s ease-in;
+        transition: all 0.25s ease-in;
+        position: relative;
+    }
+
+    #cssmenu > ul > li:first-child > a {
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px;
+    }
+
+    #cssmenu > ul > li:last-child > a {
+        border-bottom-left-radius: 3px;
+        border-bottom-right-radius: 3px;
+        border-bottom: 1px solid #000000;
+    }
+
+    #cssmenu > ul > li:hover > a,
+    #cssmenu > ul > li.open > a,
+    #cssmenu > ul > li.active > a {
+        background: #151515;
+        color: #ffffff;
+    }
+
+    #cssmenu ul > li.has-sub > a::after {
+        content: "";
+        position: absolute;
+        display: block;
+        width: 0;
+        height: 0;
+        border-top: 13px solid #000000;
+        border-bottom: 13px solid transparent;
+        border-left: 125px solid transparent;
+        border-right: 125px solid transparent;
+        left: 0;
+        bottom: -13px;
+        bottom: 0px;
+        z-index: 1;
+        opacity: 0;
+        -webkit-transition: all .2s ease;
+        -moz-transition: all .2s ease;
+        -o-transition: all .2s ease;
+        transition: all .2s ease;
+    }
+
+    #cssmenu ul > li.has-sub > a::before {
+        content: "";
+        position: absolute;
+        display: block;
+        width: 0;
+        height: 0;
+        border-top: 13px solid #151515;
+        border-bottom: 13px solid transparent;
+        border-left: 125px solid transparent;
+        border-right: 125px solid transparent;
+        left: 0;
+        bottom: -12px;
+        bottom: -1px;
+        z-index: 3;
+        opacity: 0;
+        -webkit-transition: all .2s ease;
+        -moz-transition: all .2s ease;
+        -o-transition: all .2s ease;
+        transition: all .2s ease;
+    }
+
+    #cssmenu ul > li.has-sub::after {
+        content: "";
+        display: block;
+        position: absolute;
+        width: 0;
+        height: 0;
+        border: 7px solid transparent;
+        border-top-color: #dddddd;
+        z-index: 2;
+        right: 20px;
+        top: 24.5px;
+        pointer-events: none;
+    }
+
+    #cssmenu ul > li:hover::after,
+    #cssmenu ul > li.active::after,
+    #cssmenu ul > li.open::after {
+        border-top-color: #ffffff;
+    }
+
+    #cssmenu ul > li.has-sub.open > a::after {
+        opacity: 1;
+        bottom: -13px;
+    }
+
+    #cssmenu ul > li.has-sub.open > a::before {
+        opacity: 1;
+        bottom: -12px;
+    }
+
+    #cssmenu ul ul {
+        display: none;
+    }
+
+        #cssmenu ul ul li {
+            border-left: 1px solid #ccc;
+            border-right: 1px solid #ccc;
+        }
+
+            #cssmenu ul ul li a {
+                background: #e4e4e4;
+                font-weight: 300;
+                display: block;
+                position: relative;
+                font-size: 15px;
+                padding: 14px 20px;
+                border-bottom: 1px solid #dddddd;
+                color: #666666;
+                -webkit-transition: all 0.25s ease-in;
+                -moz-transition: all 0.25s ease-in;
+                -o-transition: all 0.25s ease-in;
+                transition: all 0.25s ease-in;
+            }
+
+        #cssmenu ul ul ul li a {
+            background: #f1f1f1;
             display: block;
             position: relative;
             font-size: 15px;
             padding: 14px 20px;
             border-bottom: 1px solid #dddddd;
-            color: #666666;
+            color: #480be2;
+            font-weight: 300;
             -webkit-transition: all 0.25s ease-in;
             -moz-transition: all 0.25s ease-in;
             -o-transition: all 0.25s ease-in;
             transition: all 0.25s ease-in;
         }
 
-    #cssmenu ul ul ul li a {
-        background: #f1f1f1;
-        display: block;
-        position: relative;
-        font-size: 15px;
-        padding: 14px 20px;
-        border-bottom: 1px solid #dddddd;
-        color: #480be2;
-        font-weight: 300;
-        -webkit-transition: all 0.25s ease-in;
-        -moz-transition: all 0.25s ease-in;
-        -o-transition: all 0.25s ease-in;
-        transition: all 0.25s ease-in;
-    }
-
-    #cssmenu ul ul li:first-child > a {
-        padding-top: 18px;
-    }
-
-    #cssmenu ul ul ul li {
-        border: 0;
-    }
-
-    #cssmenu ul ul li:hover > a,
-    #cssmenu ul ul li.open > a,
-    #cssmenu ul ul li.active > a {
-        background: #e4e4e4;
-        color: #666666;
-        font-weight: bolder;
-    }
-
-    #cssmenu ul ul > li.has-sub > a::after {
-        border-top: 13px solid #dddddd;
-    }
-
-    #cssmenu ul ul > li.has-sub > a::before {
-        border-top: 13px solid #e4e4e4;
-    }
-
-    #cssmenu ul ul ul li a {
-        padding-left: 30px;
-    }
-
-    #cssmenu ul ul > li.has-sub::after {
-        top: 18.5px;
-        border-width: 6px;
-        border-top-color: #777777;
-    }
-
-    #cssmenu ul ul > li:hover::after,
-    #cssmenu ul ul > li.active::after,
-    #cssmenu ul ul > li.open::after {
-        border-top-color: #666666;
-    }
-
-.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
-    padding: 20px 12px;
-}
-
-.form-horizontal .control-label {
-    padding-top: 7px;
-    margin-bottom: 0;
-    text-align: right;
-    margin-top: -6px;
-}
-
-.mySchedule {
-    font-size: 15px;
-    border-collapse: collapse;
-    width: 100%;
-    max-width: 100%;
-    margin-bottom: 20px;
-    max-height: 50%;
-}
-
-.mySchedule > tbody > tr > th:hover {
-    background-color: #f2dede;
-}
-
-    .mySchedule tr, .mySchedule th {
-        border-bottom: 1px solid #000000; /*#ddd;*/
-        padding: 2px;
-    }
-
-        .mySchedule tr:hover {
-            background-color: #ddd;
+        #cssmenu ul ul li:first-child > a {
+            padding-top: 18px;
         }
 
-    .mySchedule th {
-        padding-top: 12px;
-        padding-bottom: 12px;
-        text-align: left;
-        background-color: #4CAF50;
-        color: white;
+        #cssmenu ul ul ul li {
+            border: 0;
+        }
+
+        #cssmenu ul ul li:hover > a,
+        #cssmenu ul ul li.open > a,
+        #cssmenu ul ul li.active > a {
+            background: #e4e4e4;
+            color: #666666;
+            font-weight: bolder;
+        }
+
+        #cssmenu ul ul > li.has-sub > a::after {
+            border-top: 13px solid #dddddd;
+        }
+
+        #cssmenu ul ul > li.has-sub > a::before {
+            border-top: 13px solid #e4e4e4;
+        }
+
+        #cssmenu ul ul ul li a {
+            padding-left: 30px;
+        }
+
+        #cssmenu ul ul > li.has-sub::after {
+            top: 18.5px;
+            border-width: 6px;
+            border-top-color: #777777;
+        }
+
+        #cssmenu ul ul > li:hover::after,
+        #cssmenu ul ul > li.active::after,
+        #cssmenu ul ul > li.open::after {
+            border-top-color: #666666;
+        }
+
+    .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+        padding: 20px 12px;
     }
+
+    .form-horizontal .control-label {
+        padding-top: 7px;
+        margin-bottom: 0;
+        text-align: right;
+        margin-top: -6px;
+    }
+
+    .mySchedule {
+        font-size: 15px;
+        border-collapse: collapse;
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 20px;
+        max-height: 50%;
+    }
+
+        .mySchedule > tbody > tr > th:hover {
+            background-color: #f2dede;
+        }
+
+        .mySchedule tr, .mySchedule th {
+            border-bottom: 1px solid #000000; /*#ddd;*/
+            padding: 2px;
+        }
+
+            .mySchedule tr:hover {
+                background-color: #ddd;
+            }
+
+        .mySchedule th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #4CAF50;
+            color: white;
+        }
 

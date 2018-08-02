@@ -11,27 +11,27 @@ else
     <h3 style="color:crimson">Course Documents</h3>
     <table class="table table-bordered">
         <tr>
-            <th>
+            <th class="hidden-xs hidden-sm">
                 @Html.DisplayNameFor(model => model.Description)
             </th>
-            <th>
+            <th class="col-sm-6">
                 @Html.DisplayNameFor(model => model.DocumentName)
             </th>
 
-            <th></th>
+            <th class="col-sm-6"></th>
         </tr>
 
         @foreach (var item in Model)
         {
             <tr>
-                <td class="col-md-6">
+                <td class="hidden-xs hidden-sm col-md-6">
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>
-                <td class="col-md-2">
+                <td class="col-sm-6 col-md-2">
                     @Html.DisplayFor(modelItem => item.DocumentName)
                 </td>
 
-                <td>
+                <td class="col-sm-6">
                     <a href="@Url.Action("DownLoadFile", "Documents", new { id = item.DocumentId })" class="btn btn-success">
                         <i class="glyphicon glyphicon-download"></i>
                         <span>

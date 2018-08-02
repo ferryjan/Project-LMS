@@ -7,26 +7,28 @@
 else
 {
     <h3 style="color:crimson">Activity Documents</h3>
-    <table class="table table-bordered">
+    <table class="table table-bordered" id="table-actdoc-pc">
         <tr>
-            <th class="col-md-5">
+            <th class="hidden-xs hidden-sm">
                 @Html.DisplayNameFor(model => model.Description)
             </th>
-            <th class="col-md-2">
+            <th class="col-sm-4">
                 @Html.DisplayNameFor(model => model.DocumentName)
             </th>
-            <th class="col-md-5"></th>
+
+            <th class="col-sm-4"></th>
         </tr>
         @foreach (var item in Model)
         {
             <tr>
-                <td class="col-md-5">
+                <td class="hidden-xs hidden-sm col-md-6">
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>
-                <td class="col-md-2">
+                <td class="col-sm-4 col-md-2">
                     @Html.DisplayFor(modelItem => item.DocumentName)
                 </td>
-                <td class="col-md-5">
+
+                <td class="col-sm-4">
                     <a href="@Url.Action("DownLoadFile", "Documents", new { id = item.DocumentId })" class="btn btn-success">
                         <i class="glyphicon glyphicon-download"></i>
                         <span>
@@ -34,11 +36,34 @@ else
                         </span>
                     </a>
                     @*<a href="@Url.Action("ModuleDocumentDetails", "Documents", new { id = item.DocumentId })" class="btn btn-info">
-                        <i class="glyphicon glyphicon-list"></i>
+                            <i class="glyphicon glyphicon-list"></i>
+                            <span>
+                                <strong>Details</strong>
+                            </span>
+                        </a>*@
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    <table class="table table-bordered" id="table-actdoc-mobile" style="display:none">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DocumentName)
+            </th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="col-sm-4 col-md-2">
+                    @Html.DisplayFor(modelItem => item.DocumentName)
+                    <a href="@Url.Action("DownLoadFile", "Documents", new { id = item.DocumentId })" class="btn btn-success">
+                        <i class="glyphicon glyphicon-download"></i>
                         <span>
-                            <strong>Details</strong>
+                            <strong>Open</strong>
                         </span>
-                    </a>*@
+                    </a>
                 </td>
             </tr>
         }

@@ -262,6 +262,7 @@
     <Compile Include="Models\SendMessageViewModel.cs" />
     <Compile Include="Models\StudentListNavItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ScheduleUI\ScheduleManage.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -523,6 +524,7 @@
     <Content Include="Views\Documents\DeleteHomeworkDocument.cshtml" />
     <Content Include="Views\Documents\CreateStudentActivityDocument.cshtml" />
     <Content Include="Views\StudentCourses\_upcomingHomeWork.cshtml" />
+    <Content Include="Views\StudentCourses\ShowStudentListInMobileView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
