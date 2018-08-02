@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using Project_LMS.Models;
-using Project_LMS.ScheduleUI;
+using Rotativa;
 
 namespace Project_LMS.Controllers
 {
@@ -57,6 +59,24 @@ namespace Project_LMS.Controllers
         {
             return View();
         }
+
+
+
+        [Authorize(Roles = "Teacher")]
+        public ActionResult PrintAllReport()
+        {
+            Dictionary<string, string> cookieCollection = new Dictionary<string, string>();
+            foreach (var key in Request.Cookies.AllKeys)
+            {
+                cookieCollection.Add(key, Request.Cookies.Get(key).Value);
+            }
+            return new ActionAsPdf("Schedule", new { id = 1})
+            {
+                FileName = "Name.pdf",
+                Cookies = cookieCollection
+            };
+        }
+    
 
         // POST: TeacherCourses/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
