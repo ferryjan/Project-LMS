@@ -9,12 +9,12 @@ namespace Project_LMS.ScheduleUI
     public class ScheduleManage
     {
         private ApplicationDbContext DataBase { get; set; }
-        private Course TheCourse  { get; set; }
+        private Course TheCourse { get; set; }
         private ScheduleViewModels[] samling;
         public int MaxDates { get; private set; }
         private int CourseId { get; set; }
         private string CourseName { get; set; }
-        
+
         public ScheduleManage()
         {
             MaxDates = 0;
@@ -95,18 +95,20 @@ namespace Project_LMS.ScheduleUI
 
             for (int i = 0; i < MaxDates; i++)
             {
-                samling[i] = new ScheduleViewModels();
-                samling[i].Date = courseStartDate.ToString("yyyy-MM-dd");
-                samling[i].Day = courseStartDate.DayOfWeek.ToString();
-                samling[i].Modul = "";
-                samling[i].PM = "";
-                samling[i].AM = "";
-                samling[i].ActuallDate = courseStartDate;
-                samling[i].Year = courseStartDate.ToString("yyyy");
-                samling[i].DayOfYear = courseStartDate.DayOfYear;
-                samling[i].ErrModul = new List<string>();
-                samling[i].ErrAM = new List<string>();
-                samling[i].ErrPM = new List<string>();
+                samling[i] = new ScheduleViewModels
+                {
+                    Date = courseStartDate.ToString("yyyy-MM-dd"),
+                    Day = courseStartDate.DayOfWeek.ToString(),
+                    Modul = "",
+                    PM = "",
+                    AM = "",
+                    ActuallDate = courseStartDate,
+                    Year = courseStartDate.ToString("yyyy"),
+                    DayOfYear = courseStartDate.DayOfYear,
+                    ErrModul = new List<string>(),
+                    ErrAM = new List<string>(),
+                    ErrPM = new List<string>()
+                };
 
                 if (i % 2 == 0) { samling[i].bgColor = "LightSteelBlue"; }
                 else samling[i].bgColor = "#ffffff";
@@ -210,6 +212,28 @@ namespace Project_LMS.ScheduleUI
             }
         }
 
+        private void CheckActivityDateHourAndUpdateNames(int startHour, int stoppHour, int counter, string name)
+        {
+            if (startHour >= 13)
+            {
+                samling[counter] = UpdatePMName(samling[counter], name);
+            }
+            else if (startHour >= 0 && startHour < 13)
+            {
+                samling[counter] = UpdateAMName(samling[counter], name);
+
+                if (stoppHour > 13 && stoppHour <= 24)
+                {
+                    samling[counter] = UpdatePMName(samling[counter], name);
+                }
+            }
+            else
+            {
+                samling[counter] = UpdatePMName(samling[counter], name);
+            }
+        }
+
+
         public bool AddActivites(DateTime startDate, DateTime endDate, string aName, string aType)
         {
             if (aType == "Homework")
@@ -236,44 +260,13 @@ namespace Project_LMS.ScheduleUI
                     {
                         if (activiStoppDate.Date == activiStartDate.Date)
                         {
-                            if (activiStartDate.Hour >= 13)
-                            {
-                                samling[counter] = UpdatePMName(samling[counter], name);
-                            }
-                            else if (activiStartDate.Hour >= 0 && activiStartDate.Hour < 13)
-                            {
-                                samling[counter] = UpdateAMName(samling[counter], name);
-
-                                if (activiStoppDate.Hour > 13 && activiStoppDate.Hour <= 24)
-                                {
-                                    samling[counter] = UpdatePMName(samling[counter], name);
-                                }
-                            }
-                            else
-                            {
-                                samling[counter] = UpdatePMName(samling[counter], name);
-                            }
+                            CheckActivityDateHourAndUpdateNames(activiStartDate.Hour, activiStoppDate.Hour, counter, name);
                         }
                         else if (activiStoppDate.Date > activiStartDate.Date)
                         {
                             if (firstTime == true)
                             {
-                                if (activiStartDate.Hour >= 13)
-                                {
-                                    samling[counter] = UpdatePMName(samling[counter], name);
-                                }
-                                else if (activiStartDate.Hour >= 0 && activiStartDate.Hour < 13)
-                                {
-                                    samling[counter] = UpdateAMName(samling[counter], name);
-
-                                    if (activiStoppDate.Hour > 13 && activiStoppDate.Hour <= 24)
-                                        samling[counter] = UpdatePMName(samling[counter], name);
-                                }
-                                else
-                                {
-                                    samling[counter] = UpdatePMName(samling[counter], name);
-                                }
-
+                                CheckActivityDateHourAndUpdateNames(activiStartDate.Hour, activiStoppDate.Hour, counter, name);
                                 firstTime = false;
                             }
                             else
