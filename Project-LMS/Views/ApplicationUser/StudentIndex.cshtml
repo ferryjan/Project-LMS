@@ -3,50 +3,42 @@
 <p>
     @Html.ActionLink("Add New Student to The Course", "CreateStudent", new { id = ViewBag.CourseId }, new { @class = "btn btn-primary btn-large" })
 </p>
+
+<style>
+    .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+        padding: 0px 0px;
+    }
+</style>
+
 <div class="bodycontainer scrollable">
     <table class="table" >
-        <tr style="padding:0">
-            <th style="padding:0"></th>
-            <th style="padding:0">
-                @Html.DisplayNameFor(model => model.GivenName)
-            </th>
-            <th style="padding:0">
-                @Html.DisplayNameFor(model => model.FamilyName)
-            </th>
-            <th style="padding:0">
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th style="padding:0"></th>
+        <tr>
+            <th></th>
+            <th>@Html.DisplayNameFor(model => model.GivenName)</th>
+            <th>@Html.DisplayNameFor(model => model.FamilyName)</th>
+            <th>@Html.DisplayNameFor(model => model.Email) </th>
+            <th></th>
         </tr>
 
         @foreach (var item in Model)
         {
-            <tr style="padding:0">
-                <td style="padding:0">
+            <tr>
+                <td >
                     @if (item.ProfileImageRef != "")
                     {<img alt="" src="~/Pictures/@item.ProfileImageRef" data-radium="true" style="width: 48px; height: 48px; border-radius: 00%">}
                     else
                     {<img alt="" src="~/Pictures/defaultavatar.png" data-radium="true" style="width: 48px; height: 48px; border-radius: 00%">}
                 </td>
-                <td style="padding:0">
-                    @Html.DisplayFor(modelItem => item.GivenName)
-                </td>
-                <td style="padding:0">
-                    @Html.DisplayFor(modelItem => item.FamilyName)
-                </td>
-                <td style="padding:0">
-                    @Html.DisplayFor(modelItem => item.Email)
-                </td>
-                <td style="padding:0">
+                <td> @Html.DisplayFor(modelItem => item.GivenName)</td>
+                <td> @Html.DisplayFor(modelItem => item.FamilyName)</td>
+                <td> @Html.DisplayFor(modelItem => item.Email)</td>
+                <td >
                     <a href="@Url.Action("DeleteStudentFromCourse", "ApplicationUser", new {id = ViewBag.CourseId, studnetId = item.Id })" class="btn btn-danger">
                         <i class="glyphicon glyphicon-erase"></i>
-                        <span>
-                            <strong>Remove Student</strong>
-                        </span>
+                        <span><strong>Remove Student</strong></span>
                     </a>
                 </td>
             </tr>
         }
-
     </table>
 </div>
