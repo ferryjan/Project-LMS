@@ -522,6 +522,7 @@
     <Content Include="Views\Documents\DeleteHomeworkDocument.cshtml" />
     <Content Include="Views\Documents\CreateStudentActivityDocument.cshtml" />
     <Content Include="Views\StudentCourses\_upcomingHomeWork.cshtml" />
+    <Content Include="Views\StudentCourses\ShowStudentListInMobileView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

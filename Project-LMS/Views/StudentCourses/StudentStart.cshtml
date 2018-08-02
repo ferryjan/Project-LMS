@@ -9,10 +9,17 @@
 <h2>@ViewBag.CourseName</h2>
 <h4>@ViewBag.TimePeriod</h4>
 <br />
-<div>
-    @Html.ActionLink("View Schedule", "StudentSchedule", new { id = ViewBag.CourseId }, new { @class = "btn btn-primary btn-large" })
-    <a href="#CourseDocument" class="btn btn-primary"> Jump To Course Document</a>
-    <a href="#Modules" class="btn btn-primary"> Jump To Modules</a>
+<a href="#CourseDocument"> Jump To Course Document</a>
+<br>
+<a href="#Modules"> Jump To Modules</a>
+<br />
+<div class="row">
+    <div id="schedule_button" class="col-sm-3 col-xs-12">
+        @Html.ActionLink("View Schedule", "StudentSchedule", new { id = ViewBag.CourseId }, new { @class = "btn btn-primary btn-large" })
+    </div>
+    <div class="col-sm-3 col-xs-12">
+        @Html.ActionLink("View Classmate", "ShowStudentListInMobileView", null, new { @class = "btn btn-primary btn-large" })
+    </div>
 </div>
 <div id="homeworkView">
     @Html.Action("StudentUpcomingHomeWork", "StudentCourses", new { id = ViewBag.CourseId })
