@@ -224,25 +224,32 @@ namespace Project_LMS.Controllers
         [Authorize(Roles = "Teacher")]
         public ActionResult MoveModule(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+            if (id == null) { return new HttpStatusCodeResult(HttpStatusCode.BadRequest);}
+
             Module module = db.Modules.Find(id);
-            if (module == null)
-            {
-                return HttpNotFound();
-            }
-            return PartialView("_moveModule", module);
+            if (module == null) {return HttpNotFound();}
+
+            MoveModuleViewModel mmViewModel = new MoveModuleViewModel { Module = module, NewDate = module.StartDate };
+            return PartialView("_moveModule", mmViewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Teacher")]
-        public ActionResult MoveModule(int id)
+        public ActionResult MoveModule(MoveModuleViewModel mmViewModel)
         {
-            // move logic here
-            return RedirectToAction("Edit", "TeacherCourses", id);
+            Module module = db.Modules.Find(mmViewModel.Module.ModuleId);
+            var period = mmViewModel.NewDate - mmViewModel.Module.StartDate;
+            module.StartDate += period;
+            module.EndDate += period;
+            foreach (var item in module.Activities)
+            {
+                item.Start += period;
+                item.End += period;
+            }
+            db.Entry(module).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Edit", "TeacherCourses", new { id = module.CourseId });
         }
 
 
