@@ -29,7 +29,7 @@ namespace Project_LMS.Controllers
             ViewBag.ModuleId = id;
 
             var activities = db.Activities.Where(n => n.ModuleId == id).Include(a => a.ActivityType);
-            return View(activities.OrderBy(s => s.Start).ToList());
+            return View(activities.OrderBy(s => s.Start).ThenBy(s => s.End).ToList());
         }
 
         [ChildActionOnly]

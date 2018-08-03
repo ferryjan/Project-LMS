@@ -1,8 +1,37 @@
 ﻿@model IEnumerable<Project_LMS.Models.Activity>
 
+@{
+    List<Project_LMS.Models.Activity> activityDateInCollision = new List<Project_LMS.Models.Activity>();
+
+    foreach (var activity in Model)
+    {
+        if (Model.FirstOrDefault(m => m.ActivityId != activity.ActivityId &&
+        ((DateTime.Compare(m.Start, activity.Start) < 0) && (DateTime.Compare(m.End, activity.Start) > 0 && activity.ActivityType.Type != "Homework" && m.ActivityType.Type != "Homework") ||
+        (DateTime.Compare(m.Start, activity.Start) > 0) && (DateTime.Compare(m.End, activity.End) < 0 && activity.ActivityType.Type != "Homework" && m.ActivityType.Type != "Homework") ||
+        (DateTime.Compare(m.Start, activity.Start) == 0) && (DateTime.Compare(m.End, activity.End) < 0 && activity.ActivityType.Type != "Homework" && m.ActivityType.Type != "Homework") ||
+        (DateTime.Compare(m.Start, activity.Start) > 0) && (DateTime.Compare(m.End, activity.End) == 0 && activity.ActivityType.Type != "Homework" && m.ActivityType.Type != "Homework") ||
+        (DateTime.Compare(m.Start, activity.End) < 0) && (DateTime.Compare(m.End, activity.End) > 0 && activity.ActivityType.Type != "Homework" && m.ActivityType.Type != "Homework"))) != null)
+        {
+            activityDateInCollision.Add(activity);
+        }
+    }
+
+    var inValidActivity = Model.FirstOrDefault(item => DateTime.Compare(ViewBag.CourseStartDate, item.Start.Date) > 0 || DateTime.Compare(ViewBag.CourseEndDate, item.End.Date) < 0
+        || DateTime.Compare(ViewBag.ModuleStartDate, item.Start.Date) > 0 || DateTime.Compare(ViewBag.ModuleEndDate, item.End.Date) < 0);
+}
+
+
 <p>
     @Html.ActionLink("Add New Activity to The Module", "Create", new { id = ViewBag.ModuleId }, new { @class = "btn btn-primary btn-large" })
-    <h4 style="color:red">The activity in red text => Either start date or end date (or both) is not within the date range of the module!</h4>
+    @if (inValidActivity != null)
+    {
+        <h4 style="color:red">The activity in red text: Either start date or end date (or both) of the activity is not within the date range of the module!</h4>
+    }
+    @if (activityDateInCollision.Count != 0)
+    {
+        <h4 style="color:blue">The activity name(s) in blue text: Date range of the activity overlaps with one or more activities!</h4>
+    }
+
 </p>
 <!-- html comment-->
 @*C sharp comment*@
@@ -34,7 +63,34 @@
             }
             else
             {
-                <td>@Html.DisplayFor(modelItem => item.ActivityName)</td>
+                if (activityDateInCollision.FirstOrDefault(m => m.ActivityId == item.ActivityId) != null)
+                {
+                    if (item.ActivityType.Type == "Homework")
+                    {
+                        <td style="color:blue">
+                            <div><i class="glyphicon glyphicon-home"></i> @Html.DisplayFor(modelItem => item.ActivityName)</div>
+
+                        </td>
+                    }
+                    else
+                    {
+                        <td style="color:blue">@Html.DisplayFor(modelItem => item.ActivityName)</td>
+                    }
+                }
+                else
+                {
+                    if (item.ActivityType.Type == "Homework")
+                    {
+                        <td>
+                            <div><i class="glyphicon glyphicon-home"></i> @Html.DisplayFor(modelItem => item.ActivityName)</div>
+
+                        </td>
+                    }
+                    else
+                    {
+                        <td>@Html.DisplayFor(modelItem => item.ActivityName)</td>
+                    }
+                }
             }
 
 
