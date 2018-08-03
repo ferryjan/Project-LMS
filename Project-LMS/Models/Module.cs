@@ -71,4 +71,13 @@ namespace Project_LMS.Models
             return res;
         }
     }
+
+    public class MoveModuleViewModel
+    {
+        public Module Module { get; set; }
+
+        [Display(Name = "New startdate")]
+        [DataType(DataType.Date)]
+        public DateTime NewDate { get; set; }
+    }
 }

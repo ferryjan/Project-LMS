@@ -519,6 +519,9 @@
         }
 
 .modal-content {
-    width: 600px !important;
+    width: 650px !important;
     margin: 30px auto !important;
+    background-color: lightgrey;
+    box-shadow: -1px 1px 1px 2px black;
+
 }

@@ -1,53 +1,60 @@
-﻿@model Project_LMS.Models.Module
+﻿@model Project_LMS.Models.MoveModuleViewModel
 
 @{ViewBag.Title = "Move module";}
 
-@using (Html.BeginForm("MoveModule", "Modules", new { id = Model.CourseId }))
+@using (Html.BeginForm("MoveModule", "Modules", new { id = Model.Module.CourseId }))
 {
-   
+
     @Html.AntiForgeryToken()
 
-    <h2 style="text-align-last:center">Move module</h2><hr />
+    <h2 style="text-align-last:center">Move module</h2>
+    <p style="text-align-last:center; font-size:smaller">Moving a module will also move all included activities</p>
+    <hr />
 
     <div class="row">
+        <h4 style="color:red; text-align-last:center; padding:0px">@Model.Module.Course.CourseName&nbsp;@Model.Module.Course.StartDate.ToString("yyyy-MM-dd")&nbsp;-&nbsp;@Model.Module.Course.EndDate.ToString("yyyy-MM-dd")</h4>
+        <hr />
         <div class="form-horizontal col-md-offset-1 col-md-11">
-            <h4 style="color:red; text-align-last:center; padding:0px">@Model.Course.CourseName&nbsp;@Model.Course.StartDate.ToString("yyyy-MM-dd")&nbsp;-&nbsp;@Model.Course.EndDate.ToString("yyyy-MM-dd")</h4>
-            <hr />
 
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <h4 style="color:indianred"> @ViewBag.DateNotValidMessage </h4>
-            @Html.HiddenFor(model => model.ModuleId)
+            @Html.HiddenFor(model => model.Module.ModuleId)
 
-            <div class="form-group col-md-11">
-                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="form-group col-md-offset-1 col-md-11">
+                @Html.LabelFor(model => model.Module.Name, htmlAttributes: new { @class = "control-label col-md-4" })
                 <div>
-                    @Html.DisplayFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.DisplayFor(model => model.Module.Name, new { htmlAttributes = new { @class = "form-control col-md-7" } })
                 </div>
             </div>
 
             <div class="form-group col-md-11">
-                <div class="col-md-4" style="text-align-last:right"><strong>Duration</strong></div>
+                <div class="col-md-4" style="text-align-last:right">
+                    <strong>Duration</strong>
+                </div>
+                    <div>
+                        @Html.DisplayFor(model => model.Module.StartDate, new { htmlAttributes = new { @class = "form-control" } }) - @Html.DisplayFor(model => model.Module.EndDate, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+            </div>
+
+            <div class="form-group col-md-11">
+                @Html.LabelFor(model => model.Module.Description, htmlAttributes: new { @class = "control-label col-md-4" })
                 <div>
-                    @Html.DisplayFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control" } }) - @Html.DisplayFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.DisplayFor(model => model.Module.Description, new { htmlAttributes = new { @class = "form-control col-md-7" } })
                 </div>
             </div>
-
-            <div class="form-group col-md-11">
-                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-4" })
-                <div class="col-md-8">
-                    @Html.DisplayFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-                </div>
-            </div>
-            <hr />
         </div>
 
-        <div class="form-group">
-
-            <div class="col-md-10">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </div>
         <hr />
+
+        <div class="form-group col-md-12">
+            @Html.LabelFor(model => model.NewDate, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div>
+                @Html.EditorFor(model => model.NewDate, new { htmlAttributes = new { @class = "form-control col-md-7" } })
+            </div>
+            <div class="col-md-1" style="align-self:flex-end">
+                <input type="submit" value="Move" class="btn btn-primary" />
+            </div>
+        </div>
     </div>
 }
 
