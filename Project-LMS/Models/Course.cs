@@ -81,4 +81,17 @@ namespace Project_LMS.Models
         [DataType(DataType.Date)]
         public DateTime NewDate { get; set; }
     }
+
+    public class CloneCourseViewModel
+    {
+        public Course Course { get; set; }
+
+        [Display(Name = "New startdate")]
+        [DataType(DataType.Date)]
+        public DateTime NewDate { get; set; }
+
+        [Display(Name = "New name")]
+        public string NewName { get; set; }
+    }
+
 }

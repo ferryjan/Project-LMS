@@ -294,6 +294,71 @@ namespace Project_LMS.Controllers
             return RedirectToAction("Index", "TeacherCourses", null);
         }
 
+        // GET: Modules/MoveCourse/5
+        [Authorize(Roles = "Teacher")]
+        public ActionResult CloneCourse(int? id)
+        {
+            if (id == null) { return new HttpStatusCodeResult(HttpStatusCode.BadRequest); }
+
+            Course course = db.Courses.Find(id);
+            if (course == null) { return HttpNotFound(); }
+
+            CloneCourseViewModel ccViewModel = new CloneCourseViewModel { Course = course, NewDate = course.StartDate, NewName = course.CourseName };
+            return PartialView("_moveCourse", ccViewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Teacher")]
+        public ActionResult CloneCourse(CloneCourseViewModel ccViewModel)
+        {
+            Course oldcourse = db.Courses.Find(ccViewModel.Course.CourseId);
+            int offsetDays = (oldcourse.EndDate - oldcourse.StartDate).Days;
+
+            //clone the course
+            Course newcourse = new Course
+            {
+                CourseName = oldcourse.CourseName,
+                CourseDescription = oldcourse.CourseDescription,
+                StartDate = ccViewModel.NewDate,
+                EndDate = ccViewModel.NewDate.AddDays(offsetDays)
+            };
+            db.Courses.Add(newcourse);
+            db.SaveChanges();
+
+            Document newdoc;
+            //clone the course documents
+            foreach (var doc in oldcourse.CourseDocuments)
+            {
+                newdoc = doc;
+                newdoc.CourseId = newcourse.CourseId;
+                db.Documents.Add(newdoc);
+            }
+            db.SaveChanges();
+
+            //clone the modules,
+            Module newmodule;
+            foreach (var mod in oldcourse.CourseModules)
+            {
+                newmodule = mod;
+                newmodule.CourseId = newcourse.CourseId;
+                newmodule.StartDate = newmodule.StartDate.AddDays(offsetDays);
+                newmodule.EndDate = newmodule.EndDate.AddDays(offsetDays);
+                db.Modules.Add(newmodule);
+                db.SaveChanges();
+                //clone module documents
+
+                //clone the activities, and their documents
+
+            }
+
+
+
+
+
+            //db.SaveChanges();
+            return RedirectToAction("Index", "TeacherCourses", null);
+        }
 
         protected override void Dispose(bool disposing)
         {
