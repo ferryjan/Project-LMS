@@ -13,29 +13,17 @@
 
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.CourseName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.StartDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EndDate)
-        </th>
+        <th>@Html.DisplayNameFor(model => model.CourseName)</th>
+        <th>@Html.DisplayNameFor(model => model.StartDate)</th>
+        <th>@Html.DisplayNameFor(model => model.EndDate)</th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.CourseName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StartDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EndDate)
-        </td>
+        <td>@Html.DisplayFor(modelItem => item.CourseName)</td>
+        <td>@Html.DisplayFor(modelItem => item.StartDate)</td>
+        <td>@Html.DisplayFor(modelItem => item.EndDate)</td>
         <td>
             <a href="@Url.Action("Edit", "TeacherCourses", new { id = item.CourseId })" class="btn btn-primary">
                 <i class="glyphicon glyphicon-edit"></i>
@@ -62,6 +50,7 @@
                     <strong>Schedule</strong>
                 </span>
             </a>
+            <a href="@Url.Action("MoveCourse", "TeacherCourses", new { id =  item.CourseId })" class="modal-link btn btn-info"><i class="glyphicon glyphicon-move"></i> <span><strong>Move</strong></span></a>
         </td>
     </tr>
 }
@@ -72,3 +61,28 @@
     @Html.ActionLink("Show Ongoing Courses", "ShowUndergoingCourses", null, new { @class = "btn btn-primary btn-large" })
     @Html.ActionLink("Show Expired Courses", "ShowExpiredCourses", null, new { @class = "btn btn-primary btn-large" })
 </p>
+<script type="text/javascript">
+    $(function () {
+        // Initialize numeric spinner input boxes
+        //$(".numeric-spinner").spinedit();
+        // Initialize modal dialog
+        // attach modal-container bootstrap attributes to links with .modal-link class.
+        // when a link is clicked with these attributes, bootstrap will display the href content in a modal dialog.
+        $('body').on('click', '.modal-link', function (e) {
+            e.preventDefault();
+            $(this).attr('data-target', '#modal-container');
+            $(this).attr('data-toggle', 'modal');
+        });
+        // Attach listener to .modal-close-btn's so that when the button is pressed the modal dialog disappears
+        $('body').on('click', '.modal-close-btn', function () {
+            $('#modal-container').modal('hide');
+        });
+        //clear modal cache, so that new content can be loaded
+        $('#modal-container').on('hidden.bs.modal', function () {
+            $(this).removeData('bs.modal');
+        });
+        $('#CancelModal').on('click', function () {
+            return false;
+        });
+    });
+</script>

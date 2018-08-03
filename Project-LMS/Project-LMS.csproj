@@ -535,6 +535,7 @@
     <Content Include="Views\StudentCourses\ShowStudentListInMobileView.cshtml" />
     <Content Include="Views\TeacherCourses\_showPartialSchedule.cshtml" />
     <Content Include="Views\Modules\_moveModule.cshtml" />
+    <Content Include="Views\TeacherCourses\_moveCourse.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

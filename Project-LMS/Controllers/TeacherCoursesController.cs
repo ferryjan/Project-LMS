@@ -253,6 +253,47 @@ namespace Project_LMS.Controllers
             return PartialView("_showPartialSchedule", mySchedule);
         }
 
+        // GET: Modules/MoveCourse/5
+        [Authorize(Roles = "Teacher")]
+        public ActionResult MoveCourse(int? id)
+        {
+            if (id == null) { return new HttpStatusCodeResult(HttpStatusCode.BadRequest); }
+
+            Course course = db.Courses.Find(id);
+            if (course == null) { return HttpNotFound(); }
+
+            MoveCourseViewModel mcViewModel = new MoveCourseViewModel { Course = course, NewDate = course.StartDate };
+            return PartialView("_moveCourse", mcViewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Teacher")]
+        public ActionResult MoveCourse(MoveCourseViewModel mcViewModel)
+        {
+            Course course = db.Courses.Find(mcViewModel.Course.CourseId);
+            var period = mcViewModel.NewDate - course.StartDate;
+            var days = Convert.ToInt32(period.TotalDays);
+            if (days == 0) { return RedirectToAction("Edit", "TeacherCourses", new { id = course.CourseId }); }
+
+            course.StartDate = course.StartDate.AddDays(days);
+            course.EndDate = course.EndDate.AddDays(days);
+            foreach (var mod in course.CourseModules)
+            {
+                mod.StartDate = mod.StartDate.AddDays(days);
+                mod.EndDate = mod.EndDate.AddDays(days);
+                foreach (var act in mod.Activities)
+                {
+                    act.Start = act.Start.AddDays(days);
+                    act.End = act.End.AddDays(days);
+                }
+            }
+
+            db.Entry(course).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Index", "TeacherCourses", null);
+        }
+
 
         protected override void Dispose(bool disposing)
         {
