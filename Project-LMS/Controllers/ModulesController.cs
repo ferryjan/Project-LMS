@@ -239,14 +239,18 @@ namespace Project_LMS.Controllers
         public ActionResult MoveModule(MoveModuleViewModel mmViewModel)
         {
             Module module = db.Modules.Find(mmViewModel.Module.ModuleId);
-            var period = mmViewModel.NewDate - mmViewModel.Module.StartDate;
-            module.StartDate += period;
-            module.EndDate += period;
-            foreach (var item in module.Activities)
-            {
-                item.Start += period;
-                item.End += period;
-            }
+            var period = mmViewModel.NewDate - module.StartDate;
+            var days = Convert.ToInt32(period.TotalDays);
+            if (days == 0) { return RedirectToAction("Edit", "TeacherCourses", new { id = module.CourseId }); }
+            
+             module.StartDate = module.StartDate.AddDays(days);
+             module.EndDate = module.EndDate.AddDays(days);
+             foreach (var item in module.Activities)
+             {
+                 item.Start = item.Start.AddDays(days);
+                 item.End = item.End.AddDays(days);
+             }
+ 
             db.Entry(module).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("Edit", "TeacherCourses", new { id = module.CourseId });

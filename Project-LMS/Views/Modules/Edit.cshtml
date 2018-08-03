@@ -12,7 +12,6 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4 style="color:red">OBS! Editing start/end date of a module may affect on the activities under this module!</h4>
         <h4 style="color:red">@Model.Course.CourseName&nbsp;@Model.Course.StartDate.ToString("yyyy-MM-dd")&nbsp;-&nbsp;@Model.Course.EndDate.ToString("yyyy-MM-dd")</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
