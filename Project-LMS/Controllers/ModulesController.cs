@@ -220,6 +220,33 @@ namespace Project_LMS.Controllers
             return RedirectToAction("Edit", "TeacherCourses", new { id });
         }
 
+        // GET: Modules/MoveModule/5
+        [Authorize(Roles = "Teacher")]
+        public ActionResult MoveModule(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Module module = db.Modules.Find(id);
+            if (module == null)
+            {
+                return HttpNotFound();
+            }
+            return PartialView("_moveModule", module);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Teacher")]
+        public ActionResult MoveModule(int id)
+        {
+            // move logic here
+            return RedirectToAction("Edit", "TeacherCourses", id);
+        }
+
+
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
