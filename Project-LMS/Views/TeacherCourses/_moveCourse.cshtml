@@ -21,11 +21,9 @@
             @Html.HiddenFor(model => model.Course.CourseId)
 
             <div class="form-group col-md-11">
-                <div class="col-md-4" style="text-align-last:right">
-                    <strong>Description</strong>
-                </div>
-                <div>
-                    @Html.DisplayFor(model => model.Course.CourseDescription, new { htmlAttributes = new { @class = "form-control col-md-7" } })
+                <div class="col-md-4" style="text-align-last:right"><strong>Description</strong></div>
+                <div class="col-md-7">
+                    @Html.DisplayFor(model => model.Course.CourseDescription, new { htmlAttributes = new { @class = "form-control" } })
                 </div>
             </div>
         </div>
@@ -33,7 +31,9 @@
         <hr />
 
         <div class="form-group col-md-12">
-            @Html.LabelFor(model => model.NewDate, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-4" style="text-align-last:right">
+                @Html.LabelFor(model => model.NewDate, htmlAttributes: new { @class = "control-label" })
+            </div>
             <div>
                 @Html.EditorFor(model => model.NewDate, new { htmlAttributes = new { @class = "form-control col-md-7" } })
             </div>
