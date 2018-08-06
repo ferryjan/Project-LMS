@@ -313,7 +313,13 @@ namespace Project_LMS.Controllers
         public ActionResult CloneCourse(CloneCourseViewModel ccViewModel)
         {
             Course oldcourse = db.Courses.Find(ccViewModel.Course.CourseId);
+            if (oldcourse == null)
+                { // add code here
+                }
             int offsetDays = (oldcourse.EndDate - oldcourse.StartDate).Days;
+            if (offsetDays == 0)
+                {  // add code here
+                }
 
             //clone the course
             Course newcourse = new Course
@@ -346,10 +352,36 @@ namespace Project_LMS.Controllers
                 newmodule.EndDate = newmodule.EndDate.AddDays(offsetDays);
                 db.Modules.Add(newmodule);
                 db.SaveChanges();
+
                 //clone module documents
+                foreach (var doc in mod.ModuleDocuments)
+                {
+                    newdoc = doc;
+                    newdoc.ModuleId = newmodule.ModuleId;
+                    db.Documents.Add(newdoc);
+                }
+                db.SaveChanges();
 
-                //clone the activities, and their documents
+                //clone the activities
+                Activity newact;
+                foreach (var act in mod.Activities)
+                {
+                    newact = act;
+                    newact.ModuleId = newmodule.ModuleId;
+                    newact.Start = act.Start.AddDays(offsetDays);
+                    newact.End = act.End.AddDays(offsetDays);
+                    db.Activities.Add(newact);
+                    db.SaveChanges();
 
+                    //clone activity documents
+                    foreach (var doc in act.ActivityDocuments)
+                    {
+                        newdoc = doc;
+                        newdoc.ActivityId = newact.ActivityId;
+                        db.Documents.Add(newdoc);
+                    }
+                    db.SaveChanges();
+                }
             }
 
 
