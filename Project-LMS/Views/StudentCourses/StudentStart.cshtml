@@ -12,6 +12,8 @@
 <a href="#CourseDocument"> Jump To Course Document</a>
 <br>
 <a href="#Modules"> Jump To Modules</a>
+<br>
+<a href="#CourseMessageBoard"> Jump To Course Message Board</a>
 <br />
 <div class="row">
     <div id="schedule_button" class="col-sm-3 col-xs-12">
@@ -41,7 +43,7 @@
                     i++;
                 }
                 <div>
-                    <a data-target=@target class="tabs" data-group="footer-blocks" data-toggle="collapse">@mod.StartDate.ToShortDateString() - @mod.EndDate.ToShortDateString() : @mod.Name</a>
+                    <a data-target=@target class="tabs" data-group="footer-blocks" data-toggle="collapse">@mod.StartDate.ToString("yyyy-MM-dd") - @mod.EndDate.ToString("yyyy-MM-dd") : @mod.Name</a>
                 </div>
                 <div id=@id class="collapse show-in-md">
                     <div class="well">
@@ -109,6 +111,16 @@
 <br />
 <div id="CourseDocument">
     @Html.Action("StudentCourseFile", "StudentCourses", new { id = ViewBag.CourseId })
+</div>
+<br />
+
+@{
+    var courseMsgBoardId = "course" + ViewBag.CourseId;
+}
+
+<br />
+<div id="CourseMessageBoard">
+    @Html.Action("CourseMessageBoard", "Messages", new { id = courseMsgBoardId })
 </div>
 <br />
 

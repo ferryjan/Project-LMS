@@ -21,6 +21,7 @@ namespace Project_LMS.Models
         [Display(Name = "Picture")]
         public string ProfileImageRef { get; set; }
         [Display(Name = "Registered")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd HH:mm:ss}")]
         public DateTime TimeOfRegistration { get; set; }
 
         public bool? FirstTimeLogin { get; set; }

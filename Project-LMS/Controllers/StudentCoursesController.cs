@@ -25,7 +25,7 @@ namespace Project_LMS.Controllers
             var course = db.Courses.First(u => u.CourseId == appUser.CourseId);
             ViewBag.CourseId = course.CourseId;
             ViewBag.CourseName = course.CourseName;
-            ViewBag.TimePeriod = course.StartDate.ToString() + " - " + course.EndDate.ToString();
+            ViewBag.TimePeriod = course.StartDate.ToString("yyyy-MM-dd") + " - " + course.EndDate.ToString("yyy-MM-dd");
             ViewBag.CourseDescription = course.CourseDescription;
             var modules = db.Modules.Where(i => i.CourseId == course.CourseId).ToList();
             return View(modules);

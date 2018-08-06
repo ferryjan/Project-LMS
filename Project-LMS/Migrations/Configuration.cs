@@ -51,7 +51,7 @@ namespace Project_LMS.Migrations
             var roleStore = new RoleStore<IdentityRole>(db);
             var roleManager = new RoleManager<IdentityRole>(roleStore);
 
-            var roleNames = new[] { "Teacher", "Student" };
+            var roleNames = new[] { "Teacher", "Student", "System" };
             foreach (var roleName in roleNames)
             {
                 if (db.Roles.Any(r => r.Name == roleName)) continue;
@@ -558,6 +558,14 @@ namespace Project_LMS.Migrations
                     GivenName = "Ante",
                     FamilyName= "Bante",
                     CourseId = courses[0].CourseId
+                },
+                new NewUser
+                {
+                    Email = "System@lms.se",
+                    Rolestring = "System",
+                    GivenName = "LMS",
+                    FamilyName= "System Notification",
+                    CourseId = null
                 }
             };
         

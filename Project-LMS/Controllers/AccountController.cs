@@ -89,6 +89,13 @@ namespace Project_LMS.Controllers
                 return View(model);
             }
 
+            var loggedinUser = await UserManager.FindAsync(model.Email, model.Password);
+            if (loggedinUser != null)
+            {
+                // change the security stamp only on correct username/password
+                await UserManager.UpdateSecurityStampAsync(loggedinUser.Id);
+            }
+
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
@@ -274,6 +281,8 @@ namespace Project_LMS.Controllers
             {
                 ViewBag.FirstLoginMessage = "";
             }
+            var user = UserManager.FindById(userId);
+            ViewBag.Email = user.Email;
             return code == null ? View("Error") : View();
         }
 

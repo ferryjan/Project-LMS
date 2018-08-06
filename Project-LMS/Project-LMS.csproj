@@ -366,6 +366,7 @@
     <Content Include="Resources\BestCookies.docx" />
     <Content Include="Resources\Kursschema .NET ND18.pdf" />
     <Content Include="App_Browsers\qt.browser" />
+    <None Include="Properties\PublishProfiles\Project-LMS20180806122101 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\i18n\jquery-ui-timepicker-addon-i18n.js" />
     <Content Include="Scripts\i18n\jquery-ui-timepicker-addon-i18n.min.js" />
@@ -537,6 +538,8 @@
     <Content Include="Views\Modules\_moveModule.cshtml" />
     <Content Include="Views\TeacherCourses\_moveCourse.cshtml" />
     <Content Include="Views\TeacherCourses\_cloneCourse.cshtml" />
+    <Content Include="Views\Messages\_courseMsgBoard.cshtml" />
+    <Content Include="Views\Messages\_showCourseMessageBoardMessages.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
