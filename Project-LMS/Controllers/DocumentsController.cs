@@ -165,7 +165,7 @@ namespace Project_LMS.Controllers
                         ViewBag.ModuleId = id;
                         return View(doc);
                     }
-                    
+
                 }
             }
             ViewBag.ModuleId = id;
@@ -278,7 +278,7 @@ namespace Project_LMS.Controllers
             {
                 return File(FileById.FileData, FileById.DocumentFileType, FileById.DocumentName);
             }
-            
+
 
         }
 
@@ -305,8 +305,23 @@ namespace Project_LMS.Controllers
         public ActionResult GiveFeedbackConfirmed([Bind(Include = "DocumentId,FeedBack")] Document doc)
         {
             var dbdoc = db.Documents.FirstOrDefault(i => i.DocumentId == doc.DocumentId);
+            var userEmail = dbdoc.ApplicationUser.Email;
             dbdoc.FeedBack = doc.FeedBack;
             db.Entry(dbdoc).State = EntityState.Modified;
+            db.SaveChanges();
+
+            Message newSystemNotification = new Message();
+            newSystemNotification.MessageBoxNumber = "999999";
+            newSystemNotification.SentFrom = "System@lms.se";
+            newSystemNotification.SentFromFullName = "System Notification";
+            newSystemNotification.SentTo = userEmail;
+            newSystemNotification.SentToFullName = dbdoc.ApplicationUser.FullName;
+            newSystemNotification.isPublic = false;
+            newSystemNotification.SentDate = DateTime.Now;
+            newSystemNotification.Topic = "System Notification";
+            newSystemNotification.isRead = false;
+            newSystemNotification.Msg = "You have received a feedback to your homework - Activity: " + dbdoc.Activity.ActivityName;
+            db.Messages.Add(newSystemNotification);
             db.SaveChanges();
 
             return RedirectToAction("Edit", "Activities", new { id = dbdoc.ActivityId });

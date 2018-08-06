@@ -15,7 +15,11 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        @if (ViewBag.HasLeft == "Yes")
+        @if (ViewBag.HasLeft == "System")
+        {
+            <h4 style="color:red">This is system notification, do not reply!</h4>
+        }
+        else if (ViewBag.HasLeft == "Yes")
         {
             <h4 style="color:red">@Model.SentToFullName has left the chat room, you cannot send message to him/her in this chat!</h4>
         }
