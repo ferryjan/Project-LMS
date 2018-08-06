@@ -355,8 +355,7 @@ namespace Project_LMS.Controllers
                 message.SentDate = DateTime.Now;
                 db.Messages.Add(message);
                 db.SaveChanges();
-                //return RedirectToAction("StudentStart", "StudentCourses");
-                message.Msg = "123";
+                ModelState["Msg"].Value = new ValueProviderResult(string.Empty, string.Empty, ModelState["Msg"].Value.Culture);
                 return PartialView("_courseMsgBoard", message);
             }
             return PartialView("_courseMsgBoard", message);
