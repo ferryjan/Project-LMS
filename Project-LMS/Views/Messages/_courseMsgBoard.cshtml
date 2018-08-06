@@ -1,0 +1,40 @@
+﻿@model Project_LMS.Models.Message
+
+<h3 style="color:crimson">Course Message Board</h3>
+
+@Html.Action("ShowCourseMessageBoardMessages", "Messages", new { id = Model.MessageBoxNumber })
+
+<br />
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        @Html.HiddenFor(model => model.isPublic)
+        @Html.HiddenFor(model => model.isRead)
+        @Html.HiddenFor(model => model.MessageBoxNumber)
+        @Html.HiddenFor(model => model.Topic)
+        @Html.HiddenFor(model => model.SentFrom)
+        @Html.HiddenFor(model => model.SentFromFullName)
+        @Html.HiddenFor(model => model.SentTo)
+        @Html.HiddenFor(model => model.SentToFullName)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Msg, "Leave your message:", htmlAttributes: new { @class = "control-label" })
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.Msg, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Msg, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" value="Post" class="btn btn-primary" />
+            </div>
+        </div>
+
+    </div>
+}

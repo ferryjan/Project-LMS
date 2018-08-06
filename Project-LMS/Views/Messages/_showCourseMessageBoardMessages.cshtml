@@ -1,14 +1,11 @@
 ﻿@model IEnumerable<Project_LMS.Models.Message>
 
-<h3>@Model.First().Topic</h3>
 
 <div class="bodycontainer scrollable" id="div-private-chat">
     <table class="table" id="table-private-chat">
         <tr>
             <th>
-                @Html.Raw("Me")
-            </th>
-            <th>
+                @Html.Raw("Message")
             </th>
         </tr>
         @foreach (var msg in Model)
@@ -20,16 +17,13 @@
                         @msg.SentFromFullName @msg.SentDate says:
                         <br />@msg.Msg
                     </td>
-                    <td></td>
                 }
                 else
                 {
-                    <td></td>
-                    <td style="color:blue; font-weight:bold; max-width: 400px; word-wrap:break-word;word-break:break-all;" align="right">
-                        @msg.SentFromFullName&nbsp;@msg.SentDate&nbsp; says:
+                    <td style="color:blue; font-weight:bold; max-width: 400px; word-wrap:break-word;word-break:break-all" align="left">
+                        @msg.SentFromFullName @msg.SentDate says:
                         <br />@msg.Msg
                     </td>
-
                 }
             </tr>
         }

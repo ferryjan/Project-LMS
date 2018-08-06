@@ -77,7 +77,7 @@ namespace Project_LMS.Controllers
                 Cookies = cookieCollection
             };
         }
-    
+
 
         // POST: TeacherCourses/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -91,6 +91,22 @@ namespace Project_LMS.Controllers
             {
                 db.Courses.Add(course);
                 db.SaveChanges();
+
+                Message courseMsgBoard = new Message();
+                courseMsgBoard.MessageBoxNumber = "course" + course.CourseId;
+                courseMsgBoard.SentFrom = User.Identity.Name;
+                var user = db.Users.FirstOrDefault(u => u.Email == User.Identity.Name);
+                courseMsgBoard.SentFromFullName = user.FullName;
+                courseMsgBoard.SentTo = User.Identity.Name;
+                courseMsgBoard.SentToFullName = user.FullName;
+                courseMsgBoard.isPublic = true;
+                courseMsgBoard.SentDate = DateTime.Now;
+                courseMsgBoard.Topic = "Course Message Board";
+                courseMsgBoard.isRead = false;
+                courseMsgBoard.Msg = "Welcome to use the course message board!";
+                db.Messages.Add(courseMsgBoard);
+                db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
 
@@ -313,7 +329,13 @@ namespace Project_LMS.Controllers
         public ActionResult CloneCourse(CloneCourseViewModel ccViewModel)
         {
             Course oldcourse = db.Courses.Find(ccViewModel.Course.CourseId);
+            if (oldcourse == null)
+            { // add code here
+            }
             int offsetDays = (oldcourse.EndDate - oldcourse.StartDate).Days;
+            if (offsetDays == 0)
+            {  // add code here
+            }
 
             //clone the course
             Course newcourse = new Course
@@ -346,10 +368,36 @@ namespace Project_LMS.Controllers
                 newmodule.EndDate = newmodule.EndDate.AddDays(offsetDays);
                 db.Modules.Add(newmodule);
                 db.SaveChanges();
+
                 //clone module documents
+                foreach (var doc in mod.ModuleDocuments)
+                {
+                    newdoc = doc;
+                    newdoc.ModuleId = newmodule.ModuleId;
+                    db.Documents.Add(newdoc);
+                }
+                db.SaveChanges();
 
-                //clone the activities, and their documents
+                //clone the activities
+                Activity newact;
+                foreach (var act in mod.Activities)
+                {
+                    newact = act;
+                    newact.ModuleId = newmodule.ModuleId;
+                    newact.Start = act.Start.AddDays(offsetDays);
+                    newact.End = act.End.AddDays(offsetDays);
+                    db.Activities.Add(newact);
+                    db.SaveChanges();
 
+                    //clone activity documents
+                    foreach (var doc in act.ActivityDocuments)
+                    {
+                        newdoc = doc;
+                        newdoc.ActivityId = newact.ActivityId;
+                        db.Documents.Add(newdoc);
+                    }
+                    db.SaveChanges();
+                }
             }
 
 

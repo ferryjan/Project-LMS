@@ -55,7 +55,7 @@
         </div>
 
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
+            <div class="col-md-10">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </div>
@@ -64,9 +64,15 @@
 
 
 
-    <div>
-        @Html.ActionLink("Back to activity", "Edit", "Activities", new { id = Model.ActivityId }, new { @class = "btn btn-primary btn-large" })
-    </div>
+<div>
+    <a href="@Url.Action("DownLoadFile", "Documents", new { id = Model.DocumentId })" class="btn btn-success">
+        <i class="glyphicon glyphicon-download"></i>
+        <span>
+            <strong>Download Document</strong>
+        </span>
+    </a>
+    @Html.ActionLink("Back to activity", "Edit", "Activities", new { id = Model.ActivityId }, new { @class = "btn btn-primary btn-large" })
+</div>
 
 
 
