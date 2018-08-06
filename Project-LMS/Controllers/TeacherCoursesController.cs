@@ -304,7 +304,7 @@ namespace Project_LMS.Controllers
             if (course == null) { return HttpNotFound(); }
 
             CloneCourseViewModel ccViewModel = new CloneCourseViewModel { Course = course, NewDate = course.StartDate, NewName = course.CourseName };
-            return PartialView("_moveCourse", ccViewModel);
+            return PartialView("_cloneCourse", ccViewModel);
         }
 
         [HttpPost]
@@ -312,22 +312,31 @@ namespace Project_LMS.Controllers
         [Authorize(Roles = "Teacher")]
         public ActionResult CloneCourse(CloneCourseViewModel ccViewModel)
         {
+            if (ccViewModel.NewDate < DateTime.Now) { return RedirectToAction("Index", "TeacherCourses", null); }
+
             Course oldcourse = db.Courses.Find(ccViewModel.Course.CourseId);
-            if (oldcourse == null)
-                { // add code here
-                }
-            int offsetDays = (oldcourse.EndDate - oldcourse.StartDate).Days;
-            if (offsetDays == 0)
-                {  // add code here
-                }
+            if (oldcourse == null) { return RedirectToAction("Index", "TeacherCourses", null); }
+
+            int offsetDays = (ccViewModel.NewDate - oldcourse.StartDate).Days;
+            if (offsetDays == 0) { return RedirectToAction("Index", "TeacherCourses", null); }
+
+            //get a unique name for the clone
+            int i = 0;
+            string suggestedName;
+            do
+            {
+                i++;
+                suggestedName = "Clone" + i + " " + oldcourse.CourseName;
+                suggestedName = suggestedName.Substring(0, Math.Min(suggestedName.Length, 50));
+            } while (db.Courses.FirstOrDefault(n => n.CourseName == suggestedName) != null);
 
             //clone the course
             Course newcourse = new Course
             {
-                CourseName = oldcourse.CourseName,
+                CourseName = suggestedName,
                 CourseDescription = oldcourse.CourseDescription,
                 StartDate = ccViewModel.NewDate,
-                EndDate = ccViewModel.NewDate.AddDays(offsetDays)
+                EndDate = oldcourse.EndDate.AddDays(offsetDays)
             };
             db.Courses.Add(newcourse);
             db.SaveChanges();
@@ -336,59 +345,89 @@ namespace Project_LMS.Controllers
             //clone the course documents
             foreach (var doc in oldcourse.CourseDocuments)
             {
-                newdoc = doc;
-                newdoc.CourseId = newcourse.CourseId;
+                newdoc = new Document
+                {
+                    ApplicationUserId = doc.ApplicationUserId,
+                    CourseId = newcourse.CourseId,
+                    Description = doc.Description,
+                    DocumentFileType = doc.DocumentFileType,
+                    DocumentName = doc.DocumentName,
+                    FileData = doc.FileData,
+                    UploadingTime = doc.UploadingTime,
+                    isHomework = doc.isHomework
+                };
                 db.Documents.Add(newdoc);
             }
             db.SaveChanges();
 
-            //clone the modules,
+            //clone modules
             Module newmodule;
+            Activity newact;
             foreach (var mod in oldcourse.CourseModules)
             {
-                newmodule = mod;
-                newmodule.CourseId = newcourse.CourseId;
-                newmodule.StartDate = newmodule.StartDate.AddDays(offsetDays);
-                newmodule.EndDate = newmodule.EndDate.AddDays(offsetDays);
+                newmodule = new Module
+                {
+                    CourseId = newcourse.CourseId,
+                    StartDate = mod.StartDate.AddDays(offsetDays),
+                    EndDate = mod.EndDate.AddDays(offsetDays),
+                    Description = mod.Description,
+                    Name = mod.Name
+                };
                 db.Modules.Add(newmodule);
                 db.SaveChanges();
 
                 //clone module documents
                 foreach (var doc in mod.ModuleDocuments)
                 {
-                    newdoc = doc;
-                    newdoc.ModuleId = newmodule.ModuleId;
+                    newdoc = new Document
+                    {
+                        ApplicationUserId = doc.ApplicationUserId,
+                        ModuleId = newmodule.ModuleId,
+                        Description = doc.Description,
+                        DocumentFileType = doc.DocumentFileType,
+                        DocumentName = doc.DocumentName,
+                        FileData = doc.FileData,
+                        UploadingTime = doc.UploadingTime,
+                        isHomework = doc.isHomework
+                    };
                     db.Documents.Add(newdoc);
                 }
                 db.SaveChanges();
 
-                //clone the activities
-                Activity newact;
+                //Clone activities for this mod
                 foreach (var act in mod.Activities)
                 {
-                    newact = act;
-                    newact.ModuleId = newmodule.ModuleId;
-                    newact.Start = act.Start.AddDays(offsetDays);
-                    newact.End = act.End.AddDays(offsetDays);
+                    newact = new Activity
+                    {
+                        ActivityName = act.ActivityName,
+                        ActivityTypeId = act.ActivityTypeId,
+                        ModuleId = newmodule.ModuleId,
+                        Start = act.Start.AddDays(offsetDays),
+                        End = act.End.AddDays(offsetDays),
+                        Description = act.Description
+                    };
                     db.Activities.Add(newact);
                     db.SaveChanges();
 
-                    //clone activity documents
+                    // clone documents for this activity
                     foreach (var doc in act.ActivityDocuments)
                     {
-                        newdoc = doc;
-                        newdoc.ActivityId = newact.ActivityId;
+                        newdoc = new Document
+                        {
+                            ApplicationUserId = doc.ApplicationUserId,
+                            ActivityId = newact.ActivityId,
+                            Description = doc.Description,
+                            DocumentFileType = doc.DocumentFileType,
+                            DocumentName = doc.DocumentName,
+                            FileData = doc.FileData,
+                            UploadingTime = doc.UploadingTime,
+                            isHomework = doc.isHomework
+                        };
                         db.Documents.Add(newdoc);
                     }
                     db.SaveChanges();
                 }
             }
-
-
-
-
-
-            //db.SaveChanges();
             return RedirectToAction("Index", "TeacherCourses", null);
         }
 

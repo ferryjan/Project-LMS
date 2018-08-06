@@ -51,7 +51,7 @@ namespace Project_LMS.Models
             var result = db.Courses.FirstOrDefault(v => v.CourseName == CourseName);
             if (result != null && CourseId == 0)
             {
-                ValidationResult mss = new ValidationResult("There is already a module by this name registered in this course");
+                ValidationResult mss = new ValidationResult("There is already a course by this name registered");
                 res.Add(mss);
             }
             if (StartDate < DateTime.Now.Date && CourseId == 0)
@@ -82,7 +82,7 @@ namespace Project_LMS.Models
         public DateTime NewDate { get; set; }
     }
 
-    public class CloneCourseViewModel
+    public class CloneCourseViewModel //: IValidatableObject
     {
         public Course Course { get; set; }
 
@@ -92,6 +92,17 @@ namespace Project_LMS.Models
 
         [Display(Name = "New name")]
         public string NewName { get; set; }
-    }
 
+        //IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        //{
+        //    List<ValidationResult> res = new List<ValidationResult>();
+        //    ApplicationDbContext db = new ApplicationDbContext();
+        //    if (NewDate < DateTime.Now.Date)
+        //    {
+        //        ValidationResult mss = new ValidationResult("You cannot add a course in the past!");
+        //        res.Add(mss);
+        //    }
+        //    return res;
+        //}
+    }
 }
