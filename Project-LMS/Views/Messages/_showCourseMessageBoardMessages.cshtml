@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Project_LMS.Models.Message>
+
+
+<div class="bodycontainer scrollable" id="div-private-chat">
+    <table class="table" id="table-private-chat">
+        <tr>
+            <th>
+                @Html.Raw("Message")
+            </th>
+        </tr>
+        @foreach (var msg in Model)
+        {
+            <tr>
+                @if (msg.SentFrom == User.Identity.Name)
+                {
+                    <td style="color:red; font-weight:bold; max-width: 400px; word-wrap:break-word;word-break:break-all" align="left">
+                        @msg.SentFromFullName @msg.SentDate says:
+                        <br />@msg.Msg
+                    </td>
+                }
+                else
+                {
+                    <td style="color:blue; font-weight:bold; max-width: 400px; word-wrap:break-word;word-break:break-all" align="left">
+                        @msg.SentFromFullName @msg.SentDate says:
+                        <br />@msg.Msg
+                    </td>
+                }
+            </tr>
+        }
+    </table>
+</div>
+
+
+<script type="text/javascript" language="Javascript">
+    $(document).ready(function () {
+        var scrollBottom = Math.max($('#table-private-chat').height() - $('#div-private-chat').height() + 20, 0);
+        $('#div-private-chat').scrollTop(scrollBottom);
+    });
+</script>
+
+

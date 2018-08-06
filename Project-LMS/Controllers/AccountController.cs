@@ -274,6 +274,8 @@ namespace Project_LMS.Controllers
             {
                 ViewBag.FirstLoginMessage = "";
             }
+            var user = UserManager.FindById(userId);
+            ViewBag.Email = user.Email;
             return code == null ? View("Error") : View();
         }
 

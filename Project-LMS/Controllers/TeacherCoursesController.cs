@@ -77,7 +77,7 @@ namespace Project_LMS.Controllers
                 Cookies = cookieCollection
             };
         }
-    
+
 
         // POST: TeacherCourses/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -91,6 +91,22 @@ namespace Project_LMS.Controllers
             {
                 db.Courses.Add(course);
                 db.SaveChanges();
+
+                Message courseMsgBoard = new Message();
+                courseMsgBoard.MessageBoxNumber = "course" + course.CourseId;
+                courseMsgBoard.SentFrom = User.Identity.Name;
+                var user = db.Users.FirstOrDefault(u => u.Email == User.Identity.Name);
+                courseMsgBoard.SentFromFullName = user.FullName;
+                courseMsgBoard.SentTo = User.Identity.Name;
+                courseMsgBoard.SentToFullName = user.FullName;
+                courseMsgBoard.isPublic = true;
+                courseMsgBoard.SentDate = DateTime.Now;
+                courseMsgBoard.Topic = "Course Message Board";
+                courseMsgBoard.isRead = false;
+                courseMsgBoard.Msg = "Welcome to use the course message board!";
+                db.Messages.Add(courseMsgBoard);
+                db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
 
@@ -314,12 +330,12 @@ namespace Project_LMS.Controllers
         {
             Course oldcourse = db.Courses.Find(ccViewModel.Course.CourseId);
             if (oldcourse == null)
-                { // add code here
-                }
+            { // add code here
+            }
             int offsetDays = (oldcourse.EndDate - oldcourse.StartDate).Days;
             if (offsetDays == 0)
-                {  // add code here
-                }
+            {  // add code here
+            }
 
             //clone the course
             Course newcourse = new Course
