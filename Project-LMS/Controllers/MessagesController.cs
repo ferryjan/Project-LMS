@@ -21,7 +21,7 @@ namespace Project_LMS.Controllers
         [HttpPost]
         public ActionResult GetUnreadMessages()
         {
-            var unreadMessages = db.Messages.Where(m => m.SentTo == User.Identity.Name && m.isRead == false).Count().ToString();
+            var unreadMessages = db.Messages.Where(m => m.SentTo == User.Identity.Name && m.isRead == false && m.isPublic == false).Count().ToString();
             return Json(new { Data = unreadMessages }, JsonRequestBehavior.AllowGet);
 
         }
@@ -234,9 +234,6 @@ namespace Project_LMS.Controllers
                 ViewBag.HasLeft = "No";
             }
 
-
-            
-
             var listOfMsg = db.Messages.Where(m => m.MessageBoxNumber == id && m.SentTo == User.Identity.Name && m.isRead == false).ToList();
             foreach (var m in listOfMsg)
             {
@@ -323,6 +320,48 @@ namespace Project_LMS.Controllers
             }
             return RedirectToAction("MessageBox");
         }
+
+
+        public PartialViewResult CourseMessageBoard(string id)
+        {
+            Message msgModel = new Message();
+            msgModel.isPublic = true;
+            msgModel.isRead = false;
+            msgModel.MessageBoxNumber = id;
+            msgModel.Topic = "Course Message Board";
+            var user = db.Users.FirstOrDefault(u => u.Email == User.Identity.Name);
+            msgModel.SentFrom = User.Identity.Name;
+            msgModel.SentFromFullName = user.FullName;
+            msgModel.SentTo = User.Identity.Name;
+            msgModel.SentToFullName = user.FullName;
+            msgModel.Msg = "";
+            return PartialView("_courseMsgBoard", msgModel);
+        }
+
+        public PartialViewResult ShowCourseMessageBoardMessages(string id)
+        {
+            var listOfMsg = new List<Message>();
+            listOfMsg = db.Messages.Where(m => m.MessageBoxNumber == id).OrderBy(m => m.SentDate).ToList();
+            return PartialView("_showCourseMessageBoardMessages", listOfMsg);
+        }
+
+        // POST: Messages/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CourseMessageBoard([Bind(Include = "SentFrom,SentFromFullName,SentTo,SentToFullName,isPublic,isRead,MessageBoxNumber,Topic,Msg")] Message message)
+        {
+            if (ModelState.IsValid)
+            {
+                message.SentDate = DateTime.Now;
+                db.Messages.Add(message);
+                db.SaveChanges();
+                //return RedirectToAction("StudentStart", "StudentCourses");
+                message.Msg = "123";
+                return PartialView("_courseMsgBoard", message);
+            }
+            return PartialView("_courseMsgBoard", message);
+        }
+
 
         protected override void Dispose(bool disposing)
         {
