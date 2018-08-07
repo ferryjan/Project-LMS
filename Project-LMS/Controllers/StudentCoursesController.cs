@@ -20,6 +20,16 @@ namespace Project_LMS.Controllers
         [Authorize(Roles = "Student")]
         public ActionResult StudentStart()
         {
+            if (TempData.ContainsKey("position"))
+            {
+                ViewBag.Position = "yes";
+                TempData.Remove("position");
+            }
+            else
+            {
+                ViewBag.Position = "";
+            }
+            TempData.Remove("position");
             var userId = User.Identity.GetUserId();
             var appUser = db.Users.Find(userId);
             var course = db.Courses.First(u => u.CourseId == appUser.CourseId);

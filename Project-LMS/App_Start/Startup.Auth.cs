@@ -26,7 +26,6 @@ namespace Project_LMS
             {
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
                 LoginPath = new PathString("/Account/Login"),
-                LogoutPath = new PathString("/ApplicationUser/RedirectToPage"),
                 Provider = new CookieAuthenticationProvider
                 {
                     // Enables the application to validate the security stamp when the user logs in.
