@@ -20,6 +20,16 @@ namespace Project_LMS.Controllers
         [Authorize(Roles = "Student")]
         public ActionResult StudentStart(int? id)
         {
+            if (TempData.ContainsKey("MsgSent"))
+            {
+                ViewBag.MS = "yes";
+                TempData.Remove("MsgSent");
+            }
+            else
+            {
+                ViewBag.MS = "no";
+            }
+
             var userId = User.Identity.GetUserId();
             var appUser = db.Users.Find(userId);
             var course = db.Courses.First(u => u.CourseId == appUser.CourseId);

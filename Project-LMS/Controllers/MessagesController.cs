@@ -322,7 +322,7 @@ namespace Project_LMS.Controllers
         }
 
 
-        public PartialViewResult CourseMessageBoard(string id)
+        public ActionResult CourseMessageBoard(string id)
         {
             Message msgModel = new Message();
             msgModel.isPublic = true;
@@ -355,10 +355,11 @@ namespace Project_LMS.Controllers
                 message.SentDate = DateTime.Now;
                 db.Messages.Add(message);
                 db.SaveChanges();
+                TempData["MsgSent"] = "yes";
                 ModelState["Msg"].Value = new ValueProviderResult(string.Empty, string.Empty, ModelState["Msg"].Value.Culture);
-                return PartialView("_courseMsgBoard", message);
+                return RedirectToAction("StudentStart","StudentCourses");
             }
-            return PartialView("_courseMsgBoard", message);
+            return View("_courseMsgBoard", message);
         }
 
 

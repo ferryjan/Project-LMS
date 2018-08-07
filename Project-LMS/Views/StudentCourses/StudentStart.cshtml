@@ -11,13 +11,17 @@
 <br />
 <a href="#CourseDocument"> Jump To Course Document</a>
 <br>
-<a href="#Modules"> Jump To Modules</a>
-<br>
-<a href="#CourseMessageBoard"> Jump To Course Message Board</a>
+<a href="#Modules" id="abc"> Jump To Modules</a>
 <br />
 <div class="row">
     <div id="schedule_button" class="col-sm-3 col-xs-12">
         @Html.ActionLink("View Schedule", "StudentSchedule", new { id = ViewBag.CourseId }, new { @class = "btn btn-primary btn-large" })
+    </div>
+    @{
+        var courseMsgBoardId = "course" + ViewBag.CourseId;
+    }
+    <div class="col-sm-5 col-xs-12">
+        <a href="@Url.Action("CourseMessageBoard", "Messages", new { id = courseMsgBoardId })" id="modal-link-herf" class="btn btn-primary modal-link"><i class="glyphicon glyphicon-move"></i> <span><strong>Open Course Message Board</strong></span></a>
     </div>
     <div class="col-sm-3 col-xs-12">
         @Html.ActionLink("View Classmate", "ShowStudentListInMobileView", null, new { @class = "btn btn-primary btn-large" })
@@ -122,15 +126,10 @@ else
 </div>
 <br />
 
-@{
-    var courseMsgBoardId = "course" + ViewBag.CourseId;
-}
-
-<br />
-<div id="CourseMessageBoard">
-    @Html.Action("CourseMessageBoard", "Messages", new { id = courseMsgBoardId })
-</div>
-<br />
+@*<div id="CourseMessageBoard">
+        @Html.Action("CourseMessageBoard", "Messages", new { id = courseMsgBoardId })
+    </div>
+    <br />*@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
@@ -144,6 +143,41 @@ else
                 $($(this).data("target")).removeClass("in").addClass('collapse');
             });
         });
+
+        $(function () {
+            // Initialize numeric spinner input boxes
+            //$(".numeric-spinner").spinedit();
+            // Initialize modal dialog
+            // attach modal-container bootstrap attributes to links with .modal-link class.
+            // when a link is clicked with these attributes, bootstrap will display the href content in a modal dialog.
+            $('body').on('click', '.modal-link', function (e) {
+                e.preventDefault();
+                $(this).attr('data-target', '#modal-container');
+                $(this).attr('data-toggle', 'modal');
+
+            });
+
+            // Attach listener to .modal-close-btn's so that when the button is pressed the modal dialog disappears
+            $('body').on('click', '.modal-close-btn', function () {
+                $('#modal-container').modal('hide');
+            });
+            //clear modal cache, so that new content can be loaded
+            $('#modal-container').on('hidden.bs.modal', function () {
+                $(this).removeData('bs.modal');
+            });
+            $('#CancelModal').on('click', function () {
+                return false;
+            });
+        });
+
+        $(function openModal() {
+            var content = '@ViewBag.MS';
+            if (content == "yes") {
+                document.getElementById("modal-link-herf").click();
+            }
+        });
+        window.onload = openModal;
+
     </script>
 }
 
