@@ -12,7 +12,7 @@ namespace Project_LMS.Models
         public string Date { get; set; }
         [Display(Name = "Day")]
         public string Day { get; set; }
-        [Display(Name = "Modul")]
+        [Display(Name = "Module")]
         public string Modul { get; set; }
         [Display(Name = "AM (08:00 - 12:00)")]
         public String AM { get; set; }
