@@ -16,8 +16,8 @@
             <p style="font-weight:normal"> @activity.Module.Name</p>
             <p> Activity: </p>
 
-            @if (activity.ActivityType.Type == "Homework") {<p style="font-weight:normal"><i class="glyphicon glyphicon-home"> </i> @activity.ActivityName </p>}
-            else {<p style="font-weight:normal"> @activity.ActivityName </p> }
+            @if (activity.ActivityType.Type == "Homework") {<p style="font-weight:normal"><i class="glyphicon glyphicon-home"> </i> (@activity.ActivityType.Type) @activity.ActivityName </p>}
+            else {<p style="font-weight:normal"> (@activity.ActivityType.Type) @activity.ActivityName </p> }
 
             <p> Activity Description: </p>
             <p style="font-weight:normal"> @activity.Description</p>

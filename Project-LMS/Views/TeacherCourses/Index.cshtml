@@ -13,48 +13,51 @@
 
 <table class="table">
     <tr>
-        <th>@Html.DisplayNameFor(model => model.CourseName)</th>
-        <th>@Html.DisplayNameFor(model => model.StartDate)</th>
-        <th>@Html.DisplayNameFor(model => model.EndDate)</th>
-        <th></th>
+        <th class="col-md-2">@Html.DisplayNameFor(model => model.CourseName)</th>
+        <th class="col-md-2">@Html.DisplayNameFor(model => model.StartDate)</th>
+        <th class="col-md-2">@Html.DisplayNameFor(model => model.EndDate)</th>
+        <th class="col-md-6"></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>@Html.DisplayFor(modelItem => item.CourseName)</td>
-        <td>@Html.DisplayFor(modelItem => item.StartDate)</td>
-        <td>@Html.DisplayFor(modelItem => item.EndDate)</td>
-        <td>
-            <a href="@Url.Action("Edit", "TeacherCourses", new { id = item.CourseId })" class="btn btn-primary">
-                <i class="glyphicon glyphicon-edit"></i>
-                <span>
-                    <strong>Edit</strong>
-                </span>
-            </a>
-            <a href="@Url.Action("Details", "TeacherCourses", new { id = item.CourseId })" class="btn btn-info">
-                <i class="glyphicon glyphicon-list"></i>
-                <span>
-                    <strong>Details</strong>
-                </span>
-            </a>
-            <a href="@Url.Action("Delete", "TeacherCourses", new { id = item.CourseId, isVerified = false })" class="btn btn-danger">
-                <i class="glyphicon glyphicon-erase"></i>
-                <span>
-                    <strong>Delete</strong>
-                </span>
-            </a>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td class="col-md-2">@Html.DisplayFor(modelItem => item.CourseName)</td>
+            <td class="col-md-2">@Html.DisplayFor(modelItem => item.StartDate)</td>
+            <td class="col-md-2">@Html.DisplayFor(modelItem => item.EndDate)</td>
+            <td class="col-md-6" style="text-align:center">
+                <div class="btn-group-sm">
+                    <a href="@Url.Action("Edit", "TeacherCourses", new { id = item.CourseId })" class="btn btn-primary">
+                        <i class="glyphicon glyphicon-edit"></i>
+                        <span>
+                            <strong>Edit</strong>
+                        </span>
+                    </a>
+                    <a href="@Url.Action("Details", "TeacherCourses", new { id = item.CourseId })" class="btn btn-info">
+                        <i class="glyphicon glyphicon-list"></i>
+                        <span>
+                            <strong>Details</strong>
+                        </span>
+                    </a>
+                    <a href="@Url.Action("Delete", "TeacherCourses", new { id = item.CourseId, isVerified = false })" class="btn btn-danger">
+                        <i class="glyphicon glyphicon-erase"></i>
+                        <span>
+                            <strong>Delete</strong>
+                        </span>
+                    </a>
 
-            <a href="@Url.Action("Schedule", "TeacherCourses", new { id = item.CourseId })" class="btn btn-success">
-                <i class="glyphicon glyphicon-list-alt"></i>
-                <span>
-                    <strong>Schedule</strong>
-                </span>
-            </a>
-            <a href="@Url.Action("MoveCourse", "TeacherCourses", new { id =  item.CourseId })" class="modal-link btn btn-info"><i class="glyphicon glyphicon-move"></i> <span><strong>Move</strong></span></a>
-            <a href="@Url.Action("CloneCourse", "TeacherCourses", new { id =  item.CourseId })" class="modal-link btn btn-info"><i class="glyphicon glyphicon-copy"></i> <span><strong>Clone</strong></span></a>
-        </td>
-    </tr>
-}
+                    <a href="@Url.Action("Schedule", "TeacherCourses", new { id = item.CourseId })" class="btn btn-success">
+                        <i class="glyphicon glyphicon-list-alt"></i>
+                        <span>
+                            <strong>Schedule</strong>
+                        </span>
+                    </a>
+                    <a href="@Url.Action("MoveCourse", "TeacherCourses", new { id =  item.CourseId })" class="modal-link btn btn-info"><i class="glyphicon glyphicon-move"></i> <span><strong>Move</strong></span></a>
+                    <a href="@Url.Action("CloneCourse", "TeacherCourses", new { id =  item.CourseId })" class="modal-link btn btn-info"><i class="glyphicon glyphicon-copy"></i> <span><strong>Clone</strong></span></a>
+                </div>
+            </td>
+        </tr>
+    }
 
 </table>
 

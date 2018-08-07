@@ -2,10 +2,13 @@
 @model Project_LMS.Models.ScheduleHeadViewModels
 
 @{ ViewBag.Title = "Schedule"; }
-<h4>Premilary Schedule  <b>@Html.DisplayFor(model => model.CourseName)</b></h4>
+<h3 style="color:crimson">Premilary Schedule  <b>@Html.DisplayFor(model => model.CourseName)</b></h3>
 
 @Html.ActionLink("Create as PDF", "PrintAllReport", new { id = Model.CourseId, courseName = Model.CourseName }, new { @class = "btn btn-info btn-large" })
-
+@Html.ActionLink("Back to Course list", "Index", "TeacherCourses", new { id = Model.CourseId }, new { @class = "btn btn-primary btn-large" })
+<p>
+    <br />
+</p>
 <div class="schedulecontainer scrollable">
     <table class="mySchedule">
         <thead>
@@ -80,5 +83,5 @@
 
 <br />
 <p>
-    @Html.ActionLink("Back to Course list", "Index", "TeacherCourses", new { id = Model.CourseId }, new { @class = "btn btn-primary btn-large" })
+
 </p>

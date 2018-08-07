@@ -18,18 +18,8 @@ namespace Project_LMS.Controllers
 
         // GET: StudentStart/
         [Authorize(Roles = "Student")]
-        public ActionResult StudentStart()
+        public ActionResult StudentStart(int? id)
         {
-            if (TempData.ContainsKey("position"))
-            {
-                ViewBag.Position = "yes";
-                TempData.Remove("position");
-            }
-            else
-            {
-                ViewBag.Position = "";
-            }
-            TempData.Remove("position");
             var userId = User.Identity.GetUserId();
             var appUser = db.Users.Find(userId);
             var course = db.Courses.First(u => u.CourseId == appUser.CourseId);
@@ -40,7 +30,6 @@ namespace Project_LMS.Controllers
             var modules = db.Modules.Where(i => i.CourseId == course.CourseId).ToList();
             return View(modules);
         }
-
 
         // GET: StudentCourses/Details/5
         [Authorize(Roles = "Student")]

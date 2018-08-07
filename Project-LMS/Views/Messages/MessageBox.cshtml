@@ -59,18 +59,30 @@
                     @Html.Raw(totalUnreadMsg)
                 </td>
                 <td class="col-md-4">
-                    <a href="@Url.Action("Reply", "Messages", new { id = item.MessageBoxNumber })" class="btn btn-primary">
-                        <i class="glyphicon glyphicon-pencil"></i>
-                        <span>
-                            <strong>Check&Reply</strong>
-                        </span>
-                    </a>
-                    <a href="@Url.Action("LeaveChat", "Messages", new { id = item.MessageBoxNumber })" class="btn btn-danger">
-                        <i class="glyphicon glyphicon-erase"></i>
-                        <span>
-                            <strong>Leave Chat</strong>
-                        </span>
-                    </a>
+                    @if (item.MessageBoxNumber == "999999")
+                    {
+                        <a href="@Url.Action("Reply", "Messages", new { id = item.MessageBoxNumber })" class="btn btn-primary">
+                            <i class="glyphicon glyphicon-pencil"></i>
+                            <span>
+                                <strong>Check&Reply</strong>
+                            </span>
+                        </a>
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("Reply", "Messages", new { id = item.MessageBoxNumber })" class="btn btn-primary">
+                            <i class="glyphicon glyphicon-pencil"></i>
+                            <span>
+                                <strong>Check&Reply</strong>
+                            </span>
+                        </a>
+                        <a href="@Url.Action("LeaveChat", "Messages", new { id = item.MessageBoxNumber })" class="btn btn-danger">
+                            <i class="glyphicon glyphicon-erase"></i>
+                            <span>
+                                <strong>Leave Chat</strong>
+                            </span>
+                        </a>
+                    }
                 </td>
             </tr>
             tempMBN = item.MessageBoxNumber;
@@ -149,6 +161,6 @@
 </table>
 
 <p>
-    @Html.ActionLink("Back to StartPage", "StudentStart", "StudentCourses", null, new { @class = "btn btn-primary btn-large" })
+    @Html.ActionLink("Back to Start Page", "StudentStart", "StudentCourses", null, new { @class = "btn btn-primary btn-large" })
 </p>
 
