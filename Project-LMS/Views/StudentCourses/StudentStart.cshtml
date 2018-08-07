@@ -31,82 +31,90 @@
 <br />
 <h3 style="color:crimson">Modules</h3>
 <br />
-<div class="container" id="Modules">
-    <div class="row">
-        @{ int i = 1;}
-        @{ int a = 1;}
-        @foreach (var mod in Model)
-        {
-            <div>
-                @{ string target = "#fm" + i;
-                    string id = "fm" + i;
-                    i++;
-                }
+
+@if (Model.Count() != 0)
+{
+    <div class="container" id="Modules">
+        <div class="row">
+            @{ int i = 1;}
+            @{ int a = 1;}
+            @foreach (var mod in Model)
+            {
                 <div>
-                    <a data-target=@target class="tabs" data-group="footer-blocks" data-toggle="collapse">@mod.StartDate.ToString("yyyy-MM-dd") - @mod.EndDate.ToString("yyyy-MM-dd") : @mod.Name</a>
-                </div>
-                <div id=@id class="collapse show-in-md">
-                    <div class="well">
-                        <section style="color:blue; font-weight:bold; max-width: 800px; word-wrap:break-word;word-break:break-all">
-                            <p> Module Start Date: </p>
-                            <p style="font-weight:normal"> @mod.StartDate.Date.ToString("yyyy-MM-dd")</p>
-                            <p> Module End Date: </p>
-                            <p style="font-weight:normal"> @mod.EndDate.Date.ToString("yyyy-MM-dd") </p>
-                            <p> Module Description: </p>
-                            <p style="font-weight:normal"> @mod.Description</p>
-                        </section>
+                    @{ string target = "#fm" + i;
+                        string id = "fm" + i;
+                        i++;
+                    }
+                    <div>
+                        <a data-target=@target class="tabs" data-group="footer-blocks" data-toggle="collapse">@mod.StartDate.ToString("yyyy-MM-dd") - @mod.EndDate.ToString("yyyy-MM-dd") : @mod.Name</a>
+                    </div>
+                    <div id=@id class="collapse show-in-md">
+                        <div class="well">
+                            <section style="color:blue; font-weight:bold; max-width: 800px; word-wrap:break-word;word-break:break-all">
+                                <p> Module Start Date: </p>
+                                <p style="font-weight:normal"> @mod.StartDate.Date.ToString("yyyy-MM-dd")</p>
+                                <p> Module End Date: </p>
+                                <p style="font-weight:normal"> @mod.EndDate.Date.ToString("yyyy-MM-dd") </p>
+                                <p> Module Description: </p>
+                                <p style="font-weight:normal"> @mod.Description</p>
+                            </section>
 
-                        <hr />
-                        @if (mod.Activities.Count() > 0)
-                        {<h3 style="color:crimson">Activities</h3>}
-                        else
-                        {<h3 style="color:crimson">No activities registered for this module</h3>}
-                        <hr />
+                            <hr />
+                            @if (mod.Activities.Count() > 0)
+                            {<h3 style="color:crimson">Activities</h3>}
+                            else
+                            {<h3 style="color:crimson">No activities registered for this module</h3>}
+                            <hr />
 
 
-                        @foreach (var activity in mod.Activities)
-                        {
-                            <div>
-                                @{ string atarget = "#am" + a;
-                                    string aid = "am" + a;
-                                    a++;
-                                }
-                                <div style="width:80%">
-                                    @if (activity.ActivityType.Type == "Homework")
-                                    {
-                                        <a data-target=@atarget class="activitytabs" data-group="footer-blocks" data-toggle="collapse"><i class="glyphicon glyphicon-home"></i> @activity.Start.ToString("yyyy-MM-dd HH:mm:ss") - @activity.End.ToString("yyyy-MM-dd HH:mm:ss") : @activity.ActivityName</a>
+                            @foreach (var activity in mod.Activities.OrderBy(b => b.Start).ThenBy(b => b.End))
+                            {
+                                <div>
+                                    @{ string atarget = "#am" + a;
+                                        string aid = "am" + a;
+                                        a++;
                                     }
-                                    else
-                                    {
-                                        <a data-target=@atarget class="activitytabs" data-group="footer-blocks" data-toggle="collapse">@activity.Start.ToString("yyyy-MM-dd HH:mm:ss") - @activity.End.ToString("yyyy-MM-dd HH:mm:ss") : @activity.ActivityName</a>
-                                    }
-                                </div>
-                                <div id=@aid class="collapse show-in-md well " style="width:80%; background-color: #f5c6ff">
-                                    <section style="color:blue; font-weight:bold; max-width: 800px; word-wrap:break-word;word-break:break-all">
-                                        <p style="font-weight:normal"> @activity.Description</p>
-                                    </section>
-                                    <div>
-                                        @Html.Action("StudentActivityFile", "StudentCourses", new { activityId = activity.ActivityId })
+                                    <div style="width:80%">
+                                        @if (activity.ActivityType.Type == "Homework")
+                                        {
+                                            <a data-target=@atarget class="activitytabs" data-group="footer-blocks" data-toggle="collapse"><i class="glyphicon glyphicon-home"></i> @activity.Start.ToString("yyyy-MM-dd HH:mm:ss") - @activity.End.ToString("yyyy-MM-dd HH:mm:ss") : @activity.ActivityName</a>
+                                        }
+                                        else
+                                        {
+                                            <a data-target=@atarget class="activitytabs" data-group="footer-blocks" data-toggle="collapse">@activity.Start.ToString("yyyy-MM-dd HH:mm:ss") - @activity.End.ToString("yyyy-MM-dd HH:mm:ss") : @activity.ActivityName</a>
+                                        }
                                     </div>
-                                    @if (activity.ActivityType.Type == "Homework")
-                                    {
+                                    <div id=@aid class="collapse show-in-md well " style="width:80%; background-color: #f5c6ff">
+                                        <section style="color:blue; font-weight:bold; max-width: 800px; word-wrap:break-word;word-break:break-all">
+                                            <p style="font-weight:normal"> @activity.Description</p>
+                                        </section>
                                         <div>
-                                            @Html.Action("StudentHomeworkFile", "StudentCourses", new { activityId = activity.ActivityId })
+                                            @Html.Action("StudentActivityFile", "StudentCourses", new { activityId = activity.ActivityId })
                                         </div>
-                                    }
+                                        @if (activity.ActivityType.Type == "Homework")
+                                        {
+                                            <div>
+                                                @Html.Action("StudentHomeworkFile", "StudentCourses", new { activityId = activity.ActivityId })
+                                            </div>
+                                        }
+                                    </div>
                                 </div>
+                            }
+                            <div>
+                                @Html.Action("StudentModuleFile", "StudentCourses", new { moduleId = mod.ModuleId })
                             </div>
-                        }
-                        <div>
-                            @Html.Action("StudentModuleFile", "StudentCourses", new { moduleId = mod.ModuleId })
                         </div>
                     </div>
                 </div>
-            </div>
-            <br />
-        }
+                <br />
+            }
+        </div>
     </div>
-</div>
+}
+else
+{
+    <h3 style="color:crimson">No course module found!</h3>
+}
 
 <br />
 <div id="CourseDocument">

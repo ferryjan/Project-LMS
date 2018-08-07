@@ -9,156 +9,164 @@
 <p>
     @Html.ActionLink("Open A New Private Chat", "SendMessage", new { id = "" }, new { @class = "btn btn-primary btn-large" })
 </p>
-<table class="table" id="table-mb-pc">
-    <tr>
-        <th class="col-md-2">
-            @Html.DisplayNameFor(model => model.Topic)
-        </th>
-        <th class="col-md-2">
-            @Html.Raw("Chat With")
-        </th>
-        <th class="col-md-2">
-            @Html.Raw("Last Sent/Receive Date")
-        </th>
-        <th class="col-md-2">
-            @Html.Raw("Unread Messages")
-        </th>
-        <th class="col-md-4"></th>
-    </tr>
 
-    @{
-        var tempMBN = "";
-        DateTime tempDT = DateTime.Now.AddYears(-10);
-    }
-    @foreach (var item in Model)
-    {
-        if (item.MessageBoxNumber != tempMBN)
+@if (Model.Count() != 0)
+{
+    <table class="table" id="table-mb-pc">
+        <tr>
+            <th class="col-md-2">
+                @Html.DisplayNameFor(model => model.Topic)
+            </th>
+            <th class="col-md-2">
+                @Html.Raw("Chat With")
+            </th>
+            <th class="col-md-2">
+                @Html.Raw("Last Sent/Receive Date")
+            </th>
+            <th class="col-md-2">
+                @Html.Raw("Unread Messages")
+            </th>
+            <th class="col-md-4"></th>
+        </tr>
+
+        @{
+            var tempMBN = "";
+            DateTime tempDT = DateTime.Now.AddYears(-10);
+        }
+        @foreach (var item in Model)
         {
-            var totalUnreadMsg = Model.Where(a => a.MessageBoxNumber == item.MessageBoxNumber && a.isRead == false && a.SentTo == User.Identity.Name).Count();
-            var lastSent = Model.Where(a => a.MessageBoxNumber == item.MessageBoxNumber).OrderByDescending(a => a.SentDate).First().SentDate;
-            <tr>
-                <td class="col-md-2">
-                    @Html.DisplayFor(modelItem => item.Topic)
-                </td>
-                @if (item.SentFrom == User.Identity.Name)
-                {
+            if (item.MessageBoxNumber != tempMBN)
+            {
+                var totalUnreadMsg = Model.Where(a => a.MessageBoxNumber == item.MessageBoxNumber && a.isRead == false && a.SentTo == User.Identity.Name).Count();
+                var lastSent = Model.Where(a => a.MessageBoxNumber == item.MessageBoxNumber).OrderByDescending(a => a.SentDate).First().SentDate;
+                <tr>
                     <td class="col-md-2">
-                        @Html.DisplayFor(modelItem => item.SentToFullName)
+                        @Html.DisplayFor(modelItem => item.Topic)
                     </td>
-                }
-                else
-                {
-                    <td class="col-md-2">
-                        @Html.DisplayFor(modelItem => item.SentFromFullName)
-                    </td>
-                }
-                <td class="col-md-2">
-                    @lastSent.ToString("yyyy-MM-dd HH:mm:ss")
-                </td>
-                <td class="col-md-2">
-                    @Html.Raw(totalUnreadMsg)
-                </td>
-                <td class="col-md-4">
-                    @if (item.MessageBoxNumber == "999999")
+                    @if (item.SentFrom == User.Identity.Name)
                     {
-                        <a href="@Url.Action("Reply", "Messages", new { id = item.MessageBoxNumber })" class="btn btn-primary">
-                            <i class="glyphicon glyphicon-pencil"></i>
-                            <span>
-                                <strong>Check&Reply</strong>
-                            </span>
-                        </a>
+                        <td class="col-md-2">
+                            @Html.DisplayFor(modelItem => item.SentToFullName)
+                        </td>
                     }
                     else
                     {
+                        <td class="col-md-2">
+                            @Html.DisplayFor(modelItem => item.SentFromFullName)
+                        </td>
+                    }
+                    <td class="col-md-2">
+                        @lastSent.ToString("yyyy-MM-dd HH:mm:ss")
+                    </td>
+                    <td class="col-md-2">
+                        @Html.Raw(totalUnreadMsg)
+                    </td>
+                    <td class="col-md-4">
+                        @if (item.MessageBoxNumber == "999999")
+                        {
+                            <a href="@Url.Action("Reply", "Messages", new { id = item.MessageBoxNumber })" class="btn btn-primary">
+                                <i class="glyphicon glyphicon-pencil"></i>
+                                <span>
+                                    <strong>Check&Reply</strong>
+                                </span>
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="@Url.Action("Reply", "Messages", new { id = item.MessageBoxNumber })" class="btn btn-primary">
+                                <i class="glyphicon glyphicon-pencil"></i>
+                                <span>
+                                    <strong>Check&Reply</strong>
+                                </span>
+                            </a>
+                            <a href="@Url.Action("LeaveChat", "Messages", new { id = item.MessageBoxNumber })" class="btn btn-danger">
+                                <i class="glyphicon glyphicon-erase"></i>
+                                <span>
+                                    <strong>Leave Chat</strong>
+                                </span>
+                            </a>
+                        }
+                    </td>
+                </tr>
+                tempMBN = item.MessageBoxNumber;
+                tempDT = DateTime.Now.AddYears(-10);
+            }
+            else
+            {
+                if (DateTime.Compare(tempDT, item.SentDate) < 0)
+                {
+                    tempDT = item.SentDate;
+                }
+            }
+        }
+
+    </table>
+
+
+    <table class="table" id="table-mb-moblie" style="display:none">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Topic) / Chat with
+            </th>
+            <th></th>
+        </tr>
+
+        @{
+            var tempMBN_mobile = "";
+            DateTime tempDT_mobile = DateTime.Now.AddYears(-10);
+        }
+        @foreach (var item in Model)
+        {
+            if (item.MessageBoxNumber != tempMBN_mobile)
+            {
+                var totalUnreadMsg = Model.Where(a => a.MessageBoxNumber == item.MessageBoxNumber && a.isRead == false && a.SentTo == User.Identity.Name).Count();
+                var lastSent = Model.Where(a => a.MessageBoxNumber == item.MessageBoxNumber).OrderByDescending(a => a.SentDate).First().SentDate;
+                <tr>
+                    @if (item.SentFrom == User.Identity.Name)
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Topic) / @Html.DisplayFor(modelItem => item.SentToFullName)
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Topic) / @Html.DisplayFor(modelItem => item.SentFromFullName)
+                        </td>
+                    }
+                    <td class>
                         <a href="@Url.Action("Reply", "Messages", new { id = item.MessageBoxNumber })" class="btn btn-primary">
                             <i class="glyphicon glyphicon-pencil"></i>
                             <span>
-                                <strong>Check&Reply</strong>
+                                <strong>Reply</strong>
                             </span>
                         </a>
                         <a href="@Url.Action("LeaveChat", "Messages", new { id = item.MessageBoxNumber })" class="btn btn-danger">
                             <i class="glyphicon glyphicon-erase"></i>
                             <span>
-                                <strong>Leave Chat</strong>
+                                <strong>Leave</strong>
                             </span>
                         </a>
-                    }
-                </td>
-            </tr>
-            tempMBN = item.MessageBoxNumber;
-            tempDT = DateTime.Now.AddYears(-10);
-        }
-        else
-        {
-            if (DateTime.Compare(tempDT, item.SentDate) < 0)
+                    </td>
+                </tr>
+                tempMBN_mobile = item.MessageBoxNumber;
+                tempDT_mobile = DateTime.Now.AddYears(-10);
+            }
+            else
             {
-                tempDT = item.SentDate;
+                if (DateTime.Compare(tempDT_mobile, item.SentDate) < 0)
+                {
+                    tempDT_mobile = item.SentDate;
+                }
             }
         }
-    }
 
-</table>
-
-
-<table class="table" id="table-mb-moblie" style="display:none">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Topic) / Chat with
-        </th>
-        <th></th>
-    </tr>
-
-    @{
-        var tempMBN_mobile = "";
-        DateTime tempDT_mobile = DateTime.Now.AddYears(-10);
-    }
-    @foreach (var item in Model)
-    {
-        if (item.MessageBoxNumber != tempMBN_mobile)
-        {
-            var totalUnreadMsg = Model.Where(a => a.MessageBoxNumber == item.MessageBoxNumber && a.isRead == false && a.SentTo == User.Identity.Name).Count();
-            var lastSent = Model.Where(a => a.MessageBoxNumber == item.MessageBoxNumber).OrderByDescending(a => a.SentDate).First().SentDate;
-            <tr>
-                @if (item.SentFrom == User.Identity.Name)
-                {
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Topic) / @Html.DisplayFor(modelItem => item.SentToFullName)
-                    </td>
-                }
-                else
-                {
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Topic) / @Html.DisplayFor(modelItem => item.SentFromFullName)
-                    </td>
-                }
-                <td class>
-                    <a href="@Url.Action("Reply", "Messages", new { id = item.MessageBoxNumber })" class="btn btn-primary">
-                        <i class="glyphicon glyphicon-pencil"></i>
-                        <span>
-                            <strong>Reply</strong>
-                        </span>
-                    </a>
-                    <a href="@Url.Action("LeaveChat", "Messages", new { id = item.MessageBoxNumber })" class="btn btn-danger">
-                        <i class="glyphicon glyphicon-erase"></i>
-                        <span>
-                            <strong>Leave</strong>
-                        </span>
-                    </a>
-                </td>
-            </tr>
-            tempMBN_mobile = item.MessageBoxNumber;
-            tempDT_mobile = DateTime.Now.AddYears(-10);
-        }
-        else
-        {
-            if (DateTime.Compare(tempDT_mobile, item.SentDate) < 0)
-            {
-                tempDT_mobile = item.SentDate;
-            }
-        }
-    }
-
-</table>
+    </table>
+}
+else
+{
+    <h3 style="color:crimson">No message found!</h3>
+}
 
 <p>
     @Html.ActionLink("Back to Start Page", "StudentStart", "StudentCourses", null, new { @class = "btn btn-primary btn-large" })

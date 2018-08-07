@@ -105,7 +105,7 @@ namespace Project_LMS.Migrations
                 new Project_LMS.Models.Module {
                     CourseId = courses[0].CourseId,
                     StartDate = courses[0].StartDate.AddDays(7),
-                    EndDate = courses[0].StartDate.AddDays(10),
+                    EndDate = courses[0].StartDate.AddDays(11),
                     Name = "Coffie, the black gold",
                     Description = "An introduction to Coffie: Brew or boil?"
                 },
@@ -118,7 +118,7 @@ namespace Project_LMS.Migrations
                 },
                 new Project_LMS.Models.Module {
                     CourseId = courses[0].CourseId,
-                    StartDate = courses[0].StartDate.AddDays(16),
+                    StartDate = courses[0].StartDate.AddDays(15),
                     EndDate = courses[0].StartDate.AddDays(30),
                     Name = "Fika: the F-word in Sweden",
                     Description = "Fika is a coffee break in Sweden, but it is invested with considerable socio-cultural and symbolic significance."
@@ -132,7 +132,7 @@ namespace Project_LMS.Migrations
                 },
                 new Project_LMS.Models.Module {
                     CourseId = courses[1].CourseId,
-                    StartDate = courses[1].StartDate.AddDays(9),
+                    StartDate = courses[1].StartDate.AddDays(8),
                     EndDate = courses[1].StartDate.AddDays(30),
                     Name = "Fika: research",
                     Description = "Our research interrogates and deconstructs fika in the context of the political economy of neoliberalism. "

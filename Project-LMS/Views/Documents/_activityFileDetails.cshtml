@@ -4,62 +4,69 @@
     @Html.ActionLink("Upload Activity Document", "CreateActivityDocument", new { id = ViewBag.Id }, new { @class = "btn btn-primary btn-large" })
 </p>
 
-<table class="table table-bordered">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DocumentName)
-        </th>
+@if (Model.Count() != 0)
+{
+    <table class="table table-bordered">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DocumentName)
+            </th>
 
-        <th></th>
-    </tr>
+            <th></th>
+        </tr>
 
-    @foreach (var item in Model)
-    {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DocumentName)
-        </td>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DocumentName)
+                </td>
 
-        <td>
-            <a href="@Url.Action("DownLoadFile", "Documents", new { id = item.DocumentId })" class="btn btn-success">
-                <i class="glyphicon glyphicon-download"></i>
-                <span>
-                    <strong>Download</strong>
-                </span>
-            </a>
-            <a href="@Url.Action("ActivityDocumentDetails", "Documents", new { id = item.DocumentId })" class="btn btn-info">
-                <i class="glyphicon glyphicon-list"></i>
-                <span>
-                    <strong>Details</strong>
-                </span>
-            </a>
-            <a href="@Url.Action("DeleteActivityDocument", "Documents", new { id = item.DocumentId })" class="btn btn-danger">
-                <i class="glyphicon glyphicon-erase"></i>
-                <span>
-                    <strong>Delete</strong>
-                </span>
-            </a>
-            @if (item.isHomework)
-            {
-                <a href="@Url.Action("GiveFeedback", "Documents", new { id = item.DocumentId })" class="btn btn-danger">
-                    <i class="glyphicon glyphicon-bullhorn"></i>
-                    <span>
-                        <strong>Feedback</strong>
-                    </span>
-                </a>
-            }
+                <td>
+                    <a href="@Url.Action("DownLoadFile", "Documents", new { id = item.DocumentId })" class="btn btn-success">
+                        <i class="glyphicon glyphicon-download"></i>
+                        <span>
+                            <strong>Download</strong>
+                        </span>
+                    </a>
+                    <a href="@Url.Action("ActivityDocumentDetails", "Documents", new { id = item.DocumentId })" class="btn btn-info">
+                        <i class="glyphicon glyphicon-list"></i>
+                        <span>
+                            <strong>Details</strong>
+                        </span>
+                    </a>
+                    <a href="@Url.Action("DeleteActivityDocument", "Documents", new { id = item.DocumentId })" class="btn btn-danger">
+                        <i class="glyphicon glyphicon-erase"></i>
+                        <span>
+                            <strong>Delete</strong>
+                        </span>
+                    </a>
+                    @if (item.isHomework)
+                    {
+                        <a href="@Url.Action("GiveFeedback", "Documents", new { id = item.DocumentId })" class="btn btn-danger">
+                            <i class="glyphicon glyphicon-bullhorn"></i>
+                            <span>
+                                <strong>Feedback</strong>
+                            </span>
+                        </a>
+                    }
 
-        </td>
-    </tr>
-    }
+                </td>
+            </tr>
+        }
 
-</table>
+    </table>
+}
+else
+{
+    <h3 style="color:crimson">No activity document found!</h3>
+}
 
 
 
