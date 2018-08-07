@@ -51,6 +51,7 @@
                 </span>
             </a>
             <a href="@Url.Action("MoveCourse", "TeacherCourses", new { id =  item.CourseId })" class="modal-link btn btn-info"><i class="glyphicon glyphicon-move"></i> <span><strong>Move</strong></span></a>
+            <a href="@Url.Action("CloneCourse", "TeacherCourses", new { id =  item.CourseId })" class="modal-link btn btn-info"><i class="glyphicon glyphicon-copy"></i> <span><strong>Clone</strong></span></a>
         </td>
     </tr>
 }

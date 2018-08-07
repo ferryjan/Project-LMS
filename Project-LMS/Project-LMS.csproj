@@ -537,6 +537,7 @@
     <Content Include="Views\TeacherCourses\_showPartialSchedule.cshtml" />
     <Content Include="Views\Modules\_moveModule.cshtml" />
     <Content Include="Views\TeacherCourses\_moveCourse.cshtml" />
+    <Content Include="Views\TeacherCourses\_cloneCourse.cshtml" />
     <Content Include="Views\Messages\_courseMsgBoard.cshtml" />
     <Content Include="Views\Messages\_showCourseMessageBoardMessages.cshtml" />
   </ItemGroup>
