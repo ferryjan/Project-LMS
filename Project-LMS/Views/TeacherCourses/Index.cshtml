@@ -11,21 +11,32 @@
     @Html.ActionLink("Add A New Course", "Create", new { id = ViewBag.Id }, new { @class = "btn btn-primary btn-large" })
 </p>
 
+<style>
+    .table > thead > tr > th,
+    .table > tbody > tr > th,
+    .table > tfoot > tr > th,
+    .table > thead > tr > td,
+    .table > tbody > tr > td,
+    .table > tfoot > tr > td {
+        padding: 0px 0px;
+    }
+</style>
+
 <table class="table">
     <tr>
-        <th class="col-md-2">@Html.DisplayNameFor(model => model.CourseName)</th>
+        <th class="col-md-3">@Html.DisplayNameFor(model => model.CourseName)</th>
         <th class="col-md-2">@Html.DisplayNameFor(model => model.StartDate)</th>
         <th class="col-md-2">@Html.DisplayNameFor(model => model.EndDate)</th>
-        <th class="col-md-6"></th>
+        <th class="col-md-5"></th>
     </tr>
 
     @foreach (var item in Model)
     {
         <tr>
-            <td class="col-md-2">@Html.DisplayFor(modelItem => item.CourseName)</td>
+            <td class="col-md-3">@Html.DisplayFor(modelItem => item.CourseName)</td>
             <td class="col-md-2">@Html.DisplayFor(modelItem => item.StartDate)</td>
             <td class="col-md-2">@Html.DisplayFor(modelItem => item.EndDate)</td>
-            <td class="col-md-6" style="text-align:center">
+            <td class="col-md-5" style="text-align:center">
                 <div class="btn-group-sm">
                     <a href="@Url.Action("Edit", "TeacherCourses", new { id = item.CourseId })" class="btn btn-primary">
                         <i class="glyphicon glyphicon-edit"></i>

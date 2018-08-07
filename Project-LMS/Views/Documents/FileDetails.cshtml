@@ -1,10 +1,10 @@
-﻿@model IEnumerable<Project_LMS.Models.Document>  
+﻿@model IEnumerable<Project_LMS.Models.Document>
 
 <p>
     @Html.ActionLink("Upload Course Document", "CreateCourseDocument", new { id = ViewBag.Id }, new { @class = "btn btn-primary btn-large" })
 </p>
 
-<table class="table table-bordered">  
+<table class="table table-bordered">
     <tr>
         <th class="col-md-5">
             @Html.DisplayNameFor(model => model.Description)
@@ -14,41 +14,44 @@
         </th>
 
         <th class="col-md-5"></th>
-    </tr>  
-  
-@foreach (var item in Model) {  
-    <tr>
-        <td class="col-md-5">
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td class="col-md-2">
-            @Html.DisplayFor(modelItem => item.DocumentName)
-        </td>
+    </tr>
 
-        <td class="col-md-5">
-            <a href="@Url.Action("DownLoadFile", "Documents", new { id = item.DocumentId })" class="btn btn-success">
-                <i class="glyphicon glyphicon-download"></i>
-                <span>
-                    <strong>Download</strong>
-                </span>
-            </a>
-            <a href="@Url.Action("Details", "Documents", new { id = item.DocumentId })" class="btn btn-info">
-                <i class="glyphicon glyphicon-list"></i>
-                <span>
-                    <strong>Details</strong>
-                </span>
-            </a>
-            <a href="@Url.Action("Delete", "Documents", new { id = item.DocumentId })" class="btn btn-danger">
-                <i class="glyphicon glyphicon-erase"></i>
-                <span>
-                    <strong>Delete</strong>
-                </span>
-            </a>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td class="col-md-5">
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td class="col-md-2">
+                @Html.DisplayFor(modelItem => item.DocumentName)
+            </td>
 
-        </td>
-    </tr>  
-}  
-  
-</table> 
+            <td class="col-md-5">
+                <div class="btn-group-sm">
+
+                    <a href="@Url.Action("DownLoadFile", "Documents", new { id = item.DocumentId })" class="btn btn-success">
+                        <i class="glyphicon glyphicon-download"></i>
+                        <span>
+                            <strong>Download</strong>
+                        </span>
+                    </a>
+                    <a href="@Url.Action("Details", "Documents", new { id = item.DocumentId })" class="btn btn-info">
+                        <i class="glyphicon glyphicon-list"></i>
+                        <span>
+                            <strong>Details</strong>
+                        </span>
+                    </a>
+                    <a href="@Url.Action("Delete", "Documents", new { id = item.DocumentId })" class="btn btn-danger">
+                        <i class="glyphicon glyphicon-erase"></i>
+                        <span>
+                            <strong>Delete</strong>
+                        </span>
+                    </a>
+                </div>
+            </td>
+        </tr>
+    }
+
+</table>
 
 

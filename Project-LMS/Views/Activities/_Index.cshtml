@@ -1,5 +1,17 @@
 ﻿@model IEnumerable<Project_LMS.Models.Activity>
 
+
+<style>
+    .table > thead > tr > th,
+    .table > tbody > tr > th,
+    .table > tfoot > tr > th,
+    .table > thead > tr > td,
+    .table > tbody > tr > td,
+    .table > tfoot > tr > td {
+        padding: 0px 0px;
+    }
+</style>
+
 @{
     List<Project_LMS.Models.Activity> activityDateInCollision = new List<Project_LMS.Models.Activity>();
 
@@ -37,10 +49,10 @@
 @*C sharp comment*@
 <table class="table">
     <tr>
-        <th>@Html.DisplayNameFor(model => model.ActivityName)</th>
-        <th>@Html.DisplayNameFor(model => model.Start) </th>
-        <th>@Html.DisplayNameFor(model => model.End)</th>
-        <th></th>
+        <th class="col-md-3">@Html.DisplayNameFor(model => model.ActivityName)</th>
+        <th class="col-md-2">@Html.DisplayNameFor(model => model.Start) </th>
+        <th class="col-md-2">@Html.DisplayNameFor(model => model.End)</th>
+        <th class="col-md-5"></th>
     </tr>
 
     @foreach (var item in Model)
@@ -51,14 +63,14 @@
             {
                 if (item.ActivityType.Type == "Homework")
                 {
-                    <td style="color:red">
+                    <td class="col-md-3" style="color:red">
                         <div><i class="glyphicon glyphicon-home"></i> @Html.DisplayFor(modelItem => item.ActivityName)</div>
 
                     </td>
                 }
                 else
                 {
-                    <td style="color:red">@Html.DisplayFor(modelItem => item.ActivityName)</td>
+                    <td class="col-md-3" style="color:red">@Html.DisplayFor(modelItem => item.ActivityName)</td>
                 }
             }
             else
@@ -67,57 +79,59 @@
                 {
                     if (item.ActivityType.Type == "Homework")
                     {
-                        <td style="color:blue">
+                        <td class="col-md-3" style="color:blue">
                             <div><i class="glyphicon glyphicon-home"></i> @Html.DisplayFor(modelItem => item.ActivityName)</div>
 
                         </td>
                     }
                     else
                     {
-                        <td style="color:blue">@Html.DisplayFor(modelItem => item.ActivityName)</td>
+                        <td class="col-md-3" style="color:blue">@Html.DisplayFor(modelItem => item.ActivityName)</td>
                     }
                 }
                 else
                 {
                     if (item.ActivityType.Type == "Homework")
                     {
-                        <td>
+                        <td class="col-md-3">
                             <div><i class="glyphicon glyphicon-home"></i> @Html.DisplayFor(modelItem => item.ActivityName)</div>
 
                         </td>
                     }
                     else
                     {
-                        <td>@Html.DisplayFor(modelItem => item.ActivityName)</td>
+                        <td class="col-md-3">@Html.DisplayFor(modelItem => item.ActivityName)</td>
                     }
                 }
             }
 
 
-            <td>@Html.DisplayFor(modelItem => item.Start)</td>
-            <td>@Html.DisplayFor(modelItem => item.End)</td>
-            <td>
-                <a href="@Url.Action("Edit", "Activities", new { id = item.ActivityId})" class="btn btn-primary">
-                    <i class="glyphicon glyphicon-edit"></i>
-                    <span>
-                        <strong>Edit</strong>
-                    </span>
-                </a>
-                <a href="@Url.Action("Details", "Activities", new { id = item.ActivityId })" class="btn btn-info">
-                    <i class="glyphicon glyphicon-list"></i>
-                    <span>
-                        <strong>Details</strong>
-                    </span>
-                </a>
-                <a href="@Url.Action("Delete", "Activities", new { id = item.ActivityId , isVerified = false })" class="btn btn-danger">
-                    <i class="glyphicon glyphicon-erase"></i>
-                    <span>
-                        <strong>Remove Activity</strong>
-                    </span>
-                </a>
+            <td class="col-md-2">@Html.DisplayFor(modelItem => item.Start)</td>
+            <td class="col-md-2">@Html.DisplayFor(modelItem => item.End)</td>
+            <td class="col-md-5" style="text-align:center">
+                <div class="btn-group-sm">
+                    <a href="@Url.Action("Edit", "Activities", new { id = item.ActivityId})" class="btn btn-primary">
+                        <i class="glyphicon glyphicon-edit"></i>
+                        <span>
+                            <strong>Edit</strong>
+                        </span>
+                    </a>
+                    <a href="@Url.Action("Details", "Activities", new { id = item.ActivityId })" class="btn btn-info">
+                        <i class="glyphicon glyphicon-list"></i>
+                        <span>
+                            <strong>Details</strong>
+                        </span>
+                    </a>
+                    <a href="@Url.Action("Delete", "Activities", new { id = item.ActivityId , isVerified = false })" class="btn btn-danger">
+                        <i class="glyphicon glyphicon-erase"></i>
+                        <span>
+                            <strong>Remove Activity</strong>
+                        </span>
+                    </a>
+                </div>
             </td>
         </tr>
     }
 
 </table>
-@*<div>(<i class="glyphicon glyphicon-home"></i> Denotes homework activity)</div>*@
+

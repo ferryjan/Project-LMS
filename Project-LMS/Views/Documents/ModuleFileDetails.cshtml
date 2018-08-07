@@ -6,47 +6,49 @@
 
 <table class="table table-bordered">
     <tr>
-        <th>
+        <th class="col-md-4">
             @Html.DisplayNameFor(model => model.Description)
         </th>
-        <th>
+        <th class="col-md-3">
             @Html.DisplayNameFor(model => model.DocumentName)
         </th>
 
-        <th></th>
+        <th class="col-md-5"></th>
     </tr>
 
     @foreach (var item in Model)
     {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DocumentName)
-        </td>
+        <tr>
+            <td class="col-md-4">
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td class="col-md-3">
+                @Html.DisplayFor(modelItem => item.DocumentName)
+            </td>
 
-        <td>
-            <a href="@Url.Action("DownLoadFile", "Documents", new { id = item.DocumentId })" class="btn btn-success">
-                <i class="glyphicon glyphicon-download"></i>
-                <span>
-                    <strong>Download</strong>
-                </span>
-            </a>
-            <a href="@Url.Action("ModuleDocumentDetails", "Documents", new { id = item.DocumentId })" class="btn btn-info">
-                <i class="glyphicon glyphicon-list"></i>
-                <span>
-                    <strong>Details</strong>
-                </span>
-            </a>
-            <a href="@Url.Action("DeleteModuleDocument", "Documents", new { id = item.DocumentId })" class="btn btn-danger">
-                <i class="glyphicon glyphicon-erase"></i>
-                <span>
-                    <strong>Delete</strong>
-                </span>
-            </a>
-        </td>
-    </tr>
+            <td class="col-md-5" style="text-align:center">
+                <div class="btn-group-sm">
+                    <a href="@Url.Action("DownLoadFile", "Documents", new { id = item.DocumentId })" class="btn btn-success">
+                        <i class="glyphicon glyphicon-download"></i>
+                        <span>
+                            <strong>Download</strong>
+                        </span>
+                    </a>
+                    <a href="@Url.Action("ModuleDocumentDetails", "Documents", new { id = item.DocumentId })" class="btn btn-info">
+                        <i class="glyphicon glyphicon-list"></i>
+                        <span>
+                            <strong>Details</strong>
+                        </span>
+                    </a>
+                    <a href="@Url.Action("DeleteModuleDocument", "Documents", new { id = item.DocumentId })" class="btn btn-danger">
+                        <i class="glyphicon glyphicon-erase"></i>
+                        <span>
+                            <strong>Delete</strong>
+                        </span>
+                    </a>
+                </div>
+            </td>
+        </tr>
     }
 
 </table>
