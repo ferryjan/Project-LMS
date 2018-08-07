@@ -74,14 +74,14 @@
                                 <div style="width:80%">
                                     @if (activity.ActivityType.Type == "Homework")
                                     {
-                                        <a data-target=@atarget class="activitytabs" data-group="footer-blocks" data-toggle="collapse"><i class="glyphicon glyphicon-home"></i> @activity.Start.Date.ToString("yyyy-MM-dd hh:mm:ss") - @activity.End.Date.ToString("yyyy-MM-dd hh:mm:ss") : @activity.ActivityName</a>
+                                        <a data-target=@atarget class="activitytabs" data-group="footer-blocks" data-toggle="collapse"><i class="glyphicon glyphicon-home"></i> @activity.Start.ToString("yyyy-MM-dd HH:mm:ss") - @activity.End.ToString("yyyy-MM-dd HH:mm:ss") : @activity.ActivityName</a>
                                     }
                                     else
                                     {
-                                        <a data-target=@atarget class="activitytabs" data-group="footer-blocks" data-toggle="collapse">@activity.Start.Date.ToString("yyyy-MM-dd hh:mm:ss") - @activity.End.Date.ToString("yyyy-MM-dd hh:mm:ss") : @activity.ActivityName</a>
+                                        <a data-target=@atarget class="activitytabs" data-group="footer-blocks" data-toggle="collapse">@activity.Start.ToString("yyyy-MM-dd HH:mm:ss") - @activity.End.ToString("yyyy-MM-dd HH:mm:ss") : @activity.ActivityName</a>
                                     }
                                 </div>
-                                <div id=@aid class="collapse show-in-md well" style="width:80%; background-color: #f5c6ff">
+                                <div id=@aid class="collapse show-in-md well " style="width:80%; background-color: #f5c6ff">
                                     <section style="color:blue; font-weight:bold; max-width: 800px; word-wrap:break-word;word-break:break-all">
                                         <p style="font-weight:normal"> @activity.Description</p>
                                     </section>
