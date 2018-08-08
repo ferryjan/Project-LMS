@@ -335,6 +335,15 @@ namespace Project_LMS.Controllers
             msgModel.SentTo = User.Identity.Name;
             msgModel.SentToFullName = user.FullName;
             msgModel.Msg = "";
+            if (TempData.ContainsKey("Empty"))
+            {
+                ViewBag.isEmpty = TempData["Empty"].ToString();
+                TempData.Remove("Empty");
+            }
+            else
+            {
+                ViewBag.isEmpty = "";
+            }
             return PartialView("_courseMsgBoard", msgModel);
         }
 
@@ -359,7 +368,9 @@ namespace Project_LMS.Controllers
                 ModelState["Msg"].Value = new ValueProviderResult(string.Empty, string.Empty, ModelState["Msg"].Value.Culture);
                 return RedirectToAction("StudentStart","StudentCourses");
             }
-            return View("_courseMsgBoard", message);
+            TempData["MsgSent"] = "yes";
+            TempData["Empty"] = "empty";
+            return RedirectToAction("StudentStart", "StudentCourses");
         }
 
 

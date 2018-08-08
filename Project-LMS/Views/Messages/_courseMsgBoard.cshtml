@@ -30,6 +30,10 @@
         @Html.HiddenFor(model => model.SentToFullName)
 
         <div class="form-group">
+            @if (ViewBag.isEmpty == "empty")
+            {
+                <h5 style="color:crimson">&nbsp&nbsp&nbsp&nbsp&nbspYou are not allowed to post empty message!</h5>
+            }
             @Html.LabelFor(model => model.Msg, "Leave your message:", htmlAttributes: new { @class = "control-label col-md-offset-1 col-md-4" })
             <div class="col-md-offset-1 col-md-10">
                 @Html.EditorFor(model => model.Msg, new { htmlAttributes = new { @class = "form-control" } })
