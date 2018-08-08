@@ -1,7 +1,8 @@
 ﻿@model Project_LMS.Models.Message
 
-
-<h3 style="color:crimson" id="herf-location">&nbsp&nbsp&nbsp&nbsp&nbspCourse Message Board</h3>
+<div class="row">
+    <h3 style="color:crimson; text-align-last:center" id="herf-location" class="col-md-12">Course Message Board</h3>
+</div>
 
 @Html.Action("ShowCourseMessageBoardMessages", "Messages", new { id = Model.MessageBoxNumber })
 
