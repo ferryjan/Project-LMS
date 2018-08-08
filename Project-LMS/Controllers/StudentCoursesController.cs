@@ -22,12 +22,12 @@ namespace Project_LMS.Controllers
         {
             if (TempData.ContainsKey("MsgSent"))
             {
-                ViewBag.MS = "yes";
+                ViewBag.MS = TempData["MsgSent"].ToString();
                 TempData.Remove("MsgSent");
             }
             else
             {
-                ViewBag.MS = "no";
+                ViewBag.MS = "";
             }
 
             var userId = User.Identity.GetUserId();
