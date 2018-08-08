@@ -32,10 +32,11 @@
 
 
 <script type="text/javascript" language="Javascript">
-    $(document).ready(function () {
+    var delayInMilliseconds = 500; 
+    $(setTimeout(function autoScrollDown() {
         var scrollBottom = Math.max($('#table-private-chat').height() - $('#div-private-chat').height() + 20, 0);
         $('#div-private-chat').scrollTop(scrollBottom);
-    });
+    }, delayInMilliseconds));
 </script>
 
 
