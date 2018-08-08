@@ -303,7 +303,7 @@ namespace Project_LMS.Controllers
             Course course = db.Courses.Find(id);
             if (course == null) { return HttpNotFound(); }
 
-            CloneCourseViewModel ccViewModel = new CloneCourseViewModel { Course = course, NewDate = course.StartDate, NewName = course.CourseName };
+            CloneCourseViewModel ccViewModel = new CloneCourseViewModel { Course = course, NewDate = course.StartDate};
             return PartialView("_cloneCourse", ccViewModel);
         }
 
