@@ -1,10 +1,6 @@
 ﻿@model IEnumerable<Project_LMS.Models.Message>
 
-<style>
-    table, thead, tbody, th, td, tr {
-        display: block;
-    }
-</style>
+
 <div class="bodycontainer scrollable" id="div-private-chat">
     <table class="table" id="table-private-chat">
         <tr>
@@ -17,19 +13,19 @@
             <tr>
                 @if (msg.SentFrom == User.Identity.Name)
                 {
-                <td style="color:red; font-weight:bold; column-width:auto; max-width: 350px; word-wrap:break-word;word-break:break-all" align="left">
-                    @msg.SentFromFullName <br />
-                    @msg.SentDate.ToString("yyyy-MM-dd HH:mm:ss")<br />
-                    <a style="color:black;width: 80%">@msg.Msg</a>
-                </td>
+                    <td style="display:block; color:red; font-weight:bold; column-width:auto; max-width: 350px; word-wrap:break-word;word-break:break-word" align="left">
+                        @msg.SentFromFullName <br />
+                        @msg.SentDate.ToString("yyyy-MM-dd HH:mm:ss")<br />
+                        <a style="color:black;width: 80%">@msg.Msg</a>
+                    </td>
                 }
                 else
                 {
-                <td style="color:blue; font-weight:bold; column-width:auto; max-width: 350px; word-wrap:break-word;word-break:break-all" align="left">
-                    @msg.SentFromFullName <br />
-                    @msg.SentDate.ToString("yyyy-MM-dd HH:mm:ss")<br />
-                    <a style="color:black;width: 80%">@msg.Msg</a>
-                </td>
+                    <td style="display:block; color:blue; font-weight:bold; column-width:auto; max-width: 350px; word-wrap:break-word;word-break:break-word" align="left">
+                        @msg.SentFromFullName <br />
+                        @msg.SentDate.ToString("yyyy-MM-dd HH:mm:ss")<br />
+                        <a style="color:black;width: 80%">@msg.Msg</a>
+                    </td>
                 }
             </tr>
         }
@@ -38,7 +34,7 @@
 
 
 <script type="text/javascript" language="Javascript">
-    var delayInMilliseconds = 200; 
+    var delayInMilliseconds = 200;
     $(setTimeout(function autoScrollDown() {
         var scrollBottom = Math.max($('#table-private-chat').height() - $('#div-private-chat').height() + 20, 0);
         $('#div-private-chat').scrollTop(scrollBottom);
