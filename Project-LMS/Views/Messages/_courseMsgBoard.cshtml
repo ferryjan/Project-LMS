@@ -1,8 +1,12 @@
 ﻿@model Project_LMS.Models.Message
 
-<div class="row">
-    <h3 style="color:crimson; text-align-last:center" id="herf-location" class="col-md-12">Course Message Board</h3>
+<div class="modal-header modal-header-confirm">
+    <h4 class="modal-title ng-binding ">
+        <span class="text-align-last:center">Course Message Board</span>
+        @*<a title="Close"><i ng-click="CloseModal()" class="modal-close-btn glyphicon glyphicon-remove icon-arrow-right pull-right"></i></a>*@
+    </h4>
 </div>
+
 
 @Html.Action("ShowCourseMessageBoardMessages", "Messages", new { id = Model.MessageBoxNumber })
 
@@ -32,14 +36,13 @@
                 @Html.ValidationMessageFor(model => model.Msg, "", new { @class = "text-danger" })
             </div>
         </div>
+        <hr />
         <div class="form-group">
             <div class="col-md-offset-1 col-md-10">
                 <input type="submit" value="Post" class="btn btn-primary" />
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
-            @*<div class="col-md-1">
-                
-            </div>*@
         </div>
     </div>
 }
-
+}
