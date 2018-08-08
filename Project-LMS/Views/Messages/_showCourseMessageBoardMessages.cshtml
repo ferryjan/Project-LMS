@@ -13,17 +13,19 @@
             <tr>
                 @if (msg.SentFrom == User.Identity.Name)
                 {
-                    <td style="color:red; font-weight:bold; max-width: 400px; word-wrap:break-word;word-break:break-all" align="left">
-                        @msg.SentFromFullName @msg.SentDate.ToString("yyyy-MM-dd HH:mm:ss") says:
-                        <br />@msg.Msg
-                    </td>
+                <td style="color:red; font-weight:bold; max-width: 200px; word-wrap:break-word;word-break:break-all" align="left">
+                    @msg.SentFromFullName <br />
+                    @msg.SentDate.ToString("yyyy-MM-dd HH:mm:ss")<br />
+                    says:@msg.Msg
+                </td>
                 }
                 else
                 {
-                    <td style="color:blue; font-weight:bold; max-width: 400px; word-wrap:break-word;word-break:break-all" align="left">
-                        @msg.SentFromFullName @msg.SentDate.ToString("yyyy-MM-dd HH:mm:ss") says:
-                        <br />@msg.Msg
-                    </td>
+                <td style="color:blue; font-weight:bold; max-width: 200px; word-wrap:break-word;word-break:break-all" align="left">
+                    @msg.SentFromFullName <br />
+                    @msg.SentDate.ToString("yyyy-MM-dd HH:mm:ss")<br />
+                    says:@msg.Msg
+                </td>
                 }
             </tr>
         }
