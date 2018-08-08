@@ -79,6 +79,7 @@ namespace Project_LMS.Models
 
         [Display(Name = "New startdate")]
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime NewDate { get; set; }
     }
 
@@ -88,6 +89,7 @@ namespace Project_LMS.Models
 
         [Display(Name = "New startdate")]
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime NewDate { get; set; }
 
         [Display(Name = "New name")]
