@@ -79,6 +79,7 @@ namespace Project_LMS.Models
 
         [Display(Name = "New startdate")]
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime NewDate { get; set; }
     }
 
@@ -89,6 +90,7 @@ namespace Project_LMS.Models
         [Display(Name = "New startdate")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]        
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime NewDate { get; set; }
 
         //IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
