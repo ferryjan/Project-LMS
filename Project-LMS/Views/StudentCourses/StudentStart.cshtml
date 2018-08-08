@@ -15,7 +15,7 @@
 <br />
 <div class="row">
     <div id="schedule_button" class="col-sm-3 col-xs-12">
-        @Html.ActionLink("View Schedule", "StudentSchedule", new { id = ViewBag.CourseId }, new { @class = "btn btn-primary btn-large" })
+        @Html.ActionLink("View Schedule", "StudentSchedule", new { id = ViewBag.CourseId }, new { @class = "btn btn-primary btn-large", @style = "font-weight:bold" })
     </div>
     @{
         var courseMsgBoardId = "course" + ViewBag.CourseId;
@@ -24,7 +24,7 @@
         <a href="@Url.Action("CourseMessageBoard", "Messages", new { id = courseMsgBoardId })" id="modal-link-herf" class="btn btn-primary modal-link"><i class="glyphicon glyphicon-pencil"></i> <span><strong>Open Course Message Board</strong></span></a>
     </div>
     <div class="col-sm-3 col-xs-12">
-        @Html.ActionLink("View Classmate", "ShowStudentListInMobileView", null, new { @class = "btn btn-primary btn-large" })
+        @Html.ActionLink("View Classmate", "ShowStudentListInMobileView", null, new { @class = "btn btn-primary btn-large", @style = "font-weight:bold" })
     </div>
 </div>
 <div id="homeworkView">
