@@ -21,7 +21,7 @@
         var courseMsgBoardId = "course" + ViewBag.CourseId;
     }
     <div class="col-sm-5 col-xs-12">
-        <a href="@Url.Action("CourseMessageBoard", "Messages", new { id = courseMsgBoardId })" id="modal-link-herf" class="btn btn-primary modal-link"><i class="glyphicon glyphicon-pencil"></i> <span><strong>Class message board</strong></span></a>
+        <a href="@Url.Action("CourseMessageBoard", "Messages", new { id = courseMsgBoardId })" id="modal-link-herf" class="btn btn-primary modal-link"><i class="glyphicon glyphicon-pencil"></i> <span><strong>Class message board </strong></span></a>
     </div>
     <div class="col-sm-3 col-xs-12">
         @Html.ActionLink("View Classmate", "ShowStudentListInMobileView", null, new { @class = "btn btn-primary btn-large", @style = "font-weight:bold" })
@@ -54,7 +54,7 @@
                     </div>
                     <div id=@id class="collapse show-in-md">
                         <div class="well">
-                            <section style="color:blue; font-weight:bold; max-width: 800px; word-wrap:break-word;word-break:break-all">
+                            <section style="color:blue; font-weight:bold; max-width: 800px; word-wrap:break-word;word-break:break-word">
                                 <p> Module Start Date: </p>
                                 <p style="font-weight:normal"> @mod.StartDate.Date.ToString("yyyy-MM-dd")</p>
                                 <p> Module End Date: </p>
@@ -89,7 +89,7 @@
                                         }
                                     </div>
                                     <div id=@aid class="collapse show-in-md well " style="width:80%; background-color: #f5c6ff">
-                                        <section style="color:blue; font-weight:bold; max-width: 800px; word-wrap:break-word;word-break:break-all">
+                                        <section style="color:blue; font-weight:bold; max-width: 800px; word-wrap:break-word;word-break:break-word">
                                             <p style="font-weight:normal"> @activity.Description</p>
                                         </section>
                                         <div>

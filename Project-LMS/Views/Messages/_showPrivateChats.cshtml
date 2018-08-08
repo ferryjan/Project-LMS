@@ -16,7 +16,7 @@
             <tr>
                 @if (msg.SentFrom == User.Identity.Name)
                 {
-                    <td style="color:red; font-weight:bold; max-width: 400px; word-wrap:break-word;word-break:break-all" align="left">
+                    <td style="color:red; font-weight:bold; max-width: 400px; word-wrap:break-word;word-break:break-word" align="left">
                         @msg.SentFromFullName @msg.SentDate.ToString("yyyy-MM-dd HH:mm:ss") says:
                         <br />@msg.Msg
                     </td>
@@ -25,7 +25,7 @@
                 else
                 {
                     <td></td>
-                    <td style="color:blue; font-weight:bold; max-width: 400px; word-wrap:break-word;word-break:break-all;" align="right">
+                    <td style="color:blue; font-weight:bold; max-width: 400px; word-wrap:break-word;word-break:break-word;" align="right">
                         @msg.SentFromFullName&nbsp;@msg.SentDate.ToString("yyyy-MM-dd HH:mm:ss")&nbsp; says:
                         <br />@msg.Msg
                     </td>

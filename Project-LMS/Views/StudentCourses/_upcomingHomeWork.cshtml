@@ -2,7 +2,7 @@
 
 <h4 style="color:crimson; text-align:center"> Upcoming Homework </h4>
 
-<div class="well" style="width: 300px; max-width: 300px; word-wrap:break-word;word-break:break-all">
+<div class="well" style="width: 300px; max-width: 300px; word-wrap:break-word;word-break:break-word">
     @if (ViewBag.IsEmpty == "Yes")
     {
         <p style="color: blue; font-weight: bold">No homework event detected!</p>
@@ -11,7 +11,7 @@
     {
         foreach (var activity in Model)
         {
-            <section style="color:blue; font-weight:bold; max-width: 300px; word-wrap:break-word;word-break:break-all">
+            <section style="color:blue; font-weight:bold; max-width: 300px; word-wrap:break-word;word-break:break-word">
                 <p> @activity.Module.Name</p>
                 <p style="font-weight:normal"><i class="glyphicon glyphicon-home"> </i> @activity.ActivityName </p>
                 <p style="font-weight:normal"> Deadline: @activity.End</p>
