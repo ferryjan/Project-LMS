@@ -250,9 +250,6 @@ body {
     width: 300px;
 }
 
-#cssmenu > ul > li > a {
-    /*add lot of stuff here*/
-}
 
 /*@import url(http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300);*/
 
@@ -536,4 +533,10 @@ body {
     margin: 30px auto;
     background-color: lightgrey;
     box-shadow: -1px 1px 1px 2px black;
+}
+#SentFrom {
+    border-radius: 6px;
+}
+#Classmates {
+    border-radius: 6px;
 }
