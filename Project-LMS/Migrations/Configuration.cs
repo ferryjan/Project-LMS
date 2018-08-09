@@ -130,6 +130,7 @@ namespace Project_LMS.Migrations
                     Name = "Fika is polyvalent and paradoxical ",
                     Description = "It can be a signifier of employer recognition and generosity, and a challenge to the mind/body dualism in academic work cultures."
                 },
+
                 new Project_LMS.Models.Module { //5
                     CourseId = courses[0].CourseId,
                     StartDate = courses[0].StartDate.AddDays(8),
@@ -769,7 +770,7 @@ namespace Project_LMS.Migrations
                 },
                 new NewUser //55
                 {
-                    Email = "reza_zaman @yahoo.com",
+                    Email = "reza_zaman@yahoo.com",
                     Rolestring = "Student",
                     GivenName = "Reza",
                     FamilyName= "Dagleh",
@@ -777,7 +778,7 @@ namespace Project_LMS.Migrations
                 },
                 new NewUser //56
                 {
-                    Email = "robert.dubrovskis @gmail.com",
+                    Email = "robert.dubrovskis@gmail.com",
                     Rolestring = "Student",
                     GivenName = "Robert",
                     FamilyName= "Dubrovskis",
