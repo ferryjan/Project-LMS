@@ -63,15 +63,9 @@ namespace Project_LMS.Controllers
         public PartialViewResult StudentUpcomingActivities(int? id)
         {
             ViewBag.Id = id;
-            var todaysActivities = db.Activities.Where(i => i.Module.CourseId == id && (DateTime.Compare(i.Start, DateTime.Today) <= 0 && DateTime.Compare(i.End, DateTime.Today) >= 0));
-            if (todaysActivities == null)
-            {
-                ViewBag.IsEmpty = "Yes";
-            }
-            else
-            {
-                ViewBag.IsEmpty = "No";
-            }
+            var todaysActivities = db.Activities.Where(i => i.Module.CourseId == id 
+                && (DateTime.Compare(i.Start, DateTime.Today) <= 0 && DateTime.Compare(i.End, DateTime.Today) >= 0));
+            ViewBag.IsEmpty = todaysActivities == null ? "Yes" : "No";
             return PartialView("_studentUpcomingActivities", todaysActivities.ToList());
         }
 
@@ -80,25 +74,19 @@ namespace Project_LMS.Controllers
         {
             ViewBag.Id = id;
             DateTime week = DateTime.Today.AddDays(7);
-            var tempList = db.Activities.Where(i => i.Module.CourseId == id && i.ActivityTypeId == 4 && DateTime.Compare(i.End, week) <= 0 && DateTime.Compare(i.End, DateTime.Today) > 0).ToList();
+            var tempList = db.Activities.Where(i => i.Module.CourseId == id && i.ActivityType.Type == "Homework" 
+                && DateTime.Compare(i.End, week) <= 0 
+                && DateTime.Compare(i.End, DateTime.Today) > 0).ToList();
             var upcomingHomeWork = new List<Activity>();
-
             foreach (var activity in tempList)
             {
-                if (db.Documents.FirstOrDefault(d => d.ActivityId == activity.ActivityId && d.ApplicationUser.Email == User.Identity.Name) == null)
+                if (db.Documents.FirstOrDefault(d => d.ActivityId == activity.ActivityId 
+                    && d.ApplicationUser.Email == User.Identity.Name) == null)
                 {
                     upcomingHomeWork.Add(activity);
                 }
             }
-
-            if (upcomingHomeWork.Count() == 0)
-            {
-                ViewBag.IsEmpty = "Yes";
-            }
-            else
-            {
-                ViewBag.IsEmpty = "No";
-            }
+            ViewBag.IsEmpty = upcomingHomeWork.Count() == 0 ? "Yes" : "No";
             return PartialView("_upcomingHomeWork", upcomingHomeWork.ToList());
         }
 

@@ -124,18 +124,53 @@ namespace Project_LMS.Migrations
                     Description = "Fika is a coffee break in Sweden, but it is invested with considerable socio-cultural and symbolic significance."
                 },
                 new Project_LMS.Models.Module {
-                    CourseId = courses[1].CourseId,
-                    StartDate = courses[1].StartDate,
-                    EndDate = courses[1].StartDate.AddDays(8),
+                    CourseId = courses[0].CourseId,
+                    StartDate = courses[0].StartDate,
+                    EndDate = courses[0].StartDate.AddDays(8),
                     Name = "Fika is polyvalent and paradoxical ",
                     Description = "It can be a signifier of employer recognition and generosity, and a challenge to the mind/body dualism in academic work cultures."
                 },
                 new Project_LMS.Models.Module {
-                    CourseId = courses[1].CourseId,
-                    StartDate = courses[1].StartDate.AddDays(8),
-                    EndDate = courses[1].StartDate.AddDays(30),
+                    CourseId = courses[0].CourseId,
+                    StartDate = courses[0].StartDate.AddDays(8),
+                    EndDate = courses[0].StartDate.AddDays(30),
                     Name = "Fika: research",
                     Description = "Our research interrogates and deconstructs fika in the context of the political economy of neoliberalism. "
+                },
+                    new Project_LMS.Models.Module {
+                    CourseId = courses[1].CourseId,
+                    StartDate = courses[1].StartDate.AddDays(0),
+                    EndDate = courses[1].StartDate.AddDays(5),
+                    Name = "Physical excercise",
+                    Description = "After tipping a cow, it's important to be able to outrun it. "
+                },
+                    new Project_LMS.Models.Module {
+                    CourseId = courses[1].CourseId,
+                    StartDate = courses[1].StartDate.AddDays(6),
+                    EndDate = courses[1].StartDate.AddDays(10),
+                    Name = "Stealth",
+                    Description = "The art fo sneaking up on a sleepign cow, without waking it"
+                },
+                    new Project_LMS.Models.Module {
+                    CourseId = courses[1].CourseId,
+                    StartDate = courses[1].StartDate.AddDays(6),
+                    EndDate = courses[1].StartDate.AddDays(10),
+                    Name = "Dry-run",
+                    Description = "We practice on each other"
+                },
+                    new Project_LMS.Models.Module {
+                    CourseId = courses[1].CourseId,
+                    StartDate = courses[1].StartDate.AddDays(6),
+                    EndDate = courses[1].StartDate.AddDays(10),
+                    Name = "Starting small",
+                    Description = "Calf-tilting"
+                },
+                    new Project_LMS.Models.Module {
+                    CourseId = courses[1].CourseId,
+                    StartDate = courses[1].StartDate.AddDays(6),
+                    EndDate = courses[1].StartDate.AddDays(10),
+                    Name = "The real deal",
+                    Description = "We drive out on the countryside, in search of sleeping cows"
                 }
             };
             db.Modules.AddOrUpdate(m => m.Name, modules);

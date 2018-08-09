@@ -34,7 +34,10 @@ namespace Project_LMS.Controllers
             var courseId = student.CourseId;
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
             var studentRole = roleManager.FindByName("Student");
-            var studentList = db.Users.Where(x => x.Roles.Any(s => s.RoleId == studentRole.Id)).Where(t => t.CourseId == courseId && t.isActive == true).OrderBy(g => g.GivenName).ThenBy(f => f.FamilyName).ToList();
+            var studentList = db.Users.Where(x => x.Roles.Any(s => s.RoleId == studentRole.Id))
+                .Where(t => t.CourseId == courseId && t.isActive == true)
+                .OrderBy(g => g.GivenName).ThenBy(f => f.FamilyName)
+                .ToList();
             List<StudentListNavItem> studentListViewModel = new List<StudentListNavItem>();
             StudentListNavItem sn = new StudentListNavItem() { Students = studentList };
             studentListViewModel.Add(sn);

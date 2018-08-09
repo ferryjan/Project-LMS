@@ -34,6 +34,7 @@
                     {
                         <li>@Html.ActionLink("Administrate Teachers", "Index", "ApplicationUser")</li>
                         <li>@Html.ActionLink("Administrate Courses", "Index", "TeacherCourses")</li>
+                        <li>@Html.ActionLink("Message Center", "MessageBox", "Messages")</li>
                     }
                     else if (User.IsInRole("Student"))
                     {
