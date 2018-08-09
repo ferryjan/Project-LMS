@@ -88,12 +88,10 @@ namespace Project_LMS.Models
         public Course Course { get; set; }
 
         [Display(Name = "New startdate")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]        
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime NewDate { get; set; }
-
-        [Display(Name = "New name")]
-        public string NewName { get; set; }
 
         //IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         //{
