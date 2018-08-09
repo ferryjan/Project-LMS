@@ -42,10 +42,10 @@ namespace Project_LMS.Migrations
         protected override void Seed(Project_LMS.Models.ApplicationDbContext db)
         {
             //Enables debugging of seed, comment out to disable
-            if (!System.Diagnostics.Debugger.IsAttached)
-            {
-                System.Diagnostics.Debugger.Launch();
-            }
+            //if (!System.Diagnostics.Debugger.IsAttached)
+            //{
+            //    System.Diagnostics.Debugger.Launch();
+            //}
 
             // Seeding Roles. Changes to roles will affect the application
             var roleStore = new RoleStore<IdentityRole>(db);
@@ -149,7 +149,7 @@ namespace Project_LMS.Migrations
                     StartDate = courses[1].StartDate.AddDays(6),
                     EndDate = courses[1].StartDate.AddDays(10),
                     Name = "Stealth",
-                    Description = "The art fo sneaking up on a sleepign cow, without waking it"
+                    Description = "The art fo sneaking up on a sleeping cow, without waking it"
                 },
                     new Project_LMS.Models.Module { //8
                     CourseId = courses[1].CourseId,
@@ -304,6 +304,15 @@ namespace Project_LMS.Migrations
                     ActivityTypeId = activityTypes[3].ActivityTypeId,
                     Description = "Hand in a list of 10 good places for cowtilting. Including driving directions, pictures and a description of the farmer who owns said cows.",
                     Color = "navy"
+                },
+                    new Activity {
+                    ModuleId = modules[7].ModuleId,
+                    Start = modules[7].StartDate.AddDays(0),
+                    End = modules[7].StartDate.AddDays(2),
+                    ActivityName = "Silent walk",
+                    ActivityTypeId = activityTypes[1].ActivityTypeId,
+                    Description = "We train by walking silently over japanese singing floors (student pays for flight tickets to japan themselves)",
+                    Color = "blue"
                 }
             };
             db.Activities.AddOrUpdate(a => a.ActivityName, activities);
