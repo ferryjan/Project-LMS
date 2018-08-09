@@ -42,10 +42,10 @@ namespace Project_LMS.Migrations
         protected override void Seed(Project_LMS.Models.ApplicationDbContext db)
         {
             //Enables debugging of seed, comment out to disable
-            if (!System.Diagnostics.Debugger.IsAttached)
-            {
-                System.Diagnostics.Debugger.Launch();
-            }
+            //if (!System.Diagnostics.Debugger.IsAttached)
+            //{
+            //    System.Diagnostics.Debugger.Launch();
+            //}
 
             // Seeding Roles. Changes to roles will affect the application
             var roleStore = new RoleStore<IdentityRole>(db);
@@ -149,7 +149,7 @@ namespace Project_LMS.Migrations
                     StartDate = courses[1].StartDate.AddDays(6),
                     EndDate = courses[1].StartDate.AddDays(10),
                     Name = "Stealth",
-                    Description = "The art fo sneaking up on a sleepign cow, without waking it"
+                    Description = "The art fo sneaking up on a sleeping cow, without waking it"
                 },
                     new Project_LMS.Models.Module { //8
                     CourseId = courses[1].CourseId,
@@ -304,6 +304,15 @@ namespace Project_LMS.Migrations
                     ActivityTypeId = activityTypes[3].ActivityTypeId,
                     Description = "Hand in a list of 10 good places for cowtilting. Including driving directions, pictures and a description of the farmer who owns said cows.",
                     Color = "navy"
+                },
+                    new Activity {
+                    ModuleId = modules[7].ModuleId,
+                    Start = modules[7].StartDate.AddDays(0),
+                    End = modules[7].StartDate.AddDays(2),
+                    ActivityName = "Silent walk",
+                    ActivityTypeId = activityTypes[1].ActivityTypeId,
+                    Description = "We train by walking silently over japanese singing floors (student pays for flight tickets to japan themselves)",
+                    Color = "blue"
                 }
             };
             db.Activities.AddOrUpdate(a => a.ActivityName, activities);
@@ -640,7 +649,7 @@ namespace Project_LMS.Migrations
                 },
                 new NewUser //40
                 {
-                    Email = "Adrian.Hedqvist@lexicon.se",
+                    Email = "adrian@tollyx.net",
                     Rolestring = "Student",
                     GivenName = "Adrian",
                     FamilyName= "Hedqvist",
@@ -648,7 +657,7 @@ namespace Project_LMS.Migrations
                 },
                 new NewUser //41
                 {
-                    Email = "Ali.Salhab@lexicon.se",
+                    Email = "jamesmamac1986@gmail.com",
                     Rolestring = "Student",
                     GivenName = "Ali",
                     FamilyName= "Salhab",
@@ -656,7 +665,7 @@ namespace Project_LMS.Migrations
                 },
                 new NewUser //42
                 {
-                    Email = "Ante.Inersjo@lexicon.se",
+                    Email = "ante@inersjo.com",
                     Rolestring = "Student",
                     GivenName = "Ante",
                     FamilyName= "Inersjö",
@@ -664,7 +673,7 @@ namespace Project_LMS.Migrations
                 },
                 new NewUser //43
                 {
-                    Email = "Bereket.Alemseged.Tukabo@lexicon.se",
+                    Email = "bereisawa@yahoo.com",
                     Rolestring = "Student",
                     GivenName = "Bereket",
                     FamilyName= "Alemseged",
@@ -672,7 +681,7 @@ namespace Project_LMS.Migrations
                 },
                 new NewUser //44
                 {
-                    Email = "Dennis.Nilsson@lexicon.se",
+                    Email = "dennis.nilsson1111@gmail.com",
                     Rolestring = "Student",
                     GivenName = "Dennis",
                     FamilyName= "Nilsson",
@@ -680,7 +689,7 @@ namespace Project_LMS.Migrations
                 },
                 new NewUser //45
                 {
-                    Email = "Fredrik.Ekman@lexicon.se",
+                    Email = "fredrik.ff@gmail.com",
                     Rolestring = "Student",
                     GivenName = "Fredrik",
                     FamilyName= "Ekman",
@@ -688,7 +697,7 @@ namespace Project_LMS.Migrations
                 },
                 new NewUser //46
                 {
-                    Email = "Hesam.Zandi.Ghaleh@lexicon.se",
+                    Email = "hesamzandigh@gmail.com",
                     Rolestring = "Student",
                     GivenName = "Hesam",
                     FamilyName= "Ghaleh",
@@ -696,7 +705,7 @@ namespace Project_LMS.Migrations
                 },
                 new NewUser //47
                 {
-                    Email = "Jesper.Furtenbach@lexicon.se",
+                    Email = "jesper.furtenbach@gmail.com",
                     Rolestring = "Student",
                     GivenName = "Jesper",
                     FamilyName= "Fürtenbach",
@@ -704,7 +713,7 @@ namespace Project_LMS.Migrations
                 },
                 new NewUser //48
                 {
-                    Email = "Jerry.Fan@lexicon.se",
+                    Email = "jerry_swe@hotmail.com",
                     Rolestring = "Student",
                     GivenName = "Jesper",
                     FamilyName= "Fürtenbach",
@@ -712,7 +721,7 @@ namespace Project_LMS.Migrations
                 },
                 new NewUser //49
                 {
-                    Email = "Kristoffer.Aberg@lexicon.se",
+                    Email = "kristoffer.aberg@agileacademy.se",
                     Rolestring = "Student",
                     GivenName = "Kristoffer",
                     FamilyName= "Åberg",
@@ -720,7 +729,7 @@ namespace Project_LMS.Migrations
                 },
                 new NewUser //50
                 {
-                    Email = "Marcus.Andersson@lexicon.se",
+                    Email = "andersson257@gmail.com",
                     Rolestring = "Student",
                     GivenName = "Marcus",
                     FamilyName= "Andersson",
@@ -728,7 +737,7 @@ namespace Project_LMS.Migrations
                 },
                 new NewUser //51
                 {
-                    Email = "Michael.Nyberg.Hjerto@lexicon.se",
+                    Email = "justanotherperson1@outlook.com",
                     Rolestring = "Student",
                     GivenName = "Michael",
                     FamilyName= "Hjertö",
@@ -736,7 +745,7 @@ namespace Project_LMS.Migrations
                 },
                 new NewUser //52
                 {
-                    Email = "Mohamed.Almohsen@lexicon.se",
+                    Email = "mohamed.almohsen@outlook.com",
                     Rolestring = "Student",
                     GivenName = "Mohamed",
                     FamilyName= "Almohsen",
@@ -744,7 +753,7 @@ namespace Project_LMS.Migrations
                 },
                 new NewUser //53
                 {
-                    Email = "Oskar.Ljungdahl@lexicon.se",
+                    Email = "oscar.ljungdahl@hotmail.com",
                     Rolestring = "Student",
                     GivenName = "Oskar",
                     FamilyName= "Ljungdahl",
@@ -752,7 +761,7 @@ namespace Project_LMS.Migrations
                 },
                 new NewUser //54
                 {
-                    Email = "Patrick.Andersson@lexicon.se",
+                    Email = "lmpatrick.frank@gmail.com",
                     Rolestring = "Student",
                     GivenName = "Patrick",
                     FamilyName= "Andersson",
@@ -760,7 +769,7 @@ namespace Project_LMS.Migrations
                 },
                 new NewUser //55
                 {
-                    Email = "Reza.Zaman.Dagleh@lexicon.se",
+                    Email = "reza_zaman @yahoo.com",
                     Rolestring = "Student",
                     GivenName = "Reza",
                     FamilyName= "Dagleh",
@@ -768,7 +777,7 @@ namespace Project_LMS.Migrations
                 },
                 new NewUser //56
                 {
-                    Email = "Robert.Dubrovskis@lexicon.se",
+                    Email = "robert.dubrovskis @gmail.com",
                     Rolestring = "Student",
                     GivenName = "Robert",
                     FamilyName= "Dubrovskis",
@@ -776,7 +785,7 @@ namespace Project_LMS.Migrations
                 },
                 new NewUser //57
                 {
-                    Email = "Robert.Huselius@lexicon.se",
+                    Email = "robert@huseli.us",
                     Rolestring = "Student",
                     GivenName = "Robert",
                     FamilyName= "Huselius",
@@ -784,7 +793,7 @@ namespace Project_LMS.Migrations
                 },
                 new NewUser //58
                 {
-                    Email = "Rolf.Bjarenstam@lexicon.se",
+                    Email = "rolf.bjarenstam@gmail.com",
                     Rolestring = "Student",
                     GivenName = "Rolf",
                     FamilyName= "Bjärenstam",
@@ -792,7 +801,7 @@ namespace Project_LMS.Migrations
                 },
                 new NewUser //59
                 {
-                    Email = "Sandeep.Singh@lexicon.se",
+                    Email = "san337737@gmail.com",
                     Rolestring = "Student",
                     GivenName = "Sandeep",
                     FamilyName= "Singh",
@@ -800,7 +809,7 @@ namespace Project_LMS.Migrations
                 },
                 new NewUser //60
                 {
-                    Email = "Sebastian.Norman@lexicon.se",
+                    Email = "normansebastian2@gmail.com",
                     Rolestring = "Student",
                     GivenName = "Sebastian",
                     FamilyName= "Norman",
@@ -808,7 +817,7 @@ namespace Project_LMS.Migrations
                 },
                 new NewUser //61
                 {
-                    Email = "Teemu.Mustaniemi@lexicon.se",
+                    Email = "teemu158@gmail.com",
                     Rolestring = "Student",
                     GivenName = "Teemu",
                     FamilyName= "Mustaniemi",
@@ -816,7 +825,7 @@ namespace Project_LMS.Migrations
                 },
                 new NewUser //62
                 {
-                    Email = "Tomas.Risveden@lexicon.se",
+                    Email = "tomas.risveden@gmail.com",
                     Rolestring = "Student",
                     GivenName = "Tomas",
                     FamilyName= "Risveden",
@@ -824,7 +833,7 @@ namespace Project_LMS.Migrations
                 },
                 new NewUser //63
                 {
-                    Email = "Wameedh.Hashosh@lexicon.se",
+                    Email = "wameedh75@hotmail.com",
                     Rolestring = "Student",
                     GivenName = "Wameedh",
                     FamilyName= "Hashosh",
