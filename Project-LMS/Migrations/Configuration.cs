@@ -42,10 +42,10 @@ namespace Project_LMS.Migrations
         protected override void Seed(Project_LMS.Models.ApplicationDbContext db)
         {
             //Enables debugging of seed, comment out to disable
-            //if (!System.Diagnostics.Debugger.IsAttached)
-            //{
-            //    System.Diagnostics.Debugger.Launch();
-            //}
+            if (!System.Diagnostics.Debugger.IsAttached)
+            {
+                System.Diagnostics.Debugger.Launch();
+            }
 
             // Seeding Roles. Changes to roles will affect the application
             var roleStore = new RoleStore<IdentityRole>(db);
@@ -95,77 +95,77 @@ namespace Project_LMS.Migrations
 
             //Seeding modules, referencing courses
             var modules = new[] {
-                new Project_LMS.Models.Module {
+                new Project_LMS.Models.Module { //0
                     CourseId = courses[0].CourseId,
                     StartDate = courses[0].StartDate,
                     EndDate = courses[0].StartDate.AddDays(8),
                     Name = "Cookies, not just for web-pages",
                     Description = "An introduction to Cookies: the common combinations."
                 },
-                new Project_LMS.Models.Module {
+                new Project_LMS.Models.Module { //1
                     CourseId = courses[0].CourseId,
                     StartDate = courses[0].StartDate.AddDays(7),
                     EndDate = courses[0].StartDate.AddDays(11),
                     Name = "Coffie, the black gold",
                     Description = "An introduction to Coffie: Brew or boil?"
                 },
-                new Project_LMS.Models.Module {
+                new Project_LMS.Models.Module { //2
                     CourseId = courses[0].CourseId,
                     StartDate = courses[0].StartDate.AddDays(11),
                     EndDate = courses[0].StartDate.AddDays(15),
                     Name = "fika: rest, recreation or regulation",
                     Description = "A theoretical glance at the position of fika in todays society."
                 },
-                new Project_LMS.Models.Module {
+                new Project_LMS.Models.Module { //3
                     CourseId = courses[0].CourseId,
                     StartDate = courses[0].StartDate.AddDays(15),
                     EndDate = courses[0].StartDate.AddDays(30),
                     Name = "Fika: the F-word in Sweden",
                     Description = "Fika is a coffee break in Sweden, but it is invested with considerable socio-cultural and symbolic significance."
                 },
-                new Project_LMS.Models.Module {
+                new Project_LMS.Models.Module { //4
                     CourseId = courses[0].CourseId,
                     StartDate = courses[0].StartDate,
                     EndDate = courses[0].StartDate.AddDays(8),
                     Name = "Fika is polyvalent and paradoxical ",
                     Description = "It can be a signifier of employer recognition and generosity, and a challenge to the mind/body dualism in academic work cultures."
                 },
-                new Project_LMS.Models.Module {
+                new Project_LMS.Models.Module { //5
                     CourseId = courses[0].CourseId,
                     StartDate = courses[0].StartDate.AddDays(8),
                     EndDate = courses[0].StartDate.AddDays(30),
                     Name = "Fika: research",
                     Description = "Our research interrogates and deconstructs fika in the context of the political economy of neoliberalism. "
                 },
-                    new Project_LMS.Models.Module {
+                    new Project_LMS.Models.Module { //6
                     CourseId = courses[1].CourseId,
                     StartDate = courses[1].StartDate.AddDays(0),
                     EndDate = courses[1].StartDate.AddDays(5),
                     Name = "Physical excercise",
                     Description = "After tipping a cow, it's important to be able to outrun it. "
                 },
-                    new Project_LMS.Models.Module {
+                    new Project_LMS.Models.Module { //7
                     CourseId = courses[1].CourseId,
                     StartDate = courses[1].StartDate.AddDays(6),
                     EndDate = courses[1].StartDate.AddDays(10),
                     Name = "Stealth",
                     Description = "The art fo sneaking up on a sleepign cow, without waking it"
                 },
-                    new Project_LMS.Models.Module {
+                    new Project_LMS.Models.Module { //8
                     CourseId = courses[1].CourseId,
                     StartDate = courses[1].StartDate.AddDays(6),
                     EndDate = courses[1].StartDate.AddDays(10),
                     Name = "Dry-run",
                     Description = "We practice on each other"
                 },
-                    new Project_LMS.Models.Module {
+                    new Project_LMS.Models.Module { //9
                     CourseId = courses[1].CourseId,
                     StartDate = courses[1].StartDate.AddDays(6),
                     EndDate = courses[1].StartDate.AddDays(10),
                     Name = "Starting small",
                     Description = "Calf-tilting"
                 },
-                    new Project_LMS.Models.Module {
+                    new Project_LMS.Models.Module { //10
                     CourseId = courses[1].CourseId,
                     StartDate = courses[1].StartDate.AddDays(6),
                     EndDate = courses[1].StartDate.AddDays(10),
@@ -268,6 +268,42 @@ namespace Project_LMS.Migrations
                     ActivityTypeId = activityTypes[2].ActivityTypeId,
                     Description = "Acronym for Problem in chair. Not in computer. Used by Sysadmins to covertly describe user error to each other. Some snickering usually involved.",
                     Color = "purple"
+                },
+                new Activity {
+                    ModuleId = modules[6].ModuleId,
+                    Start = modules[6].StartDate.AddDays(0),
+                    End = modules[6].StartDate.AddDays(2),
+                    ActivityName = "Speedwalking",
+                    ActivityTypeId = activityTypes[1].ActivityTypeId,
+                    Description = "In full gear, and backpack filled with sand we speedwalk to a place called \"Lapphelvetet\", and back again",
+                    Color = "blue"
+                },
+                    new Activity {
+                    ModuleId = modules[6].ModuleId,
+                    Start = modules[6].StartDate.AddDays(3),
+                    End = modules[6].StartDate.AddDays(3),
+                    ActivityName = "R&D",
+                    ActivityTypeId = activityTypes[4].ActivityTypeId,
+                    Description = "A full day off",
+                    Color = "white"
+                },
+                    new Activity {
+                    ModuleId = modules[6].ModuleId,
+                    Start = modules[6].StartDate.AddDays(4),
+                    End = modules[6].StartDate.AddDays(5),
+                    ActivityName = "obstacle Course",
+                    ActivityTypeId = activityTypes[1].ActivityTypeId,
+                    Description = "Getting around the old military obstacle base outside Falun as fast as possibel. Both during daytime and during night-time",
+                    Color = "blue"
+                },
+                    new Activity {
+                    ModuleId = modules[6].ModuleId,
+                    Start = modules[6].StartDate.AddDays(0),
+                    End = modules[6].StartDate.AddDays(5),
+                    ActivityName = "Cowspotting",
+                    ActivityTypeId = activityTypes[3].ActivityTypeId,
+                    Description = "Hand in a list of 10 good places for cowtilting. Including driving directions, pictures and a description of the farmer who owns said cows.",
+                    Color = "navy"
                 }
             };
             db.Activities.AddOrUpdate(a => a.ActivityName, activities);
