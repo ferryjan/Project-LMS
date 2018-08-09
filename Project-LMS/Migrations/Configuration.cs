@@ -426,7 +426,7 @@ namespace Project_LMS.Migrations
                     FamilyName= "Carvalho",
                     CourseId = courses[0].CourseId
                 },
-                new NewUser
+                new NewUser //18
                 {
                     Email = "Audra.Gustafson@aol.com",
                     Rolestring = "Student",
@@ -434,7 +434,7 @@ namespace Project_LMS.Migrations
                     FamilyName= "Gustafson",
                     CourseId = courses[0].CourseId
                 },
-                new NewUser
+                new NewUser //19
                 {
                     Email = "Avram.Silvers@icloud.com",
                     Rolestring = "Student",
@@ -442,7 +442,7 @@ namespace Project_LMS.Migrations
                     FamilyName= "Gustafson",
                     CourseId = courses[0].CourseId
                 },
-                new NewUser
+                new NewUser //20
                 {
                     Email = "Modestia.Michaud@icloud.com",
                     Rolestring = "Student",
@@ -450,7 +450,7 @@ namespace Project_LMS.Migrations
                     FamilyName= "Michaud",
                     CourseId = courses[0].CourseId
                 },
-                new NewUser
+                new NewUser //21
                 {
                     Email = "Boris.Cronan@yahoo.com",
                     Rolestring = "Student",
@@ -458,7 +458,7 @@ namespace Project_LMS.Migrations
                     FamilyName= "Cronan",
                     CourseId = courses[0].CourseId
                 },
-                new NewUser
+                new NewUser //22
                 {
                     Email = "Kyrstin.Blake@mail.com",
                     Rolestring = "Student",
@@ -466,7 +466,7 @@ namespace Project_LMS.Migrations
                     FamilyName= "Blake",
                     CourseId = courses[0].CourseId
                 },
-                new NewUser 
+                new NewUser //23
                 {
                     Email = "Reinwald.Reggiani@gmx.com",
                     Rolestring = "Student",
@@ -474,7 +474,7 @@ namespace Project_LMS.Migrations
                     FamilyName= "Reggiani",
                     CourseId = courses[0].CourseId
                 },
-                new NewUser
+                new NewUser //24
                 {
                     Email = "Katuscha.Mccabe@gmail.com",
                     Rolestring = "Student",
@@ -482,7 +482,7 @@ namespace Project_LMS.Migrations
                     FamilyName= "Mccabe",
                     CourseId = courses[0].CourseId
                 },
-                new NewUser
+                new NewUser //25
                 {
                     Email = "Gallard.Cripps@gmail.com",
                     Rolestring = "Student",
@@ -490,7 +490,7 @@ namespace Project_LMS.Migrations
                     FamilyName= "Cripps",
                     CourseId = courses[0].CourseId
                 },
-                new NewUser
+                new NewUser //26
                 {
                     Email = "Anallise.Cedillo@aol.com",
                     Rolestring = "Student",
@@ -498,7 +498,7 @@ namespace Project_LMS.Migrations
                     FamilyName= "Cedillo",
                     CourseId = courses[0].CourseId
                 },
-                new NewUser
+                new NewUser //27
                 {
                     Email = "Gayelord.Roels@bredbandsbolaget.se",
                     Rolestring = "Student",
@@ -506,7 +506,7 @@ namespace Project_LMS.Migrations
                     FamilyName= "Roels",
                     CourseId = courses[0].CourseId
                 },
-                new NewUser
+                new NewUser //28
                 {
                     Email = "Kelila.Von.hoffman@fastmail.se",
                     Rolestring = "Student",
@@ -514,7 +514,7 @@ namespace Project_LMS.Migrations
                     FamilyName= "Von Hoffman",
                     CourseId = courses[0].CourseId
                 },
-                new NewUser
+                new NewUser //29
                 {
                     Email = "Silvester.Heck@Hushmail.il",
                     Rolestring = "Student",
@@ -522,7 +522,7 @@ namespace Project_LMS.Migrations
                     FamilyName= "Von Hoffman",
                     CourseId = courses[0].CourseId
                 },
-                new NewUser
+                new NewUser //30
                 {
                     Email = "Anna.diana.Teitz@Lycos.com",
                     Rolestring = "Student",
@@ -530,7 +530,7 @@ namespace Project_LMS.Migrations
                     FamilyName= "Teitz",
                     CourseId = courses[0].CourseId
                 },
-                new NewUser
+                new NewUser //31
                 {
                     Email = "Laird.Penkethman@mail.ru",
                     Rolestring = "Student",
@@ -538,7 +538,7 @@ namespace Project_LMS.Migrations
                     FamilyName= "Penkethman",
                     CourseId = courses[0].CourseId
                 },
-                new NewUser
+                new NewUser //32
                 {
                     Email = "Lauralee.Salvemini@Mailfence.com",
                     Rolestring = "Student",
@@ -546,7 +546,7 @@ namespace Project_LMS.Migrations
                     FamilyName= "Salvemini",
                     CourseId = courses[0].CourseId
                 },
-                new NewUser
+                new NewUser //33
                 {
                     Email = "Muhammad.Spaur@hotmail.com",
                     Rolestring = "Student",
@@ -554,7 +554,7 @@ namespace Project_LMS.Migrations
                     FamilyName= "Spaur",
                     CourseId = courses[0].CourseId
                 },
-                new NewUser
+                new NewUser //34
                 {
                     Email = "Marrilee.Renzella@livemail.com",
                     Rolestring = "Student",
@@ -562,7 +562,7 @@ namespace Project_LMS.Migrations
                     FamilyName= "Renzella",
                     CourseId = courses[0].CourseId
                 },
-                new NewUser
+                new NewUser //35
                 {
                     Email = "Lyn.Viglionese@livemail.com",
                     Rolestring = "Student",
@@ -570,7 +570,7 @@ namespace Project_LMS.Migrations
                     FamilyName= "Viglionese",
                     CourseId = courses[0].CourseId
                 },
-                new NewUser
+                new NewUser //36
                 {
                     Email = "Jacquette.Mcarthur@protonmail.com",
                     Rolestring = "Student",
@@ -578,7 +578,7 @@ namespace Project_LMS.Migrations
                     FamilyName= "Mcarthur",
                     CourseId = courses[1].CourseId
                 },
-                new NewUser
+                new NewUser //37
                 {
                     Email = "Frasco.Jarrett@rackspace.com",
                     Rolestring = "Student",
@@ -586,7 +586,7 @@ namespace Project_LMS.Migrations
                     FamilyName= "Jarrett",
                     CourseId = courses[0].CourseId
                 },
-                new NewUser
+                new NewUser //38
                 {
                     Email = "Ante.Bante@topstudent.se",
                     Rolestring = "Student",
@@ -594,16 +594,207 @@ namespace Project_LMS.Migrations
                     FamilyName= "Bante",
                     CourseId = courses[0].CourseId
                 },
-                new NewUser
+                new NewUser //39
                 {
                     Email = "System@lms.se",
                     Rolestring = "System",
                     GivenName = "LMS",
                     FamilyName= "System Notification",
                     CourseId = null
+                },
+                new NewUser //40
+                {
+                    Email = "Adrian.Hedqvist@lexicon.se",
+                    Rolestring = "Student",
+                    GivenName = "Adrian",
+                    FamilyName= "Hedqvist",
+                    CourseId = courses[1].CourseId
+                },
+                new NewUser //41
+                {
+                    Email = "Ali.Salhab@lexicon.se",
+                    Rolestring = "Student",
+                    GivenName = "Ali",
+                    FamilyName= "Salhab",
+                    CourseId = courses[1].CourseId
+                },
+                new NewUser //42
+                {
+                    Email = "Ante.Inersjo@lexicon.se",
+                    Rolestring = "Student",
+                    GivenName = "Ante",
+                    FamilyName= "Inersjö",
+                    CourseId = courses[1].CourseId
+                },
+                new NewUser //43
+                {
+                    Email = "Bereket.Alemseged.Tukabo@lexicon.se",
+                    Rolestring = "Student",
+                    GivenName = "Bereket",
+                    FamilyName= "Alemseged",
+                    CourseId = courses[1].CourseId
+                },
+                new NewUser //44
+                {
+                    Email = "Dennis.Nilsson@lexicon.se",
+                    Rolestring = "Student",
+                    GivenName = "Dennis",
+                    FamilyName= "Nilsson",
+                    CourseId = courses[1].CourseId
+                },
+                new NewUser //45
+                {
+                    Email = "Fredrik.Ekman@lexicon.se",
+                    Rolestring = "Student",
+                    GivenName = "Fredrik",
+                    FamilyName= "Ekman",
+                    CourseId = courses[1].CourseId
+                },
+                new NewUser //46
+                {
+                    Email = "Hesam.Zandi.Ghaleh@lexicon.se",
+                    Rolestring = "Student",
+                    GivenName = "Hesam",
+                    FamilyName= "Ghaleh",
+                    CourseId = courses[1].CourseId
+                },
+                new NewUser //47
+                {
+                    Email = "Jesper.Furtenbach@lexicon.se",
+                    Rolestring = "Student",
+                    GivenName = "Jesper",
+                    FamilyName= "Fürtenbach",
+                    CourseId = courses[1].CourseId
+                },
+                new NewUser //48
+                {
+                    Email = "Jerry.Fan@lexicon.se",
+                    Rolestring = "Student",
+                    GivenName = "Jesper",
+                    FamilyName= "Fürtenbach",
+                    CourseId = courses[1].CourseId
+                },
+                new NewUser //49
+                {
+                    Email = "Kristoffer.Aberg@lexicon.se",
+                    Rolestring = "Student",
+                    GivenName = "Kristoffer",
+                    FamilyName= "Åberg",
+                    CourseId = courses[1].CourseId
+                },
+                new NewUser //50
+                {
+                    Email = "Marcus.Andersson@lexicon.se",
+                    Rolestring = "Student",
+                    GivenName = "Marcus",
+                    FamilyName= "Andersson",
+                    CourseId = courses[1].CourseId
+                },
+                new NewUser //51
+                {
+                    Email = "Michael.Nyberg.Hjerto@lexicon.se",
+                    Rolestring = "Student",
+                    GivenName = "Michael",
+                    FamilyName= "Hjertö",
+                    CourseId = courses[1].CourseId
+                },
+                new NewUser //52
+                {
+                    Email = "Mohamed.Almohsen@lexicon.se",
+                    Rolestring = "Student",
+                    GivenName = "Mohamed",
+                    FamilyName= "Almohsen",
+                    CourseId = courses[1].CourseId
+                },
+                new NewUser //53
+                {
+                    Email = "Oskar.Ljungdahl@lexicon.se",
+                    Rolestring = "Student",
+                    GivenName = "Oskar",
+                    FamilyName= "Ljungdahl",
+                    CourseId = courses[1].CourseId
+                },
+                new NewUser //54
+                {
+                    Email = "Patrick.Andersson@lexicon.se",
+                    Rolestring = "Student",
+                    GivenName = "Patrick",
+                    FamilyName= "Andersson",
+                    CourseId = courses[1].CourseId
+                },
+                new NewUser //55
+                {
+                    Email = "Reza.Zaman.Dagleh@lexicon.se",
+                    Rolestring = "Student",
+                    GivenName = "Reza",
+                    FamilyName= "Dagleh",
+                    CourseId = courses[1].CourseId
+                },
+                new NewUser //56
+                {
+                    Email = "Robert.Dubrovskis@lexicon.se",
+                    Rolestring = "Student",
+                    GivenName = "Robert",
+                    FamilyName= "Dubrovskis",
+                    CourseId = courses[1].CourseId
+                },
+                new NewUser //57
+                {
+                    Email = "Robert.Huselius@lexicon.se",
+                    Rolestring = "Student",
+                    GivenName = "Robert",
+                    FamilyName= "Huselius",
+                    CourseId = courses[1].CourseId
+                },
+                new NewUser //58
+                {
+                    Email = "Rolf.Bjarenstam@lexicon.se",
+                    Rolestring = "Student",
+                    GivenName = "Rolf",
+                    FamilyName= "Bjärenstam",
+                    CourseId = courses[1].CourseId
+                },
+                new NewUser //59
+                {
+                    Email = "Sandeep.Singh@lexicon.se",
+                    Rolestring = "Student",
+                    GivenName = "Sandeep",
+                    FamilyName= "Singh",
+                    CourseId = courses[1].CourseId
+                },
+                new NewUser //60
+                {
+                    Email = "Sebastian.Norman@lexicon.se",
+                    Rolestring = "Student",
+                    GivenName = "Sebastian",
+                    FamilyName= "Norman",
+                    CourseId = courses[1].CourseId
+                },
+                new NewUser //61
+                {
+                    Email = "Teemu.Mustaniemi@lexicon.se",
+                    Rolestring = "Student",
+                    GivenName = "Teemu",
+                    FamilyName= "Mustaniemi",
+                    CourseId = courses[1].CourseId
+                },
+                new NewUser //62
+                {
+                    Email = "Tomas.Risveden@lexicon.se",
+                    Rolestring = "Student",
+                    GivenName = "Tomas",
+                    FamilyName= "Risveden",
+                    CourseId = courses[1].CourseId
+                },
+                new NewUser //63
+                {
+                    Email = "Wameedh.Hashosh@lexicon.se",
+                    Rolestring = "Student",
+                    GivenName = "Wameedh",
+                    FamilyName= "Hashosh",
+                    CourseId = courses[1].CourseId
                 }
             };
-        
 
             foreach (var item in newUser)
             {

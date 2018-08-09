@@ -602,7 +602,6 @@
     <Content Include="Views\TeacherCourses\_cloneCourse.cshtml" />
     <Content Include="Views\Messages\_courseMsgBoard.cshtml" />
     <Content Include="Views\Messages\_showCourseMessageBoardMessages.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
