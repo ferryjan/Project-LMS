@@ -44,7 +44,7 @@ namespace Project_LMS.Controllers
             else
             {
                 listOfMsg = db.Messages.Where(m => m.MessageBoxNumber == id).OrderBy(m => m.SentDate).ToList();
-            }       
+            }
             return PartialView("_showPrivateChats", listOfMsg);
         }
 
@@ -109,7 +109,7 @@ namespace Project_LMS.Controllers
 
                 ViewBag.Classmates = new SelectList(classmates);
             }
-                    
+
 
             if (id != null && id != "")
             {
@@ -142,7 +142,7 @@ namespace Project_LMS.Controllers
                 message.SentFromFullName = smv.SentFromFullName;
                 message.Topic = smv.Topic;
                 message.Msg = smv.Msg;
-    
+
                 if (smv.SentTo != null && smv.SentTo != "")
                 {
                     message.SentTo = smv.SentTo;
@@ -225,7 +225,7 @@ namespace Project_LMS.Controllers
             {
                 ViewBag.HasLeft = "System";
             }
-            else if (db.Messages.FirstOrDefault(m => m.MessageBoxNumber == id && m.FirstPersonLeft != null ) != null)
+            else if (db.Messages.FirstOrDefault(m => m.MessageBoxNumber == id && m.FirstPersonLeft != null) != null)
             {
                 ViewBag.HasLeft = "Yes";
             }
@@ -324,17 +324,20 @@ namespace Project_LMS.Controllers
 
         public ActionResult CourseMessageBoard(string id)
         {
-            Message msgModel = new Message();
-            msgModel.isPublic = true;
-            msgModel.isRead = false;
-            msgModel.MessageBoxNumber = id;
-            msgModel.Topic = "Course Message Board";
             var user = db.Users.FirstOrDefault(u => u.Email == User.Identity.Name);
-            msgModel.SentFrom = User.Identity.Name;
-            msgModel.SentFromFullName = user.FullName;
-            msgModel.SentTo = User.Identity.Name;
-            msgModel.SentToFullName = user.FullName;
-            msgModel.Msg = "";
+            Message msgModel = new Message()
+            {
+                isPublic = true,
+                isRead = false,
+                MessageBoxNumber = id,
+                Topic = "Course Message Board",
+                SentFrom = User.Identity.Name,
+                SentFromFullName = user.FullName,
+                SentTo = User.Identity.Name,
+                SentToFullName = user.FullName,
+                Msg = ""
+            };
+
             if (TempData.ContainsKey("Empty"))
             {
                 ViewBag.isEmpty = TempData["Empty"].ToString();
@@ -366,7 +369,7 @@ namespace Project_LMS.Controllers
                 db.SaveChanges();
                 TempData["MsgSent"] = "yes";
                 ModelState["Msg"].Value = new ValueProviderResult(string.Empty, string.Empty, ModelState["Msg"].Value.Culture);
-                return RedirectToAction("StudentStart","StudentCourses");
+                return RedirectToAction("StudentStart", "StudentCourses");
             }
             TempData["MsgSent"] = "yes";
             TempData["Empty"] = "empty";
