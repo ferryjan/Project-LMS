@@ -12,6 +12,7 @@
         (DateTime.Compare(m.StartDate, module.StartDate) > 0) && (DateTime.Compare(m.EndDate, module.EndDate) < 0) ||
         (DateTime.Compare(m.StartDate, module.StartDate) == 0) && (DateTime.Compare(m.EndDate, module.EndDate) < 0) ||
         (DateTime.Compare(m.StartDate, module.StartDate) > 0) && (DateTime.Compare(m.EndDate, module.EndDate) == 0) ||
+        (DateTime.Compare(m.StartDate, module.StartDate) == 0) && (DateTime.Compare(m.EndDate, module.EndDate) == 0) ||
         (DateTime.Compare(m.StartDate, module.EndDate) < 0) && (DateTime.Compare(m.EndDate, module.EndDate) > 0))) != null)
         {
             moduleDateInCollision.Add(module);

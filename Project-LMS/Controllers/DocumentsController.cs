@@ -249,7 +249,7 @@ namespace Project_LMS.Controllers
                         file.InputStream.Read(doc.FileData, 0, file.ContentLength);
                         db.Documents.Add(doc);
                         db.SaveChanges();
-                        return RedirectToAction("Edit", "Activities", new { id });
+                        return RedirectToAction("StudentStart", "StudentCourses");
                     }
                     else
                     {

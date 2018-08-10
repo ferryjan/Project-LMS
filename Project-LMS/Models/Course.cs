@@ -87,8 +87,7 @@ namespace Project_LMS.Models
     {
         public Course Course { get; set; }
 
-        [Display(Name = "New startdate")]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]        
+        [Display(Name = "New startdate")]    
         [DataType(DataType.Date)]
         public DateTime NewDate { get; set; }
 
