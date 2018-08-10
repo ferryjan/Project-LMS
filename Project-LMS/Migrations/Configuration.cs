@@ -154,22 +154,22 @@ namespace Project_LMS.Migrations
                 },
                     new Project_LMS.Models.Module { //8
                     CourseId = courses[1].CourseId,
-                    StartDate = courses[1].StartDate.AddDays(6),
-                    EndDate = courses[1].StartDate.AddDays(10),
+                    StartDate = courses[1].StartDate.AddDays(11),
+                    EndDate = courses[1].StartDate.AddDays(15),
                     Name = "Dry-run",
                     Description = "We practice on each other"
                 },
                     new Project_LMS.Models.Module { //9
                     CourseId = courses[1].CourseId,
-                    StartDate = courses[1].StartDate.AddDays(6),
-                    EndDate = courses[1].StartDate.AddDays(10),
+                    StartDate = courses[1].StartDate.AddDays(16),
+                    EndDate = courses[1].StartDate.AddDays(20),
                     Name = "Starting small",
                     Description = "Calf-tilting"
                 },
                     new Project_LMS.Models.Module { //10
                     CourseId = courses[1].CourseId,
-                    StartDate = courses[1].StartDate.AddDays(6),
-                    EndDate = courses[1].StartDate.AddDays(10),
+                    StartDate = courses[1].StartDate.AddDays(20),
+                    EndDate = courses[1].StartDate.AddDays(30),
                     Name = "The real deal",
                     Description = "We drive out on the countryside, in search of sleeping cows"
                 }
