@@ -494,7 +494,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Views\Shared\Script.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -602,7 +604,6 @@
     <Content Include="Views\TeacherCourses\_cloneCourse.cshtml" />
     <Content Include="Views\Messages\_courseMsgBoard.cshtml" />
     <Content Include="Views\Messages\_showCourseMessageBoardMessages.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

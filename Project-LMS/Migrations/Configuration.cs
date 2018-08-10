@@ -95,77 +95,78 @@ namespace Project_LMS.Migrations
 
             //Seeding modules, referencing courses
             var modules = new[] {
-                new Project_LMS.Models.Module {
+                new Project_LMS.Models.Module { //0
                     CourseId = courses[0].CourseId,
                     StartDate = courses[0].StartDate,
                     EndDate = courses[0].StartDate.AddDays(8),
                     Name = "Cookies, not just for web-pages",
                     Description = "An introduction to Cookies: the common combinations."
                 },
-                new Project_LMS.Models.Module {
+                new Project_LMS.Models.Module { //1
                     CourseId = courses[0].CourseId,
                     StartDate = courses[0].StartDate.AddDays(7),
                     EndDate = courses[0].StartDate.AddDays(11),
                     Name = "Coffie, the black gold",
                     Description = "An introduction to Coffie: Brew or boil?"
                 },
-                new Project_LMS.Models.Module {
+                new Project_LMS.Models.Module { //2
                     CourseId = courses[0].CourseId,
                     StartDate = courses[0].StartDate.AddDays(11),
                     EndDate = courses[0].StartDate.AddDays(15),
                     Name = "fika: rest, recreation or regulation",
                     Description = "A theoretical glance at the position of fika in todays society."
                 },
-                new Project_LMS.Models.Module {
+                new Project_LMS.Models.Module { //3
                     CourseId = courses[0].CourseId,
                     StartDate = courses[0].StartDate.AddDays(15),
                     EndDate = courses[0].StartDate.AddDays(30),
                     Name = "Fika: the F-word in Sweden",
                     Description = "Fika is a coffee break in Sweden, but it is invested with considerable socio-cultural and symbolic significance."
                 },
-                new Project_LMS.Models.Module {
+                new Project_LMS.Models.Module { //4
                     CourseId = courses[0].CourseId,
                     StartDate = courses[0].StartDate,
                     EndDate = courses[0].StartDate.AddDays(8),
                     Name = "Fika is polyvalent and paradoxical ",
                     Description = "It can be a signifier of employer recognition and generosity, and a challenge to the mind/body dualism in academic work cultures."
                 },
-                new Project_LMS.Models.Module {
+
+                new Project_LMS.Models.Module { //5
                     CourseId = courses[0].CourseId,
                     StartDate = courses[0].StartDate.AddDays(8),
                     EndDate = courses[0].StartDate.AddDays(30),
                     Name = "Fika: research",
                     Description = "Our research interrogates and deconstructs fika in the context of the political economy of neoliberalism. "
                 },
-                    new Project_LMS.Models.Module {
+                    new Project_LMS.Models.Module { //6
                     CourseId = courses[1].CourseId,
                     StartDate = courses[1].StartDate.AddDays(0),
                     EndDate = courses[1].StartDate.AddDays(5),
                     Name = "Physical excercise",
                     Description = "After tipping a cow, it's important to be able to outrun it. "
                 },
-                    new Project_LMS.Models.Module {
+                    new Project_LMS.Models.Module { //7
                     CourseId = courses[1].CourseId,
                     StartDate = courses[1].StartDate.AddDays(6),
                     EndDate = courses[1].StartDate.AddDays(10),
                     Name = "Stealth",
-                    Description = "The art fo sneaking up on a sleepign cow, without waking it"
+                    Description = "The art fo sneaking up on a sleeping cow, without waking it"
                 },
-                    new Project_LMS.Models.Module {
+                    new Project_LMS.Models.Module { //8
                     CourseId = courses[1].CourseId,
                     StartDate = courses[1].StartDate.AddDays(6),
                     EndDate = courses[1].StartDate.AddDays(10),
                     Name = "Dry-run",
                     Description = "We practice on each other"
                 },
-                    new Project_LMS.Models.Module {
+                    new Project_LMS.Models.Module { //9
                     CourseId = courses[1].CourseId,
                     StartDate = courses[1].StartDate.AddDays(6),
                     EndDate = courses[1].StartDate.AddDays(10),
                     Name = "Starting small",
                     Description = "Calf-tilting"
                 },
-                    new Project_LMS.Models.Module {
+                    new Project_LMS.Models.Module { //10
                     CourseId = courses[1].CourseId,
                     StartDate = courses[1].StartDate.AddDays(6),
                     EndDate = courses[1].StartDate.AddDays(10),
@@ -268,6 +269,51 @@ namespace Project_LMS.Migrations
                     ActivityTypeId = activityTypes[2].ActivityTypeId,
                     Description = "Acronym for Problem in chair. Not in computer. Used by Sysadmins to covertly describe user error to each other. Some snickering usually involved.",
                     Color = "purple"
+                },
+                new Activity {
+                    ModuleId = modules[6].ModuleId,
+                    Start = modules[6].StartDate.AddDays(0),
+                    End = modules[6].StartDate.AddDays(2),
+                    ActivityName = "Speedwalking",
+                    ActivityTypeId = activityTypes[1].ActivityTypeId,
+                    Description = "In full gear, and backpack filled with sand we speedwalk to a place called \"Lapphelvetet\", and back again",
+                    Color = "blue"
+                },
+                    new Activity {
+                    ModuleId = modules[6].ModuleId,
+                    Start = modules[6].StartDate.AddDays(3),
+                    End = modules[6].StartDate.AddDays(3),
+                    ActivityName = "R&D",
+                    ActivityTypeId = activityTypes[4].ActivityTypeId,
+                    Description = "A full day off",
+                    Color = "white"
+                },
+                    new Activity {
+                    ModuleId = modules[6].ModuleId,
+                    Start = modules[6].StartDate.AddDays(4),
+                    End = modules[6].StartDate.AddDays(5),
+                    ActivityName = "obstacle Course",
+                    ActivityTypeId = activityTypes[1].ActivityTypeId,
+                    Description = "Getting around the old military obstacle base outside Falun as fast as possibel. Both during daytime and during night-time",
+                    Color = "blue"
+                },
+                    new Activity {
+                    ModuleId = modules[6].ModuleId,
+                    Start = modules[6].StartDate.AddDays(0),
+                    End = modules[6].StartDate.AddDays(5),
+                    ActivityName = "Cowspotting",
+                    ActivityTypeId = activityTypes[3].ActivityTypeId,
+                    Description = "Hand in a list of 10 good places for cowtilting. Including driving directions, pictures and a description of the farmer who owns said cows.",
+                    Color = "navy"
+                },
+                    new Activity {
+                    ModuleId = modules[7].ModuleId,
+                    Start = modules[7].StartDate.AddDays(0),
+                    End = modules[7].StartDate.AddDays(2),
+                    ActivityName = "Silent walk",
+                    ActivityTypeId = activityTypes[1].ActivityTypeId,
+                    Description = "We train by walking silently over japanese singing floors (student pays for flight tickets to japan themselves)",
+                    Color = "blue"
                 }
             };
             db.Activities.AddOrUpdate(a => a.ActivityName, activities);
@@ -426,7 +472,7 @@ namespace Project_LMS.Migrations
                     FamilyName= "Carvalho",
                     CourseId = courses[0].CourseId
                 },
-                new NewUser
+                new NewUser //18
                 {
                     Email = "Audra.Gustafson@aol.com",
                     Rolestring = "Student",
@@ -434,7 +480,7 @@ namespace Project_LMS.Migrations
                     FamilyName= "Gustafson",
                     CourseId = courses[0].CourseId
                 },
-                new NewUser
+                new NewUser //19
                 {
                     Email = "Avram.Silvers@icloud.com",
                     Rolestring = "Student",
@@ -442,7 +488,7 @@ namespace Project_LMS.Migrations
                     FamilyName= "Gustafson",
                     CourseId = courses[0].CourseId
                 },
-                new NewUser
+                new NewUser //20
                 {
                     Email = "Modestia.Michaud@icloud.com",
                     Rolestring = "Student",
@@ -450,7 +496,7 @@ namespace Project_LMS.Migrations
                     FamilyName= "Michaud",
                     CourseId = courses[0].CourseId
                 },
-                new NewUser
+                new NewUser //21
                 {
                     Email = "Boris.Cronan@yahoo.com",
                     Rolestring = "Student",
@@ -458,7 +504,7 @@ namespace Project_LMS.Migrations
                     FamilyName= "Cronan",
                     CourseId = courses[0].CourseId
                 },
-                new NewUser
+                new NewUser //22
                 {
                     Email = "Kyrstin.Blake@mail.com",
                     Rolestring = "Student",
@@ -466,7 +512,7 @@ namespace Project_LMS.Migrations
                     FamilyName= "Blake",
                     CourseId = courses[0].CourseId
                 },
-                new NewUser 
+                new NewUser //23
                 {
                     Email = "Reinwald.Reggiani@gmx.com",
                     Rolestring = "Student",
@@ -474,7 +520,7 @@ namespace Project_LMS.Migrations
                     FamilyName= "Reggiani",
                     CourseId = courses[0].CourseId
                 },
-                new NewUser
+                new NewUser //24
                 {
                     Email = "Katuscha.Mccabe@gmail.com",
                     Rolestring = "Student",
@@ -482,7 +528,7 @@ namespace Project_LMS.Migrations
                     FamilyName= "Mccabe",
                     CourseId = courses[0].CourseId
                 },
-                new NewUser
+                new NewUser //25
                 {
                     Email = "Gallard.Cripps@gmail.com",
                     Rolestring = "Student",
@@ -490,7 +536,7 @@ namespace Project_LMS.Migrations
                     FamilyName= "Cripps",
                     CourseId = courses[0].CourseId
                 },
-                new NewUser
+                new NewUser //26
                 {
                     Email = "Anallise.Cedillo@aol.com",
                     Rolestring = "Student",
@@ -498,7 +544,7 @@ namespace Project_LMS.Migrations
                     FamilyName= "Cedillo",
                     CourseId = courses[0].CourseId
                 },
-                new NewUser
+                new NewUser //27
                 {
                     Email = "Gayelord.Roels@bredbandsbolaget.se",
                     Rolestring = "Student",
@@ -506,7 +552,7 @@ namespace Project_LMS.Migrations
                     FamilyName= "Roels",
                     CourseId = courses[0].CourseId
                 },
-                new NewUser
+                new NewUser //28
                 {
                     Email = "Kelila.Von.hoffman@fastmail.se",
                     Rolestring = "Student",
@@ -514,7 +560,7 @@ namespace Project_LMS.Migrations
                     FamilyName= "Von Hoffman",
                     CourseId = courses[0].CourseId
                 },
-                new NewUser
+                new NewUser //29
                 {
                     Email = "Silvester.Heck@Hushmail.il",
                     Rolestring = "Student",
@@ -522,7 +568,7 @@ namespace Project_LMS.Migrations
                     FamilyName= "Von Hoffman",
                     CourseId = courses[0].CourseId
                 },
-                new NewUser
+                new NewUser //30
                 {
                     Email = "Anna.diana.Teitz@Lycos.com",
                     Rolestring = "Student",
@@ -530,7 +576,7 @@ namespace Project_LMS.Migrations
                     FamilyName= "Teitz",
                     CourseId = courses[0].CourseId
                 },
-                new NewUser
+                new NewUser //31
                 {
                     Email = "Laird.Penkethman@mail.ru",
                     Rolestring = "Student",
@@ -538,7 +584,7 @@ namespace Project_LMS.Migrations
                     FamilyName= "Penkethman",
                     CourseId = courses[0].CourseId
                 },
-                new NewUser
+                new NewUser //32
                 {
                     Email = "Lauralee.Salvemini@Mailfence.com",
                     Rolestring = "Student",
@@ -546,7 +592,7 @@ namespace Project_LMS.Migrations
                     FamilyName= "Salvemini",
                     CourseId = courses[0].CourseId
                 },
-                new NewUser
+                new NewUser //33
                 {
                     Email = "Muhammad.Spaur@hotmail.com",
                     Rolestring = "Student",
@@ -554,7 +600,7 @@ namespace Project_LMS.Migrations
                     FamilyName= "Spaur",
                     CourseId = courses[0].CourseId
                 },
-                new NewUser
+                new NewUser //34
                 {
                     Email = "Marrilee.Renzella@livemail.com",
                     Rolestring = "Student",
@@ -562,7 +608,7 @@ namespace Project_LMS.Migrations
                     FamilyName= "Renzella",
                     CourseId = courses[0].CourseId
                 },
-                new NewUser
+                new NewUser //35
                 {
                     Email = "Lyn.Viglionese@livemail.com",
                     Rolestring = "Student",
@@ -570,7 +616,7 @@ namespace Project_LMS.Migrations
                     FamilyName= "Viglionese",
                     CourseId = courses[0].CourseId
                 },
-                new NewUser
+                new NewUser //36
                 {
                     Email = "Jacquette.Mcarthur@protonmail.com",
                     Rolestring = "Student",
@@ -578,7 +624,7 @@ namespace Project_LMS.Migrations
                     FamilyName= "Mcarthur",
                     CourseId = courses[1].CourseId
                 },
-                new NewUser
+                new NewUser //37
                 {
                     Email = "Frasco.Jarrett@rackspace.com",
                     Rolestring = "Student",
@@ -586,7 +632,7 @@ namespace Project_LMS.Migrations
                     FamilyName= "Jarrett",
                     CourseId = courses[0].CourseId
                 },
-                new NewUser
+                new NewUser //38
                 {
                     Email = "Ante.Bante@topstudent.se",
                     Rolestring = "Student",
@@ -594,16 +640,207 @@ namespace Project_LMS.Migrations
                     FamilyName= "Bante",
                     CourseId = courses[0].CourseId
                 },
-                new NewUser
+                new NewUser //39
                 {
                     Email = "System@lms.se",
                     Rolestring = "System",
                     GivenName = "LMS",
                     FamilyName= "System Notification",
                     CourseId = null
+                },
+                new NewUser //40
+                {
+                    Email = "adrian@tollyx.net",
+                    Rolestring = "Student",
+                    GivenName = "Adrian",
+                    FamilyName= "Hedqvist",
+                    CourseId = courses[1].CourseId
+                },
+                new NewUser //41
+                {
+                    Email = "jamesmamac1986@gmail.com",
+                    Rolestring = "Student",
+                    GivenName = "Ali",
+                    FamilyName= "Salhab",
+                    CourseId = courses[1].CourseId
+                },
+                new NewUser //42
+                {
+                    Email = "ante@inersjo.com",
+                    Rolestring = "Student",
+                    GivenName = "Ante",
+                    FamilyName= "Inersjö",
+                    CourseId = courses[1].CourseId
+                },
+                new NewUser //43
+                {
+                    Email = "bereisawa@yahoo.com",
+                    Rolestring = "Student",
+                    GivenName = "Bereket",
+                    FamilyName= "Alemseged",
+                    CourseId = courses[1].CourseId
+                },
+                new NewUser //44
+                {
+                    Email = "dennis.nilsson1111@gmail.com",
+                    Rolestring = "Student",
+                    GivenName = "Dennis",
+                    FamilyName= "Nilsson",
+                    CourseId = courses[1].CourseId
+                },
+                new NewUser //45
+                {
+                    Email = "fredrik.ff@gmail.com",
+                    Rolestring = "Student",
+                    GivenName = "Fredrik",
+                    FamilyName= "Ekman",
+                    CourseId = courses[1].CourseId
+                },
+                new NewUser //46
+                {
+                    Email = "hesamzandigh@gmail.com",
+                    Rolestring = "Student",
+                    GivenName = "Hesam",
+                    FamilyName= "Ghaleh",
+                    CourseId = courses[1].CourseId
+                },
+                new NewUser //47
+                {
+                    Email = "jesper.furtenbach@gmail.com",
+                    Rolestring = "Student",
+                    GivenName = "Jesper",
+                    FamilyName= "Fürtenbach",
+                    CourseId = courses[1].CourseId
+                },
+                new NewUser //48
+                {
+                    Email = "jerry_swe@hotmail.com",
+                    Rolestring = "Student",
+                    GivenName = "Jesper",
+                    FamilyName= "Fürtenbach",
+                    CourseId = courses[1].CourseId
+                },
+                new NewUser //49
+                {
+                    Email = "kristoffer.aberg@agileacademy.se",
+                    Rolestring = "Student",
+                    GivenName = "Kristoffer",
+                    FamilyName= "Åberg",
+                    CourseId = courses[1].CourseId
+                },
+                new NewUser //50
+                {
+                    Email = "andersson257@gmail.com",
+                    Rolestring = "Student",
+                    GivenName = "Marcus",
+                    FamilyName= "Andersson",
+                    CourseId = courses[1].CourseId
+                },
+                new NewUser //51
+                {
+                    Email = "justanotherperson1@outlook.com",
+                    Rolestring = "Student",
+                    GivenName = "Michael",
+                    FamilyName= "Hjertö",
+                    CourseId = courses[1].CourseId
+                },
+                new NewUser //52
+                {
+                    Email = "mohamed.almohsen@outlook.com",
+                    Rolestring = "Student",
+                    GivenName = "Mohamed",
+                    FamilyName= "Almohsen",
+                    CourseId = courses[1].CourseId
+                },
+                new NewUser //53
+                {
+                    Email = "oscar.ljungdahl@hotmail.com",
+                    Rolestring = "Student",
+                    GivenName = "Oskar",
+                    FamilyName= "Ljungdahl",
+                    CourseId = courses[1].CourseId
+                },
+                new NewUser //54
+                {
+                    Email = "lmpatrick.frank@gmail.com",
+                    Rolestring = "Student",
+                    GivenName = "Patrick",
+                    FamilyName= "Andersson",
+                    CourseId = courses[1].CourseId
+                },
+                new NewUser //55
+                {
+                    Email = "reza_zaman@yahoo.com",
+                    Rolestring = "Student",
+                    GivenName = "Reza",
+                    FamilyName= "Dagleh",
+                    CourseId = courses[1].CourseId
+                },
+                new NewUser //56
+                {
+                    Email = "robert.dubrovskis@gmail.com",
+                    Rolestring = "Student",
+                    GivenName = "Robert",
+                    FamilyName= "Dubrovskis",
+                    CourseId = courses[1].CourseId
+                },
+                new NewUser //57
+                {
+                    Email = "robert@huseli.us",
+                    Rolestring = "Student",
+                    GivenName = "Robert",
+                    FamilyName= "Huselius",
+                    CourseId = courses[1].CourseId
+                },
+                new NewUser //58
+                {
+                    Email = "rolf.bjarenstam@gmail.com",
+                    Rolestring = "Student",
+                    GivenName = "Rolf",
+                    FamilyName= "Bjärenstam",
+                    CourseId = courses[1].CourseId
+                },
+                new NewUser //59
+                {
+                    Email = "san337737@gmail.com",
+                    Rolestring = "Student",
+                    GivenName = "Sandeep",
+                    FamilyName= "Singh",
+                    CourseId = courses[1].CourseId
+                },
+                new NewUser //60
+                {
+                    Email = "normansebastian2@gmail.com",
+                    Rolestring = "Student",
+                    GivenName = "Sebastian",
+                    FamilyName= "Norman",
+                    CourseId = courses[1].CourseId
+                },
+                new NewUser //61
+                {
+                    Email = "teemu158@gmail.com",
+                    Rolestring = "Student",
+                    GivenName = "Teemu",
+                    FamilyName= "Mustaniemi",
+                    CourseId = courses[1].CourseId
+                },
+                new NewUser //62
+                {
+                    Email = "tomas.risveden@gmail.com",
+                    Rolestring = "Student",
+                    GivenName = "Tomas",
+                    FamilyName= "Risveden",
+                    CourseId = courses[1].CourseId
+                },
+                new NewUser //63
+                {
+                    Email = "wameedh75@hotmail.com",
+                    Rolestring = "Student",
+                    GivenName = "Wameedh",
+                    FamilyName= "Hashosh",
+                    CourseId = courses[1].CourseId
                 }
             };
-        
 
             foreach (var item in newUser)
             {
