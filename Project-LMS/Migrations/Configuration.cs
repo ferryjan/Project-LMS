@@ -655,7 +655,7 @@ namespace Project_LMS.Migrations
                     FamilyName= "Hedqvist",
                     CourseId = courses[1].CourseId
                 },
-                new NewUser //41
+                new NewUser //41 
                 {
                     Email = "jamesmamac1986@gmail.com",
                     Rolestring = "Student",
@@ -715,8 +715,8 @@ namespace Project_LMS.Migrations
                 {
                     Email = "jerry_swe@hotmail.com",
                     Rolestring = "Student",
-                    GivenName = "Jesper",
-                    FamilyName= "Fürtenbach",
+                    GivenName = "Jerry",
+                    FamilyName= "Fan",
                     CourseId = courses[1].CourseId
                 },
                 new NewUser //49

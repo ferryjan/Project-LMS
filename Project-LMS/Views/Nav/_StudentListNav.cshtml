@@ -1,10 +1,8 @@
 ﻿@model List<Project_LMS.Models.StudentListNavItem>
 
-
 @{
     var studentList = Model.Select(i => i.Students).FirstOrDefault().ToList();
 }
-
 <div id='cssmenu'>
     <ul style=" overflow-y: auto;  height: 70%; width: 280px">
         <li class='has-sub'>
@@ -22,9 +20,7 @@
                             else
                             {
                                 <a href='#'><span><img alt="" src="~/Pictures/defaultImage.png" data-radium="true" style="width: 32px; height: 32px; border-radius: 50%"> @Html.Raw(student.FullName)</span></a>
-
                             }
-
                             <ul>
                                 <li><a href="@Url.Action("Details", "StudentCourses", new { id = student.Id })"><span><i class="glyphicon glyphicon-info-sign"></i>@Html.Raw(" Contact Info")</span></a></li>
                                 <li><a href="@Url.Action("SendMessage", "Messages", new { id = student.Id })"><span><i class="glyphicon glyphicon-pencil"></i>@Html.Raw(" Send Message")</span></a></li>
@@ -41,9 +37,7 @@
                             else
                             {
                                 <a href='#'><span><img alt="" src="~/Pictures/defaultImage.png" data-radium="true" style="width: 32px; height: 32px; border-radius: 50%"> @Html.Raw(student.FullName)</span></a>
-
                             }
-
                             <ul>
                                 <li><a href="@Url.Action("Details", "StudentCourses", new { id = student.Id })"><span><i class="glyphicon glyphicon-info-sign"></i>@Html.Raw(" Contact Info")</span></a></li>
                             </ul>
